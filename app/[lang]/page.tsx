@@ -3,11 +3,14 @@ import Hero from "@/components/Hero";
 import ServicesGrid from "@/components/ServicesGrid";
 import Contact from "@/components/Contact";
 import PricingSingle from "@/components/PricingSingle";
-import Pricing from "@/components/Pricing";
+import PricingTabs, { PricingProps } from "@/components/PricingTabs";
 import Reviews from "@/components/Reviews";
 import Gallery from "@/components/Gallery";
-import { getGoogleReviews } from "@/actions/getReviews";
 import Faq from "@/components/Faq";
+
+import { getDictionary } from "@/lib/generate-dictionaries";
+import { getGoogleReviews } from "@/actions/getReviews";
+import { get } from "http";
 
 export default async function LandingPage({
   params,
@@ -17,6 +20,7 @@ export default async function LandingPage({
   const { lang } = (await params) as { lang: Locale };
   const dict = dictionaries[lang];
   const reviews = await getGoogleReviews(lang);
+  const pricingContent = await getDictionary(lang, "pricing") as PricingProps;
 
   return (
     <>
@@ -24,7 +28,8 @@ export default async function LandingPage({
       <ServicesGrid head={dict.servicesHead} items={dict.services} />
       <Gallery content={dict.gallery} lang={lang} />
       {/* <PricingSingle content={dict.pricing[1]} /> */}
-      {/* <Pricing plans={dict.pricing} title={dict.pricingHead.title} subtitle={dict.pricingHead.subtitle} /> */}
+      
+      <PricingTabs {...pricingContent} />
       <Reviews reviewWrapper={dict.review} reviews={reviews} />
       <Faq content={dict.faq} />
       <Contact content={dict.contact} brandInfo={GlobalConfig.brand} />
