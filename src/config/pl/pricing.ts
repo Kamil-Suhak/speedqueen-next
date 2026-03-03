@@ -2,6 +2,8 @@ export const pricingPl = {
   content: {
     title: "Cennik",
     subtitle: "Wybierz maszynę i metodę płatności",
+    unit: "zł",
+    cycleLabel: "cykl",
     locations: [
       "ul. Orlińskiego 1/U17",
       "ul. Pawiej 34/Szlak 77/B8",
@@ -114,7 +116,7 @@ export const pricingPl = {
             description:
               "Stół do prasowania. Dostępny tylko przy ul. Pawiej 34/Szlak 77/B8",
             standardPrice: 2.0,
-            loyaltyPrice: 2.0, // No loyalty price was shown on the image, matching standard
+            loyaltyPrice: 2.0,
             isPerCycle: true,
             cycleDuration: "4 min",
             availableAt: ["ul. Pawiej 34/Szlak 77/B8"],

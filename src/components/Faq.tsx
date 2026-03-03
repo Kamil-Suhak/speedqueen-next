@@ -27,7 +27,6 @@ const Faq = ({ content }: FaqProps) => {
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 3;
 
-  // Pagination for mobile
   const totalPages = Math.ceil(content.items.length / itemsPerPage);
   const startIndex = currentPage * itemsPerPage;
   const mobileItems = content.items.slice(
@@ -38,21 +37,15 @@ const Faq = ({ content }: FaqProps) => {
   return (
     <section className="py-24 bg-white" id="faq">
       <div className="container mx-auto px-4">
-        {/* Header - Centered on all devices */}
-        <div className="max-w-3xl mx-auto mb-12 text-center">
-          {/* Uncomment if you need the blue label back later
-      <div className="flex items-center justify-center gap-2 text-blue-600 font-bold uppercase tracking-wider mb-4">
-        <HelpCircle size={18} />
-        <span>{content.title}</span>
-      </div> 
-      */}
-          <h2 className="text-4xl font-black text-zinc-900 mb-4">
+        <div className="max-w-3xl mx-auto mb-16 text-center">
+          <h2 className="text-4xl font-black text-gray-900 uppercase tracking-tighter">
             {content.description}
           </h2>
+          <div className="mx-auto mt-4 h-1.5 w-24 bg-brand-red rounded-full" />
         </div>
 
-        {/* Desktop View (All items) - Centered */}
-        <div className="hidden md:grid grid-cols-1 gap-4 max-w-4xl mx-auto">
+        {/* Desktop View */}
+        <div className="hidden md:grid grid-cols-1 gap-6 max-w-4xl mx-auto">
           {content.items.slice(0, 7).map((item, idx) => (
             <FaqCard
               key={idx}
@@ -63,7 +56,7 @@ const Faq = ({ content }: FaqProps) => {
           ))}
         </div>
 
-        {/* Mobile View (Paginated) - Centered Wrapper */}
+        {/* Mobile View */}
         <div className="md:hidden space-y-4 max-w-xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.div
@@ -88,17 +81,16 @@ const Faq = ({ content }: FaqProps) => {
             </motion.div>
           </AnimatePresence>
 
-          {/* Mobile Pagination Controls */}
           {totalPages > 1 && (
             <div className="flex items-center justify-center gap-4 mt-8">
               <button
                 onClick={() => setCurrentPage((prev) => Math.max(0, prev - 1))}
                 disabled={currentPage === 0}
-                className="p-3 rounded-full border border-zinc-200 disabled:opacity-30 hover:bg-zinc-50 transition-colors"
+                className="p-3 rounded-2xl border-2 border-zinc-100 disabled:opacity-30 hover:bg-zinc-50 transition-colors text-zinc-900"
               >
                 <ChevronLeft size={20} />
               </button>
-              <span className="font-bold text-zinc-500">
+              <span className="font-black text-zinc-900 uppercase tracking-widest text-sm">
                 {currentPage + 1} / {totalPages}
               </span>
               <button
@@ -106,7 +98,7 @@ const Faq = ({ content }: FaqProps) => {
                   setCurrentPage((prev) => Math.min(totalPages - 1, prev + 1))
                 }
                 disabled={currentPage === totalPages - 1}
-                className="p-3 rounded-full border border-zinc-200 disabled:opacity-30 hover:bg-zinc-50 transition-colors"
+                className="p-3 rounded-2xl border-2 border-zinc-100 disabled:opacity-30 hover:bg-zinc-50 transition-colors text-zinc-900"
               >
                 <ChevronRight size={20} />
               </button>
@@ -128,20 +120,20 @@ const FaqCard = ({
   onClick: () => void;
 }) => (
   <div
-    className={`border-2 rounded-2xl transition-all duration-300 ${isOpen ? "border-blue-600 bg-blue-50/30" : "border-zinc-100 bg-zinc-50 hover:border-zinc-200"}`}
+    className={`border-2 rounded-[2rem] transition-all duration-300 ${isOpen ? "border-brand-red bg-brand-red/5" : "border-zinc-100 bg-white hover:border-zinc-200"}`}
   >
     <button
       onClick={onClick}
-      className="w-full flex items-center justify-between p-6 text-left"
+      className="w-full flex items-center justify-between p-8 text-left group"
     >
-      <span className="font-bold text-lg text-zinc-900 pr-4">
+      <span className={`font-black text-lg uppercase tracking-tight transition-colors ${isOpen ? "text-brand-red" : "text-gray-900 group-hover:text-brand-red"}`}>
         {item.question}
       </span>
       <div
         className={`transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"}`}
       >
         {isOpen ? (
-          <ChevronUp className="text-blue-600" />
+          <ChevronUp className="text-brand-red" />
         ) : (
           <ChevronDown className="text-zinc-400" />
         )}
@@ -157,7 +149,7 @@ const FaqCard = ({
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className="overflow-hidden"
         >
-          <div className="px-6 pb-6 text-zinc-600 leading-relaxed border-t border-blue-100 pt-4">
+          <div className="px-8 pb-8 text-gray-700 leading-relaxed border-t border-brand-red/10 pt-6 font-medium text-lg">
             {item.answer}
           </div>
         </motion.div>

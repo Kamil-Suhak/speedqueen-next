@@ -2,6 +2,8 @@ export const pricingEn = {
   content: {
     title: "Pricing",
     subtitle: "Choose your machine and payment method",
+    unit: "zł",
+    cycleLabel: "cycle",
     locations: [
       "ul. Orlińskiego 1/U17",
       "ul. Pawiej 34/Szlak 77/B8",

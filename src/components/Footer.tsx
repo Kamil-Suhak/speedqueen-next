@@ -1,4 +1,4 @@
-import { GlobalConfig, dictionaries } from "@/config/site-config";
+import { GlobalConfig } from "@/config/site-config";
 
 interface FooterProps {
   brand: typeof GlobalConfig.brand;

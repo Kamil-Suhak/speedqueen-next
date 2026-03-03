@@ -4,7 +4,6 @@ import { useEffect, useState, useMemo, useRef } from "react";
 import { Star, Quote, X } from "lucide-react";
 import type { GoogleReview } from "@/actions/getReviews";
 import Image from "next/image";
-import ButtonLink from "./ButtonLink";
 
 interface ReviewsWrapper {
   title: string;
@@ -78,7 +77,7 @@ export default function Reviews({
         return scoreB - scoreA;
       })
       .slice(0, 3);
-  }, [reviews]);
+  }, [reviews, weightScale]);
 
   if (!reviews || reviews.length === 0) return null;
 
@@ -86,27 +85,28 @@ export default function Reviews({
     <section id="reviews" className="scroll-mt-20 bg-gray-50 pt-20 pb-10">
       <div className="mx-auto max-w-7xl flex-col justify-between px-4">
         <div className="mb-16 text-center">
-          <h2 className="text-4xl font-bold text-gray-900">
+          <h2 className="text-4xl font-black text-gray-900 uppercase tracking-tighter">
             {reviewWrapper.title}
           </h2>
+          <div className="mx-auto mt-4 h-1.5 w-24 bg-brand-red rounded-full" />
         </div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {sortedReviews.map((review, i) => (
             <div
               key={review.time ?? `${review.author_name}-${i}`}
-              className={`flex flex-col justify-between rounded-3xl border border-gray-100 bg-white p-8 shadow-sm ${i > 1 ? "hidden md:flex" : "flex"}`}
+              className={`flex flex-col justify-between rounded-[2.5rem] border-2 border-transparent bg-white p-8 shadow-sm transition-all hover:border-brand-red/10 hover:shadow-xl ${i > 1 ? "hidden md:flex" : "flex"}`}
             >
               <div className="flex w-full items-start justify-between">
-                <Quote className="mb-4 text-blue-100" size={40} />
+                <Quote className="mb-4 text-brand-red/10" size={48} />
 
-                <div className="mt-4 flex gap-1 text-yellow-400">
+                <div className="mt-4 flex gap-1 text-brand-red">
                   {[...Array(Math.max(0, review.rating || 0))].map((_, j) => (
                     <Star key={j} fill="currentColor" size={20} />
                   ))}
                 </div>
               </div>
-              <p className="mb-6 leading-relaxed text-gray-600 italic flex flex-col">
+              <p className="mb-6 leading-relaxed text-gray-600 italic font-medium flex flex-col">
                 &quot;
                 {review.text.length > max
                   ? review.text.substring(0, max) + "..."
@@ -115,28 +115,28 @@ export default function Reviews({
                 {review.text.length > max && (
                   <button
                     onClick={() => setSelectedReview(review)}
-                    className="not-italic text-right text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors focus:outline-none focus:underline"
+                    className="not-italic text-right text-sm font-black text-zinc-900 hover:text-brand-red transition-colors focus:outline-none focus:underline uppercase tracking-tighter"
                   >
                     {reviewWrapper.read_more}
                   </button>
                 )}
               </p>
 
-              <div className="flex items-center gap-4 border-t pt-6">
-                <div className="relative h-12 w-12">
+              <div className="flex items-center gap-4 border-t border-gray-100 pt-6">
+                <div className="relative h-14 w-14">
                   <Image
                     src={review.profile_photo_url}
                     alt="" // decorative
                     fill
-                    className="rounded-full bg-gray-100 object-cover"
-                    sizes="48px"
+                    className="rounded-full bg-gray-100 object-cover border-2 border-zinc-100 shadow-sm"
+                    sizes="56px"
                   />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-gray-900">
+                  <h3 className="text-sm font-black text-gray-900 uppercase tracking-tight">
                     {review.author_name}
                   </h3>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">
                     {review.relative_time_description}
                   </p>
                 </div>
@@ -144,70 +144,65 @@ export default function Reviews({
             </div>
           ))}
         </div>
-        {/* View all reviews button */}
-        <div className="flex justify-center">
-          <ButtonLink href={view_all_url} className="mt-10">
-            {reviewWrapper.view_all}
-          </ButtonLink>
+        
+        <div className="flex justify-center mt-12">
+           <a 
+             href={view_all_url}
+             className="px-8 py-4 bg-zinc-900 text-white font-black rounded-xl shadow-lg hover:bg-brand-red transition-all transform hover:-translate-y-1 uppercase tracking-tight"
+           >
+             {reviewWrapper.view_all}
+           </a>
         </div>
       </div>
 
-      {/* Modal Overlay Logic */}
+      {/* Modal Overlay */}
       {selectedReview && (
         <div
           className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity"
-          onClick={() => setSelectedReview(null)} // Close when clicking the dark area
+          onClick={() => setSelectedReview(null)}
         >
           <div
-            className="bg-white rounded-3xl p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto shadow-2xl relative"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the white box
+            className="bg-white rounded-[3rem] p-10 max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl relative border-4 border-brand-red/10"
+            onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
             <button
               ref={closeButtonRef}
               onClick={() => setSelectedReview(null)}
-              className="absolute top-6 right-6  flex items-center justify-center rounded-xl hover:scale-[1.03] hover:bg-gray-100 transition-all"
+              className="absolute top-8 right-8 p-2 flex items-center justify-center rounded-2xl hover:bg-brand-red hover:text-white transition-all text-zinc-900"
               aria-label="Close modal"
             >
-              <X size={40} />
+              <X size={32} />
             </button>
-            <div className="flex items-center gap-4 mb-6">
-              <div className="relative h-12 w-12">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="relative h-16 w-16">
                 <Image
                   src={selectedReview.profile_photo_url}
                   alt="" // decorative
                   fill
-                  className="rounded-full bg-gray-100 object-cover"
-                  sizes="48px"
+                  className="rounded-full bg-gray-100 object-cover border-2 border-zinc-100"
+                  sizes="64px"
                 />
               </div>
               <div className="flex flex-col">
-                <h3 className="font-bold text-xl text-gray-900 leading-tight">
+                <h3 className="font-black text-2xl text-gray-900 uppercase tracking-tight">
                   {selectedReview.author_name}
                 </h3>
-                <p className="text-xs text-gray-400 uppercase tracking-widest">
+                <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">
                   {selectedReview.relative_time_description}
                 </p>
               </div>
 
-              <div className="hidden md:flex gap-1 text-yellow-400 ml-4">
+              <div className="hidden md:flex gap-1 text-brand-red ml-6">
                 {[...Array(Math.max(0, selectedReview.rating || 0))].map(
                   (_, k) => (
-                    <Star key={k} fill="currentColor" size={30} />
+                    <Star key={k} fill="currentColor" size={28} />
                   ),
                 )}
               </div>
-
-              <div className="md:hidden flex gap-1 text-yellow-400">
-                <span className="text-3xl font-semibold text-black leading-none self-center">
-                  {selectedReview.rating}
-                </span>
-                <Star fill="currentColor" size={30} />
-              </div>
             </div>
 
-            <div className="border-t border-gray-100 pt-6">
-              <p className="text-gray-700 leading-relaxed whitespace-pre-line text-lg">
+            <div className="border-t border-gray-100 pt-8">
+              <p className="text-gray-700 leading-relaxed whitespace-pre-line text-xl font-medium">
                 {selectedReview.text}
               </p>
             </div>
