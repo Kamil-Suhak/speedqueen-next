@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Montserrat } from "next/font/google";
 import { GlobalConfig, Locale } from "@/config/site-config";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -7,7 +7,20 @@ import SocialSidebar from "@/components/SocialSidebar";
 import "@/styles/globals.css";
 import { getDictionary } from "@/lib/generate-dictionaries";
 
-const inter = Inter({ subsets: ["latin", "latin-ext"] });
+// Configure Inter for body text
+const inter = Inter({ 
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-inter",
+  display: 'swap',
+});
+
+// Configure Montserrat for headings
+const montserrat = Montserrat({
+  subsets: ["latin", "latin-ext"],
+  weight: ["700", "800", "900"],
+  variable: "--font-montserrat",
+  display: 'swap',
+});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -54,17 +67,15 @@ export default async function RootLayout({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = (await params) as { lang: Locale };
-  const [navigation, hero] = await Promise.all([
+  const [navigation] = await Promise.all([
     getDictionary(lang, "navigation"),
-    getDictionary(lang, "hero"),
   ]);
 
-  // Use a generic "Call Now" translation for the navbar
   const callNowText = lang === "en" ? "Call Now" : "Zadzwoń Teraz";
 
   return (
-    <html lang={lang} className="scroll-smooth">
-      <body className={`${inter.className} antialiased overflow-x-hidden`}>
+    <html lang={lang} className={`scroll-smooth ${inter.variable} ${montserrat.variable}`}>
+      <body className="font-sans antialiased overflow-x-hidden">
         <Navbar
           ctaText={callNowText}
           links={navigation.navLinks}

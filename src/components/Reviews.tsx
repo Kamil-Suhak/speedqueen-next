@@ -5,7 +5,7 @@ import { Star, Quote, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { GoogleReview } from "@/actions/getReviews";
 import Image from "next/image";
-import { sectionBackgroundStyle } from "@/lib/background-manager";
+import SectionBackground from "@/components/SectionBackground";
 
 interface ReviewsWrapper {
   title: string;
@@ -13,9 +13,9 @@ interface ReviewsWrapper {
   read_more: string;
 }
 
+// Logic moved outside component to remain stable and avoid re-renders
 const MAX_CHARS = 130;
 
-// Stable helper functions
 const calculateScore = (review: GoogleReview) => {
   const bonus = Math.min(MAX_CHARS, (review.text || "").length) / MAX_CHARS * 0.99;
   return (review.rating || 0) + bonus;
@@ -23,7 +23,7 @@ const calculateScore = (review: GoogleReview) => {
 
 export default function Reviews({
   reviewWrapper,
-  reviews = [], // Default to empty array
+  reviews = [],
   bgImage,
 }: {
   reviewWrapper: ReviewsWrapper;
@@ -59,7 +59,6 @@ export default function Reviews({
     }
   }, [selectedReview]);
 
-  // Use a hardcoded fallback or safe env access
   const view_all_url = "https://www.google.com/maps/search/Speed+Queen+Kraków";
 
   const sortedReviews = useMemo(() => {
@@ -72,7 +71,9 @@ export default function Reviews({
   if (!reviews || sortedReviews.length === 0) return null;
 
   return (
-    <section id="reviews" className="scroll-mt-20 pt-20 pb-10" style={sectionBackgroundStyle(bgImage)}>
+    <section id="reviews" className="relative scroll-mt-20 pt-20 pb-10 bg-white">
+      <SectionBackground imagePath={bgImage} />
+      
       <div className="mx-auto max-w-7xl flex-col justify-between px-4 relative z-10">
         <div className="mb-16 text-center">
           <h2 className="text-4xl font-extrabold text-gray-900 uppercase tracking-tight">
@@ -155,7 +156,7 @@ export default function Reviews({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm transition-opacity"
-            style={{ zIndex: 100 }} // Extra safety for z-index
+            style={{ zIndex: 100 }}
             onClick={() => setSelectedReview(null)}
           >
             <motion.div

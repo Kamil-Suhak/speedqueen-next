@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { MapPin, List } from "lucide-react";
 import { FormattedText } from "@/components/FormattedText";
-import { sectionBackgroundStyle } from "@/lib/background-manager";
+import SectionBackground from "@/components/SectionBackground";
 
 interface HeroProps {
   content: {
@@ -37,7 +37,7 @@ const locations = [
 ];
 
 export default function Hero({ content, bgImage }: HeroProps) {
-  const [directionsUrl, setDirectionsUrl] = useState(locations[1].url); // Default to Pawia (central)
+  const [directionsUrl, setDirectionsUrl] = useState(locations[1].url);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -65,10 +65,11 @@ export default function Hero({ content, bgImage }: HeroProps) {
 
   return (
     <section
-      className="relative overflow-hidden pt-32 pb-24 lg:pt-48 lg:pb-32"
+      className="relative overflow-hidden pt-32 pb-24 lg:pt-48 lg:pb-32 bg-white"
       id="hero"
-      style={sectionBackgroundStyle(bgImage)}
     >
+      <SectionBackground imagePath={bgImage} />
+
       <div className="relative z-10 mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
         <h1 className="mx-auto mb-6 max-w-4xl text-4xl font-extrabold tracking-tight text-gray-900 md:text-7xl">
           <FormattedText text={content.title} />

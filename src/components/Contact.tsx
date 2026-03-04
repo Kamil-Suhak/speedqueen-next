@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
 import { sendEmail } from "@/actions/sendEmail";
 import StatusModal from "@/components/StatusModal";
-import { sectionBackgroundStyle } from "@/lib/background-manager";
+import SectionBackground from "@/components/SectionBackground";
 
 interface ContactProps {
   content: {
@@ -48,7 +48,9 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
   }
 
   return (
-    <section id="contact" className="scroll-mt-20 py-24" style={sectionBackgroundStyle(bgImage)}>
+    <section id="contact" className="relative scroll-mt-20 py-24 bg-white" aria-labelledby="contact-heading">
+      <SectionBackground imagePath={bgImage} />
+      
       <StatusModal
         isOpen={errorModal.isOpen}
         onClose={() => setErrorModal((prev) => ({ ...prev, isOpen: false }))}
@@ -58,26 +60,29 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
         closeButtonText={content.form.buttonClose}
       />
 
-      <div className="mx-auto grid max-w-7xl gap-16 px-4 lg:grid-cols-2">
+      <div className="mx-auto grid max-w-7xl gap-16 px-4 lg:grid-cols-2 relative z-10">
         <div>
-          <h2 className="mb-6 text-4xl font-extrabold uppercase tracking-tight">{content.title}</h2>
-          <div className="mb-8 h-1 w-16 bg-brand-red rounded-full" />
+          <h2 id="contact-heading" className="mb-6 text-4xl font-extrabold uppercase tracking-tight">{content.title}</h2>
+          <div className="mb-8 h-1 w-16 bg-brand-red rounded-full" aria-hidden="true" />
           <p className="mb-10 text-lg text-gray-600 font-normal leading-relaxed">{content.subtitle}</p>
+          
           <div className="space-y-6">
-            <div className="flex items-center gap-5 group">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-colors shadow-sm">
+            <a href={`mailto:${brandInfo.email}`} className="flex items-center gap-5 group focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-4 rounded-xl p-1 w-fit">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-colors shadow-sm" aria-hidden="true">
                 <Mail size={22} />
               </div>
               <span className="font-bold uppercase tracking-tight text-gray-900">{brandInfo.email}</span>
-            </div>
-            <div className="flex items-center gap-5 group">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-colors shadow-sm">
+            </a>
+            
+            <a href={`tel:${brandInfo.phone}`} className="flex items-center gap-5 group focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-4 rounded-xl p-1 w-fit">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-colors shadow-sm" aria-hidden="true">
                 <Phone size={22} />
               </div>
               <span className="font-bold uppercase tracking-tight text-gray-900">{brandInfo.phone}</span>
-            </div>
-            <div className="flex items-center gap-5 group">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 text-zinc-600 group-hover:bg-zinc-900 group-hover:text-white transition-colors shadow-sm">
+            </a>
+            
+            <div className="flex items-center gap-5 group p-1">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 text-zinc-600 shadow-sm" aria-hidden="true">
                 <MapPin size={22} />
               </div>
               <span className="font-bold uppercase tracking-tight text-gray-900">{brandInfo.address}</span>
@@ -85,10 +90,10 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
           </div>
         </div>
 
-        <div className="relative">
+        <div className="relative" aria-live="polite">
           {isSuccess ? (
             <div className="flex h-full flex-col items-center justify-center rounded-3xl border border-slate-100 bg-white/90 backdrop-blur-sm p-12 text-center shadow-md">
-              <CheckCircle size={64} className="mb-6 text-brand-red" />
+              <CheckCircle size={64} className="mb-6 text-brand-red" aria-hidden="true" />
               <h3 className="mb-4 text-3xl font-extrabold text-gray-900 uppercase tracking-tight">
                 {content.form.successTitle}
               </h3>
@@ -98,36 +103,50 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
             <form
               action={handleSubmit}
               className="space-y-4 rounded-3xl border border-slate-100 bg-white/90 backdrop-blur-sm p-10 shadow-sm"
+              aria-label={content.title}
             >
-              <input
-                name="senderName"
-                required
-                className="w-full rounded-2xl border border-slate-200 p-5 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 font-medium transition-all"
-                placeholder={content.form.name}
-              />
-              <input
-                name="senderEmail"
-                type="email"
-                required
-                className="w-full rounded-2xl border border-slate-200 p-5 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 font-medium transition-all"
-                placeholder={content.form.email}
-              />
-              <textarea
-                name="message"
-                required
-                className="w-full rounded-2xl border border-slate-200 p-5 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 font-medium transition-all"
-                rows={4}
-                placeholder={content.form.message}
-              />
+              <div>
+                <label htmlFor="senderName" className="sr-only">{content.form.name}</label>
+                <input
+                  id="senderName"
+                  name="senderName"
+                  required
+                  className="w-full rounded-2xl border border-slate-200 p-5 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 font-medium transition-all"
+                  placeholder={content.form.name}
+                />
+              </div>
+              <div>
+                <label htmlFor="senderEmail" className="sr-only">{content.form.email}</label>
+                <input
+                  id="senderEmail"
+                  name="senderEmail"
+                  type="email"
+                  required
+                  className="w-full rounded-2xl border border-slate-200 p-5 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 font-medium transition-all"
+                  placeholder={content.form.email}
+                />
+              </div>
+              <div>
+                <label htmlFor="message" className="sr-only">{content.form.message}</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  className="w-full rounded-2xl border border-slate-200 p-5 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 font-medium transition-all"
+                  rows={4}
+                  placeholder={content.form.message}
+                />
+              </div>
               <button
                 disabled={isPending}
-                className={`group flex w-full items-center justify-center gap-3 rounded-2xl bg-brand-red py-5 font-bold text-white text-xl uppercase tracking-wider transition-all shadow-md ${isPending ? "cursor-not-allowed opacity-50" : "hover:bg-brand-red/90 hover:scale-[1.01] active:scale-[0.99]"}`}
+                className={`group flex w-full items-center justify-center gap-3 rounded-2xl bg-brand-red py-5 font-bold text-white text-xl uppercase tracking-wider transition-all shadow-md ${isPending ? "cursor-not-allowed opacity-50" : "hover:bg-brand-red/90 hover:scale-[1.01] active:scale-[0.99]"} focus:ring-4 focus:ring-brand-red/20 outline-none`}
               >
                 {isPending ? "Sending..." : content.form.button}
                 {!isPending && (
                   <Send
                     size={22}
                     className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"
+                    aria-hidden="true"
                   />
                 )}
               </button>

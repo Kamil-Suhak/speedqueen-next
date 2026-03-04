@@ -39,6 +39,11 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
     ? pathname.replace("/pl", "/en")
     : pathname.replace("/en", "/pl");
 
+  const labels = {
+    en: { menu: "Main menu", open: "Open menu", close: "Close menu", lang: "Switch to Polish" },
+    pl: { menu: "Menu główne", open: "Otwórz menu", close: "Zamknij menu", lang: "Przełącz na angielski" }
+  }[lang as "en" | "pl"] || { menu: "Menu", open: "Open", close: "Close", lang: "Language" };
+
   return (
     <nav
       className={`fixed z-50 w-full transition-all duration-300 ${
@@ -46,15 +51,16 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
           ? "bg-white/95 py-3 shadow-md backdrop-blur-md border-b border-gray-100"
           : "bg-transparent py-5"
       }`}
+      aria-label={labels.menu}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* LOGO */}
-          <Link href={`/${lang}`} className="group flex items-center gap-2">
+          <Link href={`/${lang}`} className="group flex items-center gap-2" aria-label={brandName}>
             <div className="relative h-10 w-10 md:h-12 md:w-12 transition-transform group-hover:scale-105">
               <Image 
                 src={GlobalConfig.brand.logo} 
-                alt={brandName} 
+                alt="" 
                 fill 
                 className="object-contain"
                 priority
@@ -78,6 +84,7 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
                       ? "text-brand-red border-b-2 border-brand-red"
                       : "text-gray-600 hover:text-brand-red"
                   }`}
+                  aria-current={isActive ? "page" : undefined}
                 >
                   {link.label}
                 </a>
@@ -89,8 +96,9 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
               href={togglePath}
               scroll={false}
               className="flex items-center gap-2 border-l border-gray-200 pl-6 text-xs font-bold tracking-widest text-gray-400 uppercase transition hover:text-brand-red"
+              aria-label={labels.lang}
             >
-              <Globe size={14} />
+              <Globe size={14} aria-hidden="true" />
               {lang === "en" ? "PL" : "EN"}
             </Link>
 
@@ -98,7 +106,7 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
               href={`tel:${GlobalConfig.brand.phone}`}
               className="flex transform items-center justify-center gap-2 rounded-xl px-6 py-2.5 bg-zinc-900 text-white text-sm font-bold shadow-lg transition hover:bg-brand-red hover:-translate-y-0.5 uppercase tracking-tight"
             >
-              <Phone size={16} />
+              <Phone size={16} aria-hidden="true" />
               {ctaText}
             </a>
           </div>
@@ -109,15 +117,17 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
               href={togglePath}
               className="text-xs font-bold text-gray-600 uppercase"
               scroll={false}
+              aria-label={labels.lang}
             >
               {lang === "en" ? "PL" : "EN"}
             </Link>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 text-gray-600 hover:text-brand-red transition-colors"
-              aria-label="menu"
+              aria-label={isOpen ? labels.close : labels.open}
+              aria-expanded={isOpen}
             >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
+              {isOpen ? <X size={28} aria-hidden="true" /> : <Menu size={28} aria-hidden="true" />}
             </button>
           </div>
         </div>
@@ -148,7 +158,7 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
                    href={`tel:${GlobalConfig.brand.phone}`}
                    className="flex w-full items-center justify-center gap-3 rounded-xl bg-brand-red py-4 font-bold text-white text-lg shadow-lg"
                 >
-                  <Phone size={20} />
+                  <Phone size={20} aria-hidden="true" />
                   {ctaText}
                 </a>
               </div>

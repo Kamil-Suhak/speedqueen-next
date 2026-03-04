@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { sectionBackgroundStyle } from "@/lib/background-manager";
+import SectionBackground from "@/components/SectionBackground";
 
 export interface GalleryImage {
   src: string;
@@ -30,7 +30,6 @@ const Gallery = ({
   const [currentPage, setCurrentPage] = useState(0);
   const [imagesPerPage, setImagesPerPage] = useState(6);
 
-  // Handle responsive images per page
   useEffect(() => {
     const updateCount = () => {
       setImagesPerPage(window.innerWidth < 768 ? 3 : 6);
@@ -55,13 +54,21 @@ const Gallery = ({
     setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
   };
 
+  // Accessibility labels based on language
+  const labels = {
+    en: { prev: "Previous page", next: "Next page", page: "Go to page", gallery: "Photo gallery" },
+    pl: { prev: "Poprzednia strona", next: "Następna strona", page: "Idź do strony", gallery: "Galeria zdjęć" }
+  }[lang as "en" | "pl"] || { prev: "Previous", next: "Next", page: "Page", gallery: "Gallery" };
+
   return (
     <section 
       key={lang} 
-      className="py-24 relative overflow-hidden scroll-mt-20" 
+      className="relative py-24 overflow-hidden scroll-mt-20 bg-white" 
       id="gallery" 
-      style={sectionBackgroundStyle(bgImage)}
+      aria-label={labels.gallery}
     >
+      <SectionBackground imagePath={bgImage} />
+      
       <div className="container mx-auto px-4 relative z-10">
         {/* Header Area */}
         <div className="mb-16 text-center lg:text-left">
@@ -74,11 +81,11 @@ const Gallery = ({
             >
               {content.subtitle}
             </motion.h2>
-            <div className="mt-4 h-1 w-16 bg-brand-red rounded-full mx-auto lg:mx-0" />
+            <div className="mt-4 h-1 w-16 bg-brand-red rounded-full mx-auto lg:mx-0" aria-hidden="true" />
         </div>
 
         {/* Gallery Grid with Animation */}
-        <div>
+        <div aria-live="polite">
           <AnimatePresence mode="wait">
             <motion.div
               key={`${currentPage}-${imagesPerPage}`}
@@ -128,15 +135,15 @@ const Gallery = ({
           </AnimatePresence>
         </div>
 
-        {/* Pagination Controls - Reduced top margin from 16 to 8 */}
+        {/* Pagination Controls */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-6 mt-8">
+          <nav className="flex items-center justify-center gap-6 mt-8" aria-label="Pagination">
             <button
               onClick={handlePrev}
-              className="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-brand-red hover:text-brand-red transition-all transform hover:scale-110 text-slate-600"
-              aria-label="Previous page"
+              className="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-brand-red hover:text-brand-red transition-all transform hover:scale-110 text-slate-600 focus:ring-4 focus:ring-brand-red/10 outline-none"
+              aria-label={labels.prev}
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={24} aria-hidden="true" />
             </button>
             
             <div className="flex gap-3">
@@ -144,24 +151,25 @@ const Gallery = ({
                 <button
                   key={i}
                   onClick={() => setCurrentPage(i)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
+                  className={`h-2 rounded-full transition-all duration-300 focus:ring-4 focus:ring-brand-red/10 outline-none ${
                     currentPage === i 
                       ? "bg-brand-red w-10 shadow-sm shadow-brand-red/30" 
                       : "bg-slate-200 w-2 hover:bg-slate-300"
                   }`}
-                  aria-label={`Go to page ${i + 1}`}
+                  aria-label={`${labels.page} ${i + 1}`}
+                  aria-current={currentPage === i ? "page" : undefined}
                 />
               ))}
             </div>
 
             <button
               onClick={handleNext}
-              className="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-brand-red hover:text-brand-red transition-all transform hover:scale-110 text-slate-600"
-              aria-label="Next page"
+              className="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-brand-red hover:text-brand-red transition-all transform hover:scale-110 text-slate-600 focus:ring-4 focus:ring-brand-red/10 outline-none"
+              aria-label={labels.next}
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={24} aria-hidden="true" />
             </button>
-          </div>
+          </nav>
         )}
       </div>
     </section>

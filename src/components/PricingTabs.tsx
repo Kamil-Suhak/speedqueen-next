@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Info } from "lucide-react";
-import { sectionBackgroundStyle } from "@/lib/background-manager";
+import SectionBackground from "@/components/SectionBackground";
 
 export interface MachineItem {
   name: string;
@@ -68,10 +68,11 @@ const PricingTabs = ({ content, bgImage, showToggle = true }: PricingProps) => {
 
   return (
     <section
-      className="py-24 scroll-mt-20 overflow-hidden"
+      className="relative py-24 scroll-mt-20 overflow-hidden bg-white"
       id="pricing"
-      style={sectionBackgroundStyle(bgImage)}
     >
+      <SectionBackground imagePath={bgImage} />
+
       <div className="container mx-auto px-4 max-w-4xl relative z-10">
         {/* Header */}
         <div className="text-center mb-16">

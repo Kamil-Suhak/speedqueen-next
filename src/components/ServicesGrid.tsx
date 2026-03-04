@@ -1,6 +1,6 @@
 import { LucideIcon } from "lucide-react";
 import { FormattedText } from "@/components/FormattedText";
-import { sectionBackgroundStyle } from "@/lib/background-manager";
+import SectionBackground from "@/components/SectionBackground";
 
 interface ServiceItem {
   title: string;
@@ -16,8 +16,10 @@ interface ServicesProps {
 
 export default function ServicesGrid({ head, items, bgImage }: ServicesProps) {
   return (
-    <section id="services" className="scroll-mt-20 py-24" style={sectionBackgroundStyle(bgImage)}>
-      <div className="mx-auto max-w-7xl px-4">
+    <section id="services" className="relative scroll-mt-20 py-24 bg-white">
+      <SectionBackground imagePath={bgImage} />
+      
+      <div className="mx-auto max-w-7xl px-4 relative z-10">
         <div className="mb-16 text-center">
           <h2 className="text-4xl font-extrabold text-gray-900 uppercase tracking-tight">
             {head.title}
