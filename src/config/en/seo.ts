@@ -1,12 +1,13 @@
 export const seoEn = {
-  title: "AquaFix Pro | Expert Plumbing Services in Krakow",
+  title: "Professional Self-Service Laundry - Krakow - SpeedQueen",
   description:
-    "Emergency plumbing, leak repairs, and heating installations. 24/7 service with a satisfaction guarantee.",
+    "Speed Queen is the only modern self-service laundry in Krakow. It is the perfect choice for everyone. Save time and money!",
   keywords: [
-    "Plumber Krakow",
-    "Emergency Plumbing",
-    "Leak Repair",
-    "Heating Installation",
+    "Self-service laundry Krakow",
+    "Laundromat Krakow",
+    "Washing",
+    "Drying",
+    "SpeedQueen",
   ],
 };
 

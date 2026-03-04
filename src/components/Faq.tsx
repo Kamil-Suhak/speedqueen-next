@@ -8,6 +8,8 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { FormattedText } from "@/components/FormattedText";
+import { sectionBackgroundStyle } from "@/lib/background-manager";
 
 export interface FaqItem {
   question: string;
@@ -20,9 +22,10 @@ export interface FaqProps {
     description: string;
     items: FaqItem[];
   };
+  bgImage?: string;
 }
 
-const Faq = ({ content }: FaqProps) => {
+const Faq = ({ content, bgImage }: FaqProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 3;
@@ -35,13 +38,13 @@ const Faq = ({ content }: FaqProps) => {
   );
 
   return (
-    <section className="py-24 bg-white" id="faq">
+    <section className="py-24" id="faq" style={sectionBackgroundStyle(bgImage)}>
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto mb-16 text-center">
-          <h2 className="text-4xl font-black text-gray-900 uppercase tracking-tighter">
+          <h2 className="text-4xl font-extrabold text-gray-900 uppercase tracking-tight">
             {content.description}
           </h2>
-          <div className="mx-auto mt-4 h-1.5 w-24 bg-brand-red rounded-full" />
+          <div className="mx-auto mt-4 h-1 w-16 bg-brand-red rounded-full" />
         </div>
 
         {/* Desktop View */}
@@ -86,11 +89,11 @@ const Faq = ({ content }: FaqProps) => {
               <button
                 onClick={() => setCurrentPage((prev) => Math.max(0, prev - 1))}
                 disabled={currentPage === 0}
-                className="p-3 rounded-2xl border-2 border-zinc-100 disabled:opacity-30 hover:bg-zinc-50 transition-colors text-zinc-900"
+                className="p-3 rounded-2xl border-2 border-slate-100 disabled:opacity-30 hover:bg-slate-50 transition-colors text-zinc-900"
               >
                 <ChevronLeft size={20} />
               </button>
-              <span className="font-black text-zinc-900 uppercase tracking-widest text-sm">
+              <span className="font-bold text-zinc-900 uppercase tracking-widest text-sm">
                 {currentPage + 1} / {totalPages}
               </span>
               <button
@@ -98,7 +101,7 @@ const Faq = ({ content }: FaqProps) => {
                   setCurrentPage((prev) => Math.min(totalPages - 1, prev + 1))
                 }
                 disabled={currentPage === totalPages - 1}
-                className="p-3 rounded-2xl border-2 border-zinc-100 disabled:opacity-30 hover:bg-zinc-50 transition-colors text-zinc-900"
+                className="p-3 rounded-2xl border-2 border-slate-100 disabled:opacity-30 hover:bg-slate-50 transition-colors text-zinc-900"
               >
                 <ChevronRight size={20} />
               </button>
@@ -120,13 +123,13 @@ const FaqCard = ({
   onClick: () => void;
 }) => (
   <div
-    className={`border-2 rounded-[2rem] transition-all duration-300 ${isOpen ? "border-brand-red bg-brand-red/5" : "border-zinc-100 bg-white hover:border-zinc-200"}`}
+    className={`border rounded-2xl transition-all duration-300 ${isOpen ? "border-brand-red bg-brand-red/5" : "border-slate-100 bg-white/90 backdrop-blur-sm hover:border-slate-200"}`}
   >
     <button
       onClick={onClick}
       className="w-full flex items-center justify-between p-8 text-left group"
     >
-      <span className={`font-black text-lg uppercase tracking-tight transition-colors ${isOpen ? "text-brand-red" : "text-gray-900 group-hover:text-brand-red"}`}>
+      <span className={`font-bold text-lg uppercase tracking-tight transition-colors ${isOpen ? "text-brand-red" : "text-gray-900 group-hover:text-brand-red"}`}>
         {item.question}
       </span>
       <div
@@ -149,8 +152,8 @@ const FaqCard = ({
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className="overflow-hidden"
         >
-          <div className="px-8 pb-8 text-gray-700 leading-relaxed border-t border-brand-red/10 pt-6 font-medium text-lg">
-            {item.answer}
+          <div className="px-8 pb-8 text-gray-700 leading-relaxed border-t border-slate-50 pt-6 font-normal text-lg">
+            <FormattedText text={item.answer} />
           </div>
         </motion.div>
       )}

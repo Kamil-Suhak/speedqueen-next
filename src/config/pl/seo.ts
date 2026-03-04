@@ -1,12 +1,13 @@
 export const seoPl = {
-  title: "Pogotowe Hydrauliczne K.M. Post",
+  title: "Pralnia samoobsługowa - Kraków - SpeedQueen",
   description:
-    "Pogotowie hydrauliczne, naprawa wycieków i montaż instalacji. Serwis 24/7 z gwarancją satysfakcji.",
+    "SpeedQueen wyróżnia fakt, iż jest jedyną nowoczesną pralnią samoobsługową mieszącą się w Krakowie. Jest idealnym wyborem dla każdego. Zapoznaj się z naszą ofertą!",
   keywords: [
-    "Hydraulik Kraków",
-    "Pogotowie hydrauliczne",
-    "Naprawa rur",
-    "Montaż bojlera",
+    "Pralnia samoobsługowa Kraków",
+    "Pralnia Kraków",
+    "Pranie",
+    "Suszenie",
+    "SpeedQueen",
   ],
 };
 

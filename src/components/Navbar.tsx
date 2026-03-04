@@ -7,15 +7,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { GlobalConfig } from "@/config/site-config";
 import { useActiveSection } from "@/hooks/useActiveSelection";
+import Image from "next/image";
 
 interface NavbarProps {
   links: { label: string; href: string }[];
-  cta: string;
+  ctaText: string;
   brandName: string;
   lang: string;
 }
 
-export default function Navbar({ links, brandName, lang, cta }: NavbarProps) {
+export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -50,10 +51,16 @@ export default function Navbar({ links, brandName, lang, cta }: NavbarProps) {
         <div className="flex items-center justify-between">
           {/* LOGO */}
           <Link href={`/${lang}`} className="group flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-red font-black text-white transition-transform group-hover:scale-110 shadow-lg">
-              {brandName.charAt(0)}
+            <div className="relative h-10 w-10 md:h-12 md:w-12 transition-transform group-hover:scale-105">
+              <Image 
+                src={GlobalConfig.brand.logo} 
+                alt={brandName} 
+                fill 
+                className="object-contain"
+                priority
+              />
             </div>
-            <span className="text-2xl font-black tracking-tighter text-gray-900 uppercase">
+            <span className="text-xl font-bold tracking-tighter text-gray-900 md:block hidden">
               {brandName}
             </span>
           </Link>
@@ -66,7 +73,7 @@ export default function Navbar({ links, brandName, lang, cta }: NavbarProps) {
                 <a
                   key={link.label}
                   href={link.href}
-                  className={`text-sm font-black uppercase tracking-tight transition-all duration-300 ease-in-out ${
+                  className={`text-sm font-bold uppercase tracking-tight transition-all duration-300 ease-in-out ${
                     isActive
                       ? "text-brand-red border-b-2 border-brand-red"
                       : "text-gray-600 hover:text-brand-red"
@@ -81,7 +88,7 @@ export default function Navbar({ links, brandName, lang, cta }: NavbarProps) {
             <Link
               href={togglePath}
               scroll={false}
-              className="flex items-center gap-2 border-l border-gray-200 pl-6 text-xs font-black tracking-widest text-gray-400 uppercase transition hover:text-brand-red"
+              className="flex items-center gap-2 border-l border-gray-200 pl-6 text-xs font-bold tracking-widest text-gray-400 uppercase transition hover:text-brand-red"
             >
               <Globe size={14} />
               {lang === "en" ? "PL" : "EN"}
@@ -89,10 +96,10 @@ export default function Navbar({ links, brandName, lang, cta }: NavbarProps) {
 
             <a
               href={`tel:${GlobalConfig.brand.phone}`}
-              className="flex transform items-center justify-center gap-2 rounded-xl px-6 py-2.5 bg-zinc-900 text-white text-sm font-black shadow-lg transition hover:bg-brand-red hover:-translate-y-0.5 uppercase tracking-tighter"
+              className="flex transform items-center justify-center gap-2 rounded-xl px-6 py-2.5 bg-zinc-900 text-white text-sm font-bold shadow-lg transition hover:bg-brand-red hover:-translate-y-0.5 uppercase tracking-tight"
             >
               <Phone size={16} />
-              {cta}
+              {ctaText}
             </a>
           </div>
 
@@ -100,7 +107,7 @@ export default function Navbar({ links, brandName, lang, cta }: NavbarProps) {
           <div className="flex items-center gap-4 md:hidden">
             <Link
               href={togglePath}
-              className="text-xs font-black text-gray-600 uppercase"
+              className="text-xs font-bold text-gray-600 uppercase"
               scroll={false}
             >
               {lang === "en" ? "PL" : "EN"}
@@ -131,7 +138,7 @@ export default function Navbar({ links, brandName, lang, cta }: NavbarProps) {
                   key={link.label}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="block border-b border-gray-50 px-3 py-5 text-lg font-black text-gray-900 uppercase tracking-tight"
+                  className="block border-b border-gray-50 px-3 py-5 text-lg font-bold text-gray-900 uppercase tracking-tight"
                 >
                   {link.label}
                 </a>
@@ -139,10 +146,10 @@ export default function Navbar({ links, brandName, lang, cta }: NavbarProps) {
               <div className="pt-4">
                 <a
                    href={`tel:${GlobalConfig.brand.phone}`}
-                   className="flex w-full items-center justify-center gap-3 rounded-xl bg-brand-red py-4 font-black text-white text-lg shadow-lg"
+                   className="flex w-full items-center justify-center gap-3 rounded-xl bg-brand-red py-4 font-bold text-white text-lg shadow-lg"
                 >
                   <Phone size={20} />
-                  {cta}
+                  {ctaText}
                 </a>
               </div>
             </div>

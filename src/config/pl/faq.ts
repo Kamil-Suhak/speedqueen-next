@@ -1,26 +1,26 @@
 export const faqPl = {
   title: "Najczęściej Zadawane Pytania",
-  description: "Częste pytania dotyczące naszych usług hydraulicznych.",
+  description: "Przewodnik korzystania z pralni samoobsługowej",
   items: [
     {
-      question: "Czy oferujecie pogotowie hydrauliczne?",
+      question: "Wskazówki przed rozpoczęciem prania",
       answer:
-        "Tak, świadczymy usługi hydrauliczne 24/7. Zadzwoń do nas o każdej porze.",
+        "Prosimy o opróżnienie kieszeni oraz zabezpieczenie wszelkich zapięć (zamki, guziki, rzepy). Do pralnic nie należy wkładać odzieży silnie zabrudzonej błotem, gliną, klejem lub gipsem. Prosimy o nieprzeciążanie urządzeń.",
     },
     {
-      question: "Czy oferujecie darmowe wyceny?",
+      question: "Jak prawidłowo wykonać pranie?",
       answer:
-        "Oczywiście! Oferujemy bezpłatne wyceny dla wszystkich usług niestandardowych.",
+        "Umieść wsad w bębnie i zamknij drzwiczki. Wybierz odpowiedni program przy użyciu strzałek. !!Ważne: Programy 6 i 7 NIE posiadają automatycznego dozowania środków!! – w ich przypadku należy użyć własnych detergentów. Dokonaj płatności w panelu zbiorczym, a następnie naciśnij zielony przycisk START.",
     },
     {
-      question: "Jakie obszary obsługujecie?",
+      question: "Jak prawidłowo wykonać suszenie?",
       answer:
-        "Działamy głównie na terenie Krakowa i okolic. Skontaktuj się z nami, aby sprawdzić, czy obsługujemy Twoją lokalizację.",
+        "Umieść wilgotny wsad w suszarce i zamknij drzwiczki. Wybierz temperaturę oraz czas suszenia (od 15 do 60 min) w panelu płatniczym. Uruchom urządzenie przyciskiem START na panelu suszarki.",
     },
     {
-      question: "Czy Wasi hydraulicy mają uprawnienia i ubezpieczenie?",
+      question: "Czy detergenty są wliczone w cenę usługi?",
       answer:
-        "Tak, wszyscy nasi hydraulicy posiadają pełne uprawnienia i są ubezpieczeni dla Twojego spokoju.",
+        "Tak, dla większości programów. Programy 1-5 zawierają koszt profesjonalnych środków dozowanych automatycznie. !!Uwaga: Korzystając z programów 6 lub 7, należy użyć własnych detergentów.!!",
     },
   ],
 };

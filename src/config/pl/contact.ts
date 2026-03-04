@@ -1,7 +1,7 @@
 export const contactPl = {
   title: "Skontaktuj się z nami",
   subtitle:
-    "Potrzebujesz hydraulika? Wyślij wiadomość lub zadzwoń na naszą linię alarmową.",
+    "Odwiedź jedną z naszych 3 lokalizacji w Krakowie lub zadzwoń na naszą linię alarmową. Jesteśmy do Twojej dyspozycji!",
   form: {
     name: "Imię i Nazwisko",
     email: "Adres Email",

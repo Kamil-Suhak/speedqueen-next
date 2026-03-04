@@ -1,17 +1,9 @@
-import { ShieldCheck, Clock, MapPin, Wrench } from "lucide-react";
-
 export const heroEn = {
-  title: "Professional Plumbing Services You Can [[Trust]].",
+  title: "Professional quality at an [[affordable price]]",
   subtitle:
-    "From leaky faucets to emergency pipe bursts, we provide fast, reliable solutions for your home and business.",
-  primaryCTA: "Call Now",
-  secondaryCTA: "Book Online",
-  trustBadges: [
-    { label: "Fully Licensed", icon: ShieldCheck },
-    { label: "24/7 Available", icon: Clock },
-    { label: "Locally Owned", icon: MapPin },
-    { label: "Expert Tools", icon: Wrench },
-  ],
+    "Speed Queen, a global leader in self-service laundry, is now in Krakow. Experience premium comfort while saving time and reducing costs.",
+  primaryCTA: "Get Directions",
+  secondaryCTA: "View Price List",
 };
 
 export default heroEn;

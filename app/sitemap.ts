@@ -1,26 +1,19 @@
 import type { MetadataRoute } from "next";
+import { GlobalConfig } from "./config/site-config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: "https://expressweb-prototype.vercel.app/pl",
+      url: `${GlobalConfig.brand.url}/pl`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: "https://expressweb-prototype.vercel.app/en",
+      url: `${GlobalConfig.brand.url}/en`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
     },
   ];
-
-  //   example dynamic:
-  // const routes = ['', '/about', '/contact', '/services'].map((route) => ({
-  //     url: `${siteConfig.url}${route}`,
-  //     lastModified: new Date().toISOString(),
-  //     changeFrequency: 'monthly' as const,
-  //     priority: route === '' ? 1 : 0.8,
-  //   }));
 }

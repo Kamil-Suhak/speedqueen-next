@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { GlobalConfig, Locale } from "@/config/site-config";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SocialSidebar from "@/components/SocialSidebar";
 import "@/styles/globals.css";
 import { getDictionary } from "@/lib/generate-dictionaries";
 
@@ -31,6 +32,10 @@ export async function generateMetadata({
     description: seo.description,
     keywords: seo.keywords,
     metadataBase: new URL(GlobalConfig.brand.url),
+    icons: {
+      icon: "/images/logo.png",
+      apple: "/images/logo.png",
+    },
     alternates: {
       canonical: `${GlobalConfig.brand.url}/${lang}`,
       languages: {
@@ -54,15 +59,19 @@ export default async function RootLayout({
     getDictionary(lang, "hero"),
   ]);
 
+  // Use a generic "Call Now" translation for the navbar
+  const callNowText = lang === "en" ? "Call Now" : "Zadzwoń Teraz";
+
   return (
     <html lang={lang} className="scroll-smooth">
       <body className={`${inter.className} antialiased overflow-x-hidden`}>
         <Navbar
-          cta={hero.primaryCTA}
+          ctaText={callNowText}
           links={navigation.navLinks}
           brandName={GlobalConfig.brand.name}
           lang={lang}
         />
+        <SocialSidebar />
         <main id="main-content" className="w-full overflow-x-hidden">
           {children}
         </main>

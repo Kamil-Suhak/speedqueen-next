@@ -1,17 +1,9 @@
-import { ShieldCheck, Clock, MapPin, Wrench } from "lucide-react";
-
 export const heroPl = {
-  title: "Pogotowie Hydrauliczne&[[K.M. Post]]",
+  title: "Profesjonalna jakość w [[rozsądnej cenie]]",
   subtitle:
-    "Od cieknących kranów po kompleksowe remonty – zapewniamy szybkie i solidne rozwiązania dla Twojego domu i firmy.",
-  primaryCTA: "Zadzwoń Teraz",
-  secondaryCTA: "Napisz e-maila",
-  trustBadges: [
-    { label: "Pełne Uprawnienia", icon: ShieldCheck },
-    { label: "Dostępni 24/7", icon: Clock },
-    { label: "Lokalna Firma", icon: MapPin },
-    { label: "Specjalistyczny Sprzęt", icon: Wrench },
-  ],
+    "Marka Speed Queen, światowy lider w branży pralni samoobsługowych, jest już obecna w Krakowie. Zapewniamy najwyższy komfort oraz gwarantowaną oszczędność czasu i kosztów.",
+  primaryCTA: "Wyznacz Trasę",
+  secondaryCTA: "Zobacz Cennik",
 };
 
 export default heroPl;

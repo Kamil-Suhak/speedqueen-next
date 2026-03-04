@@ -1,7 +1,7 @@
 export const pricingPl = {
   content: {
     title: "Cennik",
-    subtitle: "Wybierz maszynę i metodę płatności",
+    subtitle: "Zapoznaj się z szeroką gamą naszych profesjonalnych urządzeń, dostosowanych do prania wsadów o dowolnej objętości.",
     unit: "zł",
     cycleLabel: "cykl",
     locations: [
@@ -10,20 +10,19 @@ export const pricingPl = {
       "Al. J. Słowackiego 56",
     ],
     toggle: {
-      standard: "Cena",
-      loyalty: "Cena z kartą SQ",
+      standard: "Cena Standard",
+      loyalty: "Cena z Kartą SQ",
       upsellBadge: "Karta SQ",
-      upsellMessage: "Zaoszczędź płacąc kartą lojalnościową!",
+      upsellMessage: "Zaoszczędź korzystając z karty lojalnościowej!",
     },
     categories: [
       {
         id: "washers",
-        title: "PRALKI",
+        title: "PRALNICE",
         items: [
           {
             name: "PRALKA 7 KG",
-            description:
-              "Najmniejsza pralka przeznaczona do małej ilości rzeczy.",
+            description: "Kompaktowa pralka przemysłowa, idealna do mniejszych wsadów.",
             standardPrice: 32.0,
             loyaltyPrice: 29.0,
             isPerCycle: true,
@@ -35,8 +34,7 @@ export const pricingPl = {
           },
           {
             name: "PRALKA 9 KG",
-            description:
-              "Średnia pralka przeznaczona do średniej ilości rzeczy.",
+            description: "Pralnica o średniej pojemności do standardowego prania codziennego.",
             standardPrice: 38.0,
             loyaltyPrice: 34.0,
             isPerCycle: true,
@@ -48,8 +46,7 @@ export const pricingPl = {
           },
           {
             name: "PRALKA 15 KG",
-            description:
-              "Duża pralka przeznaczona do dużej ilości rzeczy lub większych sztuk.",
+            description: "Wysokowydajna pralnica do dużych wsadów lub pościeli.",
             standardPrice: 56.0,
             loyaltyPrice: 50.0,
             isPerCycle: true,
@@ -61,8 +58,7 @@ export const pricingPl = {
           },
           {
             name: "PRALKA 20 KG",
-            description:
-              "Bardzo duża pralka przeznaczona do bardzo dużej ilości rzeczy lub większych sztuk. Dostępna tylko przy ul. Orlińskiego 1/U17.",
+            description: "Pralnica przemysłowa o dużej pojemności. Dostępna wyłącznie przy ul. Orlińskiego.",
             standardPrice: 72.0,
             loyaltyPrice: 65.0,
             isPerCycle: true,
@@ -70,8 +66,7 @@ export const pricingPl = {
           },
           {
             name: "PRALKA 25 KG",
-            description:
-              "Gigantyczna pralka przeznaczona do ogromnej ilości rzeczy lub bardzo dużych sztuk. Dostępna tylko przy ul. Pawiej 34/Szlak 77/B8.",
+            description: "Pralnica o bardzo wysokiej pojemności, zaprojektowana do prania wielkogabarytowego. Wyłącznie przy ul. Pawiej.",
             standardPrice: 86.0,
             loyaltyPrice: 78.0,
             isPerCycle: true,
@@ -83,14 +78,13 @@ export const pricingPl = {
         id: "dryers-and-others",
         title: "SUSZARKI I INNE",
         alertBanner: {
-          title: "Wskazówka dotycząca suszenia",
-          description: "Jeden cykl suszenia (15 min) często nie wystarcza na całkowite wysuszenie pełnego prania. Zalecamy wykupienie dwóch cykli dla optymalnych rezultatów."
+          title: "Efektywność suszenia",
+          description: "Pojedynczy cykl (15 min) może być niewystarczający dla pełnego wsadu. Zalecamy dwa cykle dla optymalnych rezultatów."
         },
         items: [
           {
             name: "SUSZARKA 10 KG",
-            description:
-              "Średnia suszarka przeznaczona do suszenia średniej ilości rzeczy lub średnich sztuk. Niedostępna przy al. J. Słowackiego 56",
+            description: "Suszarka przemysłowa do mniejszych i średnich wsadów. Niedostępna przy Al. Słowackiego.",
             standardPrice: 13.0,
             loyaltyPrice: 12.0,
             isPerCycle: true,
@@ -99,8 +93,7 @@ export const pricingPl = {
           },
           {
             name: "SUSZARKA 15 KG",
-            description:
-              "Duża suszarka przeznaczona do suszenia dużej ilości rzeczy lub dużych sztuk.",
+            description: "Profesjonalna suszarka o dużej pojemności dla wymagających wsadów.",
             standardPrice: 16.0,
             loyaltyPrice: 15.0,
             isPerCycle: true,
@@ -113,8 +106,7 @@ export const pricingPl = {
           },
           {
             name: "STÓŁ DO PRASOWANIA",
-            description:
-              "Stół do prasowania. Dostępny tylko przy ul. Pawiej 34/Szlak 77/B8",
+            description: "Profesjonalne stanowisko do prasowania. Dostępne wyłącznie przy ul. Pawiej.",
             standardPrice: 2.0,
             loyaltyPrice: 2.0,
             isPerCycle: true,
@@ -123,8 +115,7 @@ export const pricingPl = {
           },
           {
             name: "OZONATOR",
-            description:
-              "Urządzenie do ozonowania. Dostępne tylko przy Al. J. Słowackiego 56",
+            description: "Zaawansowane urządzenie do dezynfekcji ozonem. Dostępne wyłącznie przy Al. Słowackiego.",
             standardPrice: 50.0,
             loyaltyPrice: 45.0,
             isPerCycle: true,

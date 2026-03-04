@@ -1,34 +1,31 @@
-import { Clock, Wrench, Droplets, ShieldCheck } from "lucide-react";
+import { Clock, ThermometerSun, Zap, Sparkles } from "lucide-react";
 
 export const servicesEn = {
   head: {
     title: "Our Services",
     subtitle:
-      "Expert solutions for all your residential and commercial plumbing needs.",
+      "Expert solutions for all your laundry needs in Krakow. Utilizing professional industrial equipment and premium detergents.",
   },
   items: [
     {
-      title: "Emergency Repairs",
-      description: "Available 24/7 for bursts, leaks, and urgent blockages.",
+      title: "Washing",
+      description: "Our facilities utilize eco-friendly wet cleaning, the safest method for your garments and the environment. A standard cycle averages 30 minutes.",
+      icon: Sparkles,
+    },
+    {
+      title: "Drying",
+      description: "We provide high-efficiency drying using advanced heat pump technology, ensuring a delicate process that prevents creasing and shrinkage.",
+      icon: ThermometerSun,
+    },
+    {
+      title: "Automatic Dosing",
+      description: "Professional grade detergents are automatically dispensed for cycles 1-5. !!Note: Cycles 6 and 7 require your own detergents.!!",
+      icon: Zap,
+    },
+    {
+      title: "Loyalty Card",
+      description: "Our SQ loyalty program offers exclusive discounts on all machines, providing a more cost-effective solution for frequent users.",
       icon: Clock,
-    },
-    {
-      title: "Installation",
-      description:
-        "Professional installation of sinks, toilets, and water heaters.",
-      icon: Wrench,
-    },
-    {
-      title: "Leak Detection",
-      description:
-        "Advanced tools to find and fix hidden leaks before they cause damage.",
-      icon: Droplets,
-    },
-    {
-      title: "Insured Work",
-      description:
-        "All our work is fully insured and comes with a 2-year guarantee.",
-      icon: ShieldCheck,
     },
   ],
 };

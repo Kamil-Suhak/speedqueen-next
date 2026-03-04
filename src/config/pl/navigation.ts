@@ -1,6 +1,8 @@
 export const navigationPl = {
   navLinks: [
+    { label: "Home", href: "#hero" },
     { label: "Usługi", href: "#services" },
+    { label: "Cennik", href: "#pricing" },
     { label: "Galeria", href: "#gallery" },
     { label: "Opinie", href: "#reviews" },
     { label: "FAQ", href: "#faq" },
@@ -10,8 +12,8 @@ export const navigationPl = {
     {
       title: "Usługi",
       links: [
-        { label: "Pogotowie", href: "#services" },
-        { label: "Montaż", href: "#services" },
+        { label: "Pranie", href: "#services" },
+        { label: "Suszenie", href: "#services" },
       ],
     },
   ],

@@ -1,7 +1,7 @@
 export const contactEn = {
   title: "Contact Us Today",
   subtitle:
-    "Need a plumber fast? Send us a message or call our emergency line.",
+    "Visit one of our 3 locations in Krakow or call our emergency line. We are here to help you!",
   form: {
     name: "Your Name",
     email: "Email",

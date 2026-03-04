@@ -1,6 +1,8 @@
 export const navigationEn = {
   navLinks: [
+    { label: "Home", href: "#hero" },
     { label: "Services", href: "#services" },
+    { label: "Pricing", href: "#pricing" },
     { label: "Gallery", href: "#gallery" },
     { label: "Reviews", href: "#reviews" },
     { label: "FAQ", href: "#faq" },
@@ -10,8 +12,8 @@ export const navigationEn = {
     {
       title: "Services",
       links: [
-        { label: "Emergency", href: "#services" },
-        { label: "Installations", href: "#services" },
+        { label: "Washing", href: "#services" },
+        { label: "Drying", href: "#services" },
       ],
     },
   ],

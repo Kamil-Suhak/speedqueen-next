@@ -9,6 +9,7 @@ import Faq from "@/components/Faq";
 
 import { getDictionary } from "@/lib/generate-dictionaries";
 import { getGoogleReviews } from "@/actions/getReviews";
+import { getSectionBackground } from "@/lib/background-manager";
 
 export default async function LandingPage({
   params,
@@ -39,13 +40,17 @@ export default async function LandingPage({
 
   return (
     <>
-      <Hero content={hero} />
-      <ServicesGrid head={services.head} items={services.items} />
-      <Gallery content={gallery} lang={lang} />
-      <PricingTabs {...(pricing as PricingProps)} />
-      <Reviews reviewWrapper={reviewsContent} reviews={googleReviews} />
-      <Faq content={faq} />
-      <Contact content={contact} brandInfo={GlobalConfig.brand} />
+      <Hero content={hero} bgImage={getSectionBackground(0)} />
+      <ServicesGrid head={services.head} items={services.items} bgImage={getSectionBackground(1)} />
+      <Gallery content={gallery} lang={lang} bgImage={getSectionBackground(2)} />
+      <PricingTabs 
+        {...(pricing as PricingProps)} 
+        bgImage={getSectionBackground(3)} 
+        showToggle={false} // Toggle turned off as requested
+      />
+      <Reviews reviewWrapper={reviewsContent} reviews={googleReviews} bgImage={getSectionBackground(4)} />
+      <Faq content={faq} bgImage={getSectionBackground(5)} />
+      <Contact content={contact} brandInfo={GlobalConfig.brand} bgImage={getSectionBackground(6)} />
     </>
   );
 }

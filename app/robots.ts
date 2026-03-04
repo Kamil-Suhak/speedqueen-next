@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { GlobalConfig } from "./config/site-config";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -7,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/private/",
     },
-    sitemap: "https://expressweb-prototype.vercel.app/sitemap.xml",
+    sitemap: `${GlobalConfig.brand.url}/sitemap.xml`,
   };
 }
