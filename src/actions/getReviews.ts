@@ -39,7 +39,7 @@ async function fetchLocationReviews(
       text: String(r?.text || ""),
       relative_time_description: String(r?.relative_time_description || ""),
       profile_photo_url: String(r?.profile_photo_url || ""),
-      time: Number(r?.time || Date.now() / 1000), // Fallback to now if time is missing
+      time: Number(r?.time || Date.now() / 1000),
     }));
   } catch (error) {
     console.error(`Error fetching reviews for ${placeId}:`, error);
@@ -56,12 +56,10 @@ export async function getGoogleReviews(lang: string): Promise<GoogleReview[]> {
   }
 
   try {
-    // Fetch all locations in parallel
     const results = await Promise.all(
       PLACE_IDS.map((id) => fetchLocationReviews(id, apiKey, lang)),
     );
 
-    // Flatten and remove duplicates based on author and time
     const allReviews = results.flat();
     const uniqueReviewsMap = new Map<string, GoogleReview>();
     

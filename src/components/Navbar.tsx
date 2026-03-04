@@ -21,28 +21,21 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
-  // Detect scroll to change styling
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
-    handleScroll(); // Initial check
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lang]);
 
   const sectionIds = links
     .map((link) => link.href.replace("#", ""))
-    .concat("hero"); // Add hero section but don't include it in the nav links
+    .concat("hero");
   const activeSection = useActiveSection(sectionIds);
 
-  // Logic to switch language
   const togglePath = pathname.startsWith("/pl")
     ? pathname.replace("/pl", "/en")
     : pathname.replace("/en", "/pl");
-
-  const labels = {
-    en: { menu: "Main menu", open: "Open menu", close: "Close menu", lang: "Switch to Polish" },
-    pl: { menu: "Menu główne", open: "Otwórz menu", close: "Zamknij menu", lang: "Przełącz na angielski" }
-  }[lang as "en" | "pl"] || { menu: "Menu", open: "Open", close: "Close", lang: "Language" };
 
   return (
     <nav
@@ -51,11 +44,10 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
           ? "bg-white/95 py-3 shadow-md backdrop-blur-md border-b border-gray-100"
           : "bg-transparent py-5"
       }`}
-      aria-label={labels.menu}
+      aria-label="Menu"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* LOGO */}
           <Link href={`/${lang}`} className="group flex items-center gap-2" aria-label={brandName}>
             <div className="relative h-10 w-10 md:h-12 md:w-12 transition-transform group-hover:scale-105">
               <Image 
@@ -71,7 +63,6 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
             </span>
           </Link>
 
-          {/* DESKTOP NAV */}
           <div className="hidden items-center gap-8 md:flex">
             {links.map((link) => {
               const isActive = activeSection === link.href.replace("#", "");
@@ -91,12 +82,11 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
               );
             })}
 
-            {/* Language Switcher Button */}
             <Link
               href={togglePath}
               scroll={false}
               className="flex items-center gap-2 border-l border-gray-200 pl-6 text-xs font-bold tracking-widest text-gray-400 uppercase transition hover:text-brand-red"
-              aria-label={labels.lang}
+              aria-label="Switch language"
             >
               <Globe size={14} aria-hidden="true" />
               {lang === "en" ? "PL" : "EN"}
@@ -111,20 +101,19 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
             </a>
           </div>
 
-          {/* MOBILE MENU BUTTON */}
           <div className="flex items-center gap-4 md:hidden">
             <Link
               href={togglePath}
               className="text-xs font-bold text-gray-600 uppercase"
               scroll={false}
-              aria-label={labels.lang}
+              aria-label="Switch language"
             >
               {lang === "en" ? "PL" : "EN"}
             </Link>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 text-gray-600 hover:text-brand-red transition-colors"
-              aria-label={isOpen ? labels.close : labels.open}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
             >
               {isOpen ? <X size={28} aria-hidden="true" /> : <Menu size={28} aria-hidden="true" />}
@@ -133,7 +122,6 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
         </div>
       </div>
 
-      {/* MOBILE NAV ANIMATION */}
       <AnimatePresence>
         {isOpen && (
           <motion.div

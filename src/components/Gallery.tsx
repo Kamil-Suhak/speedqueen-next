@@ -54,23 +54,16 @@ const Gallery = ({
     setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
   };
 
-  // Accessibility labels based on language
-  const labels = {
-    en: { prev: "Previous page", next: "Next page", page: "Go to page", gallery: "Photo gallery" },
-    pl: { prev: "Poprzednia strona", next: "Następna strona", page: "Idź do strony", gallery: "Galeria zdjęć" }
-  }[lang as "en" | "pl"] || { prev: "Previous", next: "Next", page: "Page", gallery: "Gallery" };
-
   return (
     <section 
       key={lang} 
       className="relative py-24 overflow-hidden scroll-mt-20 bg-white" 
       id="gallery" 
-      aria-label={labels.gallery}
+      aria-label="Gallery"
     >
       <SectionBackground imagePath={bgImage} />
       
       <div className="container mx-auto px-4 relative z-10">
-        {/* Header Area */}
         <div className="mb-16 text-center lg:text-left">
            <motion.h2
               key={`${lang}-h2`}
@@ -84,7 +77,6 @@ const Gallery = ({
             <div className="mt-4 h-1 w-16 bg-brand-red rounded-full mx-auto lg:mx-0" aria-hidden="true" />
         </div>
 
-        {/* Gallery Grid with Animation */}
         <div aria-live="polite">
           <AnimatePresence mode="wait">
             <motion.div
@@ -103,7 +95,6 @@ const Gallery = ({
                   transition={{ delay: index * 0.05 }}
                   className="group relative aspect-4/3 overflow-hidden rounded-[2rem] bg-white border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-brand-red/10 hover:border-brand-red/20 transition-all duration-500"
                 >
-                  {/* Image with subtle zoom on hover */}
                   <Image
                     src={image.src}
                     alt={image.alt}
@@ -112,9 +103,7 @@ const Gallery = ({
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
 
-                  {/* Elegant Overlay */}
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 flex flex-col justify-end p-8">
-                    {/* Text Content */}
                     <div className="relative z-10 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
                       {image.category && (
                         <span className="inline-block text-[10px] font-bold text-white bg-brand-red px-2 py-0.5 rounded mb-2 uppercase tracking-widest">
@@ -126,7 +115,6 @@ const Gallery = ({
                       </h3>
                     </div>
                     
-                    {/* Bottom gradient for text readability */}
                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
                 </motion.div>
@@ -135,13 +123,12 @@ const Gallery = ({
           </AnimatePresence>
         </div>
 
-        {/* Pagination Controls */}
         {totalPages > 1 && (
           <nav className="flex items-center justify-center gap-6 mt-8" aria-label="Pagination">
             <button
               onClick={handlePrev}
               className="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-brand-red hover:text-brand-red transition-all transform hover:scale-110 text-slate-600 focus:ring-4 focus:ring-brand-red/10 outline-none"
-              aria-label={labels.prev}
+              aria-label="Previous page"
             >
               <ChevronLeft size={24} aria-hidden="true" />
             </button>
@@ -156,7 +143,7 @@ const Gallery = ({
                       ? "bg-brand-red w-10 shadow-sm shadow-brand-red/30" 
                       : "bg-slate-200 w-2 hover:bg-slate-300"
                   }`}
-                  aria-label={`${labels.page} ${i + 1}`}
+                  aria-label={`Go to page ${i + 1}`}
                   aria-current={currentPage === i ? "page" : undefined}
                 />
               ))}
@@ -165,7 +152,7 @@ const Gallery = ({
             <button
               onClick={handleNext}
               className="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-brand-red hover:text-brand-red transition-all transform hover:scale-110 text-slate-600 focus:ring-4 focus:ring-brand-red/10 outline-none"
-              aria-label={labels.next}
+              aria-label="Next page"
             >
               <ChevronRight size={24} aria-hidden="true" />
             </button>

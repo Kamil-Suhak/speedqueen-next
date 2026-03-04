@@ -38,7 +38,7 @@ const Faq = ({ content, bgImage }: FaqProps) => {
   );
 
   return (
-    <section className="relative py-24 scroll-mt-20 bg-white" id="faq">
+    <section className="relative py-24 scroll-mt-20 bg-white" id="faq" aria-label="Frequently Asked Questions">
       <SectionBackground imagePath={bgImage} />
       
       <div className="container mx-auto px-4 relative z-10">
@@ -46,7 +46,7 @@ const Faq = ({ content, bgImage }: FaqProps) => {
           <h2 className="text-4xl font-extrabold text-gray-900 uppercase tracking-tight">
             {content.description}
           </h2>
-          <div className="mx-auto mt-4 h-1 w-16 bg-brand-red rounded-full" />
+          <div className="mx-auto mt-4 h-1 w-16 bg-brand-red rounded-full" aria-hidden="true" />
         </div>
 
         {/* Desktop View */}
@@ -70,6 +70,7 @@ const Faq = ({ content, bgImage }: FaqProps) => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               className="space-y-4"
+              aria-live="polite"
             >
               {mobileItems.map((item, idx) => (
                 <FaqCard
@@ -91,11 +92,12 @@ const Faq = ({ content, bgImage }: FaqProps) => {
               <button
                 onClick={() => setCurrentPage((prev) => Math.max(0, prev - 1))}
                 disabled={currentPage === 0}
-                className="p-3 rounded-2xl border-2 border-slate-100 disabled:opacity-30 hover:bg-slate-50 transition-colors text-zinc-900"
+                className="p-3 rounded-2xl border-2 border-slate-100 disabled:opacity-30 hover:bg-slate-50 transition-colors text-zinc-900 focus:ring-4 focus:ring-brand-red/10 outline-none"
+                aria-label="Previous"
               >
-                <ChevronLeft size={20} />
+                <ChevronLeft size={20} aria-hidden="true" />
               </button>
-              <span className="font-bold text-zinc-900 uppercase tracking-widest text-sm">
+              <span className="font-bold text-zinc-900 uppercase tracking-widest text-sm" aria-current="true">
                 {currentPage + 1} / {totalPages}
               </span>
               <button
@@ -103,9 +105,10 @@ const Faq = ({ content, bgImage }: FaqProps) => {
                   setCurrentPage((prev) => Math.min(totalPages - 1, prev + 1))
                 }
                 disabled={currentPage === totalPages - 1}
-                className="p-3 rounded-2xl border-2 border-slate-100 disabled:opacity-30 hover:bg-slate-50 transition-colors text-zinc-900"
+                className="p-3 rounded-2xl border-2 border-slate-100 disabled:opacity-30 hover:bg-slate-50 transition-colors text-zinc-900 focus:ring-4 focus:ring-brand-red/10 outline-none"
+                aria-label="Next"
               >
-                <ChevronRight size={20} />
+                <ChevronRight size={20} aria-hidden="true" />
               </button>
             </div>
           )}
@@ -129,13 +132,16 @@ const FaqCard = ({
   >
     <button
       onClick={onClick}
-      className="w-full flex items-center justify-between p-8 text-left group"
+      className="w-full flex items-center justify-between p-8 text-left group outline-none focus:ring-4 focus:ring-brand-red/10 rounded-2xl"
+      aria-expanded={isOpen}
+      aria-label={`Toggle answer: ${item.question}`}
     >
       <span className={`font-bold text-lg uppercase tracking-tight transition-colors ${isOpen ? "text-brand-red" : "text-gray-900 group-hover:text-brand-red"}`}>
         {item.question}
       </span>
       <div
         className={`transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"}`}
+        aria-hidden="true"
       >
         {isOpen ? (
           <ChevronUp className="text-brand-red" />

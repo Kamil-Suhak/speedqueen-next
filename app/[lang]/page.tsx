@@ -46,7 +46,7 @@ export default async function LandingPage({
       <PricingTabs 
         {...(pricing as PricingProps)} 
         bgImage={getSectionBackground(3)} 
-        showToggle={false} // Toggle turned off as requested
+        showToggle={false}
       />
       <Reviews reviewWrapper={reviewsContent} reviews={googleReviews} bgImage={getSectionBackground(4)} />
       <Faq content={faq} bgImage={getSectionBackground(5)} />

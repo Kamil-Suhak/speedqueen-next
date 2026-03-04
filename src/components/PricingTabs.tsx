@@ -74,7 +74,6 @@ const PricingTabs = ({ content, bgImage, showToggle = true }: PricingProps) => {
       <SectionBackground imagePath={bgImage} />
 
       <div className="container mx-auto px-4 max-w-4xl relative z-10">
-        {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-extrabold text-zinc-900 mb-4 uppercase tracking-tight">
             {content.title}
@@ -85,15 +84,17 @@ const PricingTabs = ({ content, bgImage, showToggle = true }: PricingProps) => {
           </p>
         </div>
 
-        {/* Controls Layout - Location tabs centered */}
         <div className="flex flex-col items-center gap-8 mb-12">
-          {/* Location Tabs */}
-          <div className="flex flex-wrap justify-center gap-3 w-full">
+          <div className="flex flex-wrap justify-center gap-3 w-full" role="tablist" aria-label="Laundry locations">
             {content.locations.map((loc, idx) => {
               const isActive = activeLocationIndex === idx;
               return (
                 <button
                   key={idx}
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={`panel-${idx}`}
+                  id={`tab-${idx}`}
                   onClick={() => setActiveLocationIndex(idx)}
                   className={`relative px-5 py-2.5 text-sm font-bold cursor-pointer transition-all rounded-xl border-2 shadow-sm uppercase tracking-tight ${
                     isActive
@@ -107,7 +108,6 @@ const PricingTabs = ({ content, bgImage, showToggle = true }: PricingProps) => {
             })}
           </div>
 
-          {/* Pricing Toggle (Optional) */}
           {showToggle && (
             <div className="flex flex-col items-center relative">
               <div className="relative flex items-center bg-zinc-200/80 p-1.5 rounded-2xl border border-zinc-200 shadow-inner">
@@ -153,7 +153,6 @@ const PricingTabs = ({ content, bgImage, showToggle = true }: PricingProps) => {
           )}
         </div>
 
-        {/* Dynamic Pricing List */}
         <div className="space-y-16 min-h-[400px]">
           {content.categories.map((category) => {
             const visibleItems = category.items.filter((item) =>
@@ -163,14 +162,14 @@ const PricingTabs = ({ content, bgImage, showToggle = true }: PricingProps) => {
             if (visibleItems.length === 0) return null;
 
             return (
-              <motion.div layout key={category.id} transition={{ duration: 0.4 }}>
+              <motion.div layout key={category.id} transition={{ duration: 0.4 }} role="tabpanel" id={`panel-${activeLocationIndex}`} aria-labelledby={`tab-${activeLocationIndex}`}>
                 <h3 className="text-2xl font-extrabold text-zinc-900 mb-6 border-b-2 border-zinc-100 pb-2 uppercase tracking-tight">
                   {category.title}
                 </h3>
 
                 {category.alertBanner && (
                   <div className="mb-6 flex gap-3 rounded-2xl bg-amber-50 p-4 border border-amber-100">
-                    <Info className="text-amber-600 shrink-0 mt-0.5" size={20} />
+                    <Info className="text-amber-600 shrink-0 mt-0.5" size={20} aria-hidden="true" />
                     <div>
                       <h4 className="font-bold text-amber-800 mb-1 uppercase text-sm">
                         {category.alertBanner.title}
@@ -216,7 +215,6 @@ const PricingTabs = ({ content, bgImage, showToggle = true }: PricingProps) => {
                           </div>
 
                           <div className="shrink-0 flex flex-wrap items-center gap-x-2 gap-y-2 justify-start md:justify-end">
-                            {/* Standard Price */}
                             <div className="flex items-baseline gap-1">
                               <span className="text-3xl font-extrabold text-zinc-900">
                                 {item.standardPrice}
@@ -226,7 +224,6 @@ const PricingTabs = ({ content, bgImage, showToggle = true }: PricingProps) => {
                               </span>
                             </div>
 
-                            {/* Loyalty Banner - Repositioned and resized */}
                             <div className="flex items-center">
                               <span className="font-bold text-white bg-brand-red rounded-lg uppercase tracking-widest px-3 py-1.5 text-sm md:text-xs whitespace-nowrap shadow-sm">
                                 {item.loyaltyPrice} {content.unit}{" "}
@@ -234,7 +231,6 @@ const PricingTabs = ({ content, bgImage, showToggle = true }: PricingProps) => {
                               </span>
                             </div>
 
-                            {/* Cycle info */}
                             {item.isPerCycle && (
                               <span className="text-sm font-semibold text-zinc-400 uppercase">
                                 / {content.cycleLabel}
