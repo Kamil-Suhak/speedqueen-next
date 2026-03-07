@@ -33,9 +33,9 @@ export default function ServicesGrid({ head, items, bgImage }: ServicesProps) {
           {items.map((item, i) => (
             <div
               key={i}
-              className="group rounded-3xl border border-slate-100 bg-white/80 backdrop-blur-sm p-8 shadow-sm transition-all hover:border-brand-red/20 hover:shadow-md"
+              className="rounded-3xl border border-slate-100 bg-white/80 backdrop-blur-sm p-8 shadow-sm"
             >
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50 text-brand-red transition-colors group-hover:bg-brand-red group-hover:text-white shadow-inner">
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50 text-brand-red shadow-inner">
                 <item.icon size={28} />
               </div>
               <h3 className="mb-3 text-xl font-bold uppercase tracking-tight text-gray-900">

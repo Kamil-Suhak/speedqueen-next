@@ -15,6 +15,21 @@ export const pricingPl = {
       upsellBadge: "Karta SQ",
       upsellMessage: "Zaoszczędź korzystając z karty lojalnościowej!",
     },
+    loyaltyCard: {
+      title: "Karta Lojalnościowa",
+      description: "Nasza karta lojalnościowa działa na zasadzie przedpłaty (prepaid). To najwygodniejszy i najtańszy sposób korzystania z naszych pralni.",
+      priceLabel: "Cena Karty",
+      priceValue: "70",
+      benefitLabel: "Zawiera doładowanie",
+      benefitValue: "50",
+      features: [
+        "Niższe ceny na wszystkie usługi*",
+        "Jednorazowy koszt zakupu karty",
+        "Wygodne płatności zbliżeniowe",
+        "Możliwość doładowania w dowolnym momencie"
+      ],
+      ironingNote: "*Cena za stanowisko do prasowania pozostaje taka sama z kartą i bez karty."
+    },
     categories: [
       {
         id: "washers",

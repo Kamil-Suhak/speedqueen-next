@@ -1,5 +1,5 @@
 export const galleryPl = {
-  title: "Nasze Realizacje",
+  title: "Nasze Pralnie",
   subtitle: "Zobacz jak wyglądają nasze profesjonalne pralnie samoobsługowe",
   images: [
     { src: "/images/gallery/a.jpg", alt: "Pralnia - ul. Orlińskiego" },

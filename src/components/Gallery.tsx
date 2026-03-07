@@ -64,17 +64,20 @@ const Gallery = ({
       <SectionBackground imagePath={bgImage} />
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="mb-16 text-center lg:text-left">
-           <motion.h2
-              key={`${lang}-h2`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight uppercase tracking-tight"
-            >
-              {content.subtitle}
-            </motion.h2>
-            <div className="mt-4 h-1 w-16 bg-brand-red rounded-full mx-auto lg:mx-0" aria-hidden="true" />
+        <div className="mb-16 text-center">
+          <motion.h2
+            key={`${lang}-h2`}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight uppercase tracking-tight"
+          >
+            {content.title}
+          </motion.h2>
+          <div className="mx-auto mt-4 h-1 w-16 bg-brand-red rounded-full" aria-hidden="true" />
+          <p className="mt-6 text-lg text-gray-600 font-normal">
+            {content.subtitle}
+          </p>
         </div>
 
         <div aria-live="polite">

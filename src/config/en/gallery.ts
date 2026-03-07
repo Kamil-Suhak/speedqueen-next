@@ -1,5 +1,5 @@
 export const galleryEn = {
-  title: "Our Work",
+  title: "Our Laundromats",
   subtitle: "Take a tour of our professional self-service laundries",
   images: [
     { src: "/images/gallery/a.jpg", alt: "Laundry - Orlińskiego St" },

@@ -15,6 +15,21 @@ export const pricingEn = {
       upsellBadge: "SQ Card",
       upsellMessage: "Save money by paying with a loyalty card!",
     },
+    loyaltyCard: {
+      title: "Loyalty Card",
+      description: "Our loyalty card works on a prepaid basis. It's the most convenient and cheapest way to use our laundromats.",
+      priceLabel: "Card Price",
+      priceValue: "70",
+      benefitLabel: "Includes credit",
+      benefitValue: "50",
+      features: [
+        "Lower prices for all services*",
+        "One-time card purchase",
+        "Easy contactless payments",
+        "Rechargeable at any time"
+      ],
+      ironingNote: "*The price for the ironing board remains the same with and without the card."
+    },
     categories: [
       {
         id: "washers",

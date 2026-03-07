@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence, Variants } from "framer-motion";
-import { Info } from "lucide-react";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, Variants, useScroll, useMotionValueEvent } from "framer-motion";
+import { Info, ArrowRight } from "lucide-react";
 import SectionBackground from "@/components/SectionBackground";
+import LoyaltyCardImg from "@/components/LoyaltyCardImg";
 
 export interface MachineItem {
   name: string;
@@ -33,15 +34,22 @@ export interface PricingProps {
     cycleLabel: string;
     locations: string[];
     toggle: {
-      standard: string;
-      loyalty: string;
       upsellBadge: string;
       upsellMessage: string;
+    };
+    loyaltyCard: {
+      title: string;
+      description: string;
+      priceLabel: string;
+      priceValue: string;
+      benefitLabel: string;
+      benefitValue: string;
+      features: string[];
+      ironingNote: string;
     };
     categories: PricingCategory[];
   };
   bgImage?: string;
-  showToggle?: boolean;
 }
 
 const listContainerVariants: Variants = {
@@ -60,21 +68,49 @@ const listItemVariants: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } },
 };
 
-const PricingTabs = ({ content, bgImage, showToggle = true }: PricingProps) => {
+const PricingTabs = ({ content, bgImage }: PricingProps) => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const loyaltyRef = useRef<HTMLDivElement>(null);
+  
+  const [isVisible, setIsVisible] = useState(true);
+  const [isStuck, setIsStuck] = useState(false);
   const [activeLocationIndex, setActiveLocationIndex] = useState(0);
-  const activeLocation =
-    content.locations[activeLocationIndex] || content.locations[0];
-  const [isLoyalty, setIsLoyalty] = useState(false);
+
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", () => {
+    if (!sectionRef.current || !loyaltyRef.current) return;
+
+    const pricingRect = sectionRef.current.getBoundingClientRect();
+    const loyaltyRect = loyaltyRef.current.getBoundingClientRect();
+
+    const shouldBeStuck = pricingRect.top < 60;
+    if (shouldBeStuck !== isStuck) setIsStuck(shouldBeStuck);
+
+    const loyaltyThreshold = 450; 
+    const isAtSectionTop = pricingRect.top > 0;
+    const isLoyaltyFarEnough = loyaltyRect.top > loyaltyThreshold;
+    const shouldBeVisible = isAtSectionTop || isLoyaltyFarEnough;
+    
+    if (shouldBeVisible !== isVisible) setIsVisible(shouldBeVisible);
+  });
+
+  const activeLocation = content.locations[activeLocationIndex] || content.locations[0];
+
+  const scrollToLoyalty = () => {
+    loyaltyRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <section
-      className="relative py-24 scroll-mt-20 overflow-hidden bg-white"
+      ref={sectionRef}
+      className="relative py-24 scroll-mt-20 overflow-visible bg-white"
       id="pricing"
     >
       <SectionBackground imagePath={bgImage} />
 
       <div className="container mx-auto px-4 max-w-4xl relative z-10">
-        <div className="text-center mb-16">
+        <header className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-extrabold text-zinc-900 mb-4 uppercase tracking-tight">
             {content.title}
           </h2>
@@ -82,77 +118,47 @@ const PricingTabs = ({ content, bgImage, showToggle = true }: PricingProps) => {
           <p className="mt-6 text-lg text-zinc-600 font-normal">
             {content.subtitle}
           </p>
-        </div>
+        </header>
 
-        <div className="flex flex-col items-center gap-8 mb-12">
-          <div className="flex flex-wrap justify-center gap-3 w-full" role="tablist" aria-label="Laundry locations">
-            {content.locations.map((loc, idx) => {
-              const isActive = activeLocationIndex === idx;
-              return (
+        {/* Sticky Location Switcher */}
+        <div className="sticky top-[68px] z-40 mb-12 flex justify-center">
+          <motion.div
+            initial={false}
+            animate={{ 
+              opacity: isVisible ? 1 : 0, 
+              y: isVisible ? 0 : -10,
+            }}
+            transition={{ duration: 0.3 }}
+            style={{ pointerEvents: isVisible ? "auto" : "none" }}
+            className={`transition-all duration-300 rounded-2xl flex flex-col items-center ${
+              isStuck 
+                ? "bg-white/80 backdrop-blur-[2px] border border-zinc-100 p-2 md:p-3" 
+                : "bg-transparent p-0"
+            }`}
+          >
+            <div className="flex flex-wrap justify-center gap-2 md:gap-3 w-full" role="tablist" aria-label="Laundry locations">
+              {content.locations.map((loc, idx) => (
                 <button
                   key={idx}
                   role="tab"
-                  aria-selected={isActive}
+                  aria-selected={activeLocationIndex === idx}
                   aria-controls={`panel-${idx}`}
                   id={`tab-${idx}`}
                   onClick={() => setActiveLocationIndex(idx)}
-                  className={`relative px-5 py-2.5 text-sm font-bold cursor-pointer transition-all rounded-xl border-2 shadow-sm uppercase tracking-tight ${
-                    isActive
+                  className={`relative px-3 py-2 md:px-5 md:py-2.5 text-xs md:text-sm font-bold cursor-pointer transition-all rounded-xl border shadow-sm uppercase tracking-tight ${
+                    activeLocationIndex === idx
                       ? "bg-zinc-900 text-white border-zinc-900 scale-105"
                       : "bg-white text-zinc-500 border-zinc-200 hover:border-zinc-300 hover:text-zinc-800"
                   }`}
                 >
                   {loc}
                 </button>
-              );
-            })}
-          </div>
-
-          {showToggle && (
-            <div className="flex flex-col items-center relative">
-              <div className="relative flex items-center bg-zinc-200/80 p-1.5 rounded-2xl border border-zinc-200 shadow-inner">
-                <button
-                  onClick={() => setIsLoyalty(false)}
-                  className={`relative px-6 py-3 rounded-xl font-bold text-sm transition-colors cursor-pointer whitespace-nowrap uppercase tracking-tight ${
-                    !isLoyalty
-                      ? "text-zinc-900"
-                      : "text-zinc-500 hover:text-zinc-700"
-                  }`}
-                >
-                  {!isLoyalty && (
-                    <motion.div
-                      layoutId="pricingPill"
-                      className="absolute inset-0 bg-white rounded-xl shadow-md border border-zinc-100"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
-                    />
-                  )}
-                  <span className="relative z-10">
-                    {content.toggle.standard}
-                  </span>
-                </button>
-
-                <button
-                  onClick={() => setIsLoyalty(true)}
-                  className={`relative px-6 py-3 rounded-xl font-bold text-sm transition-colors cursor-pointer whitespace-nowrap uppercase tracking-tight ${
-                    isLoyalty
-                      ? "text-white"
-                      : "text-zinc-500 hover:text-zinc-700"
-                  }`}
-                >
-                  {isLoyalty && (
-                    <motion.div
-                      layoutId="pricingPill"
-                      className="absolute inset-0 bg-brand-red rounded-xl shadow-md"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
-                    />
-                  )}
-                  <span className="relative z-10">{content.toggle.loyalty}</span>
-                </button>
-              </div>
+              ))}
             </div>
-          )}
+          </motion.div>
         </div>
 
+        {/* Categories and Items */}
         <div className="space-y-16 min-h-[400px]">
           {content.categories.map((category) => {
             const visibleItems = category.items.filter((item) =>
@@ -162,19 +168,26 @@ const PricingTabs = ({ content, bgImage, showToggle = true }: PricingProps) => {
             if (visibleItems.length === 0) return null;
 
             return (
-              <motion.div layout key={category.id} transition={{ duration: 0.4 }} role="tabpanel" id={`panel-${activeLocationIndex}`} aria-labelledby={`tab-${activeLocationIndex}`}>
+              <motion.div 
+                layout 
+                key={category.id} 
+                transition={{ duration: 0.4 }} 
+                role="tabpanel" 
+                id={`panel-${activeLocationIndex}`} 
+                aria-labelledby={`tab-${activeLocationIndex}`}
+              >
                 <h3 className="text-2xl font-extrabold text-zinc-900 mb-6 border-b-2 border-zinc-100 pb-2 uppercase tracking-tight">
                   {category.title}
                 </h3>
 
                 {category.alertBanner && (
-                  <div className="mb-6 flex gap-3 rounded-2xl bg-amber-50 p-4 border border-amber-100">
-                    <Info className="text-amber-600 shrink-0 mt-0.5" size={20} aria-hidden="true" />
+                  <div className="mb-6 flex gap-3 rounded-2xl bg-blue-50/50 p-4 border border-blue-100/50 backdrop-blur-sm">
+                    <Info className="text-blue-500 shrink-0 mt-0.5" size={20} aria-hidden="true" />
                     <div>
-                      <h4 className="font-bold text-amber-800 mb-1 uppercase text-sm">
+                      <h4 className="font-bold text-blue-900 mb-1 uppercase text-xs tracking-wider">
                         {category.alertBanner.title}
                       </h4>
-                      <p className="text-sm text-zinc-700 leading-relaxed font-normal">
+                      <p className="text-sm text-zinc-600 leading-relaxed font-normal">
                         {category.alertBanner.description}
                       </p>
                     </div>
@@ -184,7 +197,7 @@ const PricingTabs = ({ content, bgImage, showToggle = true }: PricingProps) => {
                 <div className="flex flex-col gap-4">
                   <AnimatePresence mode="wait">
                     <motion.div
-                      key={`${category.id}-${activeLocationIndex}-${showToggle}`}
+                      key={`${category.id}-${activeLocationIndex}`}
                       variants={listContainerVariants}
                       initial="hidden"
                       animate="show"
@@ -225,10 +238,14 @@ const PricingTabs = ({ content, bgImage, showToggle = true }: PricingProps) => {
                             </div>
 
                             <div className="flex items-center">
-                              <span className="font-bold text-white bg-brand-red rounded-lg uppercase tracking-widest px-3 py-1.5 text-sm md:text-xs whitespace-nowrap shadow-sm">
+                              <button
+                                onClick={scrollToLoyalty}
+                                className="group/btn flex items-center gap-2 font-bold text-white bg-brand-red rounded-lg uppercase tracking-widest px-3 py-1.5 text-sm md:text-xs whitespace-nowrap shadow-sm hover:brightness-110 hover:scale-105 transition-all cursor-pointer"
+                              >
                                 {item.loyaltyPrice} {content.unit}{" "}
                                 {content.toggle.upsellBadge}
-                              </span>
+                                <ArrowRight size={14} className="group-hover/btn:translate-x-0.5 transition-transform" />
+                              </button>
                             </div>
 
                             {item.isPerCycle && (
@@ -245,6 +262,65 @@ const PricingTabs = ({ content, bgImage, showToggle = true }: PricingProps) => {
               </motion.div>
             );
           })}
+        </div>
+
+        {/* Loyalty Card Info */}
+        <div ref={loyaltyRef} id="loyalty-info" className="mt-24 pt-12 border-t border-zinc-100 scroll-mt-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="order-2 lg:order-1 flex flex-col items-center lg:items-start text-center lg:text-left">
+              <h3 className="text-3xl font-extrabold text-zinc-900 mb-4 uppercase tracking-tight">
+                {content.loyaltyCard.title}
+              </h3>
+              <p className="text-lg text-zinc-600 mb-8 max-w-lg font-normal">
+                {content.loyaltyCard.description}
+              </p>
+              
+              <div className="grid grid-cols-2 gap-4 w-full max-w-md mb-8">
+                <div className="bg-zinc-50 p-4 rounded-2xl border border-zinc-100">
+                  <span className="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-1">
+                    {content.loyaltyCard.priceLabel}
+                  </span>
+                  <span className="text-2xl font-extrabold text-zinc-900">
+                    {content.loyaltyCard.priceValue} {content.unit}
+                  </span>
+                </div>
+                <div className="bg-brand-red/5 p-4 rounded-2xl border border-brand-red/10">
+                  <span className="block text-xs font-bold text-brand-red uppercase tracking-wider mb-1">
+                    {content.loyaltyCard.benefitLabel}
+                  </span>
+                  <span className="text-2xl font-extrabold text-brand-red">
+                    {content.loyaltyCard.benefitValue} {content.unit}
+                  </span>
+                </div>
+              </div>
+
+              <ul className="space-y-3 text-left w-full max-w-md">
+                {content.loyaltyCard.features.map((feature, i) => (
+                  <li key={i} className="flex items-center gap-3 text-zinc-700 font-medium">
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-brand-red flex items-center justify-center">
+                      <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+
+              <p className="mt-6 text-sm text-zinc-500 font-normal">
+                {content.loyaltyCard.ironingNote}
+              </p>
+            </div>
+            
+            <div className="order-1 lg:order-2 flex justify-center">
+              <div className="max-w-md w-full">
+                <LoyaltyCardImg />
+                <p className="mt-6 text-sm text-zinc-500 text-center font-normal italic">
+                  {content.toggle.upsellMessage}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

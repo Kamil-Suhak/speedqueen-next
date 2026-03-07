@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { MapPin, List } from "lucide-react";
 import { FormattedText } from "@/components/FormattedText";
 import SectionBackground from "@/components/SectionBackground";
+import { motion } from "framer-motion";
 
 interface HeroProps {
   content: {
@@ -71,15 +72,30 @@ export default function Hero({ content, bgImage }: HeroProps) {
       <SectionBackground imagePath={bgImage} />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-        <h1 className="mx-auto mb-6 max-w-4xl text-4xl font-extrabold tracking-tight text-gray-900 md:text-7xl">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0 }}
+          className="mx-auto mb-6 max-w-4xl text-4xl font-extrabold tracking-tight text-gray-900 md:text-7xl"
+        >
           <FormattedText text={content.title} />
-        </h1>
+        </motion.h1>
 
-        <p className="mx-auto mb-10 max-w-2xl text-lg text-gray-600 md:text-xl font-normal">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mx-auto mb-10 max-w-2xl text-lg text-gray-600 md:text-xl font-normal"
+        >
           {content.subtitle}
-        </p>
+        </motion.p>
 
-        <div className="flex flex-col justify-center gap-4 sm:flex-row">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="flex flex-col justify-center gap-4 sm:flex-row"
+        >
           <a
             href={directionsUrl}
             target="_blank"
@@ -96,7 +112,7 @@ export default function Hero({ content, bgImage }: HeroProps) {
             <List size={20} />
             {content.secondaryCTA}
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

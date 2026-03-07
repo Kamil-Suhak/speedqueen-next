@@ -42,12 +42,11 @@ export default async function LandingPage({
     <>
       <Hero content={hero} bgImage={getSectionBackground(0)} />
       <ServicesGrid head={services.head} items={services.items} bgImage={getSectionBackground(1)} />
-      <Gallery content={gallery} lang={lang} bgImage={getSectionBackground(2)} />
       <PricingTabs 
         {...(pricing as PricingProps)} 
-        bgImage={getSectionBackground(3)} 
-        showToggle={false}
+        bgImage={getSectionBackground(2)} 
       />
+      <Gallery content={gallery} lang={lang} bgImage={getSectionBackground(3)} />
       <Reviews reviewWrapper={reviewsContent} reviews={googleReviews} bgImage={getSectionBackground(4)} />
       <Faq content={faq} bgImage={getSectionBackground(5)} />
       <Contact content={contact} brandInfo={GlobalConfig.brand} bgImage={getSectionBackground(6)} />

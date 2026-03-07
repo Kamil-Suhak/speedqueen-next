@@ -75,7 +75,7 @@ export default async function RootLayout({
 
   return (
     <html lang={lang} className={`scroll-smooth ${inter.variable} ${montserrat.variable}`}>
-      <body className="font-sans antialiased overflow-x-hidden">
+      <body className="font-sans antialiased">
         <Navbar
           ctaText={callNowText}
           links={navigation.navLinks}
@@ -83,7 +83,7 @@ export default async function RootLayout({
           lang={lang}
         />
         <SocialSidebar />
-        <main id="main-content" className="w-full overflow-x-hidden">
+        <main id="main-content" className="w-full">
           {children}
         </main>
 
