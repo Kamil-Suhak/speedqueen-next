@@ -48,7 +48,7 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
   }
 
   return (
-    <section id="contact" className="relative scroll-mt-20 py-24 bg-white" aria-labelledby="contact-heading">
+    <section id="contact" className="relative scroll-mt-20 py-24 bg-white overflow-hidden" aria-labelledby="contact-heading">
       <SectionBackground imagePath={bgImage} />
       
       <StatusModal
