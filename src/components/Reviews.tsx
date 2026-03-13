@@ -9,7 +9,8 @@ import SectionBackground from "@/components/SectionBackground";
 
 interface ReviewsWrapper {
   title: string;
-  view_all: string;
+  view_more: string;
+  hide: string;
   read_more: string;
 }
 
@@ -33,8 +34,10 @@ export default function Reviews({
   const [selectedReview, setSelectedReview] = useState<GoogleReview | null>(
     null,
   );
+  const [showAll, setShowAll] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const prevFocused = useRef<HTMLElement | null>(null);
+  const sectionRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!selectedReview) return;
@@ -59,19 +62,26 @@ export default function Reviews({
     }
   }, [selectedReview]);
 
-  const view_all_url = "https://www.google.com/maps/search/Speed+Queen+Kraków";
-
   const sortedReviews = useMemo(() => {
     if (!reviews || !Array.isArray(reviews) || reviews.length === 0) return [];
     return [...reviews]
       .sort((a, b) => calculateScore(b) - calculateScore(a))
-      .slice(0, 3);
-  }, [reviews]);
+      .slice(0, showAll ? 6 : 3);
+  }, [reviews, showAll]);
+
+  const toggleReviews = () => {
+    if (showAll) {
+      setShowAll(false);
+      sectionRef.current?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      setShowAll(true);
+    }
+  };
 
   if (!reviews || sortedReviews.length === 0) return null;
 
   return (
-    <section id="reviews" className="relative scroll-mt-20 pt-20 pb-10 bg-white">
+    <section ref={sectionRef} id="reviews" className="relative scroll-mt-20 pt-20 pb-10 bg-white">
       <SectionBackground imagePath={bgImage} />
       
       <div className="mx-auto max-w-7xl flex-col justify-between px-4 relative z-10">
@@ -82,70 +92,79 @@ export default function Reviews({
           <div className="mx-auto mt-4 h-1 w-16 bg-brand-red rounded-full" />
         </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {sortedReviews.map((review, i) => (
-            <div
-              key={`${review.author_name}-${review.time}-${i}`}
-              className={`flex flex-col justify-between rounded-3xl border border-slate-100 bg-white/90 backdrop-blur-sm p-8 shadow-sm transition-all hover:border-brand-red/20 hover:shadow-md ${i > 1 ? "hidden md:flex" : "flex"}`}
-            >
-              <div className="flex w-full items-start justify-between">
-                <Quote className="mb-4 text-brand-red/5" size={48} />
+        <motion.div 
+          layout
+          className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+        >
+          <AnimatePresence mode="popLayout">
+            {sortedReviews.map((review, i) => (
+              <motion.div
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                key={`${review.author_name}-${review.time}-${i}`}
+                className="flex flex-col justify-between rounded-3xl border border-slate-100 bg-white/90 backdrop-blur-sm p-8 shadow-sm transition-all hover:border-brand-red/20 hover:shadow-md flex"
+              >
+                <div className="flex w-full items-start justify-between">
+                  <Quote className="mb-4 text-brand-red/5" size={48} />
 
-                <div className="mt-4 flex gap-1 text-brand-red">
-                  {[...Array(Math.max(0, review.rating || 0))].map((_, j) => (
-                    <Star key={j} fill="currentColor" size={20} />
-                  ))}
+                  <div className="mt-4 flex gap-1 text-brand-red">
+                    {[...Array(Math.max(0, review.rating || 0))].map((_, j) => (
+                      <Star key={j} fill="currentColor" size={20} />
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <p className="mb-6 leading-relaxed text-gray-600 italic font-normal flex flex-col">
-                &quot;
-                {(review.text || "").length > MAX_CHARS
-                  ? review.text.substring(0, MAX_CHARS) + "..."
-                  : review.text}
-                &quot;
-                {(review.text || "").length > MAX_CHARS && (
-                  <button
-                    onClick={() => setSelectedReview(review)}
-                    className="not-italic text-right text-sm font-bold text-zinc-900 hover:text-brand-red transition-colors focus:outline-none focus:underline uppercase tracking-tight"
-                  >
-                    {reviewWrapper.read_more}
-                  </button>
-                )}
-              </p>
+                <p className="mb-6 leading-relaxed text-gray-600 italic font-normal flex flex-col">
+                  &quot;
+                  {(review.text || "").length > MAX_CHARS
+                    ? review.text.substring(0, MAX_CHARS) + "..."
+                    : review.text}
+                  &quot;
+                  {(review.text || "").length > MAX_CHARS && (
+                    <button
+                      onClick={() => setSelectedReview(review)}
+                      className="not-italic text-right text-sm font-bold text-zinc-900 hover:text-brand-red transition-colors focus:outline-none focus:underline uppercase tracking-tight"
+                    >
+                      {reviewWrapper.read_more}
+                    </button>
+                  )}
+                </p>
 
-              <div className="flex items-center gap-4 border-t border-slate-50 pt-6">
-                <div className="relative h-14 w-14">
-                  <Image
-                    src={review.profile_photo_url || "/images/logo.png"}
-                    alt=""
-                    fill
-                    className="rounded-full bg-slate-50 object-cover border border-slate-100 shadow-sm"
-                    sizes="56px"
-                  />
+                <div className="flex items-center gap-4 border-t border-slate-50 pt-6">
+                  <div className="relative h-14 w-14">
+                    <Image
+                      src={review.profile_photo_url || "/images/logo.png"}
+                      alt=""
+                      fill
+                      className="rounded-full bg-slate-50 object-cover border border-slate-100 shadow-sm"
+                      sizes="56px"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-gray-900 uppercase tracking-tight">
+                      {review.author_name}
+                    </h3>
+                    <p className="text-xs text-gray-400 font-semibold uppercase tracking-widest">
+                      {review.relative_time_description}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-sm font-bold text-gray-900 uppercase tracking-tight">
-                    {review.author_name}
-                  </h3>
-                  <p className="text-xs text-gray-400 font-semibold uppercase tracking-widest">
-                    {review.relative_time_description}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
         
-        <div className="flex justify-center mt-12">
-           <a 
-             href={view_all_url}
-             target="_blank"
-             rel="noopener noreferrer"
-             className="px-8 py-4 bg-zinc-900 text-white font-bold rounded-xl shadow-lg hover:bg-brand-red transition-all transform hover:-translate-y-1 uppercase tracking-tight"
-           >
-             {reviewWrapper.view_all}
-           </a>
-        </div>
+        {reviews.length > 3 && (
+          <div className="flex justify-center mt-12">
+             <button 
+               onClick={toggleReviews}
+               className="px-8 py-4 bg-zinc-900 text-white font-bold rounded-xl shadow-lg hover:bg-brand-red transition-all transform hover:-translate-y-1 uppercase tracking-tight"
+             >
+               {showAll ? reviewWrapper.hide : reviewWrapper.view_more}
+             </button>
+          </div>
+        )}
       </div>
 
       {/* Modal Overlay */}
