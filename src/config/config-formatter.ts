@@ -3,7 +3,7 @@ import { ElementType } from "react";
 export const markerStyles: Record<string, string> = {
   "[[": "text-brand-red",
   "{{": "text-brand-red font-bold",
-  "((": "italic text-gray-600",
+  "((": "text-brand-red hover:underline transition-all cursor-pointer",
   "!!": "font-black uppercase tracking-tighter",
 };
 

@@ -6,6 +6,7 @@ import PricingTabs, { PricingProps } from "@/components/PricingTabs";
 import Reviews from "@/components/Reviews";
 import Gallery from "@/components/Gallery";
 import Faq from "@/components/Faq";
+import PromoModal from "@/components/PromoModal";
 
 import { getDictionary } from "@/lib/generate-dictionaries";
 import { getGoogleReviews } from "@/actions/getReviews";
@@ -26,6 +27,8 @@ export default async function LandingPage({
     reviewsContent,
     faq,
     contact,
+    discount,
+    common,
     googleReviews,
   ] = await Promise.all([
     getDictionary(lang, "hero"),
@@ -35,11 +38,19 @@ export default async function LandingPage({
     getDictionary(lang, "reviews"),
     getDictionary(lang, "faq"),
     getDictionary(lang, "contact"),
+    getDictionary(lang, "discount"),
+    getDictionary(lang, "common"),
     getGoogleReviews(lang),
   ]);
 
+  const promoContent = {
+    discount,
+    common,
+  };
+
   return (
     <>
+      <PromoModal content={promoContent} />
       <Hero content={hero} bgImage={getSectionBackground(0)} />
       <ServicesGrid head={services.head} items={services.items} bgImage={getSectionBackground(1)} />
       <PricingTabs 

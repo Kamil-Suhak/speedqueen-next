@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { motion, AnimatePresence, Variants, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Info, ArrowRight } from "lucide-react";
 import SectionBackground from "@/components/SectionBackground";
 import LoyaltyCardImg from "@/components/LoyaltyCardImg";
@@ -69,31 +69,8 @@ const listItemVariants: Variants = {
 };
 
 const PricingTabs = ({ content, bgImage }: PricingProps) => {
-  const sectionRef = useRef<HTMLDivElement>(null);
   const loyaltyRef = useRef<HTMLDivElement>(null);
-  
-  const [isVisible, setIsVisible] = useState(true);
-  const [isStuck, setIsStuck] = useState(false);
   const [activeLocationIndex, setActiveLocationIndex] = useState(0);
-
-  const { scrollY } = useScroll();
-
-  useMotionValueEvent(scrollY, "change", () => {
-    if (!sectionRef.current || !loyaltyRef.current) return;
-
-    const pricingRect = sectionRef.current.getBoundingClientRect();
-    const loyaltyRect = loyaltyRef.current.getBoundingClientRect();
-
-    const shouldBeStuck = pricingRect.top < 60;
-    if (shouldBeStuck !== isStuck) setIsStuck(shouldBeStuck);
-
-    const loyaltyThreshold = 450; 
-    const isAtSectionTop = pricingRect.top > 0;
-    const isLoyaltyFarEnough = loyaltyRect.top > loyaltyThreshold;
-    const shouldBeVisible = isAtSectionTop || isLoyaltyFarEnough;
-    
-    if (shouldBeVisible !== isVisible) setIsVisible(shouldBeVisible);
-  });
 
   const activeLocation = content.locations[activeLocationIndex] || content.locations[0];
 
@@ -103,7 +80,6 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
 
   return (
     <section
-      ref={sectionRef}
       className="relative py-24 scroll-mt-20 overflow-visible bg-white"
       id="pricing"
     >
@@ -120,42 +96,27 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
           </p>
         </header>
 
-        {/* Sticky Location Switcher */}
-        <div className="sticky top-[68px] z-40 mb-12 flex justify-center">
-          <motion.div
-            initial={false}
-            animate={{ 
-              opacity: isVisible ? 1 : 0, 
-              y: isVisible ? 0 : -10,
-            }}
-            transition={{ duration: 0.3 }}
-            style={{ pointerEvents: isVisible ? "auto" : "none" }}
-            className={`transition-all duration-300 rounded-2xl flex flex-col items-center ${
-              isStuck 
-                ? "bg-white/80 backdrop-blur-[2px] border border-zinc-100 p-2 md:p-3" 
-                : "bg-transparent p-0"
-            }`}
-          >
-            <div className="flex flex-wrap justify-center gap-2 md:gap-3 w-full" role="tablist" aria-label="Laundry locations">
-              {content.locations.map((loc, idx) => (
-                <button
-                  key={idx}
-                  role="tab"
-                  aria-selected={activeLocationIndex === idx}
-                  aria-controls={`panel-${idx}`}
-                  id={`tab-${idx}`}
-                  onClick={() => setActiveLocationIndex(idx)}
-                  className={`relative px-3 py-2 md:px-5 md:py-2.5 text-xs md:text-sm font-bold cursor-pointer transition-all rounded-xl border shadow-sm uppercase tracking-tight ${
-                    activeLocationIndex === idx
-                      ? "bg-zinc-900 text-white border-zinc-900 scale-105"
-                      : "bg-white text-zinc-500 border-zinc-200 hover:border-zinc-300 hover:text-zinc-800"
-                  }`}
-                >
-                  {loc}
-                </button>
-              ))}
-            </div>
-          </motion.div>
+        {/* Location Switcher */}
+        <div className="mb-12 flex justify-center">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-3 w-full" role="tablist" aria-label="Laundry locations">
+            {content.locations.map((loc, idx) => (
+              <button
+                key={idx}
+                role="tab"
+                aria-selected={activeLocationIndex === idx}
+                aria-controls={`panel-${idx}`}
+                id={`tab-${idx}`}
+                onClick={() => setActiveLocationIndex(idx)}
+                className={`relative px-3 py-2 md:px-5 md:py-2.5 text-xs md:text-sm font-bold cursor-pointer transition-colors duration-200 rounded-xl border shadow-sm uppercase tracking-tight ${
+                  activeLocationIndex === idx
+                    ? "bg-zinc-900 text-white border-zinc-900"
+                    : "bg-white text-zinc-500 border-zinc-200 hover:border-zinc-300 hover:text-zinc-800"
+                }`}
+              >
+                {loc}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Categories and Items */}
@@ -168,10 +129,8 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
             if (visibleItems.length === 0) return null;
 
             return (
-              <motion.div 
-                layout 
+              <div 
                 key={category.id} 
-                transition={{ duration: 0.4 }} 
                 role="tabpanel" 
                 id={`panel-${activeLocationIndex}`} 
                 aria-labelledby={`tab-${activeLocationIndex}`}
@@ -181,7 +140,7 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
                 </h3>
 
                 {category.alertBanner && (
-                  <div className="mb-6 flex gap-3 rounded-2xl bg-blue-50/50 p-4 border border-blue-100/50 backdrop-blur-sm">
+                  <div className="mb-6 flex gap-3 rounded-2xl bg-blue-50/50 p-4 border border-blue-100/50">
                     <Info className="text-blue-500 shrink-0 mt-0.5" size={20} aria-hidden="true" />
                     <div>
                       <h4 className="font-bold text-blue-900 mb-1 uppercase text-xs tracking-wider">
@@ -207,9 +166,8 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
                       {visibleItems.map((item, idx) => (
                         <motion.div
                           variants={listItemVariants}
-                          layout
                           key={`${category.id}-${item.name}-${idx}`}
-                          className="flex flex-col md:flex-row md:items-center justify-between p-6 rounded-3xl bg-white/90 backdrop-blur-sm border border-slate-100 shadow-sm hover:border-brand-red/20 transition-colors gap-4"
+                          className="flex flex-col md:flex-row md:items-center justify-between p-6 rounded-3xl bg-white border border-slate-100 shadow-sm hover:border-brand-red/20 transition-colors gap-4"
                         >
                           <div className="flex flex-col md:pr-4 flex-1">
                             <span className="text-xl font-bold text-zinc-900 uppercase tracking-tight">
@@ -259,7 +217,7 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
                     </motion.div>
                   </AnimatePresence>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>

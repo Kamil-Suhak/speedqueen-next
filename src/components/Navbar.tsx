@@ -49,12 +49,13 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <Link href={`/${lang}`} className="group flex items-center gap-2" aria-label={brandName}>
-            <div className="relative h-10 w-10 md:h-12 md:w-12 transition-transform group-hover:scale-105">
+            <div className="relative transition-transform group-hover:scale-105">
               <Image 
                 src={GlobalConfig.brand.logo} 
                 alt="" 
-                fill 
-                className="object-contain"
+                width={48}
+                height={48}
+                className="object-contain md:w-12 md:h-12 w-10 h-10"
                 priority
               />
             </div>
