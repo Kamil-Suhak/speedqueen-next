@@ -1,4 +1,4 @@
-# Speed Queen Kraków - Next.js 15
+# Speed Queen Kraków - Next.js 16
 A high-performance, multilingual landing page for the Speed Queen self-service laundromats in Kraków. This project is built as a highly optimized, production-ready implementation of a modern small-business website.
 
 ## 🛠 Technical Highlights
@@ -7,7 +7,7 @@ A high-performance, multilingual landing page for the Speed Queen self-service l
 The Hero section doesn't just provide a static link. It utilizes the browser's **Geolocation API** to calculate the distance between the user and our three laundry locations (Orlińskiego, Pawia, Słowackiego). It then dynamically sets the primary CTA to open Google Maps directions to the **physically closest** facility, reducing friction for the customer.
 
 ### Automated Language Detection
-Using **Next.js Middleware**, the application analyzes the `Accept-Language` headers from the user's browser. If the user's system is set to Polish, they are automatically redirected to the `/pl` locale; otherwise, it defaults to `/en`. This ensures a seamless first-time experience without requiring manual selection.
+Using **Next.js Proxy**, the application analyzes the `Accept-Language` headers from the user's browser. If the user's system is set to Polish, they are automatically redirected to the `/pl` locale; otherwise, it defaults to `/en`. This ensures a seamless first-time experience without requiring manual selection.
 
 ### Custom Regex Text Formatter
 To keep the design flexible while using a centralized JSON configuration for content, the project includes a custom **`FormattedText`** component. It uses a regex-based parser to inject styles directly into strings (e.g., `[[bold text]]` for weights or `!!red text!!` for brand colors), allowing for rich typography within simple configuration files.
