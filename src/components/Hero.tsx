@@ -5,6 +5,7 @@ import { MapPin, List } from "lucide-react";
 import { FormattedText } from "@/components/FormattedText";
 import SectionBackground from "@/components/SectionBackground";
 import { motion } from "framer-motion";
+import { Locations } from "@/config/site-config";
 
 interface HeroProps {
   content: {
@@ -16,29 +17,8 @@ interface HeroProps {
   bgImage?: string;
 }
 
-const locations = [
-  {
-    name: "Orlińskiego",
-    lat: 50.0815,
-    lng: 20.0055,
-    url: "https://www.google.com/maps/dir/?api=1&destination=Bolesława+Orlińskiego+1/U17,+31-878+Kraków",
-  },
-  {
-    name: "Pawia/Szlak",
-    lat: 50.0695,
-    lng: 19.9445,
-    url: "https://www.google.com/maps/dir/?api=1&destination=Pawia+34,+31-154+Kraków",
-  },
-  {
-    name: "Słowackiego",
-    lat: 50.0735,
-    lng: 19.9295,
-    url: "https://www.google.com/maps/dir/?api=1&destination=Aleja+Juliusza+Słowackiego+56,+30-004+Kraków",
-  },
-];
-
 export default function Hero({ content, bgImage }: HeroProps) {
-  const [directionsUrl, setDirectionsUrl] = useState(locations[1].url);
+  const [directionsUrl, setDirectionsUrl] = useState(Locations[1].url);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -46,10 +26,10 @@ export default function Hero({ content, bgImage }: HeroProps) {
         const userLat = position.coords.latitude;
         const userLng = position.coords.longitude;
 
-        let closest = locations[0];
+        let closest = Locations[0];
         let minDistance = Infinity;
 
-        locations.forEach((loc) => {
+        Locations.forEach((loc) => {
           const dist = Math.sqrt(
             Math.pow(loc.lat - userLat, 2) + Math.pow(loc.lng - userLng, 2)
           );
