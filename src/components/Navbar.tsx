@@ -68,7 +68,7 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
             {links.map((link) => {
               const isActive = activeSection === link.href.replace("#", "");
               return (
-                <a
+                <Link
                   key={link.label}
                   href={link.href}
                   className={`text-sm font-bold uppercase tracking-tight transition-all duration-300 ease-in-out ${
@@ -79,7 +79,7 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
                   aria-current={isActive ? "page" : undefined}
                 >
                   {link.label}
-                </a>
+                </Link>
               );
             })}
 
@@ -133,14 +133,14 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
           >
             <div className="space-y-1 px-4 pt-2 pb-8">
               {links.map((link) => (
-                <a
+                <Link
                   key={link.label}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
                   className="block border-b border-gray-50 px-3 py-5 text-lg font-bold text-gray-900 uppercase tracking-tight"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
               <div className="pt-4">
                 <a
