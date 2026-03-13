@@ -6,7 +6,7 @@ export const GlobalConfig = {
     secondaryColor: "#1d1d1b",
     accentColor: "#e7272d",
     email: "kontakt@speedqueenkrk.pl",
-    address: "ul. Orlińskiego 1/U17, Kraków",
+    address: ["ul. Pawia 34, Kraków", "al. J. Słowackiego 56, Kraków", "ul. Orlińskiego 1/U17, Kraków"],
     phone: "+48 509 996 006",
     url: "https://expressweb-prototype.vercel.app",
     tagline: {

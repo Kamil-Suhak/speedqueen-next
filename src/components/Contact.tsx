@@ -22,7 +22,7 @@ interface ContactProps {
       buttonClose: string;
     };
   };
-  brandInfo: { email: string; phone: string; address: string };
+  brandInfo: { email: string; phone: string; address: string[] };
   bgImage?: string;
 }
 
@@ -81,11 +81,34 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
               <span className="font-bold uppercase tracking-tight text-gray-900">{brandInfo.phone}</span>
             </a>
             
-            <div className="flex items-center gap-5 group p-1">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 text-zinc-600 shadow-sm" aria-hidden="true">
+            <div className="flex items-center gap-5 group p-1 overflow-hidden min-w-0">
+              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-white border border-slate-100 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-colors shadow-sm" aria-hidden="true">
                 <MapPin size={22} />
               </div>
-              <span className="font-bold uppercase tracking-tight text-gray-900">{brandInfo.address}</span>
+              <div className="relative overflow-hidden flex-1 min-w-0 max-w-full w-0 whitespace-nowrap">
+                <div className="flex animate-marquee w-max">
+                  <div className="flex items-center">
+                    {brandInfo.address.map((addr, idx) => (
+                      <div key={idx} className="flex items-center gap-4 pr-4">
+                        <span className="font-bold uppercase tracking-tight text-gray-900">
+                          {addr}
+                        </span>
+                        <div className="h-6 w-1.5 bg-brand-red" aria-hidden="true" />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex items-center">
+                    {brandInfo.address.map((addr, idx) => (
+                      <div key={`copy-${idx}`} className="flex items-center gap-4 pr-4">
+                        <span className="font-bold uppercase tracking-tight text-gray-900">
+                          {addr}
+                        </span>
+                        <div className="h-6 w-1.5 bg-brand-red" aria-hidden="true" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

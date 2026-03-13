@@ -20,6 +20,13 @@
   /* Mapping Next.js font variables */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-montserrat), sans-serif;
+
+  --animate-marquee: marquee 15s linear infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
 }
 
 body {

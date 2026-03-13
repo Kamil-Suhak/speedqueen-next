@@ -74,8 +74,8 @@ export default async function RootLayout({
   const callNowText = lang === "en" ? "Call Now" : "Zadzwoń Teraz";
 
   return (
-    <html lang={lang} className={`scroll-smooth ${inter.variable} ${montserrat.variable}`}>
-      <body className="font-sans antialiased">
+    <html lang={lang} className={`scroll-smooth ${inter.variable} ${montserrat.variable} overflow-x-hidden`}>
+      <body className="font-sans antialiased overflow-x-hidden">
         <Navbar
           ctaText={callNowText}
           links={navigation.navLinks}
