@@ -116,7 +116,7 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
               <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-white border border-slate-100 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-colors shadow-sm" aria-hidden="true">
                 <MapPin size={22} />
               </div>
-              <div className="relative overflow-hidden flex-1 min-w-0 max-w-full w-48 md:w-64 whitespace-nowrap">
+              <div className="relative overflow-hidden flex-1 min-w-0 max-w-full w-[230px] md:w-[310px] whitespace-nowrap">
                 <div className="flex animate-marquee w-max">
                   <div className="flex items-center">
                     {brandInfo.address.map((addr, idx) => (

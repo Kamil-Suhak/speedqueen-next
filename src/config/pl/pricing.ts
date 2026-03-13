@@ -19,7 +19,7 @@ export const pricingPl = {
       title: "Karta Lojalnościowa",
       description: "Nasza karta lojalnościowa działa na zasadzie przedpłaty (prepaid). To najwygodniejszy i najtańszy sposób korzystania z naszych pralni.",
       priceLabel: "Cena Karty",
-      priceValue: "70",
+      priceValue: "75",
       benefitLabel: "Zawiera doładowanie",
       benefitValue: "50",
       features: [

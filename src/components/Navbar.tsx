@@ -95,7 +95,7 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
 
             <a
               href={`tel:${GlobalConfig.brand.phone}`}
-              className="flex transform items-center justify-center gap-2 rounded-xl px-6 py-2.5 bg-zinc-900 text-white text-sm font-bold shadow-lg transition hover:bg-brand-red hover:-translate-y-0.5 uppercase tracking-tight"
+              className="flex transform items-center justify-center gap-2 rounded-xl px-6 py-2.5 bg-brand-red text-white text-sm font-bold shadow-md transition hover:bg-brand-red/90 hover:scale-[1.01] active:scale-[0.99] uppercase tracking-tight outline-none focus:ring-4 focus:ring-brand-red/20"
             >
               <Phone size={16} aria-hidden="true" />
               {ctaText}
@@ -145,7 +145,7 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
               <div className="pt-4">
                 <a
                    href={`tel:${GlobalConfig.brand.phone}`}
-                   className="flex w-full items-center justify-center gap-3 rounded-xl bg-brand-red py-4 font-bold text-white text-lg shadow-lg"
+                   className="flex w-full items-center justify-center gap-3 rounded-xl bg-brand-red py-4 font-bold text-white text-lg shadow-md hover:bg-brand-red/90 hover:scale-[1.01] active:scale-[0.99] transition-all uppercase tracking-tight outline-none focus:ring-4 focus:ring-brand-red/20"
                 >
                   <Phone size={20} aria-hidden="true" />
                   {ctaText}

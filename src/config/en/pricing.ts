@@ -19,7 +19,7 @@ export const pricingEn = {
       title: "Loyalty Card",
       description: "Our loyalty card works on a prepaid basis. It's the most convenient and cheapest way to use our laundromats.",
       priceLabel: "Card Price",
-      priceValue: "70",
+      priceValue: "75",
       benefitLabel: "Includes credit",
       benefitValue: "50",
       features: [
