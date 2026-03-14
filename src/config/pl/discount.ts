@@ -14,6 +14,7 @@ export const discountPl = {
     errorNoCodes: "Wszystkie kody zostały już rozdane.",
     errorEmailFailed: "Błąd podczas wysyłania e-maila.",
     errorServer: "Wystąpił błąd serwera.",
+    errorPromoNotStarted: "Promocja startuje 30 marca.",
   },
   email: {
     subject: "Twój kod rabatowy Speed Queen Kraków",

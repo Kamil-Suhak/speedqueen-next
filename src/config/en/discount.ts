@@ -14,6 +14,7 @@ export const discountEn = {
     errorNoCodes: "All codes have already been distributed.",
     errorEmailFailed: "Error sending email.",
     errorServer: "A server error occurred.",
+    errorPromoNotStarted: "The promotion starts March 30th.",
   },
   email: {
     subject: "Your Speed Queen Krakow Discount Code",

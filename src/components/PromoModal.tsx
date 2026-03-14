@@ -14,7 +14,7 @@ export default function PromoModal({ content }: PromoModalProps) {
   return (
     <AutoOpenModal 
       uniqueId="discount-promo-march-2026" 
-      delayMs={3000} 
+      delayMs={1500} 
       closeLabel={content.common.modal.close}
     >
       <DiscountClaim content={content.discount} />

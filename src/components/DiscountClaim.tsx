@@ -16,6 +16,7 @@ interface DiscountClaimProps {
       button: string;
       buttonLoading: string;
       successMessage: string;
+      errorPromoNotStarted: string;
     };
   };
 }

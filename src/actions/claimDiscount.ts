@@ -26,6 +26,14 @@ export async function claimDiscount(state: ClaimDiscountState) {
     if (!email || !email.includes('@')) return { success: false, error: content.form.errorInvalidEmail };
     if (!consent) return { success: false, error: content.form.errorNoConsent };
 
+    // 2.5 Date restriction
+    const adminEmail = process.env.ADMIN_EMAIL;
+    const isEarlyAccess = adminEmail && email.toLowerCase().trim() === adminEmail.toLowerCase().trim();
+    const promoStartDate = new Date('2026-03-30T00:00:00+01:00');
+    if (new Date() < promoStartDate && !isEarlyAccess) {
+      return { success: false, error: content.form.errorPromoNotStarted };
+    }
+
     // 3. Salted Hash (GDPR)
     const salt = process.env.HASH_SALT || 'default-fallback-salt-change-me';
     const hashedEmail = crypto.createHash('sha256').update(email.toLowerCase().trim() + salt).digest('hex');
