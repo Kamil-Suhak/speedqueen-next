@@ -49,13 +49,13 @@ export async function claimDiscount(state: ClaimDiscountState) {
     if (claimResult.length === 0) return { success: false, error: content.form.errorNoCodes };
 
     const { id: discountId, blob_url: blobUrl } = claimResult[0];
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://speedqueen-krakow.pl';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://speedqueenkrk.pl';
     const logoUrl = `${baseUrl}/images/logo.png`;
 
     // 6. Attempt Email
     try {
       const { data, error: resendError } = await resend.emails.send({
-        from: 'Speed Queen Kraków <onboarding@resend.dev>',
+        from: 'Speed Queen Kraków <noreply@mail.speedqueenkrk.pl>',
         to: [email],
         subject: content.email.subject,
         html: `

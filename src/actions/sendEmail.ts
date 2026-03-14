@@ -19,17 +19,18 @@ export async function sendEmail(formData: FormData) {
 
   try {
     const data = await resend.emails.send({
-      from: "Leads <onboarding@resend.dev>",
-      //   to: [GlobalConfig.brand.email],
+      from: "Strona Internetowa SQ <noreply@mail.speedqueenkrk.pl>",
       to: [process.env.RESEND_TO_EMAIL!],
-      subject: `New Lead from ${name}`,
+      subject: `Nowe pytanie od: ${name}`,
       replyTo: email,
       html: `
-        <h3>New Contact Form Submission</h3>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Message:</strong></p>
+        <h3>Zostało wysłane nowe pytanie poprzez formularz kontaktowy</h3>
+        <p><strong>Imię i nazwisko:</strong> ${name}</p>
+        <p><strong>E-mail:</strong> ${email}</p>
+        <p><strong>Wiadomość:</strong></p>
         <p>${message}</p>
+        <hr />
+        <p>Aby odpowiedzieć na pytanie, napisz maila na adres: ${email} lub kliknij 'Odpowiedz'</p>
       `,
     });
 
