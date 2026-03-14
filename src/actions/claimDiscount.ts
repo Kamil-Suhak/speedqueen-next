@@ -40,6 +40,7 @@ export async function claimDiscount(state: ClaimDiscountState) {
       WHERE id = (
         SELECT id FROM discounts 
         WHERE hashed_email IS NULL 
+        ORDER BY id ASC
         LIMIT 1 
         FOR UPDATE SKIP LOCKED
       )
