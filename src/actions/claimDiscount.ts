@@ -1,8 +1,10 @@
 "use server";
 
 import crypto from 'crypto';
-import { sql } from '@/lib/db';
+import { neon } from '@netlify/neon';
 import { Resend } from 'resend';
+
+const sql = neon();
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -49,9 +51,10 @@ export async function claimDiscount(state: ClaimDiscountState) {
 
     if (claimResult.length === 0) return { success: false, error: content.form.errorNoCodes };
 
-    const { id: discountId, blob_url: blobUrl } = claimResult[0];
+    const { id: discountId, blob_url: blobKey } = claimResult[0];
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://speedqueenkrk.pl';
     const logoUrl = `${baseUrl}/images/logo.png`;
+    const blobUrl = `${baseUrl}/api/qr/${blobKey}`;
 
     // 6. Attempt Email
     try {

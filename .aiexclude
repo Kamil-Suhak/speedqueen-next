@@ -26,6 +26,3 @@ out/
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
-
-# Local migration source
-old_site/

@@ -136,3 +136,5 @@ dist
 .pnp.*
 
 gemini.md
+discount_qr_codes
+.aiexclude
