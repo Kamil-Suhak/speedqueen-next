@@ -1,15 +1,12 @@
 "use server";
 
 import { Resend } from "resend";
-// import { GlobalConfig } from "../config/site-config";
-
-// testing
-const isTest = false;
+import { getContactFormEmailTemplate } from "@/lib/emailTemplates";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendEmail(formData: FormData) {
-  if (isTest) {
+  if (process.env.NODE_ENV === "test") {
     return { success: false, error: "Test mode - email not sent." };
   }
 
@@ -18,20 +15,16 @@ export async function sendEmail(formData: FormData) {
   const message = formData.get("message") as string;
 
   try {
+    if (!process.env.RESEND_TO_EMAIL) {
+      throw new Error("Missing RESEND_TO_EMAIL environment variable.");
+    }
+
     const data = await resend.emails.send({
       from: "Strona Internetowa SQ <noreply@mail.speedqueenkrk.pl>",
-      to: [process.env.RESEND_TO_EMAIL!],
+      to: [process.env.RESEND_TO_EMAIL],
       subject: `Nowe pytanie od: ${name}`,
       replyTo: email,
-      html: `
-        <h3>Zostało wysłane nowe pytanie poprzez formularz kontaktowy</h3>
-        <p><strong>Imię i nazwisko:</strong> ${name}</p>
-        <p><strong>E-mail:</strong> ${email}</p>
-        <p><strong>Wiadomość:</strong></p>
-        <p>${message}</p>
-        <hr />
-        <p>Aby odpowiedzieć na pytanie, napisz maila na adres: ${email} lub kliknij 'Odpowiedz'</p>
-      `,
+      html: getContactFormEmailTemplate(name, email, message),
     });
 
     return { success: true };

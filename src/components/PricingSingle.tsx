@@ -7,6 +7,7 @@ interface PricingSingleProps {
     description: string;
     features: string[];
     buttonText: string;
+    bestValueBadge?: string;
   };
 }
 
@@ -18,8 +19,7 @@ export default function PricingSingle({ content }: PricingSingleProps) {
           {/* LEFT SIDE */}
           <div className="flex-1 p-8 lg:p-12">
             <div className="mb-6 inline-block rounded-full bg-blue-600 px-4 py-1 text-xs font-bold tracking-widest text-white uppercase">
-              {/* Note: You could also pass this label through the dict if needed */}
-              Best Value
+              {content.bestValueBadge || "Best Value"}
             </div>
 
             <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">

@@ -49,7 +49,6 @@ const Faq = ({ content, bgImage }: FaqProps) => {
           <div className="mx-auto mt-4 h-1 w-16 bg-brand-red rounded-full" aria-hidden="true" />
         </div>
 
-        {/* Desktop View */}
         <div className="hidden md:grid grid-cols-1 gap-6 max-w-4xl mx-auto">
           {content.items.slice(0, 7).map((item, idx) => (
             <FaqCard
@@ -61,7 +60,6 @@ const Faq = ({ content, bgImage }: FaqProps) => {
           ))}
         </div>
 
-        {/* Mobile View */}
         <div className="md:hidden space-y-4 max-w-xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.div

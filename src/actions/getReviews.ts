@@ -9,6 +9,15 @@ export interface GoogleReview {
   time: number;
 }
 
+interface GooglePlaceReviewRAW {
+  author_name?: string;
+  rating?: number;
+  text?: string;
+  relative_time_description?: string;
+  profile_photo_url?: string;
+  time?: number;
+}
+
 const PLACE_IDS = [
   process.env.NEXT_PUBLIC_GOOGLE_PLACEID_ORLINSKIEGO,
   process.env.NEXT_PUBLIC_GOOGLE_PLACEID_PAWIA,
@@ -29,11 +38,11 @@ async function fetchLocationReviews(
     if (!response.ok) return [];
 
     const data = await response.json();
-    const reviews = Array.isArray(data?.result?.reviews)
+    const reviews: GooglePlaceReviewRAW[] = Array.isArray(data?.result?.reviews)
       ? data.result.reviews
       : [];
 
-    return reviews.map((r: any) => ({
+    return reviews.map((r) => ({
       author_name: String(r?.author_name || "Anonymous"),
       rating: Number(r?.rating || 0),
       text: String(r?.text || ""),

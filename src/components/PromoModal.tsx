@@ -3,10 +3,13 @@
 import AutoOpenModal from '@/components/AutoOpenModal';
 import DiscountClaim from '@/components/DiscountClaim';
 
+type DiscountContent = typeof import('@/config/en/discount').default;
+type CommonContent = typeof import('@/config/en/common').default;
+
 interface PromoModalProps {
   content: {
-    discount: any; // discountPl or discountEn
-    common: any;   // commonPl or commonEn
+    discount: DiscountContent;
+    common: CommonContent;
   };
 }
 

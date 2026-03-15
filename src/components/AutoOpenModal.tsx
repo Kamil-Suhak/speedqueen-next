@@ -19,22 +19,15 @@ export default function AutoOpenModal({
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // Check if the user has already seen THIS specific version of the modal
-    // const hasSeenModal = localStorage.getItem(`modal_seen_${uniqueId}`);
+    const timer = setTimeout(() => {
+      setIsOpen(true);
+    }, delayMs);
 
-    // if (!hasSeenModal) {
-      const timer = setTimeout(() => {
-        setIsOpen(true);
-      }, delayMs);
-
-      return () => clearTimeout(timer);
-    // }
+    return () => clearTimeout(timer);
   }, [uniqueId, delayMs]);
 
   const handleClose = () => {
     setIsOpen(false);
-    // Persist that the user saw it
-    // localStorage.setItem(`modal_seen_${uniqueId}`, 'true');
   };
 
   return (

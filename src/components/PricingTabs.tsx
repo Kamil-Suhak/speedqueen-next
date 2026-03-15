@@ -96,7 +96,6 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
           </p>
         </header>
 
-        {/* Location Switcher */}
         <div className="mb-12 flex justify-center">
           <div className="flex flex-wrap justify-center gap-2 md:gap-3 w-full" role="tablist" aria-label="Laundry locations">
             {content.locations.map((loc, idx) => (
@@ -119,7 +118,6 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
           </div>
         </div>
 
-        {/* Categories and Items */}
         <div className="space-y-16 min-h-[400px]">
           {content.categories.map((category) => {
             const visibleItems = category.items.filter((item) =>
@@ -222,7 +220,6 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
           })}
         </div>
 
-        {/* Loyalty Card Info */}
         <div ref={loyaltyRef} id="loyalty-info" className="mt-24 pt-12 border-t border-zinc-100 scroll-mt-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1 flex flex-col items-center lg:items-start text-center lg:text-left">

@@ -4,19 +4,18 @@ import { useState } from 'react';
 import { CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import { claimDiscount } from '@/actions/claimDiscount';
 import { FormattedText } from '@/components/FormattedText';
+import { ClaimDiscountContent } from '@/lib/emailTemplates';
 
 interface DiscountClaimProps {
-  content: {
+  content: ClaimDiscountContent & {
     title: string;
     subtitle: string;
-    form: {
+    form: ClaimDiscountContent['form'] & {
       email: string;
       emailPlaceholder: string;
       consent: string;
       button: string;
       buttonLoading: string;
-      successMessage: string;
-      errorPromoNotStarted: string;
     };
   };
 }
@@ -24,7 +23,7 @@ interface DiscountClaimProps {
 export default function DiscountClaim({ content }: DiscountClaimProps) {
   const [email, setEmail] = useState('');
   const [consent, setConsent] = useState(false);
-  const [honeypot, setHoneypot] = useState(''); // Bot protection
+  const [honeypot, setHoneypot] = useState('');
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
@@ -48,8 +47,12 @@ export default function DiscountClaim({ content }: DiscountClaimProps) {
       setStatus({ type: 'success', message: result.message! });
       setEmail('');
       setConsent(false);
-    } catch (err: any) {
-      setStatus({ type: 'error', message: err.message });
+    } catch (err) {
+      if (err instanceof Error) {
+        setStatus({ type: 'error', message: err.message });
+      } else {
+        setStatus({ type: 'error', message: 'An unknown error occurred.' });
+      }
     } finally {
       setLoading(false);
     }
@@ -81,7 +84,6 @@ export default function DiscountClaim({ content }: DiscountClaimProps) {
           />
         </div>
 
-        {/* Honeypot field - hidden from users, visible to bots */}
         <div className="absolute opacity-0 -z-10 h-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <input
             type="text"
