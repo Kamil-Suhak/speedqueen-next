@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { MapPin, List } from "lucide-react";
-import { FormattedText } from "@/components/FormattedText";
-import SectionBackground from "@/components/SectionBackground";
+import { FormattedText } from "@/components/ui/FormattedText";
+import SectionBackground from "@/components/ui/SectionBackground";
 import { motion } from "framer-motion";
 import { Locations } from "@/config/site-config";
 

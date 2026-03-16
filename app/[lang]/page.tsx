@@ -1,12 +1,12 @@
 import { GlobalConfig, Locale } from "@/config/site-config";
-import Hero from "@/components/Hero";
-import ServicesGrid from "@/components/ServicesGrid";
-import Contact from "@/components/Contact";
-import PricingTabs, { PricingProps } from "@/components/PricingTabs";
-import Reviews from "@/components/Reviews";
-import Gallery from "@/components/Gallery";
-import Faq from "@/components/Faq";
-import PromoModal from "@/components/PromoModal";
+import Hero from "@/components/sections/Hero";
+import ServicesGrid from "@/components/sections/ServicesGrid";
+import Contact from "@/components/sections/Contact";
+import PricingTabs, { PricingProps } from "@/components/sections/PricingTabs";
+import Reviews from "@/components/sections/Reviews";
+import Gallery from "@/components/sections/Gallery";
+import Faq from "@/components/sections/Faq";
+import PromoModal from "@/components/modals/PromoModal";
 
 import { getDictionary } from "@/lib/generate-dictionaries";
 import { getGoogleReviews } from "@/actions/getReviews";
@@ -53,9 +53,9 @@ export default async function LandingPage({
       <PromoModal content={promoContent} />
       <Hero content={hero} bgImage={getSectionBackground(0)} />
       <ServicesGrid head={services.head} items={services.items} bgImage={getSectionBackground(1)} />
-      <PricingTabs 
-        {...(pricing as PricingProps)} 
-        bgImage={getSectionBackground(2)} 
+      <PricingTabs
+        {...(pricing as PricingProps)}
+        bgImage={getSectionBackground(2)}
       />
       <Gallery content={gallery} lang={lang} bgImage={getSectionBackground(3)} />
       <Reviews reviewWrapper={reviewsContent} reviews={googleReviews} bgImage={getSectionBackground(4)} />

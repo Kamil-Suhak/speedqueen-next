@@ -47,18 +47,4 @@ export function getClaimDiscountEmailTemplate(
   `;
 }
 
-export function getContactFormEmailTemplate(
-  name: string,
-  email: string,
-  message: string
-) {
-  return `
-    <h3>Zostało wysłane nowe pytanie poprzez formularz kontaktowy</h3>
-    <p><strong>Imię i nazwisko:</strong> ${name}</p>
-    <p><strong>E-mail:</strong> ${email}</p>
-    <p><strong>Wiadomość:</strong></p>
-    <p>${message}</p>
-    <hr />
-    <p>Aby odpowiedzieć na pytanie, napisz maila na adres: ${email} lub kliknij 'Odpowiedz'</p>
-  `;
-}
+

@@ -3,8 +3,8 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Info, ArrowRight } from "lucide-react";
-import SectionBackground from "@/components/SectionBackground";
-import LoyaltyCardImg from "@/components/LoyaltyCardImg";
+import SectionBackground from "@/components/ui/SectionBackground";
+import LoyaltyCardImg from "@/components/ui/LoyaltyCardImg";
 
 export interface MachineItem {
   name: string;
@@ -106,11 +106,10 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
                 aria-controls={`panel-${idx}`}
                 id={`tab-${idx}`}
                 onClick={() => setActiveLocationIndex(idx)}
-                className={`relative px-3 py-2 md:px-5 md:py-2.5 text-xs md:text-sm font-bold cursor-pointer transition-colors duration-200 rounded-xl border shadow-sm uppercase tracking-tight ${
-                  activeLocationIndex === idx
-                    ? "bg-zinc-900 text-white border-zinc-900"
-                    : "bg-white text-zinc-500 border-zinc-200 hover:border-zinc-300 hover:text-zinc-800"
-                }`}
+                className={`relative px-3 py-2 md:px-5 md:py-2.5 text-xs md:text-sm font-bold cursor-pointer transition-colors duration-200 rounded-xl border shadow-sm uppercase tracking-tight ${activeLocationIndex === idx
+                  ? "bg-zinc-900 text-white border-zinc-900"
+                  : "bg-white text-zinc-500 border-zinc-200 hover:border-zinc-300 hover:text-zinc-800"
+                  }`}
               >
                 {loc}
               </button>
@@ -127,10 +126,10 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
             if (visibleItems.length === 0) return null;
 
             return (
-              <div 
-                key={category.id} 
-                role="tabpanel" 
-                id={`panel-${activeLocationIndex}`} 
+              <div
+                key={category.id}
+                role="tabpanel"
+                id={`panel-${activeLocationIndex}`}
                 aria-labelledby={`tab-${activeLocationIndex}`}
               >
                 <h3 className="text-2xl font-extrabold text-zinc-900 mb-6 border-b-2 border-zinc-100 pb-2 uppercase tracking-tight">
@@ -229,7 +228,7 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
               <p className="text-lg text-zinc-600 mb-8 max-w-lg font-normal">
                 {content.loyaltyCard.description}
               </p>
-              
+
               <div className="grid grid-cols-2 gap-4 w-full max-w-md mb-8">
                 <div className="bg-zinc-50 p-4 rounded-2xl border border-zinc-100">
                   <span className="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-1">
@@ -266,7 +265,7 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
                 {content.loyaltyCard.ironingNote}
               </p>
             </div>
-            
+
             <div className="order-1 lg:order-2 flex justify-center">
               <div className="max-w-md w-full">
                 <LoyaltyCardImg />

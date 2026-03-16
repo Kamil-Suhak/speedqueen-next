@@ -5,7 +5,7 @@ import { Star, Quote, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { GoogleReview } from "@/actions/getReviews";
 import Image from "next/image";
-import SectionBackground from "@/components/SectionBackground";
+import SectionBackground from "@/components/ui/SectionBackground";
 
 interface ReviewsWrapper {
   title: string;
@@ -83,7 +83,7 @@ export default function Reviews({
   return (
     <section ref={sectionRef} id="reviews" className="relative scroll-mt-20 pt-20 pb-10 bg-white">
       <SectionBackground imagePath={bgImage} />
-      
+
       <div className="mx-auto max-w-7xl flex-col justify-between px-4 relative z-10">
         <div className="mb-16 text-center">
           <h2 className="text-4xl font-extrabold text-gray-900 uppercase tracking-tight">
@@ -151,15 +151,15 @@ export default function Reviews({
             ))}
           </AnimatePresence>
         </div>
-        
+
         {reviews.length > 3 && (
           <div className="hidden lg:flex justify-center mt-12">
-             <button 
-               onClick={toggleReviews}
-               className="px-8 py-4 bg-zinc-900 text-white font-bold rounded-xl shadow-md hover:bg-zinc-800 hover:scale-[1.01] active:scale-[0.99] transition-all uppercase tracking-tight outline-none focus:ring-4 focus:ring-zinc-900/20"
-             >
-               {showAll ? reviewWrapper.hide : reviewWrapper.view_more}
-             </button>
+            <button
+              onClick={toggleReviews}
+              className="px-8 py-4 bg-zinc-900 text-white font-bold rounded-xl shadow-md hover:bg-zinc-800 hover:scale-[1.01] active:scale-[0.99] transition-all uppercase tracking-tight outline-none focus:ring-4 focus:ring-zinc-900/20"
+            >
+              {showAll ? reviewWrapper.hide : reviewWrapper.view_more}
+            </button>
           </div>
         )}
       </div>

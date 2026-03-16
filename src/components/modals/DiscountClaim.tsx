@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import { claimDiscount } from '@/actions/claimDiscount';
-import { FormattedText } from '@/components/FormattedText';
+import { FormattedText } from '@/components/ui/FormattedText';
 import { ClaimDiscountContent } from '@/lib/emailTemplates';
 
 interface DiscountClaimProps {
@@ -135,9 +135,8 @@ export default function DiscountClaim({ content }: DiscountClaimProps) {
 
       {status && (
         <div
-          className={`mt-6 flex items-start gap-3 rounded-lg p-4 ${
-            status.type === 'success' ? 'bg-green-50 text-green-800' : 'bg-brand-red-light text-brand-red'
-          }`}
+          className={`mt-6 flex items-start gap-3 rounded-lg p-4 ${status.type === 'success' ? 'bg-green-50 text-green-800' : 'bg-brand-red-light text-brand-red'
+            }`}
         >
           {status.type === 'success' ? (
             <CheckCircle2 className="h-5 w-5 flex-shrink-0" />

@@ -1,7 +1,8 @@
 "use server";
 
 import { Resend } from "resend";
-import { getContactFormEmailTemplate } from "@/lib/emailTemplates";
+import { render } from "@react-email/render";
+import { ContactFormEmail } from "@/components/emails/ContactFormEmail";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -19,12 +20,16 @@ export async function sendEmail(formData: FormData) {
       throw new Error("Missing RESEND_TO_EMAIL environment variable.");
     }
 
+    const htmlContent = await render(
+      ContactFormEmail({ name, email, message })
+    );
+
     const data = await resend.emails.send({
       from: "Strona Internetowa SQ <noreply@mail.speedqueenkrk.pl>",
       to: [process.env.RESEND_TO_EMAIL],
       subject: `Nowe pytanie od: ${name}`,
       replyTo: email,
-      html: getContactFormEmailTemplate(name, email, message),
+      html: htmlContent,
     });
 
     return { success: true };

@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
 import { sendEmail } from "@/actions/sendEmail";
-import StatusModal from "@/components/StatusModal";
-import SectionBackground from "@/components/SectionBackground";
+import StatusModal from "@/components/modals/StatusModal";
+import SectionBackground from "@/components/ui/SectionBackground";
 import { Locations } from "@/config/site-config";
 
 interface ContactProps {
@@ -76,7 +76,7 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
   return (
     <section id="contact" className="relative scroll-mt-20 py-24 bg-white overflow-hidden" aria-labelledby="contact-heading">
       <SectionBackground imagePath={bgImage} />
-      
+
       <StatusModal
         isOpen={errorModal.isOpen}
         onClose={() => setErrorModal((prev) => ({ ...prev, isOpen: false }))}
@@ -91,7 +91,7 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
           <h2 id="contact-heading" className="mb-6 text-4xl font-extrabold uppercase tracking-tight">{content.title}</h2>
           <div className="mb-8 h-1 w-16 bg-brand-red rounded-full" aria-hidden="true" />
           <p className="mb-10 text-lg text-gray-600 font-normal leading-relaxed">{content.subtitle}</p>
-          
+
           <div className="space-y-6">
             <a href={`mailto:${brandInfo.email}`} className="flex items-center gap-5 group focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-4 rounded-xl p-1 w-fit">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-colors shadow-sm" aria-hidden="true">
@@ -99,15 +99,15 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
               </div>
               <span className="font-bold uppercase tracking-tight text-gray-900">{brandInfo.email}</span>
             </a>
-            
+
             <a href={`tel:${brandInfo.phone}`} className="flex items-center gap-5 group focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-4 rounded-xl p-1 w-fit">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-colors shadow-sm" aria-hidden="true">
                 <Phone size={22} />
               </div>
               <span className="font-bold uppercase tracking-tight text-gray-900">{brandInfo.phone}</span>
             </a>
-            
-            <a 
+
+            <a
               href={directionsUrl}
               target="_blank"
               rel="noopener noreferrer"

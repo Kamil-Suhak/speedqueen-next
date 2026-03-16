@@ -1,14 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import { GlobalConfig, Locale } from "@/config/site-config";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import SocialSidebar from "@/components/SocialSidebar";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import SocialSidebar from "@/components/layout/SocialSidebar";
 import "@/styles/globals.css";
 import { getDictionary } from "@/lib/generate-dictionaries";
 
 // Configure Inter for body text
-const inter = Inter({ 
+const inter = Inter({
   subsets: ["latin", "latin-ext"],
   variable: "--font-inter",
   display: 'swap',

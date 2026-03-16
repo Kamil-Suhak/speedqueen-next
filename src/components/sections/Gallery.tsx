@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import SectionBackground from "@/components/SectionBackground";
+import SectionBackground from "@/components/ui/SectionBackground";
 
 export interface GalleryImage {
   src: string;
@@ -55,14 +55,14 @@ const Gallery = ({
   };
 
   return (
-    <section 
-      key={lang} 
-      className="relative py-24 overflow-hidden scroll-mt-20 bg-white" 
-      id="gallery" 
+    <section
+      key={lang}
+      className="relative py-24 overflow-hidden scroll-mt-20 bg-white"
+      id="gallery"
       aria-label="Gallery"
     >
       <SectionBackground imagePath={bgImage} />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="mb-16 text-center">
           <motion.h2
@@ -117,7 +117,7 @@ const Gallery = ({
                         {image.alt}
                       </h3>
                     </div>
-                    
+
                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
                 </motion.div>
@@ -135,17 +135,16 @@ const Gallery = ({
             >
               <ChevronLeft size={24} aria-hidden="true" />
             </button>
-            
+
             <div className="flex gap-3">
               {Array.from({ length: totalPages }).map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrentPage(i)}
-                  className={`h-2 rounded-full transition-all duration-300 focus:ring-4 focus:ring-brand-red/10 outline-none ${
-                    currentPage === i 
-                      ? "bg-brand-red w-10 shadow-sm shadow-brand-red/30" 
+                  className={`h-2 rounded-full transition-all duration-300 focus:ring-4 focus:ring-brand-red/10 outline-none ${currentPage === i
+                      ? "bg-brand-red w-10 shadow-sm shadow-brand-red/30"
                       : "bg-slate-200 w-2 hover:bg-slate-300"
-                  }`}
+                    }`}
                   aria-label={`Go to page ${i + 1}`}
                   aria-current={currentPage === i ? "page" : undefined}
                 />

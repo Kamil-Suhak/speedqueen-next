@@ -8,8 +8,8 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import { FormattedText } from "@/components/FormattedText";
-import SectionBackground from "@/components/SectionBackground";
+import { FormattedText } from "@/components/ui/FormattedText";
+import SectionBackground from "@/components/ui/SectionBackground";
 
 export interface FaqItem {
   question: string;
@@ -40,7 +40,7 @@ const Faq = ({ content, bgImage }: FaqProps) => {
   return (
     <section className="relative py-24 scroll-mt-20 bg-white" id="faq" aria-label="Frequently Asked Questions">
       <SectionBackground imagePath={bgImage} />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto mb-16 text-center">
           <h2 className="text-4xl font-extrabold text-gray-900 uppercase tracking-tight">
