@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { GlobalConfig } from "@/config/site-config";
 import { useActiveSection } from "@/hooks/useActiveSelection";
 import Image from "next/image";
+import ObfuscatedLink from "@/components/ui/ObfuscatedLink";
 
 interface NavbarProps {
   links: { label: string; href: string }[];
@@ -132,13 +133,14 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
               {lang === "en" ? "PL" : "EN"}
             </Link>
 
-            <a
-              href={`tel:${GlobalConfig.brand.phone}`}
+            <ObfuscatedLink
+              type="phone"
+              useGlobalConfig={true}
               className="flex transform items-center justify-center gap-2 rounded-xl px-6 py-2.5 bg-brand-red text-white text-sm font-bold shadow-md transition hover:bg-brand-red/90 hover:scale-[1.01] active:scale-[0.99] uppercase tracking-tight outline-none focus:ring-4 focus:ring-brand-red/20"
             >
               <Phone size={16} aria-hidden="true" />
               {ctaText}
-            </a>
+            </ObfuscatedLink>
           </div>
 
           <div className="flex items-center gap-3 md:hidden">
@@ -249,13 +251,14 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
                   );
                 })}
               <div className="pt-4">
-                <a
-                  href={`tel:${GlobalConfig.brand.phone}`}
+                <ObfuscatedLink
+                  type="phone"
+                  useGlobalConfig={true}
                   className="flex w-full items-center justify-center gap-3 rounded-xl bg-brand-red py-4 font-bold text-white text-lg shadow-md hover:bg-brand-red/90 hover:scale-[1.01] active:scale-[0.99] transition-all uppercase tracking-tight outline-none focus:ring-4 focus:ring-brand-red/20"
                 >
                   <Phone size={20} aria-hidden="true" />
                   {ctaText}
-                </a>
+                </ObfuscatedLink>
               </div>
             </div>
           </motion.div>

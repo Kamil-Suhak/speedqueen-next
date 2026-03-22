@@ -1,6 +1,7 @@
 import { GlobalConfig, Locations } from "@/config/site-config";
 import Image from "next/image";
 import { Phone, Mail } from "lucide-react";
+import ObfuscatedLink from "@/components/ui/ObfuscatedLink";
 
 interface FooterProps {
   brand: typeof GlobalConfig.brand;
@@ -69,14 +70,14 @@ export default function Footer({ brand, socials, links, lang }: FooterProps) {
               {lang === "en" ? "Contact Info" : "Informacje Kontaktowe"}
             </h3>
             <div className="flex flex-col gap-3">
-              <a href={`tel:${brand.phone}`} className="flex items-center gap-2 text-sm text-gray-600 hover:text-brand-red transition-colors font-medium">
-                <Phone size={16} className="text-brand-red" />
+              <ObfuscatedLink type="phone" value={brand.phone} className="flex items-center gap-2 text-sm text-gray-600 hover:text-brand-red transition-colors font-medium">
+                <Phone size={16} className="text-brand-red"  />
                 {brand.phone}
-              </a>
-              <a href={`mailto:${brand.email}`} className="flex items-center gap-2 text-sm text-gray-600 hover:text-brand-red transition-colors font-medium break-all">
-                <Mail size={16} className="text-brand-red" />
+              </ObfuscatedLink>
+              <ObfuscatedLink type="email" value={brand.email} className="flex items-center gap-2 text-sm text-gray-600 hover:text-brand-red transition-colors font-medium break-all">
+                <Mail size={16} className="text-brand-red"  />
                 {brand.email}
-              </a>
+              </ObfuscatedLink>
             </div>
           </div>
 

@@ -6,6 +6,7 @@ import { sendEmail } from "@/actions/sendEmail";
 import StatusModal from "@/components/modals/StatusModal";
 import SectionBackground from "@/components/ui/SectionBackground";
 import { Locations } from "@/config/site-config";
+import ObfuscatedLink from "@/components/ui/ObfuscatedLink";
 
 interface ContactProps {
   content: {
@@ -93,19 +94,19 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
           <p className="mb-10 text-lg text-gray-600 font-normal leading-relaxed">{content.subtitle}</p>
 
           <div className="space-y-6">
-            <a href={`mailto:${brandInfo.email}`} className="flex items-center gap-5 group focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-4 rounded-xl p-1 w-fit">
+            <ObfuscatedLink type="email" value={brandInfo.email} className="flex items-center gap-5 group focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-4 rounded-xl p-1 w-fit">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-colors shadow-sm" aria-hidden="true">
                 <Mail size={22} />
               </div>
               <span className="font-bold uppercase tracking-tight text-gray-900">{brandInfo.email}</span>
-            </a>
+            </ObfuscatedLink>
 
-            <a href={`tel:${brandInfo.phone}`} className="flex items-center gap-5 group focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-4 rounded-xl p-1 w-fit">
+            <ObfuscatedLink type="phone" value={brandInfo.phone} className="flex items-center gap-5 group focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-4 rounded-xl p-1 w-fit">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-colors shadow-sm" aria-hidden="true">
                 <Phone size={22} />
               </div>
               <span className="font-bold uppercase tracking-tight text-gray-900">{brandInfo.phone}</span>
-            </a>
+            </ObfuscatedLink>
 
             <a
               href={directionsUrl}
