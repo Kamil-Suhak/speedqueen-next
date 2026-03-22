@@ -23,7 +23,7 @@ interface ContactProps {
       buttonClose: string;
     };
   };
-  brandInfo: { email: string; phone: string; address: string[] };
+  brandInfo: { email: string; phone: string; locations: { address: string; hours: string }[] };
   bgImage?: string;
 }
 
@@ -119,20 +119,20 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
               <div className="relative overflow-hidden flex-1 min-w-0 max-w-full w-[230px] md:w-[310px] whitespace-nowrap">
                 <div className="flex animate-marquee w-max">
                   <div className="flex items-center">
-                    {brandInfo.address.map((addr, idx) => (
+                    {brandInfo.locations && brandInfo.locations.map((loc, idx) => (
                       <div key={idx} className="flex items-center gap-4 pr-4">
-                        <span className="font-bold uppercase tracking-tight text-gray-900">
-                          {addr}
+                        <span className="font-bold uppercase tracking-tight text-gray-900 whitespace-nowrap">
+                          {loc.address}
                         </span>
                         <div className="h-6 w-1.5 bg-brand-red" aria-hidden="true" />
                       </div>
                     ))}
                   </div>
                   <div className="flex items-center">
-                    {brandInfo.address.map((addr, idx) => (
+                    {brandInfo.locations && brandInfo.locations.map((loc, idx) => (
                       <div key={`copy-${idx}`} className="flex items-center gap-4 pr-4">
-                        <span className="font-bold uppercase tracking-tight text-gray-900">
-                          {addr}
+                        <span className="font-bold uppercase tracking-tight text-gray-900 whitespace-nowrap">
+                          {loc.address}
                         </span>
                         <div className="h-6 w-1.5 bg-brand-red" aria-hidden="true" />
                       </div>

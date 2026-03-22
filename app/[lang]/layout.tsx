@@ -74,7 +74,7 @@ export default async function RootLayout({
   const callNowText = lang === "en" ? "Call Now" : "Zadzwoń Teraz";
 
   return (
-    <html lang={lang} className={`scroll-smooth ${inter.variable} ${montserrat.variable}`}>
+    <html lang={lang} className={`scroll-smooth ${inter.variable} ${montserrat.variable}`} data-scroll-behavior="smooth">
       <body className="font-sans antialiased">
         <Navbar
           ctaText={callNowText}
@@ -87,7 +87,7 @@ export default async function RootLayout({
           {children}
         </main>
 
-        <Footer brand={GlobalConfig.brand} socials={GlobalConfig.socials} />
+        <Footer brand={GlobalConfig.brand} socials={GlobalConfig.socials} links={navigation.footerLinks} lang={lang} />
       </body>
     </html>
   );

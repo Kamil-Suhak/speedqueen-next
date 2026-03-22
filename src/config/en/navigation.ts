@@ -3,7 +3,7 @@ export const navigationEn = {
     { label: "Home", href: "#hero" },
     { label: "Services", href: "#services" },
     { label: "Pricing", href: "#pricing" },
-    { label: "Gallery", href: "#gallery" },
+    { label: "Gallery", href: "/gallery" },
     { label: "Reviews", href: "#reviews" },
     { label: "FAQ", href: "#faq" },
     { label: "Contact", href: "#contact" },
@@ -16,6 +16,7 @@ export const navigationEn = {
         { label: "Drying", href: "#services" },
       ],
     },
+
   ],
 };
 

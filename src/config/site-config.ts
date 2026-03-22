@@ -27,7 +27,11 @@ export const GlobalConfig = {
     secondaryColor: "#1d1d1b",
     accentColor: "#e7272d",
     email: "kontakt@speedqueenkrk.pl",
-    address: ["ul. Pawia 34, Kraków", "al. J. Słowackiego 56, Kraków", "ul. Orlińskiego 1/U17, Kraków"],
+    locations: [
+      { address: "ul. Orlińskiego 1/U17, Kraków", hours: "6:00 - 2:00" },
+      { address: "ul. Pawia 34, Kraków", hours: "24/7" },
+      { address: "al. J. Słowackiego 56, Kraków", hours: "24/7" },
+    ],
     phone: "+48 509 996 006",
     url: "https://speedqueenkrk.pl",
     tagline: {

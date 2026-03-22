@@ -3,7 +3,7 @@ export const navigationPl = {
     { label: "Home", href: "#hero" },
     { label: "Usługi", href: "#services" },
     { label: "Cennik", href: "#pricing" },
-    { label: "Galeria", href: "#gallery" },
+    { label: "Galeria", href: "/gallery" },
     { label: "Opinie", href: "#reviews" },
     { label: "FAQ", href: "#faq" },
     { label: "Kontakt", href: "#contact" },
@@ -16,6 +16,7 @@ export const navigationPl = {
         { label: "Suszenie", href: "#services" },
       ],
     },
+
   ],
 };
 
