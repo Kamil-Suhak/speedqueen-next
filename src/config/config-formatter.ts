@@ -4,7 +4,7 @@ export const markerStyles: Record<string, string> = {
   "[[": "text-brand-red",
   "{{": "text-brand-red font-bold",
   "((": "text-brand-red hover:underline transition-all cursor-pointer",
-  "!!": "font-black uppercase tracking-tighter",
+  "!!": "font-black uppercase",
 };
 
 export const markers: Record<string, string> = {
