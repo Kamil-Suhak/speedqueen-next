@@ -1,6 +1,6 @@
 import { GlobalConfig, Locations } from "@/config/site-config";
 import Image from "next/image";
-import { Phone, Mail } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
 import ObfuscatedLink from "@/components/ui/ObfuscatedLink";
 
 interface FooterProps {
@@ -55,7 +55,8 @@ export default function Footer({ brand, socials, links, lang }: FooterProps) {
             </h3>
             <ul className="flex flex-col gap-3">
               {brand.locations && brand.locations.map((loc, i) => (
-                <li key={i}>
+                <li key={i} className="flex items-start gap-2">
+                  <MapPin size={16} className="text-brand-red shrink-0 mt-0.5" />
                   <span className="text-sm text-gray-600 font-medium whitespace-pre-wrap">
                     {loc.address} ({loc.hours})
                   </span>
