@@ -1,11 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export function useActiveSection(sectionIds: string[]) {
   const [activeSection, setActiveSection] = useState<string>("");
+  const pathname = usePathname();
 
   useEffect(() => {
+    setActiveSection(""); // Reset on page change
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -15,13 +19,11 @@ export function useActiveSection(sectionIds: string[]) {
         });
       },
       {
-        // trigger when mostly in view
         rootMargin: "-40% 0px -60% 0px",
         threshold: 0,
       },
     );
 
-    // Observe each section
     sectionIds.forEach((id) => {
       const element = document.getElementById(id);
       if (element) {
@@ -30,7 +32,7 @@ export function useActiveSection(sectionIds: string[]) {
     });
 
     return () => observer.disconnect();
-  }, [sectionIds]);
+  }, [sectionIds, pathname]);
 
   return activeSection;
 }

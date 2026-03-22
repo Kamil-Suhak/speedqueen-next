@@ -14,6 +14,13 @@ interface PromoModalProps {
 }
 
 export default function PromoModal({ content }: PromoModalProps) {
+  const promoStartDate = new Date(2026, 2, 30); // Note: Month 2 is March
+  const isPromoActive = new Date() >= promoStartDate;
+
+  if (!isPromoActive) {
+    return null;
+  }
+
   return (
     <AutoOpenModal
       uniqueId="discount-promo-march-2026"
