@@ -1,11 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
+
+import OrlinskiegoFront from "../../../public/images/collage-bg/OrlinskiegoFront.jpg";
+import OrlinskiegoWnetrze from "../../../public/images/collage-bg/OrlinskiegoWnetrze.jpg";
+import PawiaFront from "../../../public/images/collage-bg/PawiaFront.jpg";
+import PawiaWnetrze from "../../../public/images/collage-bg/PawiaWnetrze.jpg";
+import SlowackiegoFront from "../../../public/images/collage-bg/SlowackiegoFront.jpg";
+import SlowackiegoWnetrze from "../../../public/images/collage-bg/SlowackiegoWnetrze.jpg";
 
 const groups = [
-  { front: "/images/collage-bg/OrlinskiegoFront.jpg", wnetrze: "/images/collage-bg/OrlinskiegoWnetrze.jpg" },
-  { front: "/images/collage-bg/PawiaFront.jpg", wnetrze: "/images/collage-bg/PawiaWnetrze.jpg" },
-  { front: "/images/collage-bg/SlowackiegoFront.jpg", wnetrze: "/images/collage-bg/SlowackiegoWnetrze.jpg" },
+  { front: OrlinskiegoFront, wnetrze: OrlinskiegoWnetrze },
+  { front: PawiaFront, wnetrze: PawiaWnetrze },
+  { front: SlowackiegoFront, wnetrze: SlowackiegoWnetrze },
 ];
 
 const mobileCols = [
@@ -44,11 +52,14 @@ export default function CollageBackground() {
           <div key={`m-${cIdx}`} className="flex h-full w-[12.5%] mr-[-1px] shrink-0 flex-col">
             {col.map((src, iIdx) => (
               <div key={`i-${iIdx}`} className="relative h-1/3 w-full">
-                <img
+                <Image
                   src={src}
                   alt=""
-                  className="h-full w-full object-cover"
+                  fill
+                  className="object-cover"
                   style={antiAliasingStyles}
+                  priority
+                  placeholder="blur"
                 />
               </div>
             ))}
@@ -67,11 +78,14 @@ export default function CollageBackground() {
           <div key={`d-${cIdx}`} className="flex h-full w-[8.333333%] mr-[-1px] shrink-0 flex-col">
             {col.map((src, iIdx) => (
               <div key={`j-${iIdx}`} className="relative h-1/2 w-full">
-                <img
+                <Image
                   src={src}
                   alt=""
-                  className="h-full w-full object-cover"
+                  fill
+                  className="object-cover"
                   style={antiAliasingStyles}
+                  priority
+                  placeholder="blur"
                 />
               </div>
             ))}
