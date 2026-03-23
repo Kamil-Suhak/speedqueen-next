@@ -11,6 +11,13 @@ interface FooterProps {
     links: { label: string; href: string }[];
   }[];
   lang: string;
+  footerLabels?: {
+    locations: string;
+    hours: string;
+    contact: string;
+    social: string;
+    phoneHours: string;
+  };
 }
 
 const getSocialIcon = (platform: string) => {
@@ -32,13 +39,13 @@ const getSocialIcon = (platform: string) => {
   return null;
 };
 
-export default function Footer({ brand, socials, links, lang }: FooterProps) {
+export default function Footer({ brand, socials, links, lang, footerLabels }: FooterProps) {
   return (
     <footer className="border-t border-zinc-200 bg-zinc-50 pt-16 pb-8 text-gray-600">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-4 pb-12 border-b border-zinc-200">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-12 pb-12 border-b border-zinc-200">
           {/* Column 1: Brand */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 md:col-span-3">
             <div className="flex items-center gap-2">
               <Image src={brand.logo} alt={brand.name} width={40} height={40} className="object-contain" />
               <span className="text-lg font-bold tracking-tighter text-gray-900">{brand.name}</span>
@@ -49,43 +56,55 @@ export default function Footer({ brand, socials, links, lang }: FooterProps) {
           </div>
 
           {/* Column 2: Locations & Hours */}
-          <div className="flex flex-col gap-4">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-brand-red">
-              {lang === "en" ? "Locations" : "Lokalizacje"}
-            </h3>
+          <div className="flex flex-col gap-4 md:col-span-4">
+            <div className="flex flex-row gap-8 sm:gap-12">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-brand-red flex-[2]">
+                {footerLabels?.locations}
+              </h3>
+              <h3 className="text-xs font-bold uppercase tracking-wider text-brand-red whitespace-nowrap flex-1 md:text-right">
+                {footerLabels?.hours}
+              </h3>
+            </div>
             <ul className="flex flex-col gap-3">
               {brand.locations && brand.locations.map((loc, i) => (
-                <li key={i} className="flex items-start gap-2">
-                  <MapPin size={16} className="text-brand-red shrink-0 mt-0.5" />
-                  <span className="text-sm text-gray-600 font-medium whitespace-pre-wrap">
-                    {loc.address} ({loc.hours})
-                  </span>
+                <li key={i} className="flex flex-row gap-8 sm:gap-12 items-start">
+                  <div className="flex items-start gap-2 flex-[2]">
+                    <MapPin size={16} className="text-brand-red shrink-0 mt-0.5" />
+                    <span className="text-sm text-gray-600 font-medium whitespace-pre-wrap">
+                      {loc.address}
+                    </span>
+                  </div>
+                  <div className="flex-1 text-left">
+                    <span className="text-sm text-gray-600 font-medium whitespace-nowrap">
+                      {loc.hours}
+                    </span>
+                  </div>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Column 3: Contact Info */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 md:col-span-3">
             <h3 className="text-xs font-bold uppercase tracking-wider text-brand-red">
-              {lang === "en" ? "Contact Info" : "Informacje Kontaktowe"}
+              {footerLabels?.contact}
             </h3>
             <div className="flex flex-col gap-3">
               <ObfuscatedLink type="phone" value={brand.phone} className="flex items-center gap-2 text-sm text-gray-600 hover:text-brand-red transition-colors font-medium">
-                <Phone size={16} className="text-brand-red"  />
-                {brand.phone}
+                <Phone size={16} className="text-brand-red" />
+                <span>{brand.phone} <span className="text-xs text-gray-500 font-normal">({footerLabels?.phoneHours})</span></span>
               </ObfuscatedLink>
               <ObfuscatedLink type="email" value={brand.email} className="flex items-center gap-2 text-sm text-gray-600 hover:text-brand-red transition-colors font-medium break-all">
-                <Mail size={16} className="text-brand-red"  />
+                <Mail size={16} className="text-brand-red" />
                 {brand.email}
               </ObfuscatedLink>
             </div>
           </div>
 
           {/* Column 4: Social Media */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 md:col-span-2">
             <h3 className="text-xs font-bold uppercase tracking-wider text-brand-red">
-              Social Media
+              {footerLabels?.social}
             </h3>
             <div className="flex flex-col gap-3">
               {socials.map((social, i) => (

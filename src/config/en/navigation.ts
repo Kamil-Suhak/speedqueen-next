@@ -16,8 +16,14 @@ export const navigationEn = {
         { label: "Drying", href: "#services" },
       ],
     },
-
   ],
+  footerLabels: {
+    locations: "Locations",
+    hours: "Opening Hours",
+    contact: "Contact Info",
+    social: "Social Media",
+    phoneHours: "10:00 - 22:00",
+  },
 };
 
 export default navigationEn;

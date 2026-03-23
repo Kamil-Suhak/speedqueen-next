@@ -16,8 +16,14 @@ export const navigationPl = {
         { label: "Suszenie", href: "#services" },
       ],
     },
-
   ],
+  footerLabels: {
+    locations: "Lokalizacje",
+    hours: "Godziny otwarcia",
+    contact: "Informacje Kontaktowe",
+    social: "Social Media",
+    phoneHours: "10:00 - 22:00",
+  },
 };
 
 export default navigationPl;

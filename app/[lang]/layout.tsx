@@ -87,7 +87,13 @@ export default async function RootLayout({
           {children}
         </main>
 
-        <Footer brand={GlobalConfig.brand} socials={GlobalConfig.socials} links={navigation.footerLinks} lang={lang} />
+        <Footer
+          brand={GlobalConfig.brand}
+          socials={GlobalConfig.socials}
+          links={navigation.footerLinks}
+          lang={lang}
+          footerLabels={navigation.footerLabels}
+        />
       </body>
     </html>
   );
