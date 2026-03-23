@@ -5,7 +5,7 @@ export const contactEn = {
   form: {
     name: "Your Name",
     email: "Email",
-    message: "Describe the issue...",
+    message: "Your question...",
     button: "Request Help",
     successTitle: "Thank You!",
     successMessage:

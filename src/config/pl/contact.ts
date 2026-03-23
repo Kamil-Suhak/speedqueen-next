@@ -1,11 +1,11 @@
 export const contactPl = {
   title: "Skontaktuj się z nami",
   subtitle:
-    "Odwiedź jedną z naszych 3 lokalizacji w Krakowie lub zadzwoń na naszą linię alarmową. Jesteśmy do Twojej dyspozycji!",
+    "Odwiedź jedną z naszych 3 lokalizacji w Krakowie lub zadzwoń na naszą infolinię. Jesteśmy do Twojej dyspozycji!",
   form: {
     name: "Imię i Nazwisko",
     email: "Adres Email",
-    message: "Opisz problem...",
+    message: "Twoje pytanie...",
     button: "Wyślij Zapytanie",
     successTitle: "Dziękujemy!",
     successMessage:

@@ -105,7 +105,10 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-colors shadow-sm" aria-hidden="true">
                 <Phone size={22} />
               </div>
-              <span className="font-bold uppercase tracking-tight text-gray-900">{brandInfo.phone}</span>
+              <span className="font-bold uppercase tracking-tight text-gray-900">
+                {brandInfo.phone}
+                <span className="text-sm font-normal text-gray-500 normal-case ml-2">(10:00 - 22:00)</span>
+              </span>
             </ObfuscatedLink>
 
             <a
