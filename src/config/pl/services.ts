@@ -19,7 +19,7 @@ export const servicesPl = {
     },
     {
       title: "Automatyczne Dozowanie",
-      description: "[[Profesjonalne środki piorące]] są dozowane automatycznie w programach 1-5. !!Uwaga: Programy 6 i 7 wymagają użycia własnych detergentów.!!",
+      description: "[[Profesjonalne środki piorące]] są dozowane automatycznie w programach 1-5. !!Uwaga: Programy 6, 7 wymagają użycia własnych detergentów.!!",
       icon: Zap,
     },
     {
