@@ -19,7 +19,7 @@ interface HeroProps {
 export default function Hero({ content }: HeroProps) {
   return (
     <section
-      className="relative overflow-hidden min-h-screen min-h-[100dvh] flex items-center justify-center pt-24 pb-12 bg-white"
+      className="relative overflow-hidden min-h-screen flex items-center justify-center pt-24 pb-12 bg-white"
       id="hero"
     >
       <CollageBackground />
