@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { Menu, X, Globe, Phone } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { GlobalConfig } from "@/config/site-config";
@@ -20,6 +20,7 @@ interface NavbarProps {
 export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -28,6 +29,15 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lang]);
+
+  // Pages with light backgrounds can set data-navbar-theme="dark"
+  // on their wrapper to make the logo visible without scrolling
+  useEffect(() => {
+    const main = document.getElementById("main-content");
+    if (!main) return;
+    const child = main.querySelector("[data-navbar-theme]");
+    setDarkTheme(child?.getAttribute("data-navbar-theme") === "dark");
+  }, [pathname]);
 
   const sectionIds = useMemo(
     () => links.map((link) => link.href.replace("#", "")).concat("hero"),
@@ -39,7 +49,7 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
     ? pathname.replace("/pl", "/en")
     : pathname.replace("/en", "/pl");
 
-  const isSolid = scrolled || isOpen;
+  const isSolid = scrolled || isOpen || darkTheme;
 
   const renderNavLink = (link: { label: string; href: string }, isInsideRed = false) => {
     const isAnchor = link.href.startsWith("#");
@@ -56,7 +66,7 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
       <Link
         key={link.label}
         href={href}
-        className={`relative pb-1 text-sm font-bold uppercase tracking-tight transition-all duration-300 ease-in-out group ${isActive
+        className={`relative pb-1 text-sm font-bold uppercase tracking-tight transition-colors duration-300 ease-in-out group ${isActive
           ? (isInsideRed ? "text-white" : "text-brand-red")
           : (isInsideRed ? "text-white/80 hover:text-white" : "text-gray-600 hover:text-brand-red")
           }`}
@@ -70,7 +80,7 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
             transition={{ type: "spring", stiffness: 380, damping: 40 }}
           />
         ) : (
-          <span className={`absolute bottom-0 left-0 h-0.5 w-0 rounded-full transition-all duration-300 group-hover:w-full ${isInsideRed ? "bg-white" : "bg-brand-red"}`} />
+          <span className={`absolute bottom-0 left-0 h-0.5 w-0 rounded-full transition-[width] duration-300 group-hover:w-full ${isInsideRed ? "bg-white" : "bg-brand-red"}`} />
         )}
       </Link>
     );
@@ -78,7 +88,7 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
 
   return (
     <nav
-      className={`fixed z-50 w-full transition-all duration-300 ${scrolled
+      className={`fixed z-50 w-full transition-[background-color,padding,box-shadow,border-color,backdrop-filter] duration-300 ${scrolled
         ? "bg-white/95 py-3 shadow-md backdrop-blur-md border-b border-gray-100"
         : isOpen
           ? "bg-white py-5 shadow-sm"
@@ -98,7 +108,7 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
                 height={50}
                 className={`object-contain object-left`}
                 style={{
-                  filter: (scrolled || isOpen)
+                  filter: isSolid
                     ? "invert(100%) invert(20%) sepia(93%) saturate(4683%) hue-rotate(349deg) brightness(94%) contrast(94%)"
                     : "none",
                 }}
@@ -126,7 +136,7 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
             <Link
               href={togglePath}
               scroll={false}
-              className="flex items-center gap-2 bg-brand-red px-5 py-2.5 rounded-full shadow-md text-sm font-bold tracking-tight text-white uppercase transition hover:text-zinc-200"
+              className="flex items-center gap-2 bg-brand-red px-5 py-2.5 rounded-full shadow-md text-sm font-bold tracking-tight text-white uppercase transition-colors hover:text-zinc-200"
               aria-label="Switch language"
             >
               <Globe size={14} aria-hidden="true" />
@@ -136,7 +146,7 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
             <ObfuscatedLink
               type="phone"
               useGlobalConfig={true}
-              className="flex transform items-center justify-center gap-2 rounded-xl px-6 py-2.5 bg-brand-red text-white text-sm font-bold shadow-md transition hover:bg-brand-red/90 hover:scale-[1.01] active:scale-[0.99] uppercase tracking-tight outline-none focus:ring-4 focus:ring-brand-red/20"
+              className="flex transform items-center justify-center gap-2 rounded-xl px-6 py-2.5 bg-brand-red text-white text-sm font-bold shadow-md transition-[background-color,transform] hover:bg-brand-red/90 hover:scale-[1.01] active:scale-[0.99] uppercase tracking-tight outline-none focus:ring-4 focus:ring-brand-red/20"
             >
               <Phone size={16} aria-hidden="true" />
               {ctaText}
@@ -147,7 +157,7 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
             {/* Language Switcher Pill */}
             <Link
               href={togglePath}
-              className="flex items-center justify-center bg-brand-red px-4 py-2 rounded-full shadow-md text-xs font-bold text-white uppercase transition hover:text-zinc-200"
+              className="flex items-center justify-center bg-brand-red px-4 py-2 rounded-full shadow-md text-xs font-bold text-white uppercase transition-colors hover:text-zinc-200"
               scroll={false}
               aria-label="Switch language"
             >
@@ -167,14 +177,14 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
         </div>
       </div>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden border-b border-gray-100 bg-white md:hidden"
-          >
+      <div
+        className={`grid md:hidden transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
+          isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        }`}
+        aria-hidden={!isOpen}
+        inert={!isOpen ? true : undefined}
+      >
+        <div className="overflow-hidden border-b border-gray-100 bg-white">
             <div className="space-y-1 px-4 pt-2 pb-8">
               {links
                 .filter((link) => !link.href.includes("gallery"))
@@ -254,16 +264,15 @@ export default function Navbar({ links, brandName, lang, ctaText }: NavbarProps)
                 <ObfuscatedLink
                   type="phone"
                   useGlobalConfig={true}
-                  className="flex w-full items-center justify-center gap-3 rounded-xl bg-brand-red py-4 font-bold text-white text-lg shadow-md hover:bg-brand-red/90 hover:scale-[1.01] active:scale-[0.99] transition-all uppercase tracking-tight outline-none focus:ring-4 focus:ring-brand-red/20"
+                  className="flex w-full items-center justify-center gap-3 rounded-xl bg-brand-red py-4 font-bold text-white text-lg shadow-md hover:bg-brand-red/90 hover:scale-[1.01] active:scale-[0.99] transition-[background-color,transform] uppercase tracking-tight outline-none focus:ring-4 focus:ring-brand-red/20"
                 >
                   <Phone size={20} aria-hidden="true" />
                   {ctaText}
                 </ObfuscatedLink>
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        </div>
+      </div>
     </nav>
   );
 }
