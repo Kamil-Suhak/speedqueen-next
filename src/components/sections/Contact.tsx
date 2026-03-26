@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
 import { sendEmail } from "@/actions/sendEmail";
 import StatusModal from "@/components/modals/StatusModal";
 import SectionBackground from "@/components/ui/SectionBackground";
 import { Locations } from "@/config/site-config";
 import ObfuscatedLink from "@/components/ui/ObfuscatedLink";
+import { openDirections } from "@/lib/directions";
 
 interface ContactProps {
   content: {
@@ -31,34 +32,9 @@ interface ContactProps {
 export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
   const [isPending, setIsPending] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [directionsUrl, setDirectionsUrl] = useState(Locations[1].url);
   const [errorModal, setErrorModal] = useState({
     isOpen: false,
   });
-
-  useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const userLat = position.coords.latitude;
-        const userLng = position.coords.longitude;
-
-        let closest = Locations[0];
-        let minDistance = Infinity;
-
-        Locations.forEach((loc) => {
-          const dist = Math.sqrt(
-            Math.pow(loc.lat - userLat, 2) + Math.pow(loc.lng - userLng, 2)
-          );
-          if (dist < minDistance) {
-            minDistance = dist;
-            closest = loc;
-          }
-        });
-
-        setDirectionsUrl(closest.url);
-      });
-    }
-  }, []);
 
   async function handleSubmit(formData: FormData) {
     setIsPending(true);
@@ -112,9 +88,8 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
             </ObfuscatedLink>
 
             <a
-              href={directionsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={Locations[1].url}
+              onClick={openDirections}
               className="flex items-center gap-5 group focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-4 rounded-xl p-1 overflow-hidden min-w-0 w-fit"
             >
               <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-white border border-slate-100 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-colors shadow-sm" aria-hidden="true">

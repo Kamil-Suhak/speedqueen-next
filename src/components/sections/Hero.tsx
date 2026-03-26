@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { openDirections } from "@/lib/directions";
 import { MapPin, List } from "lucide-react";
 import { FormattedText } from "@/components/ui/FormattedText";
 import CollageBackground from "@/components/ui/CollageBackground";
@@ -19,31 +19,7 @@ interface HeroProps {
 }
 
 export default function Hero({ content, bgImage }: HeroProps) {
-  const [directionsUrl, setDirectionsUrl] = useState(Locations[1].url);
 
-  useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const userLat = position.coords.latitude;
-        const userLng = position.coords.longitude;
-
-        let closest = Locations[0];
-        let minDistance = Infinity;
-
-        Locations.forEach((loc) => {
-          const dist = Math.sqrt(
-            Math.pow(loc.lat - userLat, 2) + Math.pow(loc.lng - userLng, 2)
-          );
-          if (dist < minDistance) {
-            minDistance = dist;
-            closest = loc;
-          }
-        });
-
-        setDirectionsUrl(closest.url);
-      });
-    }
-  }, []);
 
   return (
     <section
@@ -85,9 +61,8 @@ export default function Hero({ content, bgImage }: HeroProps) {
           className="flex flex-col justify-center gap-4 sm:flex-row"
         >
           <a
-            href={directionsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={Locations[1].url}
+            onClick={openDirections}
             className="flex transform items-center justify-center gap-2 rounded-xl bg-brand-red px-8 py-4 font-bold text-white shadow-lg transition hover:-translate-y-1 hover:brightness-110 uppercase tracking-tight"
           >
             <MapPin size={20} />
