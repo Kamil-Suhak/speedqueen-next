@@ -14,21 +14,20 @@ interface HeroProps {
     primaryCTA: string;
     secondaryCTA: string;
   };
-  bgImage?: string;
 }
 
-export default function Hero({ content, bgImage }: HeroProps) {
+export default function Hero({ content }: HeroProps) {
 
   return (
     <section
-      className="relative overflow-hidden min-h-screen min-h-[100dvh] flex items-center justify-center pt-24 pb-12 bg-neutral-50"
+      className="relative overflow-hidden min-h-screen min-h-[100dvh] flex items-center justify-center pt-24 pb-12 bg-white"
       id="hero"
     >
       <CollageBackground />
 
       <div className="relative z-10 mx-auto max-w-4xl w-full px-4 text-center sm:px-6 lg:px-8 -mt-12 md:-mt-16">
         <div
-          className="flex justify-center mb-6 animate-fade-in-up"
+          className="flex justify-center mb-4 animate-fade-in-up"
         >
           <Image
             src="/images/logo-big.png"
@@ -40,11 +39,19 @@ export default function Hero({ content, bgImage }: HeroProps) {
           />
         </div>
 
-        <h1
-          className="mx-auto mb-20 max-w-4xl text-4xl font-extrabold tracking-tight text-gray-900 md:text-7xl animate-fade-in-up [animation-delay:400ms]"
+        <div className="flex items-center justify-center gap-1.5 mb-6 animate-fade-in-up [animation-delay:200ms]">
+          <MapPin size={14} className="text-gray-400" />
+          <span className="text-sm font-semibold text-gray-400 uppercase tracking-widest">Kraków</span>
+        </div>
+
+        {/* Cutout Text Mask Container */}
+        <div
+          className="bg-zinc-300/50 mix-blend-screen p-4 rounded-4xl mb-20 animate-fade-in-up [animation-delay:400ms]"
         >
-          <FormattedText text={content.title} />
-        </h1>
+          <h1 className="mx-auto max-w-4xl text-4xl font-extrabold tracking-tight text-black md:text-7xl">
+            <FormattedText text={content.title} />
+          </h1>
+        </div>
 
         <div
           className="flex flex-col justify-center gap-4 sm:flex-row animate-fade-in-up [animation-delay:800ms]"

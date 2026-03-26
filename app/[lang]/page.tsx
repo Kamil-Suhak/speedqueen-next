@@ -1,6 +1,5 @@
 import { GlobalConfig, Locale } from "@/config/site-config";
 import Hero from "@/components/sections/Hero";
-import HeroAlt from "@/components/sections/Hero-alt";
 import ServicesGrid from "@/components/sections/ServicesGrid";
 import Contact from "@/components/sections/Contact";
 import PricingTabs, { PricingProps } from "@/components/sections/PricingTabs";
@@ -49,8 +48,7 @@ export default async function LandingPage({
   return (
     <>
       <PromoModal content={promoContent} />
-      {/* <Hero content={hero} bgImage={getSectionBackground(0)} /> */}
-      <HeroAlt content={hero} bgImage={getSectionBackground(0)} />
+      <Hero content={hero} />
       <ServicesGrid head={services.head} items={services.items} bgImage={getSectionBackground(1)} />
       <PricingTabs
         {...(pricing as PricingProps)}
