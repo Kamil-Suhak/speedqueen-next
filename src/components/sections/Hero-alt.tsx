@@ -1,13 +1,12 @@
 "use client";
 
-import { openDirections } from "@/lib/directions";
 import { MapPin, List } from "lucide-react";
 import { FormattedText } from "@/components/ui/FormattedText";
 import SlidingBackground from "@/components/ui/SlidingBackground";
 import CollageBackground from "@/components/ui/CollageBackground";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import { Locations } from "@/config/site-config";
+import { openDirections } from "@/lib/directions";
 
 interface HeroProps {
   content: {
@@ -21,7 +20,6 @@ interface HeroProps {
 
 export default function HeroAlt({ content, bgImage }: HeroProps) {
 
-
   return (
     <section
       className="relative overflow-hidden min-h-screen min-h-[100dvh] flex items-center justify-center pt-24 pb-12 bg-white"
@@ -31,11 +29,8 @@ export default function HeroAlt({ content, bgImage }: HeroProps) {
       <CollageBackground />
 
       <div className="relative z-10 mx-auto max-w-4xl w-full px-4 text-center sm:px-6 lg:px-8 -mt-12 md:-mt-16">
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0 }}
-          className="flex justify-center mb-4"
+        <div
+          className="flex justify-center mb-4 animate-fade-in-up"
         >
           <Image
             src="/images/logo-big.png"
@@ -45,23 +40,19 @@ export default function HeroAlt({ content, bgImage }: HeroProps) {
             className="object-contain"
             priority
           />
-        </motion.div>
+        </div>
 
         {/* Cutout Text Mask Container */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }} className="bg-zinc-300/50 mix-blend-screen p-4 rounded-4xl mb-20">
+        <div
+          className="bg-zinc-300/50 mix-blend-screen p-4 rounded-4xl mb-20 animate-fade-in-up [animation-delay:400ms]"
+        >
           <h1 className="mx-auto max-w-4xl text-4xl font-extrabold tracking-tight text-black md:text-7xl">
             <FormattedText text={content.title} />
           </h1>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex flex-col justify-center gap-4 sm:flex-row"
+        <div
+          className="flex flex-col justify-center gap-4 sm:flex-row animate-fade-in-up [animation-delay:800ms]"
         >
           <a
             href={Locations[1].url}
@@ -78,7 +69,7 @@ export default function HeroAlt({ content, bgImage }: HeroProps) {
             <List size={20} />
             {content.secondaryCTA}
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
