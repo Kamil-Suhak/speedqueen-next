@@ -195,7 +195,7 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
                             <div className="flex items-center">
                               <button
                                 onClick={scrollToLoyalty}
-                                className="group/btn flex items-center gap-2 font-bold text-white bg-brand-red rounded-lg uppercase tracking-widest px-3 py-1.5 text-sm md:text-xs whitespace-nowrap shadow-sm hover:brightness-110 hover:scale-105 transition-all cursor-pointer"
+                                className="group/btn flex items-center gap-2 font-bold text-white bg-brand-red rounded-lg uppercase tracking-widest px-3 py-1.5 text-sm md:text-xs whitespace-nowrap shadow-sm btn-hover-effect"
                               >
                                 {item.loyaltyPrice} {content.unit}{" "}
                                 {content.toggle.upsellBadge}

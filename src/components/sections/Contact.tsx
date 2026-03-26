@@ -144,7 +144,7 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
                   id="senderName"
                   name="senderName"
                   required
-                  className="w-full rounded-2xl border border-slate-200 p-5 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 font-medium transition-all"
+                  className="w-full rounded-2xl border border-slate-200 p-5 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 font-medium transition-[border-color,box-shadow] duration-200"
                   placeholder={content.form.name}
                 />
               </div>
@@ -155,7 +155,7 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
                   name="senderEmail"
                   type="email"
                   required
-                  className="w-full rounded-2xl border border-slate-200 p-5 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 font-medium transition-all"
+                  className="w-full rounded-2xl border border-slate-200 p-5 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 font-medium transition-[border-color,box-shadow] duration-200"
                   placeholder={content.form.email}
                 />
               </div>
@@ -165,20 +165,20 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
                   id="message"
                   name="message"
                   required
-                  className="w-full rounded-2xl border border-slate-200 p-5 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 font-medium transition-all"
+                  className="w-full rounded-2xl border border-slate-200 p-5 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 font-medium transition-[border-color,box-shadow] duration-200"
                   rows={4}
                   placeholder={content.form.message}
                 />
               </div>
               <button
                 disabled={isPending}
-                className={`group flex w-full items-center justify-center gap-3 rounded-2xl bg-brand-red py-5 font-bold text-white text-xl uppercase tracking-wider transition-all shadow-md ${isPending ? "cursor-not-allowed opacity-50" : "hover:bg-brand-red/90 hover:scale-[1.01] active:scale-[0.99]"} focus:ring-4 focus:ring-brand-red/20 outline-none`}
+                className={`group flex w-full items-center justify-center gap-3 rounded-2xl bg-brand-red py-5 font-bold text-white text-xl uppercase tracking-wider transition-[background-color,transform,box-shadow] duration-200 shadow-md ${isPending ? "cursor-not-allowed opacity-50" : "hover:bg-brand-red/90 hover:scale-[1.01] active:scale-[0.99]"} focus:ring-4 focus:ring-brand-red/20 outline-none`}
               >
                 {isPending ? "Sending..." : content.form.button}
                 {!isPending && (
                   <Send
                     size={22}
-                    className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"
+                    className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200"
                     aria-hidden="true"
                   />
                 )}
