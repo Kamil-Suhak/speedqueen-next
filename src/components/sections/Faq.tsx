@@ -149,21 +149,13 @@ const FaqCard = ({
       </div>
     </button>
 
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: "auto", opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-          className="overflow-hidden"
-        >
-          <div className="px-8 pb-8 text-gray-700 leading-relaxed border-t border-slate-50 pt-6 font-normal text-lg">
-            <FormattedText text={item.answer} />
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div className={`grid transition-all duration-300 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
+      <div className="overflow-hidden">
+        <div className="px-8 pb-8 text-gray-700 leading-relaxed border-t border-slate-50 pt-6 font-normal text-lg">
+          <FormattedText text={item.answer} />
+        </div>
+      </div>
+    </div>
   </div>
 );
 

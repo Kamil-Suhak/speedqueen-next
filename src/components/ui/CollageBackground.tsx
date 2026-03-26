@@ -60,6 +60,7 @@ export default function CollageBackground() {
                   style={antiAliasingStyles}
                   priority
                   placeholder="blur"
+                  sizes="(min-width: 768px) 33vw, 50vw"
                 />
               </div>
             ))}
@@ -86,6 +87,7 @@ export default function CollageBackground() {
                   style={antiAliasingStyles}
                   priority
                   placeholder="blur"
+                  sizes="(min-width: 768px) 33vw, 50vw"
                 />
               </div>
             ))}

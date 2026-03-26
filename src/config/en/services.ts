@@ -14,7 +14,7 @@ export const servicesEn = {
     },
     {
       title: "Drying",
-      description: "We provide [[high-efficiency drying]] using advanced [[heat pump technology]], ensuring a delicate process that prevents creasing and shrinkage.",
+      description: "We provide [[high-efficiency drying]] using advanced heat pump technology, ensuring a delicate process that prevents creasing and shrinkage.",
       icon: ThermometerSun,
     },
     {

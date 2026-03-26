@@ -48,3 +48,7 @@ h1, h2, h3, h4, .font-heading {
 .bg-brand-gradient {
   background: linear-gradient(135deg, var(--brand-red) 0%, var(--brand-red-dark) 100%);
 }
+
+.btn-hover-effect {
+  @apply transition duration-200 hover:scale-105 hover:brightness-110 active:scale-[0.98] cursor-pointer;
+}
