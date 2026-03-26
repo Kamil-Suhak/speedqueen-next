@@ -12,7 +12,7 @@ export default async function GalleryPage({
   const gallery = await getDictionary(lang, "gallery");
 
   return (
-    <div className="pt-20"> {/* Add padding top for fixed navbar */}
+    <div className="pt-20" data-navbar-theme="dark">
       <Gallery content={gallery} lang={lang} bgImage={getSectionBackground(3)} />
     </div>
   );
