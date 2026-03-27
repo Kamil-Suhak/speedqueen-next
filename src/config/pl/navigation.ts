@@ -5,7 +5,7 @@ export const navigationPl = {
     { label: "Cennik", href: "#pricing" },
     { label: "Galeria", href: "/gallery" },
     { label: "Opinie", href: "#reviews" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Wskazówki", href: "#faq" },
     { label: "Kontakt", href: "#contact" },
   ],
   footerLinks: [

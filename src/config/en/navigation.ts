@@ -5,7 +5,7 @@ export const navigationEn = {
     { label: "Pricing", href: "#pricing" },
     { label: "Gallery", href: "/gallery" },
     { label: "Reviews", href: "#reviews" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Tips", href: "#faq" },
     { label: "Contact", href: "#contact" },
   ],
   footerLinks: [
