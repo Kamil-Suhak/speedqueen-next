@@ -101,7 +101,7 @@ export default function Reviews({
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
                 key={`${review.author_name}-${review.time}-${i}`}
-                className="flex flex-col justify-between rounded-3xl border border-slate-100 bg-white/90 backdrop-blur-sm p-8 shadow-sm transition-[box-shadow,border-color] duration-200 hover:border-brand-red/20 hover:shadow-md"
+                className="flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-8 shadow-sm transition-[box-shadow,border-color] duration-200 hover:border-brand-red/20 hover:shadow-md"
               >
                 <div className="flex w-full items-start justify-between">
                   <Quote className="mb-4 text-brand-red/5" size={48} />
@@ -171,7 +171,7 @@ export default function Reviews({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm"
+            className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm"
             style={{ zIndex: 100 }}
             onClick={() => setSelectedReview(null)}
           >
