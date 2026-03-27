@@ -14,12 +14,20 @@ interface ReviewsWrapper {
   read_more: string;
 }
 
-// Logic moved outside component to remain stable and avoid re-renders
 const MAX_CHARS = 130;
 
 const calculateScore = (review: GoogleReview) => {
-  const bonus = Math.min(MAX_CHARS, (review.text || "").length) / MAX_CHARS * 0.99;
+  const bonus =
+    (Math.min(MAX_CHARS, (review.text || "").length) / MAX_CHARS) * 0.99;
   return (review.rating || 0) + bonus;
+};
+
+const getTruncatedContent = (text: string | null | undefined) => {
+  const str = text || "";
+  if (str.length <= MAX_CHARS) return { displayedText: str, hasMore: false };
+  const nextSpace = str.indexOf(" ", MAX_CHARS);
+  if (nextSpace === -1) return { displayedText: str, hasMore: false };
+  return { displayedText: str.substring(0, nextSpace) + "...", hasMore: true };
 };
 
 export default function Reviews({
@@ -81,7 +89,11 @@ export default function Reviews({
   if (!reviews || sortedReviews.length === 0) return null;
 
   return (
-    <section ref={sectionRef} id="reviews" className="relative scroll-mt-20 pt-20 pb-10 bg-white">
+    <section
+      ref={sectionRef}
+      id="reviews"
+      className="relative scroll-mt-20 pt-20 pb-10 bg-white"
+    >
       <SectionBackground imagePath={bgImage} />
 
       <div className="mx-auto max-w-7xl flex-col justify-between px-4 relative z-10">
@@ -94,61 +106,64 @@ export default function Reviews({
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
-            {sortedReviews.map((review, i) => (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                key={`${review.author_name}-${review.time}-${i}`}
-                className="flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-8 shadow-sm transition-[box-shadow,border-color] duration-200 hover:border-brand-red/20 hover:shadow-md"
-              >
-                <div className="flex w-full items-start justify-between">
-                  <Quote className="mb-4 text-brand-red/5" size={48} />
+            {sortedReviews.map((review, i) => {
+              const { displayedText, hasMore } = getTruncatedContent(
+                review.text,
+              );
+              return (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  key={`${review.author_name}-${review.time}-${i}`}
+                  className="flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-8 shadow-sm transition-[box-shadow,border-color] duration-200 hover:border-brand-red/20 hover:shadow-md"
+                >
+                  <div className="flex w-full items-start justify-between">
+                    <Quote className="mb-4 text-brand-red/20" size={48} />
 
-                  <div className="mt-4 flex gap-1 text-brand-red">
-                    {[...Array(Math.max(0, review.rating || 0))].map((_, j) => (
-                      <Star key={j} fill="currentColor" size={20} />
-                    ))}
+                    <div className="mt-4 flex gap-1 text-brand-red">
+                      {[...Array(Math.max(0, review.rating || 0))].map(
+                        (_, j) => (
+                          <Star key={j} fill="currentColor" size={20} />
+                        ),
+                      )}
+                    </div>
                   </div>
-                </div>
-                <p className="mb-6 leading-relaxed text-gray-600 italic font-normal flex flex-col">
-                  &quot;
-                  {(review.text || "").length > MAX_CHARS
-                    ? review.text.substring(0, MAX_CHARS) + "..."
-                    : review.text}
-                  &quot;
-                  {(review.text || "").length > MAX_CHARS && (
-                    <button
-                      onClick={() => setSelectedReview(review)}
-                      className="not-italic text-right text-sm font-bold text-zinc-900 hover:text-brand-red transition-colors focus:outline-none focus:underline uppercase tracking-tight"
-                    >
-                      {reviewWrapper.read_more}
-                    </button>
-                  )}
-                </p>
+                  <p className="mb-6 leading-relaxed text-gray-600 italic font-normal flex flex-col">
+                    &quot;{displayedText}&quot;
+                    {hasMore && (
+                      <button
+                        onClick={() => setSelectedReview(review)}
+                        className="not-italic text-right text-sm font-bold text-zinc-900 hover:text-brand-red transition-colors focus:outline-none focus:underline uppercase tracking-tight"
+                      >
+                        {reviewWrapper.read_more}
+                      </button>
+                    )}
+                  </p>
 
-                <div className="flex items-center gap-4 border-t border-slate-50 pt-6">
-                  <div className="relative h-14 w-14">
-                    <Image
-                      src={review.profile_photo_url || "/images/logo.png"}
-                      alt=""
-                      fill
-                      className="rounded-full bg-slate-50 object-cover border border-slate-100 shadow-sm"
-                      sizes="56px"
-                    />
+                  <div className="flex items-center gap-4 border-t border-slate-50 pt-6">
+                    <div className="relative h-14 w-14">
+                      <Image
+                        src={review.profile_photo_url || "/images/logo.png"}
+                        alt=""
+                        fill
+                        className="rounded-full bg-slate-50 object-cover border border-slate-100 shadow-sm"
+                        sizes="56px"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-bold text-gray-900 uppercase tracking-tight">
+                        {review.author_name}
+                      </h3>
+                      <p className="text-xs text-gray-400 font-semibold uppercase tracking-widest">
+                        {review.relative_time_description}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-gray-900 uppercase tracking-tight">
-                      {review.author_name}
-                    </h3>
-                    <p className="text-xs text-gray-400 font-semibold uppercase tracking-widest">
-                      {review.relative_time_description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </AnimatePresence>
         </div>
 
