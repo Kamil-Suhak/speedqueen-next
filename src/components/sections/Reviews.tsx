@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo, useRef } from "react";
+import { useEffect, useState, useMemo, useRef, useCallback } from "react";
 import { Star, Quote, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { GoogleReview } from "@/actions/getReviews";
@@ -42,7 +42,16 @@ export default function Reviews({
   const [selectedReview, setSelectedReview] = useState<GoogleReview | null>(
     null,
   );
+  const [isClosing, setIsClosing] = useState(false);
   const [showAll, setShowAll] = useState(false);
+
+  const handleClose = useCallback(() => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setSelectedReview(null);
+      setIsClosing(false);
+    }, 200); // Wait for CSS exit animation
+  }, []);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const prevFocused = useRef<HTMLElement | null>(null);
   const sectionRef = useRef<HTMLDivElement | null>(null);
@@ -51,7 +60,7 @@ export default function Reviews({
     if (!selectedReview) return;
     document.body.style.overflow = "hidden";
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setSelectedReview(null);
+      if (e.key === "Escape") handleClose();
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => {
@@ -180,27 +189,19 @@ export default function Reviews({
       </div>
 
       {/* Modal Overlay */}
-      <AnimatePresence>
-        {selectedReview && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm"
-            style={{ zIndex: 100 }}
-            onClick={() => setSelectedReview(null)}
+      {selectedReview && (
+        <div
+          className={`fixed inset-0 z-100 flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm ${isClosing ? 'animate-fade-out' : 'animate-fade-in'}`}
+          style={{ zIndex: 100 }}
+          onClick={handleClose}
+        >
+          <div
+            className={`bg-white rounded-3xl p-10 max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl relative border border-slate-100 ${isClosing ? 'animate-scale-out-modal' : 'animate-scale-in-modal'}`}
+            onClick={(e) => e.stopPropagation()}
           >
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-              className="bg-white rounded-3xl p-10 max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl relative border border-slate-100"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                ref={closeButtonRef}
-                onClick={() => setSelectedReview(null)}
+            <button
+              ref={closeButtonRef}
+              onClick={handleClose}
                 className="absolute top-8 right-8 p-2 flex items-center justify-center rounded-2xl hover:bg-slate-50 transition-all text-zinc-900"
                 aria-label="Close modal"
               >
@@ -239,10 +240,9 @@ export default function Reviews({
                   {selectedReview.text}
                 </p>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         )}
-      </AnimatePresence>
     </section>
   );
 }
