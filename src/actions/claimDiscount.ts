@@ -4,6 +4,7 @@ import crypto from 'crypto';
 import { neon } from '@netlify/neon';
 import { Resend } from 'resend';
 import { ClaimDiscountContent, getClaimDiscountEmailTemplate } from '@/lib/emailTemplates';
+import { GlobalConfig } from '@/config/site-config';
 
 const sql = neon();
 
@@ -66,7 +67,7 @@ export async function claimDiscount(state: ClaimDiscountState) {
         from: 'Speed Queen Kraków <noreply@mail.speedqueenkrk.pl>',
         to: [email],
         subject: content.email.subject,
-        html: getClaimDiscountEmailTemplate(content.email, baseUrl, logoUrl, blobUrl),
+        html: getClaimDiscountEmailTemplate(content.email, baseUrl, logoUrl, blobUrl, GlobalConfig.brand.phone),
       });
 
       if (resendError) throw new Error('Resend failed');

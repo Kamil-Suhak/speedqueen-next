@@ -21,6 +21,8 @@ export const discountPl = {
     greeting: "Cześć!",
     body: "Dziękujemy za zainteresowanie Speed Queen Kraków. Oto Twój unikalny kod rabatowy w formie kodu QR, który możesz wykorzystać przy następnej wizycie w jednej z naszych pralni.",
     instruction: "Zeskanuj ten kod przy panelu płatniczym, aby otrzymać zniżkę.",
+    brightnessTip: "💡 Wskazówka: zwiększ jasność ekranu podczas skanowania.",
+    printTip: "Jeśli nadal masz problemy, wydrukuj kod lub zadzwoń na naszą infolinię: ",
     footer: "Do zobaczenia w Speed Queen!",
   }
 };

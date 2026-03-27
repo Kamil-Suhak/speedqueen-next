@@ -21,6 +21,8 @@ export const discountEn = {
     greeting: "Hello!",
     body: "Thank you for your interest in Speed Queen Krakow. Here is your unique discount code in the form of a QR code, which you can use on your next visit to one of our laundromats.",
     instruction: "Scan this code at the payment terminal to receive your discount.",
+    brightnessTip: "💡 Pro tip: maximize your screen brightness when scanning.",
+    printTip: "If you're still having trouble, you can print this code or call our helpline: ",
     footer: "See you at Speed Queen!",
   }
 };
