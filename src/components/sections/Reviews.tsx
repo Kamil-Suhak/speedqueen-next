@@ -191,58 +191,58 @@ export default function Reviews({
       {/* Modal Overlay */}
       {selectedReview && (
         <div
-          className={`fixed inset-0 z-100 flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm ${isClosing ? 'animate-fade-out' : 'animate-fade-in'}`}
+          className={`fixed inset-0 z-100 flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm ${isClosing ? "animate-fade-out" : "animate-fade-in"}`}
           style={{ zIndex: 100 }}
           onClick={handleClose}
         >
           <div
-            className={`bg-white rounded-3xl p-10 max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl relative border border-slate-100 ${isClosing ? 'animate-scale-out-modal' : 'animate-scale-in-modal'}`}
+            className={`bg-white rounded-3xl p-10 max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl relative border border-slate-100 ${isClosing ? "animate-scale-out-modal" : "animate-scale-in-modal"}`}
             onClick={(e) => e.stopPropagation()}
           >
             <button
               ref={closeButtonRef}
               onClick={handleClose}
-                className="absolute top-8 right-8 p-2 flex items-center justify-center rounded-2xl hover:bg-slate-50 transition-all text-zinc-900"
-                aria-label="Close modal"
-              >
-                <X size={32} />
-              </button>
-              <div className="flex items-center gap-4 mb-8">
-                <div className="relative h-16 w-16">
-                  <Image
-                    src={selectedReview.profile_photo_url || "/images/logo.png"}
-                    alt=""
-                    fill
-                    className="rounded-full bg-slate-50 object-cover border border-slate-100"
-                    sizes="64px"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <h3 className="font-extrabold text-2xl text-gray-900 uppercase tracking-tight">
-                    {selectedReview.author_name}
-                  </h3>
-                  <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">
-                    {selectedReview.relative_time_description}
-                  </p>
-                </div>
-
-                <div className="hidden md:flex gap-1 text-brand-red ml-6">
-                  {[...Array(Math.max(0, selectedReview.rating || 0))].map(
-                    (_, k) => (
-                      <Star key={k} fill="currentColor" size={28} />
-                    ),
-                  )}
-                </div>
+              className="absolute top-8 right-8 p-2 flex items-center justify-center rounded-2xl hover:bg-slate-50 transition-all text-zinc-900"
+              aria-label="Close modal"
+            >
+              <X size={32} />
+            </button>
+            <div className="flex items-center gap-4 mb-8">
+              <div className="relative h-16 w-16">
+                <Image
+                  src={selectedReview.profile_photo_url || "/images/logo.png"}
+                  alt=""
+                  fill
+                  className="rounded-full bg-slate-50 object-cover border border-slate-100"
+                  sizes="64px"
+                />
               </div>
-
-              <div className="border-t border-slate-50 pt-8">
-                <p className="text-gray-700 leading-relaxed whitespace-pre-line text-xl font-normal">
-                  {selectedReview.text}
+              <div className="flex flex-col">
+                <h3 className="font-extrabold text-2xl text-gray-900 uppercase tracking-tight">
+                  {selectedReview.author_name}
+                </h3>
+                <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">
+                  {selectedReview.relative_time_description}
                 </p>
               </div>
+
+              <div className="hidden md:flex gap-1 text-brand-red ml-6">
+                {[...Array(Math.max(0, selectedReview.rating || 0))].map(
+                  (_, k) => (
+                    <Star key={k} fill="currentColor" size={28} />
+                  ),
+                )}
+              </div>
+            </div>
+
+            <div className="border-t border-slate-50 pt-8">
+              <p className="text-gray-700 leading-relaxed whitespace-pre-line text-xl font-normal">
+                {selectedReview.text}
+              </p>
             </div>
           </div>
-        )}
+        </div>
+      )}
     </section>
   );
 }
