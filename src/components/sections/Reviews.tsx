@@ -117,7 +117,7 @@ export default function Reviews({
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
                   key={`${review.author_name}-${review.time}-${i}`}
-                  className="flex flex-col justify-between rounded-3xl border border-slate-100 bg-white p-8 shadow-sm transition-[box-shadow,border-color] duration-200 hover:border-brand-red/20 hover:shadow-md"
+                  className="flex flex-col justify-between rounded-3xl border border-slate-100 bg-white shadow-md md:bg-white/90 md:backdrop-blur-sm md:shadow-sm p-8 transition-[box-shadow,border-color] duration-200 hover:border-brand-red/20 hover:shadow-lg md:hover:shadow-md"
                 >
                   <div className="flex w-full items-start justify-between">
                     <Quote className="mb-4 text-brand-red/20" size={48} />

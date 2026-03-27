@@ -126,7 +126,7 @@ const FaqCard = ({
   onClick: () => void;
 }) => (
   <div
-    className={`border rounded-2xl transition-[border-color,background-color] duration-300 ${isOpen ? "border-brand-red bg-brand-red/5" : "border-slate-100 bg-white/90 backdrop-blur-sm hover:border-slate-200"}`}
+    className={`border rounded-2xl transition-[border-color,background-color,box-shadow] duration-300 ${isOpen ? "border-brand-red bg-brand-red/5 shadow-md md:shadow-sm" : "border-slate-100 bg-white shadow-sm md:bg-white/90 md:backdrop-blur-sm md:shadow-none hover:border-slate-200 md:hover:shadow-sm hover:shadow-md"}`}
   >
     <button
       onClick={onClick}

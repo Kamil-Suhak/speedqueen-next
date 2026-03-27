@@ -33,7 +33,7 @@ export default function ServicesGrid({ head, items, bgImage }: ServicesProps) {
           {items.map((item, i) => (
             <div
               key={i}
-              className="rounded-3xl border border-slate-100 bg-white/80 backdrop-blur-sm p-8 shadow-sm"
+              className="rounded-3xl border border-slate-100 bg-white shadow-md md:bg-white/80 md:backdrop-blur-sm md:shadow-sm p-8"
             >
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50 text-brand-red shadow-inner">
                 <item.icon size={28} />

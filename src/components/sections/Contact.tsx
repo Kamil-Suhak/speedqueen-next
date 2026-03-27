@@ -175,7 +175,7 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
 
         <div className="relative" aria-live="polite">
           {isSuccess ? (
-            <div className="flex h-full flex-col items-center justify-center rounded-3xl border border-slate-100 bg-white/90 backdrop-blur-sm p-12 text-center shadow-md">
+            <div className="flex h-full flex-col items-center justify-center rounded-3xl border border-slate-100 bg-white shadow-lg md:bg-white/90 md:backdrop-blur-sm md:shadow-md p-12 text-center">
               <CheckCircle
                 size={64}
                 className="mb-6 text-brand-red"
@@ -191,7 +191,7 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
           ) : (
             <form
               action={handleSubmit}
-              className="space-y-4 rounded-3xl border border-slate-100 bg-white/90 backdrop-blur-sm p-10 shadow-sm"
+              className="space-y-4 rounded-3xl border border-slate-100 bg-white shadow-lg md:bg-white/90 md:backdrop-blur-sm md:shadow-md p-10"
               aria-label={content.title}
             >
               <div>
