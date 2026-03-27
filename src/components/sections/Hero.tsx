@@ -24,9 +24,9 @@ export default function Hero({ content }: HeroProps) {
     >
       <CollageBackground />
 
-      <div className="absolute md:top-28 top-38 left-1/2 -translate-x-1/2 md:left-12 md:translate-x-0 z-20 flex items-center gap-1.5 bg-white/60 px-4 py-2 rounded-full animate-fade-in-up">
-        <MapPin size={14} className="text-brand-red" />
-        <span className="text-sm font-bold text-brand-red uppercase tracking-widest">
+      <div className="absolute md:top-28 top-30 left-1/2 -translate-x-1/2 md:left-12 md:translate-x-0 z-20 flex items-center gap-1.5 bg-white/60 px-4 py-2 rounded-full animate-fade-in-up">
+        <MapPin size={18} className="text-brand-red" />
+        <span className="text-sm font-extrabold text-brand-red uppercase tracking-widest">
           Kraków
         </span>
       </div>
