@@ -6,6 +6,7 @@ import PricingTabs, { PricingProps } from "@/components/sections/PricingTabs";
 import Reviews from "@/components/sections/Reviews";
 import Faq from "@/components/sections/Faq";
 import PromoModal from "@/components/modals/PromoModal";
+import JsonLdHomePage from "@/components/seo/JsonLdHomePage";
 
 import { getDictionary } from "@/lib/generate-dictionaries";
 import { getGoogleReviews } from "@/actions/getReviews";
@@ -27,6 +28,7 @@ export default async function LandingPage({
     contact,
     discount,
     common,
+    seo,
     googleReviews,
   ] = await Promise.all([
     getDictionary(lang, "hero"),
@@ -37,6 +39,7 @@ export default async function LandingPage({
     getDictionary(lang, "contact"),
     getDictionary(lang, "discount"),
     getDictionary(lang, "common"),
+    getDictionary(lang, "seo"),
     getGoogleReviews(lang),
   ]);
 
@@ -47,6 +50,12 @@ export default async function LandingPage({
 
   return (
     <>
+      <JsonLdHomePage
+        faqItems={faq.items}
+        serviceItems={services.items}
+        pricingCategories={pricing.content.categories}
+        serviceMatchKeywords={seo.jsonLd.serviceMatchKeywords}
+      />
       <PromoModal content={promoContent} />
       <Hero content={hero} />
       <ServicesGrid head={services.head} items={services.items} bgImage={getSectionBackground(1)} />
@@ -60,3 +69,4 @@ export default async function LandingPage({
     </>
   );
 }
+

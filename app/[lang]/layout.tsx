@@ -4,8 +4,10 @@ import { GlobalConfig, Locale } from "@/config/site-config";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SocialSidebar from "@/components/layout/SocialSidebar";
-import "@/styles/globals.css";
+import JsonLdBase from "@/components/seo/JsonLdBase";
 import { getDictionary } from "@/lib/generate-dictionaries";
+import { getLocationRatings } from "@/lib/getLocationRatings";
+import "@/styles/globals.css";
 
 // Configure Inter for body text
 const inter = Inter({
@@ -40,6 +42,9 @@ export async function generateMetadata({
   const { lang } = (await params) as { lang: Locale };
   const seo = await getDictionary(lang, "seo");
 
+  const ogLocale = lang === "pl" ? "pl_PL" : "en_US";
+  const ogLocaleAlt = lang === "pl" ? "en_US" : "pl_PL";
+
   return {
     title: seo.title,
     description: seo.description,
@@ -56,6 +61,20 @@ export async function generateMetadata({
         "pl-PL": `${GlobalConfig.brand.url}/pl`,
       },
     },
+    openGraph: {
+      type: "website",
+      locale: ogLocale,
+      alternateLocale: ogLocaleAlt,
+      siteName: "Speed Queen Kraków",
+      title: seo.title,
+      description: seo.description,
+      url: `${GlobalConfig.brand.url}/${lang}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seo.title,
+      description: seo.description,
+    },
   };
 }
 
@@ -67,8 +86,10 @@ export default async function RootLayout({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = (await params) as { lang: Locale };
-  const [navigation] = await Promise.all([
+  const [navigation, ratings, seo] = await Promise.all([
     getDictionary(lang, "navigation"),
+    getLocationRatings(),
+    getDictionary(lang, "seo"),
   ]);
 
   const callNowText = lang === "en" ? "Call Now" : "Zadzwoń Teraz";
@@ -76,6 +97,7 @@ export default async function RootLayout({
   return (
     <html lang={lang} className={`scroll-smooth ${inter.variable} ${montserrat.variable}`} data-scroll-behavior="smooth">
       <body className="font-sans antialiased">
+        <JsonLdBase seo={seo} ratings={ratings} />
         <Navbar
           ctaText={callNowText}
           links={navigation.navLinks}
@@ -98,3 +120,4 @@ export default async function RootLayout({
     </html>
   );
 }
+

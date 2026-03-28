@@ -3,18 +3,21 @@ export const Locations = [
     name: "Orlińskiego",
     lat: 50.0815,
     lng: 20.0055,
+    postalCode: "31-878",
     url: "https://www.google.com/maps/dir/?api=1&destination=Bolesława+Orlińskiego+1/U17,+31-878+Kraków",
   },
   {
     name: "Pawia/Szlak",
     lat: 50.0695,
     lng: 19.9445,
+    postalCode: "31-153",
     url: "https://www.google.com/maps/dir/?api=1&destination=Pawia+34,+31-154+Kraków",
   },
   {
     name: "Słowackiego",
     lat: 50.0735,
     lng: 19.9295,
+    postalCode: "30-003",
     url: "https://www.google.com/maps/dir/?api=1&destination=Aleja+Juliusza+Słowackiego+56,+30-004+Kraków",
   },
 ];
