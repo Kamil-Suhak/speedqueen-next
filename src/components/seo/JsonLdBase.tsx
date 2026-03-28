@@ -57,7 +57,8 @@ function buildLocalBusinessSchema(
 
   const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
-    "@type": "Laundromat",
+    "@type": "LocalBusiness",
+    additionalType: "https://schema.org/Laundromat",
     "@id": `${GlobalConfig.brand.url}/#location-${details.placeKey}`,
     name: `Speed Queen Kraków – ${location.name}`,
     description: seo.jsonLd.locationDescription,
