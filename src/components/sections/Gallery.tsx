@@ -43,7 +43,7 @@ const Gallery = ({
   const startIndex = currentPage * imagesPerPage;
   const visibleImages = content.images.slice(
     startIndex,
-    startIndex + imagesPerPage
+    startIndex + imagesPerPage,
   );
 
   const handleNext = () => {
@@ -65,12 +65,13 @@ const Gallery = ({
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="mb-16 text-center">
-          <h2
-            className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight uppercase tracking-tight animate-fade-in-up"
-          >
+          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight uppercase tracking-tight animate-fade-in-up">
             {content.title}
           </h2>
-          <div className="mx-auto mt-4 h-1 w-16 bg-brand-red rounded-full" aria-hidden="true" />
+          <div
+            className="mx-auto mt-4 h-1 w-16 bg-brand-red rounded-full"
+            aria-hidden="true"
+          />
           <p className="mt-6 text-lg text-gray-600 font-normal">
             {content.subtitle}
           </p>
@@ -92,7 +93,7 @@ const Gallery = ({
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  className="group relative aspect-4/3 overflow-hidden rounded-[2rem] bg-white border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-brand-red/10 hover:border-brand-red/20 transition-[box-shadow,border-color] duration-500"
+                  className="group relative aspect-4/3 overflow-hidden rounded-4xl bg-white border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-brand-red/10 hover:border-brand-red/20 transition-[box-shadow,border-color] duration-500"
                 >
                   <Image
                     src={image.src}
@@ -114,7 +115,7 @@ const Gallery = ({
                       </h3>
                     </div>
 
-                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
                 </motion.div>
               ))}
@@ -123,7 +124,10 @@ const Gallery = ({
         </div>
 
         {totalPages > 1 && (
-          <nav className="flex items-center justify-center gap-6 mt-8" aria-label="Pagination">
+          <nav
+            className="flex items-center justify-center gap-6 mt-8"
+            aria-label="Pagination"
+          >
             <button
               onClick={handlePrev}
               className="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-brand-red hover:text-brand-red transition-[border-color,color,transform] duration-200 transform hover:scale-110 text-slate-600 focus:ring-4 focus:ring-brand-red/10 outline-none"
@@ -137,10 +141,11 @@ const Gallery = ({
                 <button
                   key={i}
                   onClick={() => setCurrentPage(i)}
-                  className={`h-2 rounded-full transition-[width,background-color] duration-300 focus:ring-4 focus:ring-brand-red/10 outline-none ${currentPage === i
+                  className={`h-2 rounded-full transition-[width,background-color] duration-300 focus:ring-4 focus:ring-brand-red/10 outline-none ${
+                    currentPage === i
                       ? "bg-brand-red w-10 shadow-sm shadow-brand-red/30"
                       : "bg-slate-200 w-2 hover:bg-slate-300"
-                    }`}
+                  }`}
                   aria-label={`Go to page ${i + 1}`}
                   aria-current={currentPage === i ? "page" : undefined}
                 />
