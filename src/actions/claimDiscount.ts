@@ -3,7 +3,7 @@
 import crypto from 'crypto';
 import { neon } from '@netlify/neon';
 import { Resend } from 'resend';
-import { ClaimDiscountContent, getClaimDiscountEmailTemplate } from '@/lib/emailTemplates';
+import { ClaimDiscountContent, getClaimDiscountEmailTemplate, getAdminNotificationTemplate } from '@/lib/emailTemplates';
 import { GlobalConfig } from '@/config/site-config';
 
 const sql = neon();
@@ -73,6 +73,24 @@ export async function claimDiscount(state: ClaimDiscountState) {
       if (resendError) throw new Error('Resend failed');
 
       console.log('Success:', data?.id);
+
+      // Send admin notification
+      if (adminEmail) {
+        Promise.all([
+          sql`SELECT COUNT(*) FROM discounts WHERE hashed_email IS NOT NULL`,
+          sql`SELECT COUNT(*) FROM discounts`
+        ]).then(([countResult, totalResult]) => {
+          const totalRedeemed = countResult[0].count;
+          const totalCodes = totalResult[0].count;
+          
+          resend.emails.send({
+            from: 'Speed Queen System <noreply@mail.speedqueenkrk.pl>',
+            to: [adminEmail],
+            subject: `🎟️ QR Code Redeemed (${totalRedeemed}/${totalCodes})`,
+            html: getAdminNotificationTemplate(Number(totalRedeemed), Number(totalCodes)),
+          }).catch(err => console.error('Admin email failed:', err));
+        }).catch(err => console.error('Failed to get counts for admin email:', err));
+      }
     } catch (err) {
       // FALLBACK: Email failed, so release the QR code back to the pool
       await sql`UPDATE discounts SET hashed_email = NULL, claimed_at = NULL WHERE id = ${discountId}`;
