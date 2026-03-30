@@ -1,7 +1,8 @@
 export const pricingPl = {
   content: {
     title: "Cennik",
-    subtitle: "Zapoznaj się z szeroką gamą naszych profesjonalnych urządzeń, dostosowanych do prania wsadów o dowolnej objętości.",
+    subtitle:
+      "Zapoznaj się z szeroką gamą naszych profesjonalnych urządzeń, dostosowanych do prania wsadów o dowolnej objętości.",
     unit: "zł",
     cycleLabel: "cykl",
     locations: [
@@ -17,7 +18,8 @@ export const pricingPl = {
     },
     loyaltyCard: {
       title: "Karta Lojalnościowa",
-      description: "Nasza karta lojalnościowa działa na zasadzie przedpłaty (prepaid). To najwygodniejszy i najtańszy sposób korzystania z naszych pralni.",
+      description:
+        "Nasza karta lojalnościowa działa na zasadzie przedpłaty (prepaid). To najwygodniejszy i najtańszy sposób korzystania z naszych pralni.",
       priceLabel: "Cena Karty",
       priceValue: "75",
       benefitLabel: "Zawiera doładowanie",
@@ -26,9 +28,10 @@ export const pricingPl = {
         "Niższe ceny na wszystkie usługi*",
         "Jednorazowy koszt zakupu karty",
         "Wygodne płatności zbliżeniowe",
-        "Możliwość doładowania w dowolnym momencie"
+        "Możliwość doładowania w dowolnym momencie",
       ],
-      ironingNote: "*Cena za stanowisko do prasowania pozostaje taka sama z kartą i bez karty."
+      ironingNote:
+        "*Cena za stanowisko do prasowania pozostaje taka sama z kartą i bez karty.",
     },
     categories: [
       {
@@ -37,7 +40,8 @@ export const pricingPl = {
         items: [
           {
             name: "PRALKA 7 KG",
-            description: "Kompaktowa pralka przemysłowa, idealna do mniejszych wsadów.",
+            description:
+              "Kompaktowa pralka przemysłowa, idealna do mniejszych wsadów.",
             standardPrice: 32.0,
             loyaltyPrice: 29.0,
             isPerCycle: true,
@@ -49,7 +53,8 @@ export const pricingPl = {
           },
           {
             name: "PRALKA 9 KG",
-            description: "Pralnica o średniej pojemności do standardowego prania codziennego.",
+            description:
+              "Pralnica o średniej pojemności do standardowego prania codziennego.",
             standardPrice: 38.0,
             loyaltyPrice: 34.0,
             isPerCycle: true,
@@ -61,7 +66,8 @@ export const pricingPl = {
           },
           {
             name: "PRALKA 15 KG",
-            description: "Wysokowydajna pralnica do dużych wsadów lub pościeli.",
+            description:
+              "Wysokowydajna pralnica do dużych wsadów lub pościeli.",
             standardPrice: 56.0,
             loyaltyPrice: 50.0,
             isPerCycle: true,
@@ -73,7 +79,8 @@ export const pricingPl = {
           },
           {
             name: "PRALKA 20 KG",
-            description: "Pralnica przemysłowa o dużej pojemności. Dostępna wyłącznie przy ul. Orlińskiego.",
+            description:
+              "Pralnica przemysłowa o dużej pojemności. Dostępna wyłącznie przy ul. Orlińskiego.",
             standardPrice: 72.0,
             loyaltyPrice: 65.0,
             isPerCycle: true,
@@ -81,7 +88,8 @@ export const pricingPl = {
           },
           {
             name: "PRALKA 25 KG",
-            description: "Pralnica o bardzo wysokiej pojemności, zaprojektowana do prania wielkogabarytowego. Wyłącznie przy ul. Pawiej.",
+            description:
+              "Pralnica o bardzo wysokiej pojemności, zaprojektowana do prania wielkogabarytowego. Wyłącznie przy ul. Pawiej.",
             standardPrice: 86.0,
             loyaltyPrice: 78.0,
             isPerCycle: true,
@@ -94,12 +102,14 @@ export const pricingPl = {
         title: "SUSZARKI I INNE",
         alertBanner: {
           title: "Efektywność suszenia",
-          description: "Pojedynczy cykl (15 min) może być niewystarczający dla pełnego wsadu. Zalecamy dwa cykle dla optymalnych rezultatów."
+          description:
+            "Pojedynczy cykl (15 min) może być niewystarczający dla pełnego wsadu. Zalecamy od dwóch do czterech cykli dla optymalnych rezultatów, w zależności od suszonej tkaniny.",
         },
         items: [
           {
             name: "SUSZARKA 10 KG",
-            description: "Suszarka przemysłowa do mniejszych i średnich wsadów. Niedostępna przy Al. Słowackiego.",
+            description:
+              "Suszarka przemysłowa do mniejszych i średnich wsadów. Niedostępna przy Al. Słowackiego.",
             standardPrice: 13.0,
             loyaltyPrice: 12.0,
             isPerCycle: true,
@@ -108,7 +118,8 @@ export const pricingPl = {
           },
           {
             name: "SUSZARKA 15 KG",
-            description: "Profesjonalna suszarka o dużej pojemności dla wymagających wsadów.",
+            description:
+              "Profesjonalna suszarka o dużej pojemności dla wymagających wsadów.",
             standardPrice: 16.0,
             loyaltyPrice: 15.0,
             isPerCycle: true,
@@ -121,7 +132,8 @@ export const pricingPl = {
           },
           {
             name: "STÓŁ DO PRASOWANIA",
-            description: "Profesjonalne stanowisko do prasowania. Dostępne wyłącznie przy ul. Pawiej.",
+            description:
+              "Profesjonalne stanowisko do prasowania. Dostępne wyłącznie przy ul. Pawiej.",
             standardPrice: 2.0,
             loyaltyPrice: 2.0,
             isPerCycle: true,
@@ -130,7 +142,8 @@ export const pricingPl = {
           },
           {
             name: "OZONATOR",
-            description: "Zaawansowane urządzenie do dezynfekcji ozonem. Dostępne wyłącznie przy Al. Słowackiego.",
+            description:
+              "Zaawansowane urządzenie do dezynfekcji ozonem. Dostępne wyłącznie przy Al. Słowackiego.",
             standardPrice: 50.0,
             loyaltyPrice: 45.0,
             isPerCycle: true,
