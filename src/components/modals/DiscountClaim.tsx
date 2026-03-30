@@ -18,9 +18,10 @@ interface DiscountClaimProps {
       buttonLoading: string;
     };
   };
+  onSuccess?: () => void;
 }
 
-export default function DiscountClaim({ content }: DiscountClaimProps) {
+export default function DiscountClaim({ content, onSuccess }: DiscountClaimProps) {
   const [email, setEmail] = useState('');
   const [consent, setConsent] = useState(false);
   const [honeypot, setHoneypot] = useState('');
@@ -47,6 +48,12 @@ export default function DiscountClaim({ content }: DiscountClaimProps) {
       setStatus({ type: 'success', message: result.message! });
       setEmail('');
       setConsent(false);
+      
+      if (onSuccess) {
+        setTimeout(() => {
+          onSuccess();
+        }, 3000);
+      }
     } catch (err) {
       if (err instanceof Error) {
         setStatus({ type: 'error', message: err.message });
@@ -139,9 +146,9 @@ export default function DiscountClaim({ content }: DiscountClaimProps) {
             }`}
         >
           {status.type === 'success' ? (
-            <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
+            <CheckCircle2 className="h-5 w-5 shrink-0" />
           ) : (
-            <AlertCircle className="h-5 w-5 flex-shrink-0" />
+            <AlertCircle className="h-5 w-5 shrink-0" />
           )}
           <p className="text-sm font-medium">{status.message}</p>
         </div>

@@ -53,4 +53,23 @@ export function getClaimDiscountEmailTemplate(
   `;
 }
 
-
+export function getAdminNotificationTemplate(redeemed: number, total: number) {
+  const timestamp = new Date().toLocaleString('pl-PL', { timeZone: 'Europe/Warsaw' });
+  return `
+    <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #eeeeee; border-radius: 12px; overflow: hidden;">
+      <div style="background-color: #f3f4f6; padding: 20px; text-align: center; border-bottom: 1px solid #eeeeee;">
+        <h1 style="color: #1d1d1b; font-size: 20px; margin: 0; font-weight: bold;">New QR Code Redeemed</h1>
+      </div>
+      <div style="padding: 30px;">
+        <p style="color: #4a4a4a; font-size: 16px; margin-bottom: 20px;">A new discount code has just been claimed.</p>
+        
+        <div style="background-color: #f9fafb; padding: 15px; border-radius: 8px; border: 1px solid #e5e7eb; margin-bottom: 20px;">
+          <p style="margin: 0 0 10px 0; color: #6b7280; font-size: 14px;">Total Redeemed Cards</p>
+          <p style="margin: 0; font-size: 24px; font-weight: bold; color: #111827;">${redeemed} <span style="font-size: 16px; font-weight: normal; color: #6b7280;">/ ${total}</span></p>
+        </div>
+        
+        <p style="color: #6b7280; font-size: 13px; margin: 0;">Time of claim: ${timestamp}</p>
+      </div>
+    </div>
+  `;
+}
