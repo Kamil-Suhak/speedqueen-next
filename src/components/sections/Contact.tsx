@@ -142,6 +142,9 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
                         <div key={idx} className="flex items-center gap-4 pr-4">
                           <span className="font-bold uppercase tracking-tight text-gray-900 whitespace-nowrap">
                             {loc.address}
+                            <span className="text-sm font-normal text-gray-500 normal-case ml-2">
+                              ({loc.hours})
+                            </span>
                           </span>
                           <div
                             className="h-6 w-1.5 bg-brand-red"
@@ -159,6 +162,9 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
                         >
                           <span className="font-bold uppercase tracking-tight text-gray-900 whitespace-nowrap">
                             {loc.address}
+                            <span className="text-sm font-normal text-gray-500 normal-case ml-2">
+                              ({loc.hours})
+                            </span>
                           </span>
                           <div
                             className="h-6 w-1.5 bg-brand-red"
