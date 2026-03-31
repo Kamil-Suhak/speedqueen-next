@@ -1,5 +1,5 @@
 export const instructionsPl = {
-  title: "Instrukcje",
+  title: "Krok po kroku",
   washing: {
     title: "Pranie",
     steps: [

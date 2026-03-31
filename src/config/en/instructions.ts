@@ -1,5 +1,5 @@
 export const instructionsEn = {
-  title: "Instructions",
+  title: "Step by step",
   washing: {
     title: "Washing",
     steps: [

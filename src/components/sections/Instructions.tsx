@@ -2,7 +2,13 @@
 
 import React, { useState, useRef } from "react";
 import Image from "next/image";
-import { ChevronRight, ChevronLeft, CreditCard, Ticket, Tag } from "lucide-react";
+import {
+  ChevronRight,
+  ChevronLeft,
+  CreditCard,
+  Ticket,
+  Tag,
+} from "lucide-react";
 import SectionBackground from "@/components/ui/SectionBackground";
 
 interface InstructionConfig {
@@ -38,9 +44,24 @@ export default function Instructions({
   const touchStartX = useRef<number | null>(null);
 
   const tabs = [
-    { id: 0 as const, title: content.washing.title, key: "washing" as const, image: "/images/gallery/a.jpg" },
-    { id: 1 as const, title: content.drying.title, key: "drying" as const, image: "/images/gallery/b.jpg" },
-    { id: 2 as const, title: content.extras.title, key: "extras" as const, image: "/images/gallery/c.jpg" },
+    {
+      id: 0 as const,
+      title: content.washing.title,
+      key: "washing" as const,
+      image: "/images/gallery/a.jpg",
+    },
+    {
+      id: 1 as const,
+      title: content.drying.title,
+      key: "drying" as const,
+      image: "/images/gallery/b.jpg",
+    },
+    {
+      id: 2 as const,
+      title: content.extras.title,
+      key: "extras" as const,
+      image: "/images/gallery/c.jpg",
+    },
   ];
 
   const prevTab = tabs[(activeTab + 2) % 3];
@@ -80,27 +101,30 @@ export default function Instructions({
     const isStaggered = idx % 2 === 1;
 
     return (
-      <div key={idx} className="relative flex w-full group cursor-default">
-        {/* Left Gutter: Staggered Badges */}
-        <div className="relative shrink-0 w-24 flex pt-2">
-          {/* Timeline Spine localized to the gutter for perfect scaling */}
-          <div className="absolute top-0 bottom-0 left-12 -ml-px w-[2px] border-l-2 border-dashed border-slate-200 -z-10" />
-          
-          <div
-            className="w-12 h-12 rounded-full bg-brand-red text-white flex items-center justify-center font-extrabold text-xl shadow-md z-10 animate-seq-zoom-in absolute transition-all duration-300 pointer-events-none"
-            style={{ 
-              animationDelay: `${idx * 80}ms`,
-              left: isStaggered ? '48px' : '0px'
-            }}
-          >
-            {idx + 1}
+      <div
+        key={idx}
+        className="relative flex w-full items-stretch group cursor-default"
+      >
+        <div className="relative shrink-0 w-32 flex flex-col pb-6">
+          <div className="absolute top-0 bottom-0 left-16 -ml-px w-[2px] border-l-2 border-dashed border-slate-200 -z-10" />
+
+          <div className="flex-1 flex flex-col justify-center">
+            <div
+              className="w-14 h-14 rounded-full bg-brand-red text-white flex items-center justify-center font-extrabold text-2xl shadow-md z-10 animate-seq-zoom-in transition-all duration-300 pointer-events-none"
+              style={{
+                animationDelay: `${idx * 80}ms`,
+                marginLeft: isStaggered ? "72px" : "0px",
+              }}
+            >
+              {idx + 1}
+            </div>
           </div>
         </div>
 
         {/* Right Content: Tiled Text Block */}
-        <div className="flex-1 pb-6 pr-4">
-          <div 
-            className="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md animate-seq-fade-in-up"
+        <div className="flex-1 pb-6 pr-4 pl-3 md:pl-5">
+          <div
+            className="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md animate-seq-fade-in-up"
             style={{ animationDelay: `${idx * 80}ms` }}
           >
             <p className="text-gray-700 leading-relaxed text-left md:text-base text-sm">
@@ -112,34 +136,44 @@ export default function Instructions({
     );
   };
 
-  const renderExtrasStep = (item: { title: string; description: string }, idx: number) => {
+  const renderExtrasStep = (
+    item: { title: string; description: string },
+    idx: number,
+  ) => {
     const isStaggered = idx % 2 === 1;
     const Icon = extrasIcons[idx % extrasIcons.length];
 
     return (
-      <div key={idx} className="relative flex w-full group cursor-default">
+      <div
+        key={idx}
+        className="relative flex w-full items-stretch group cursor-default"
+      >
         {/* Left Gutter */}
-        <div className="relative shrink-0 w-24 flex pt-2">
-          <div className="absolute top-0 bottom-0 left-12 -ml-px w-[2px] border-l-2 border-dashed border-slate-200 -z-10" />
-          
-          <div
-            className="w-12 h-12 rounded-full bg-brand-red text-white flex items-center justify-center font-extrabold shadow-md z-10 animate-seq-zoom-in absolute transition-all duration-300 pointer-events-none"
-            style={{ 
-              animationDelay: `${idx * 80}ms`,
-              left: isStaggered ? '48px' : '0px'
-            }}
-          >
-            <Icon size={22} strokeWidth={2.5} />
+        <div className="relative shrink-0 w-32 flex flex-col pb-6">
+          <div className="absolute top-0 bottom-0 left-16 -ml-px w-[2px] border-l-2 border-dashed border-slate-200 -z-10" />
+
+          <div className="flex-1 flex flex-col justify-center">
+            <div
+              className="w-14 h-14 rounded-full bg-brand-red text-white flex items-center justify-center font-extrabold shadow-md z-10 animate-seq-zoom-in transition-all duration-300 pointer-events-none"
+              style={{
+                animationDelay: `${idx * 80}ms`,
+                marginLeft: isStaggered ? "72px" : "0px",
+              }}
+            >
+              <Icon size={26} strokeWidth={2.5} />
+            </div>
           </div>
         </div>
 
         {/* Right Content */}
-        <div className="flex-1 pb-6 pr-4">
-          <div 
-            className="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md animate-seq-fade-in-up"
+        <div className="flex-1 pb-6 pr-4 pl-3 md:pl-5">
+          <div
+            className="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md animate-seq-fade-in-up"
             style={{ animationDelay: `${idx * 80}ms` }}
           >
-            <h4 className="font-extrabold text-brand-red uppercase mb-1">{item.title}</h4>
+            <h4 className="font-extrabold text-brand-red uppercase mb-1">
+              {item.title}
+            </h4>
             <p className="text-gray-700 leading-relaxed text-left md:text-base text-sm">
               {item.description}
             </p>
@@ -149,14 +183,19 @@ export default function Instructions({
     );
   };
 
-  const swipeClass = slideDir === "right" ? "animate-seq-fade-in-right" : "animate-seq-fade-in-left";
+  const swipeClass =
+    slideDir === "right"
+      ? "animate-seq-fade-in-right"
+      : "animate-seq-fade-in-left";
 
   return (
-    <section id="instructions" className="relative py-24 scroll-mt-20 bg-slate-50 overflow-hidden">
+    <section
+      id="instructions"
+      className="relative py-24 scroll-mt-20 bg-slate-50 overflow-hidden"
+    >
       <SectionBackground imagePath={bgImage} />
 
       <div className="mx-auto max-w-7xl px-4 relative z-10">
-        
         <div className="mb-16 text-center">
           <h2 className="text-4xl font-extrabold text-gray-900 uppercase tracking-tight">
             {content.title}
@@ -166,47 +205,64 @@ export default function Instructions({
 
         {/* UNIFIED DESKTOP / MOBILE GRID */}
         <div className="md:grid grid-cols-2 xl:grid-cols-12 md:gap-12 items-stretch relative z-10 mx-auto w-full">
-
           {/* LEFT PANE: Scannable Timeline Content (7 Cols on XL) */}
-          <div 
+          <div
             className="flex flex-col h-full w-full max-w-lg md:max-w-none mx-auto xl:col-span-7 pb-4 overflow-hidden relative"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
             {/* Active Content Anchored Title */}
-            <h3 key={activeTab} className={`text-xl md:text-2xl font-bold uppercase tracking-widest text-brand-red mb-6 border-b-2 border-brand-red/20 pb-2 text-center md:pb-4 md:mb-10 w-full ${swipeClass}`}>
+            <h3
+              key={activeTab}
+              className={`text-xl md:text-2xl font-bold uppercase tracking-widest text-brand-red mb-6 border-b-2 border-brand-red/20 pb-2 text-center md:pb-4 md:mb-10 w-full ${swipeClass}`}
+            >
               {tabs[activeTab].title}
             </h3>
 
-            <div className={`relative grid ${swipeClass}`} key={`tab-${activeTab}`}>
+            <div
+              className={`relative grid ${swipeClass}`}
+              key={`tab-${activeTab}`}
+            >
               {/* Wash - Preserves Layout Height Even When Invisible */}
-              <div 
+              <div
                 className={`col-start-1 row-start-1 relative flex flex-col ${
-                  activeTab === 0 ? "visible z-10" : "invisible z-0 pointer-events-none"
+                  activeTab === 0
+                    ? "visible z-10"
+                    : "invisible z-0 pointer-events-none"
                 }`}
                 aria-hidden={activeTab !== 0}
               >
-                {content.washing.steps.map((step, idx) => renderTimelineStep(step, idx))}
+                {content.washing.steps.map((step, idx) =>
+                  renderTimelineStep(step, idx),
+                )}
               </div>
 
               {/* Dry - Preserves Layout Height Even When Invisible */}
-              <div 
+              <div
                 className={`col-start-1 row-start-1 relative flex flex-col ${
-                  activeTab === 1 ? "visible z-10" : "invisible z-0 pointer-events-none"
+                  activeTab === 1
+                    ? "visible z-10"
+                    : "invisible z-0 pointer-events-none"
                 }`}
                 aria-hidden={activeTab !== 1}
               >
-                {content.drying.steps.map((step, idx) => renderTimelineStep(step, idx))}
+                {content.drying.steps.map((step, idx) =>
+                  renderTimelineStep(step, idx),
+                )}
               </div>
 
               {/* Extras - Preserves Layout Height Even When Invisible */}
-              <div 
+              <div
                 className={`col-start-1 row-start-1 flex flex-col ${
-                  activeTab === 2 ? "visible z-10" : "invisible z-0 pointer-events-none"
+                  activeTab === 2
+                    ? "visible z-10"
+                    : "invisible z-0 pointer-events-none"
                 }`}
                 aria-hidden={activeTab !== 2}
               >
-                {content.extras.items.map((item, idx) => renderExtrasStep(item, idx))}
+                {content.extras.items.map((item, idx) =>
+                  renderExtrasStep(item, idx),
+                )}
               </div>
             </div>
 
@@ -235,7 +291,6 @@ export default function Instructions({
                 />
               </button>
             </div>
-
           </div>
 
           {/* RIGHT PANE: Immersive Eye-Candy Desktop Photography (5 Cols on XL) */}
@@ -243,14 +298,14 @@ export default function Instructions({
             <div className="relative w-full max-w-[440px] aspect-4/5 animate-seq-zoom-in">
               {/* Sharp Offset Accent Frame */}
               <div className="absolute inset-0 translate-x-4 translate-y-4 border-2 border-brand-red/30 rounded-2xl -z-10" />
-              
+
               <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-lg bg-slate-50">
                 {tabs.map((tab) => (
-                  <Image 
+                  <Image
                     key={tab.id}
-                    src={tab.image} 
-                    alt={tab.title} 
-                    fill 
+                    src={tab.image}
+                    alt={tab.title}
+                    fill
                     className={`object-cover transition-opacity duration-700 ease-in-out ${
                       activeTab === tab.id ? "opacity-100" : "opacity-0"
                     }`}
@@ -261,7 +316,6 @@ export default function Instructions({
               </div>
             </div>
           </div>
-          
         </div>
       </div>
     </section>
