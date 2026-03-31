@@ -1,7 +1,7 @@
 export const navigationEn = {
   navLinks: [
     { label: "Home", href: "#hero" },
-    { label: "Services", href: "#services" },
+    { label: "Step by step", href: "#instructions" },
     { label: "Pricing", href: "#pricing" },
     { label: "Gallery", href: "/gallery" },
     { label: "Reviews", href: "#reviews" },
@@ -10,10 +10,10 @@ export const navigationEn = {
   ],
   footerLinks: [
     {
-      title: "Services",
+      title: "Step by step",
       links: [
-        { label: "Washing", href: "#services" },
-        { label: "Drying", href: "#services" },
+        { label: "Washing", href: "#instructions" },
+        { label: "Drying", href: "#instructions" },
       ],
     },
   ],
