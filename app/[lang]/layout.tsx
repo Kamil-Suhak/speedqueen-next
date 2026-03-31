@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import { GlobalConfig, Locale } from "@/config/site-config";
 import Navbar from "@/components/layout/Navbar";
+import AnnouncementBar from "@/components/ui/AnnouncementBar";
 import Footer from "@/components/layout/Footer";
 import SocialSidebar from "@/components/layout/SocialSidebar";
 import JsonLdBase from "@/components/seo/JsonLdBase";
@@ -98,6 +99,7 @@ export default async function RootLayout({
     <html lang={lang} className={`scroll-smooth ${inter.variable} ${montserrat.variable}`} data-scroll-behavior="smooth">
       <body className="font-sans antialiased">
         <JsonLdBase seo={seo} ratings={ratings} />
+        <AnnouncementBar locations={GlobalConfig.brand.locations} />
         <Navbar
           ctaText={callNowText}
           links={navigation.navLinks}
