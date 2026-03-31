@@ -1,20 +1,23 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  ChevronUp,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { ChevronUp, ChevronDown, Clock, Droplets, CreditCard, ListChecks, Wind, LucideIcon } from "lucide-react";
 import { FormattedText } from "@/components/ui/FormattedText";
 import SectionBackground from "@/components/ui/SectionBackground";
 
 export interface FaqItem {
   question: string;
   answer: string;
+  icon?: string;
 }
+
+const iconMap: Record<string, LucideIcon> = {
+  Clock,
+  Droplets,
+  CreditCard,
+  ListChecks,
+  Wind,
+};
 
 export interface FaqProps {
   content: {
@@ -27,18 +30,13 @@ export interface FaqProps {
 
 const Faq = ({ content, bgImage }: FaqProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 3;
-
-  const totalPages = Math.ceil(content.items.length / itemsPerPage);
-  const startIndex = currentPage * itemsPerPage;
-  const mobileItems = content.items.slice(
-    startIndex,
-    startIndex + itemsPerPage,
-  );
 
   return (
-    <section className="relative py-24 scroll-mt-20 bg-white" id="faq" aria-label="Frequently Asked Questions">
+    <section
+      className="relative py-24 scroll-mt-20 bg-white"
+      id="faq"
+      aria-label="Frequently Asked Questions"
+    >
       <SectionBackground imagePath={bgImage} />
 
       <div className="container mx-auto px-4 relative z-10">
@@ -46,11 +44,14 @@ const Faq = ({ content, bgImage }: FaqProps) => {
           <h2 className="text-4xl font-extrabold text-gray-900 uppercase tracking-tight">
             {content.description}
           </h2>
-          <div className="mx-auto mt-4 h-1 w-16 bg-brand-red rounded-full" aria-hidden="true" />
+          <div
+            className="mx-auto mt-4 h-1 w-16 bg-brand-red rounded-full"
+            aria-hidden="true"
+          />
         </div>
 
-        <div className="hidden md:grid grid-cols-1 gap-6 max-w-4xl mx-auto">
-          {content.items.slice(0, 7).map((item, idx) => (
+        <div className="grid grid-cols-1 gap-4 max-w-4xl mx-auto">
+          {content.items.map((item, idx) => (
             <FaqCard
               key={idx}
               item={item}
@@ -58,58 +59,6 @@ const Faq = ({ content, bgImage }: FaqProps) => {
               onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
             />
           ))}
-        </div>
-
-        <div className="md:hidden space-y-4 max-w-xl mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentPage}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="space-y-4"
-              aria-live="polite"
-            >
-              {mobileItems.map((item, idx) => (
-                <FaqCard
-                  key={startIndex + idx}
-                  item={item}
-                  isOpen={openIndex === startIndex + idx}
-                  onClick={() =>
-                    setOpenIndex(
-                      openIndex === startIndex + idx ? null : startIndex + idx,
-                    )
-                  }
-                />
-              ))}
-            </motion.div>
-          </AnimatePresence>
-
-          {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-4 mt-8">
-              <button
-                onClick={() => setCurrentPage((prev) => Math.max(0, prev - 1))}
-                disabled={currentPage === 0}
-                className="p-3 rounded-2xl border-2 border-slate-100 disabled:opacity-30 hover:bg-slate-50 transition-colors text-zinc-900 focus:ring-4 focus:ring-brand-red/10 outline-none"
-                aria-label="Previous"
-              >
-                <ChevronLeft size={20} aria-hidden="true" />
-              </button>
-              <span className="font-bold text-zinc-900 uppercase tracking-widest text-sm" aria-current="true">
-                {currentPage + 1} / {totalPages}
-              </span>
-              <button
-                onClick={() =>
-                  setCurrentPage((prev) => Math.min(totalPages - 1, prev + 1))
-                }
-                disabled={currentPage === totalPages - 1}
-                className="p-3 rounded-2xl border-2 border-slate-100 disabled:opacity-30 hover:bg-slate-50 transition-colors text-zinc-900 focus:ring-4 focus:ring-brand-red/10 outline-none"
-                aria-label="Next"
-              >
-                <ChevronRight size={20} aria-hidden="true" />
-              </button>
-            </div>
-          )}
         </div>
       </div>
     </section>
@@ -124,39 +73,60 @@ const FaqCard = ({
   item: FaqItem;
   isOpen: boolean;
   onClick: () => void;
-}) => (
-  <div
-    className={`border rounded-2xl transition-[border-color,background-color,box-shadow] duration-300 ${isOpen ? "border-brand-red bg-brand-red/5 shadow-md md:shadow-sm" : "border-slate-100 bg-white shadow-sm md:bg-white/90 md:backdrop-blur-sm md:shadow-none hover:border-slate-200 md:hover:shadow-sm hover:shadow-md"}`}
-  >
-    <button
-      onClick={onClick}
-      className="w-full flex items-center justify-between p-8 text-left group outline-none focus:ring-4 focus:ring-brand-red/10 rounded-2xl"
-      aria-expanded={isOpen}
-      aria-label={`Toggle answer: ${item.question}`}
-    >
-      <span className={`font-bold text-lg uppercase tracking-tight transition-colors ${isOpen ? "text-brand-red" : "text-gray-900 group-hover:text-brand-red"}`}>
-        {item.question}
-      </span>
-      <div
-        className={`transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"}`}
-        aria-hidden="true"
-      >
-        {isOpen ? (
-          <ChevronUp className="text-brand-red" />
-        ) : (
-          <ChevronDown className="text-zinc-400" />
-        )}
-      </div>
-    </button>
+}) => {
+  const Icon = item.icon ? iconMap[item.icon] : null;
 
-    <div className={`grid transition-all duration-300 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
-      <div className="overflow-hidden">
-        <div className="px-8 pb-8 text-gray-700 leading-relaxed border-t border-slate-50 pt-6 font-normal text-lg">
-          <FormattedText text={item.answer} />
+  return (
+    <div
+      className={`border rounded-2xl transition-[border-color,background-color,box-shadow,border-left-width] duration-300 relative overflow-hidden ${
+        isOpen
+          ? "border-brand-red border-l-4 bg-brand-red/2 shadow-md md:shadow-sm"
+          : "border-slate-100 border-l-4 border-l-transparent bg-white shadow-sm md:bg-white/90 md:backdrop-blur-sm md:shadow-none hover:border-slate-200 hover:border-l-brand-red/30 md:hover:shadow-sm hover:shadow-md"
+      }`}
+    >
+      <button
+        onClick={onClick}
+        className="w-full flex items-center justify-between py-5 px-6 text-left group outline-none focus:ring-4 focus:ring-brand-red/10"
+        aria-expanded={isOpen}
+        aria-label={`Toggle answer: ${item.question}`}
+      >
+        <div className="flex items-center gap-4">
+          {Icon && (
+            <div
+              className={`p-2 rounded-xl transition-colors ${isOpen ? "bg-brand-red text-white" : "bg-slate-100 text-zinc-500 group-hover:bg-brand-red/10 group-hover:text-brand-red"}`}
+            >
+              <Icon size={20} strokeWidth={2.5} />
+            </div>
+          )}
+          <span
+            className={`font-bold text-base md:text-lg uppercase tracking-tight transition-colors ${isOpen ? "text-brand-red" : "text-gray-900 group-hover:text-brand-red"}`}
+          >
+            {item.question}
+          </span>
+        </div>
+        <div
+          className={`shrink-0 ml-4 transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"}`}
+          aria-hidden="true"
+        >
+          {isOpen ? (
+            <ChevronUp className="text-brand-red" />
+          ) : (
+            <ChevronDown className="text-zinc-400" />
+          )}
+        </div>
+      </button>
+
+      <div
+        className={`grid transition-all duration-300 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+      >
+        <div className="overflow-hidden">
+          <div className="px-6 pb-6 text-gray-700 leading-relaxed pt-2 font-normal text-base md:text-lg">
+            <FormattedText text={item.answer} />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Faq;

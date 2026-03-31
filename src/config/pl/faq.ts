@@ -3,24 +3,29 @@ export const faqPl = {
   description: "Przewodnik korzystania z pralni samoobsługowej",
   items: [
     {
-      question: "Wskazówki przed rozpoczęciem prania",
-      answer:
-        "Prosimy o opróżnienie kieszeni oraz zabezpieczenie wszelkich zapięć (zamki, guziki, rzepy). Do pralnic nie należy wkładać odzieży silnie zabrudzonej błotem, gliną, klejem lub gipsem. Prosimy o nieprzeciążanie urządzeń.",
+      question: "Jakie są godziny otwarcia?",
+      answer: "Jesteśmy otwarci 7 dni w tygodniu, 365 dni w roku, również we wszystkie święta. Pralnie przy ul. Pawiej 34 oraz al. Słowackiego 56 są czynne całą dobę. Pralnia przy ul. Orlińskiego 1 jest czynna w godzinach 6:00 - 2:00.",
+      icon: "Clock",
     },
     {
-      question: "Jak prawidłowo wykonać pranie?",
-      answer:
-        "Umieść wsad w bębnie i zamknij drzwiczki. Wybierz odpowiedni program przy użyciu strzałek. !!Ważne: Programy 6 i 7 NIE posiadają automatycznego dozowania środków!! – w ich przypadku należy użyć własnych detergentów. Dokonaj płatności w panelu zbiorczym, a następnie naciśnij zielony przycisk START.",
+      question: "Czy muszę przynieść własne środki piorące?",
+      answer: "Nie, profesjonalne detergenty oraz płyny zmiękczające są pobierane automatycznie w programach od 1 do 5. Dla Państwa wygody, programy 6 i 7 zostały specjalnie przeznaczone dla osób preferujących użycie własnych środków piorących.",
+      icon: "Droplets",
     },
     {
-      question: "Jak prawidłowo wykonać suszenie?",
-      answer:
-        "Umieść wilgotny wsad w suszarce i zamknij drzwiczki. Wybierz temperaturę oraz czas suszenia (od 15 do 60 min) w panelu płatniczym. Uruchom urządzenie przyciskiem START na panelu suszarki.",
+      question: "Jakie formy płatności są akceptowane?",
+      answer: "Akceptujemy płatności kartą, gotówką oraz kartą lojalnościową.&&• [[Karta:]] Tylko płatności zbliżeniowe.&• [[Gotówka:]] Bilon (1-5 zł), Banknoty (10-50 zł).&• [[Karta Lojalnościowa SQ:]] Karta przedpłacona (prepaid) gwarantująca niższe ceny na wszystkie usługi.&&!!Uwaga: System wydaje resztę wyłącznie w bilonie.!!",
+      icon: "CreditCard",
     },
     {
-      question: "Czy detergenty są wliczone w cenę usługi?",
-      answer:
-        "Tak, dla większości programów. Programy 1-5 zawierają koszt profesjonalnych środków dozowanych automatycznie. !!Uwaga: Korzystając z programów 6 lub 7, należy użyć własnych detergentów.!!",
+      question: "Jakie programy prania są dostępne?",
+      answer: "Oferujemy różnorodne programy dostosowane do różnych tkanin i rozmiarów wsadów, w tym opcje do prania bardzo delikatnego oraz intensywnego. Pełna lista dostępnych programów znajduje się na tablicach informacyjnych w każdym z naszych lokali.",
+      icon: "ListChecks",
+    },
+    {
+      question: "Jakie są opcje suszenia i jak długo to trwa?",
+      answer: "W zależności od rodzaju tkanin, mogą Państwo wybrać ustawienia temperatury: Niska, Średnia, Wysoka lub Delikatna. Czas suszenia można zaplanować od 15 do 60 minut (jeden cykl wynosi 15 minut). W celu uzyskania optymalnych rezultatów zalecamy skorzystanie z co najmniej dwóch cykli (30 minut).",
+      icon: "Wind",
     },
   ],
 };
