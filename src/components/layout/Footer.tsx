@@ -1,6 +1,6 @@
 import { GlobalConfig, Locations } from "@/config/site-config";
 import Image from "next/image";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, CheckCircle } from "lucide-react";
 import ObfuscatedLink from "@/components/ui/ObfuscatedLink";
 
 interface FooterProps {
@@ -43,9 +43,9 @@ export default function Footer({ brand, socials, links, lang, footerLabels }: Fo
   return (
     <footer className="border-t border-zinc-200 bg-zinc-50 pt-16 pb-8 text-gray-600">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-12 pb-12 border-b border-zinc-200">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-12 pb-12 border-b border-zinc-200 lg:gap-8 xl:gap-12">
           {/* Column 1: Brand */}
-          <div className="flex flex-col gap-4 md:col-span-3">
+          <div className="flex flex-col gap-4 sm:col-span-2 lg:col-span-3">
             <div className="flex items-center gap-2">
               <Image src={brand.logo} alt={brand.name} width={40} height={40} className="object-contain" />
               <span className="text-lg font-bold tracking-tighter text-gray-900">{brand.name}</span>
@@ -55,37 +55,46 @@ export default function Footer({ brand, socials, links, lang, footerLabels }: Fo
             </p>
           </div>
 
-          {/* Column 2: Locations & Hours */}
-          <div className="flex flex-col gap-4 md:col-span-4">
-            <div className="flex flex-row gap-8 sm:gap-12">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-brand-red flex-[2]">
-                {footerLabels?.locations}
-              </h3>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-brand-red whitespace-nowrap flex-1 md:text-right">
-                {footerLabels?.hours}
-              </h3>
-            </div>
-            <ul className="flex flex-col gap-3">
-              {brand.locations && brand.locations.map((loc, i) => (
-                <li key={i} className="flex flex-row gap-8 sm:gap-12 items-start">
-                  <div className="flex items-start gap-2 flex-[2]">
-                    <MapPin size={16} className="text-brand-red shrink-0 mt-0.5" />
-                    <span className="text-sm text-gray-600 font-medium whitespace-pre-wrap">
-                      {loc.address}
-                    </span>
-                  </div>
-                  <div className="flex-1 text-left">
-                    <span className="text-sm text-gray-600 font-medium whitespace-nowrap">
-                      {loc.hours}
-                    </span>
-                  </div>
-                </li>
-              ))}
+          {/* Column 2: Locations & Hours (Allocated 5 slots to guarantee inline horizontal spanning) */}
+          <div className="flex flex-col gap-4 sm:col-span-2 lg:col-span-5 lg:pl-4 xl:pl-6">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-brand-red">
+              {footerLabels?.locations}
+            </h3>
+            <ul className="flex flex-col gap-5">
+              {brand.locations && brand.locations.map((loc, i) => {
+                const is247 = loc.hours.includes("24/7");
+
+                return (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <MapPin size={18} className="text-brand-red shrink-0 mt-[2px]" />
+                    <div className="flex flex-row flex-wrap items-center gap-x-3 gap-y-2">
+                      <span className="text-sm text-gray-700 font-medium leading-snug">
+                        {loc.address}
+                      </span>
+                      {is247 ? (
+                        <div className="flex items-center gap-1.5 px-2.5 py-[3px] rounded-md bg-green-50 border border-green-100 shadow-sm shrink-0">
+                          <CheckCircle size={13} className="text-green-600 shrink-0" strokeWidth={2.5} />
+                          <span className="text-[11px] font-extrabold text-green-700 uppercase tracking-widest leading-none">
+                            {loc.hours}
+                          </span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-1.5 px-2.5 py-[3px] rounded-md bg-white border border-slate-200 shadow-sm shrink-0">
+                          <Clock size={13} className="text-slate-500 shrink-0" strokeWidth={2.5} />
+                          <span className="text-[11px] font-extrabold text-slate-600 uppercase tracking-widest leading-none">
+                            {loc.hours}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
           {/* Column 3: Contact Info */}
-          <div className="flex flex-col gap-4 md:col-span-3">
+          <div className="flex flex-col gap-4 col-span-1 lg:col-span-2">
             <h3 className="text-xs font-bold uppercase tracking-wider text-brand-red">
               {footerLabels?.contact}
             </h3>
@@ -102,7 +111,7 @@ export default function Footer({ brand, socials, links, lang, footerLabels }: Fo
           </div>
 
           {/* Column 4: Social Media */}
-          <div className="flex flex-col gap-4 md:col-span-2">
+          <div className="flex flex-col gap-4 col-span-1 lg:col-span-2">
             <h3 className="text-xs font-bold uppercase tracking-wider text-brand-red">
               {footerLabels?.social}
             </h3>
