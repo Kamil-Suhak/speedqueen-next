@@ -76,7 +76,7 @@ export default function Navbar({
       <Link
         key={link.label}
         href={href}
-        className={`relative pb-1 text-sm font-bold uppercase tracking-tight transition-colors duration-300 ease-in-out group ${
+        className={`relative pb-1 text-sm font-bold uppercase tracking-wider transition-colors duration-300 ease-in-out group whitespace-nowrap ${
           isActive
             ? isInsideRed
               ? "text-white"
@@ -119,7 +119,7 @@ export default function Navbar({
         <div className="flex items-center justify-between">
           <Link
             href={`/${lang}`}
-            className="group flex items-center"
+            className="group flex items-center -ml-2"
             aria-label={brandName}
           >
             <div className="relative w-40 h-10">
@@ -142,7 +142,7 @@ export default function Navbar({
 
           <div className="hidden items-center gap-4 md:flex">
             {/* Pill 1: Standard Nav Links */}
-            <div className="flex items-center gap-6 bg-brand-red px-6 py-2.5 rounded-full shadow-md">
+            <div className="flex items-center gap-5 bg-brand-red px-4 py-2.5 rounded-full shadow-md">
               {links
                 .filter((link) => !link.href.includes("gallery"))
                 .map((link) => renderNavLink(link, true))}
@@ -150,7 +150,7 @@ export default function Navbar({
 
             {/* Pill 2: Separate Gallery Link */}
             {links.some((link) => link.href.includes("gallery")) && (
-              <div className="flex items-center bg-brand-red px-6 py-2.5 rounded-full shadow-md">
+              <div className="flex items-center bg-brand-red px-5 py-2.5 rounded-full shadow-md">
                 {renderNavLink(
                   links.find((link) => link.href.includes("gallery"))!,
                   true,
@@ -162,7 +162,7 @@ export default function Navbar({
             <Link
               href={togglePath}
               scroll={false}
-              className="flex items-center gap-2 bg-brand-red px-5 py-2.5 rounded-full shadow-md text-sm font-bold tracking-tight text-white uppercase transition-colors hover:text-zinc-200"
+              className="flex items-center gap-2 bg-brand-red px-4 py-2.5 rounded-full shadow-md text-sm font-bold tracking-wide text-white uppercase transition-colors hover:text-zinc-200"
               aria-label="Switch language"
             >
               <Globe size={14} aria-hidden="true" />
@@ -172,7 +172,7 @@ export default function Navbar({
             <ObfuscatedLink
               type="phone"
               useGlobalConfig={true}
-              className="flex transform items-center justify-center gap-2 rounded-xl px-6 py-2.5 bg-brand-red text-white text-sm font-bold shadow-md transition-[background-color,transform] hover:bg-brand-red/90 hover:scale-[1.01] active:scale-[0.99] uppercase tracking-tight outline-none focus:ring-4 focus:ring-brand-red/20"
+              className="flex transform items-center justify-center gap-2 rounded-xl px-4 py-2.5 bg-brand-red text-white text-sm font-bold shadow-md transition-[background-color,transform] hover:bg-brand-red/90 hover:scale-[1.01] active:scale-[0.99] uppercase tracking-tight outline-none focus:ring-4 focus:ring-brand-red/20 whitespace-nowrap"
             >
               <Phone size={16} aria-hidden="true" />
               {ctaText}
