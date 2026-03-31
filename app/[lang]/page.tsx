@@ -1,6 +1,7 @@
 import { GlobalConfig, Locale } from "@/config/site-config";
 import Hero from "@/components/sections/Hero";
-import ServicesGrid from "@/components/sections/ServicesGrid";
+import Instructions from "@/components/sections/Instructions";
+// import ServicesGrid from "@/components/sections/ServicesGrid";
 import Contact from "@/components/sections/Contact";
 import PricingTabs, { PricingProps } from "@/components/sections/PricingTabs";
 import Reviews from "@/components/sections/Reviews";
@@ -21,6 +22,7 @@ export default async function LandingPage({
 
   const [
     hero,
+    instructions,
     services,
     pricing,
     reviewsContent,
@@ -32,6 +34,7 @@ export default async function LandingPage({
     googleReviews,
   ] = await Promise.all([
     getDictionary(lang, "hero"),
+    getDictionary(lang, "instructions"),
     getDictionary(lang, "services"),
     getDictionary(lang, "pricing"),
     getDictionary(lang, "reviews"),
@@ -58,7 +61,8 @@ export default async function LandingPage({
       />
       <PromoModal content={promoContent} />
       <Hero content={hero} />
-      <ServicesGrid head={services.head} items={services.items} bgImage={getSectionBackground(1)} />
+      <Instructions content={instructions} bgImage={getSectionBackground(1)} />
+      {/* <ServicesGrid head={services.head} items={services.items} bgImage={getSectionBackground(1)} /> */}
       <PricingTabs
         {...(pricing as PricingProps)}
         bgImage={getSectionBackground(2)}
