@@ -41,6 +41,7 @@ export const GlobalConfig = {
       en: "The highest standard of self-service laundry.",
       pl: "Najwyższy standard prania samoobsługowego.",
     },
+    showAnnouncementBar: true,
   },
   socials: [
     {

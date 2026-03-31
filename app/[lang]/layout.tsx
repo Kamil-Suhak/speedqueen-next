@@ -99,12 +99,15 @@ export default async function RootLayout({
     <html lang={lang} className={`scroll-smooth ${inter.variable} ${montserrat.variable}`} data-scroll-behavior="smooth">
       <body className="font-sans antialiased">
         <JsonLdBase seo={seo} ratings={ratings} />
-        <AnnouncementBar locations={GlobalConfig.brand.locations} />
+        {GlobalConfig.brand.showAnnouncementBar && (
+          <AnnouncementBar locations={GlobalConfig.brand.locations} />
+        )}
         <Navbar
           ctaText={callNowText}
           links={navigation.navLinks}
           brandName={GlobalConfig.brand.name}
           lang={lang}
+          hasAnnouncementBar={GlobalConfig.brand.showAnnouncementBar}
         />
         <SocialSidebar />
         <main id="main-content" className="w-full overflow-x-hidden">

@@ -15,6 +15,7 @@ interface NavbarProps {
   ctaText: string;
   brandName: string;
   lang: string;
+  hasAnnouncementBar?: boolean;
 }
 
 export default function Navbar({
@@ -22,6 +23,7 @@ export default function Navbar({
   brandName,
   lang,
   ctaText,
+  hasAnnouncementBar = false,
 }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -105,7 +107,7 @@ export default function Navbar({
 
   return (
     <nav
-      style={{ top: scrolled ? "0px" : "20px" }}
+      style={{ top: hasAnnouncementBar && !scrolled ? "20px" : "0px" }}
       className={`fixed z-50 w-full transition-[background-color,padding,box-shadow,border-color,backdrop-filter,top] duration-300 ${
         scrolled
           ? "bg-white/95 py-3 shadow-md backdrop-blur-md border-b border-gray-100"
