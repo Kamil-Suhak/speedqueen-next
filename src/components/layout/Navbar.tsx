@@ -143,24 +143,27 @@ export default function Navbar({
           </Link>
 
           <div className="hidden items-center gap-4 md:flex">
-            {/* Pill 1: Standard Nav Links */}
-            <div className="flex items-center gap-5 bg-brand-red px-4 py-2.5 rounded-full shadow-md">
-              {links
-                .filter((link) => !link.href.includes("gallery"))
-                .map((link) => renderNavLink(link, true))}
+            <div className="flex items-center gap-4 bg-brand-red px-5 py-2.5 rounded-full shadow-md">
+              <div className="flex items-center gap-5">
+                {links
+                  .filter((link) => !link.href.includes("gallery"))
+                  .map((link) => renderNavLink(link, true))}
+              </div>
+
+              {links.some((link) => link.href.includes("gallery")) && (
+                <>
+                  <div
+                    className="h-5 w-[2px] bg-white/60 mx-1"
+                    aria-hidden="true"
+                  />
+                  {renderNavLink(
+                    links.find((link) => link.href.includes("gallery"))!,
+                    true,
+                  )}
+                </>
+              )}
             </div>
 
-            {/* Pill 2: Separate Gallery Link */}
-            {links.some((link) => link.href.includes("gallery")) && (
-              <div className="flex items-center bg-brand-red px-5 py-2.5 rounded-full shadow-md">
-                {renderNavLink(
-                  links.find((link) => link.href.includes("gallery"))!,
-                  true,
-                )}
-              </div>
-            )}
-
-            {/* Pill 3: Language Switcher */}
             <Link
               href={togglePath}
               scroll={false}
