@@ -1,6 +1,6 @@
 "use client";
 
-import { MapPin, List } from "lucide-react";
+import { MapPin, List, CheckCircle } from "lucide-react";
 import { FormattedText } from "@/components/ui/FormattedText";
 import CollageBackground from "@/components/ui/CollageBackground";
 import Image from "next/image";
@@ -25,9 +25,13 @@ export default function Hero({ content }: HeroProps) {
       <CollageBackground />
 
       <div className="absolute md:top-28 top-30 left-1/2 -translate-x-1/2 md:left-12 md:translate-x-0 z-20 flex items-center gap-1.5 bg-white/60 px-4 py-2 rounded-full animate-fade-in-up">
-        <MapPin size={18} className="text-brand-red" />
-        <span className="text-sm font-extrabold text-brand-red uppercase tracking-widest">
-          Kraków
+        <MapPin size={18} className="text-brand-red-dark" />
+        <span className="text-sm font-extrabold text-brand-red-dark uppercase tracking-widest">
+          Kraków &bull;
+        </span>
+        <CheckCircle size={18} className="text-green-700" />
+        <span className="text-sm font-extrabold text-green-700 uppercase tracking-widest">
+          24/7
         </span>
       </div>
 
