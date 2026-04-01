@@ -4,42 +4,48 @@ export const instructionsPl = {
     title: "Pranie",
     steps: [
       "Włóż ubrania i dokładnie zamknij drzwiczki, przekręcając klamkę.",
-      "Wybierz odpowiedni program prania na maszynie.",
-      "Opłać wybraną usługę w centralnym panelu dotykowym.",
-      "Naciśnij zielony przycisk START na maszynie, aby rozpocząć."
-    ]
+      "Używjąc strzałek na pralce, wybierz odpowiedni program prania.",
+      "Opłać wybraną maszynę w systemie płatności.",
+      "Naciśnij zielony przycisk START na maszynie, aby rozpocząć pranie.",
+    ],
   },
   drying: {
     title: "Suszenie",
     steps: [
-      "Włóż odwirowaną odzież (nie ociekającą wodą) do suszarki i szczelnie zamknij drzwiczki.",
+      "Włóż odwirowaną odzież do suszarki i szczelnie zamknij drzwiczki.",
       "Wybierz preferowaną temperaturę na panelu suszarki.",
-      "Dokonaj płatności w centralnym panelu dotykowym.",
-      "Naciśnij przycisk START na suszarce."
-    ]
+      "Wybierz długość suszenia i dokonaj płatności w systemie płatności.",
+      "Naciśnij przycisk START na suszarce.",
+    ],
   },
   extras: {
     title: "Dodatki",
     items: [
       {
         title: "Prasowanie",
-        description: "Profesjonalne stanowisko do prasowania (ul. Pawia)."
+        description:
+          "Profesjonalne stanowisko do prasowania przyjmujące monety znajduje się w pralni przy ul. Pawiej 34.",
+        icon: "iron",
       },
       {
         title: "Ozonator",
-        description: "Zaawansowane urządzenie do dezynfekcji ozonem (al. Słowackiego)."
+        description:
+          "Zaawansowane urządzenie do dezynfekcji ozonem znajduje się w pralni przy al. Słowackiego 56.",
+        icon: "zap",
       },
       {
-        title: "Płatność Kartą",
-        description: "Wybierz usługę, naciśnij zielony przycisk START na terminalu i przyłóż na chwilę kartę zbliżeniową."
-      }
-    ]
+        title: "Karta lojalnościowa Speed Queen",
+        description:
+          "Kup kartę w systemie płatności i ciesz się niższymi cenami na pranie i suszenie w każdej z naszych pralni.",
+        icon: "credit-card",
+      },
+    ],
   },
   navigation: {
     washing: "Pranie",
     drying: "Suszenie",
-    extras: "Dodatki"
-  }
+    extras: "Dodatki",
+  },
 };
 
 export default instructionsPl;
