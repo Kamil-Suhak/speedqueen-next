@@ -50,19 +50,19 @@ export default function Instructions({
       id: 0 as const,
       title: content.washing.title,
       key: "washing" as const,
-      image: "/images/gallery/a.jpg",
+      image: "/images/gallery/j.jpg",
     },
     {
       id: 1 as const,
       title: content.drying.title,
       key: "drying" as const,
-      image: "/images/gallery/b.jpg",
+      image: "/images/gallery/d.jpg",
     },
     {
       id: 2 as const,
       title: content.extras.title,
       key: "extras" as const,
-      image: "/images/gallery/c.jpg",
+      image: "/images/gallery/m2.jpg",
     },
   ];
 
@@ -87,7 +87,6 @@ export default function Instructions({
     setActiveTab(prevTab.id);
   };
 
-  // Zero-performance-impact custom swiper logic
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -98,9 +97,9 @@ export default function Instructions({
     const deltaX = touchEndX - touchStartX.current;
 
     if (deltaX > 50) {
-      goPrev(); // Swiped right -> go prev (sliding in from left)
+      goPrev();
     } else if (deltaX < -50) {
-      goNext(); // Swiped left -> go next (sliding in from right)
+      goNext();
     }
     touchStartX.current = null;
   };
@@ -129,7 +128,6 @@ export default function Instructions({
           </div>
         </div>
 
-        {/* Right Content: Tiled Text Block */}
         <div className="flex-1 pb-6 pr-4 pl-3 md:pl-5">
           <div
             className="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md animate-seq-fade-in-up"
@@ -156,7 +154,6 @@ export default function Instructions({
         key={idx}
         className="relative flex w-full items-stretch group cursor-default"
       >
-        {/* Left Gutter */}
         <div className="relative shrink-0 w-32 flex flex-col pb-6">
           <div className="absolute top-0 bottom-0 left-16 -ml-px w-[2px] border-l-2 border-dashed border-slate-200 -z-10" />
 
@@ -173,7 +170,6 @@ export default function Instructions({
           </div>
         </div>
 
-        {/* Right Content */}
         <div className="flex-1 pb-6 pr-4 pl-3 md:pl-5">
           <div
             className="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md animate-seq-fade-in-up"
@@ -211,15 +207,12 @@ export default function Instructions({
           <div className="mx-auto mt-4 h-1 w-16 bg-brand-red rounded-full" />
         </div>
 
-        {/* UNIFIED DESKTOP / MOBILE GRID */}
         <div className="md:grid grid-cols-2 xl:grid-cols-12 md:gap-12 items-stretch relative z-10 mx-auto w-full">
-          {/* LEFT PANE: Scannable Timeline Content (7 Cols on XL) */}
           <div
             className="flex flex-col h-full w-full max-w-lg md:max-w-none mx-auto xl:col-span-7 pb-4 overflow-hidden relative"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
-            {/* Active Content Anchored Title */}
             <h3
               key={activeTab}
               className={`text-xl md:text-2xl font-bold uppercase tracking-widest text-brand-red mb-6 border-b-2 border-brand-red/20 pb-2 text-center md:pb-4 md:mb-10 w-full ${swipeClass}`}
@@ -231,7 +224,6 @@ export default function Instructions({
               className={`relative grid ${swipeClass}`}
               key={`tab-${activeTab}`}
             >
-              {/* Wash - Preserves Layout Height Even When Invisible */}
               <div
                 className={`col-start-1 row-start-1 relative flex flex-col ${
                   activeTab === 0
@@ -245,7 +237,6 @@ export default function Instructions({
                 )}
               </div>
 
-              {/* Dry - Preserves Layout Height Even When Invisible */}
               <div
                 className={`col-start-1 row-start-1 relative flex flex-col ${
                   activeTab === 1
@@ -259,7 +250,6 @@ export default function Instructions({
                 )}
               </div>
 
-              {/* Extras - Preserves Layout Height Even When Invisible */}
               <div
                 className={`col-start-1 row-start-1 flex flex-col ${
                   activeTab === 2
@@ -274,7 +264,6 @@ export default function Instructions({
               </div>
             </div>
 
-            {/* Bidirectional Navigation Footer */}
             <div className="mt-auto flex justify-between items-center w-full pt-8 border-t border-slate-200/60 transition-opacity duration-300">
               <button
                 onClick={goPrev}
@@ -301,10 +290,8 @@ export default function Instructions({
             </div>
           </div>
 
-          {/* RIGHT PANE: Immersive Eye-Candy Desktop Photography (5 Cols on XL) */}
           <div className="hidden md:flex flex-col items-center justify-center xl:col-span-5 sticky top-32 mt-8">
             <div className="relative w-full max-w-[440px] aspect-4/5 animate-seq-zoom-in">
-              {/* Sharp Offset Accent Frame */}
               <div className="absolute inset-0 translate-x-4 translate-y-4 border-2 border-brand-red/30 rounded-2xl -z-10" />
 
               <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-lg bg-slate-50">
