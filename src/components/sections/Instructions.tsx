@@ -222,20 +222,22 @@ export default function Instructions({
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
                     className={`flex-1 pb-3 md:pb-4 text-center transition-all duration-300 relative group outline-none ${
-                        isActive ? "text-brand-primary" : "text-zinc-400 hover:text-brand-primary/60"
+                      isActive
+                        ? "text-brand-primary"
+                        : "text-zinc-400 hover:text-brand-primary/60"
                     }`}
                   >
                     <span className="text-[11px] sm:text-sm md:text-xl font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] md:tracking-widest whitespace-nowrap">
                       {tab.title}
                     </span>
-                    
+
                     {/* CSS-only Animated Underline */}
-                    <div 
+                    <div
                       className={`absolute -bottom-[2px] left-0 right-0 h-[2px] rounded-full transition-all duration-300 transform origin-center ${
-                        isActive 
-                          ? "bg-brand-primary scale-x-100 opacity-100" 
+                        isActive
+                          ? "bg-brand-primary scale-x-100 opacity-100"
                           : "bg-brand-primary scale-x-0 opacity-0 group-hover:scale-x-50 group-hover:opacity-30"
-                      }`} 
+                      }`}
                     />
                   </button>
                 );
@@ -338,4 +340,3 @@ export default function Instructions({
     </section>
   );
 }
-

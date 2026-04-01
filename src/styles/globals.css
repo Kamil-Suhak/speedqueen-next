@@ -10,14 +10,13 @@
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  
+
   --color-brand-primary: var(--brand-primary);
   --color-brand-secondary: var(--brand-secondary);
-  
+
   --color-brand-primary-light: #fff5f6;
   --color-brand-primary-dark: #c01e23;
-  
-  /* Mapping Next.js font variables */
+
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-montserrat), sans-serif;
 
@@ -25,60 +24,116 @@
   --animate-fade-in-up: fade-in-up 0.8s ease-out both;
 
   @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
   }
 
   @keyframes fade-in-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   --animate-fade-in: fade-in 0.2s ease-out both;
   --animate-fade-out: fade-out 0.2s ease-in both;
-  --animate-scale-in-modal: scale-in-modal 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+  --animate-scale-in-modal: scale-in-modal 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)
+    both;
   --animate-scale-out-modal: scale-out-modal 0.2s ease-in both;
 
   @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   @keyframes fade-out {
-    from { opacity: 1; }
-    to { opacity: 0; }
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
   }
 
   @keyframes scale-in-modal {
-    from { opacity: 0; transform: translateY(10px) scale(0.98); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
   }
 
   @keyframes scale-out-modal {
-    from { opacity: 1; transform: translateY(0) scale(1); }
-    to { opacity: 0; transform: translateY(10px) scale(0.98); }
+    from {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(10px) scale(0.98);
+    }
   }
 
   --animate-seq-fade-in-right: seq-fade-in-right 0.5s ease-out both;
   --animate-seq-fade-in-left: seq-fade-in-left 0.5s ease-out both;
   --animate-seq-fade-in-up: seq-fade-in-up 0.5s ease-out both;
-  --animate-seq-zoom-in: seq-zoom-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  --animate-seq-zoom-in: seq-zoom-in 0.3s
+    cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 
   @keyframes seq-fade-in-right {
-    from { opacity: 0; transform: translateX(20px); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
   @keyframes seq-fade-in-left {
-    from { opacity: 0; transform: translateX(-20px); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
   @keyframes seq-fade-in-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   @keyframes seq-zoom-in {
-    from { opacity: 0; transform: scale(0.5); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 }
 
@@ -88,15 +143,22 @@ body {
   font-family: var(--font-sans);
 }
 
-h1, h2, h3, h4, .font-heading {
+h1,
+h2,
+h3,
+h4,
+.font-heading {
   font-family: var(--font-heading);
 }
 
 .bg-brand-gradient {
-  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--brand-primary) 0%,
+    var(--brand-primary-dark) 100%
+  );
 }
 
 .btn-hover-effect {
   @apply transition duration-200 hover:scale-105 hover:brightness-110 active:scale-[0.98] cursor-pointer;
 }
-
