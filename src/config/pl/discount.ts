@@ -28,3 +28,4 @@ export const discountPl = {
 };
 
 export default discountPl;
+

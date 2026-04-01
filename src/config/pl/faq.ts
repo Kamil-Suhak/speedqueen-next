@@ -31,3 +31,4 @@ export const faqPl = {
 };
 
 export default faqPl;
+

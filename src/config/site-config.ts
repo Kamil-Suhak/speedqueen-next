@@ -56,3 +56,4 @@ export const GlobalConfig = {
 };
 
 export type Locale = "en" | "pl";
+

@@ -80,7 +80,7 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
             {content.title}
           </h2>
           <div
-            className="mb-8 h-1 w-16 bg-brand-red rounded-full"
+            className="mb-8 h-1 w-16 bg-brand-primary rounded-full"
             aria-hidden="true"
           />
           <p className="mb-10 text-lg text-gray-600 font-normal leading-relaxed">
@@ -91,10 +91,10 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
             <ObfuscatedLink
               type="email"
               value={brandInfo.email}
-              className="flex items-center gap-5 group focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-4 rounded-xl p-1 w-fit"
+              className="flex items-center gap-5 group focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-4 rounded-xl p-1 w-fit"
             >
               <div
-                className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-colors shadow-sm"
+                className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-colors shadow-sm"
                 aria-hidden="true"
               >
                 <Mail size={22} />
@@ -107,10 +107,10 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
             <ObfuscatedLink
               type="phone"
               value={brandInfo.phone}
-              className="flex items-center gap-5 group focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-4 rounded-xl p-1 w-fit"
+              className="flex items-center gap-5 group focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-4 rounded-xl p-1 w-fit"
             >
               <div
-                className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-colors shadow-sm"
+                className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-100 text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-colors shadow-sm"
                 aria-hidden="true"
               >
                 <Phone size={22} />
@@ -126,10 +126,10 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
             <a
               href={Locations[1].url}
               onClick={openDirections}
-              className="flex items-center gap-5 group focus:outline-none focus:ring-2 focus:ring-brand-red focus:ring-offset-4 rounded-xl p-1 overflow-hidden min-w-0 w-fit"
+              className="flex items-center gap-5 group focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-4 rounded-xl p-1 overflow-hidden min-w-0 w-fit"
             >
               <div
-                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white border border-slate-100 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-colors shadow-sm"
+                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white border border-slate-100 text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-colors shadow-sm"
                 aria-hidden="true"
               >
                 <MapPin size={22} />
@@ -147,7 +147,7 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
                             </span>
                           </span>
                           <div
-                            className="h-6 w-1.5 bg-brand-red"
+                            className="h-6 w-1.5 bg-brand-primary"
                             aria-hidden="true"
                           />
                         </div>
@@ -167,7 +167,7 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
                             </span>
                           </span>
                           <div
-                            className="h-6 w-1.5 bg-brand-red"
+                            className="h-6 w-1.5 bg-brand-primary"
                             aria-hidden="true"
                           />
                         </div>
@@ -184,7 +184,7 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
             <div className="flex h-full flex-col items-center justify-center rounded-3xl border border-slate-100 bg-white shadow-lg md:bg-white/90 md:backdrop-blur-sm md:shadow-md p-12 text-center">
               <CheckCircle
                 size={64}
-                className="mb-6 text-brand-red"
+                className="mb-6 text-brand-primary"
                 aria-hidden="true"
               />
               <h3 className="mb-4 text-3xl font-extrabold text-gray-900 uppercase tracking-tight">
@@ -208,7 +208,7 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
                   id="senderName"
                   name="senderName"
                   required
-                  className="w-full rounded-2xl border border-slate-200 p-5 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 font-medium transition-[border-color,box-shadow] duration-200"
+                  className="w-full rounded-2xl border border-slate-200 p-5 outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/5 font-medium transition-[border-color,box-shadow] duration-200"
                   placeholder={content.form.name}
                 />
               </div>
@@ -221,7 +221,7 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
                   name="senderEmail"
                   type="email"
                   required
-                  className="w-full rounded-2xl border border-slate-200 p-5 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 font-medium transition-[border-color,box-shadow] duration-200"
+                  className="w-full rounded-2xl border border-slate-200 p-5 outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/5 font-medium transition-[border-color,box-shadow] duration-200"
                   placeholder={content.form.email}
                 />
               </div>
@@ -233,14 +233,14 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
                   id="message"
                   name="message"
                   required
-                  className="w-full rounded-2xl border border-slate-200 p-5 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 font-medium transition-[border-color,box-shadow] duration-200"
+                  className="w-full rounded-2xl border border-slate-200 p-5 outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/5 font-medium transition-[border-color,box-shadow] duration-200"
                   rows={4}
                   placeholder={content.form.message}
                 />
               </div>
               <button
                 disabled={isPending}
-                className={`group flex w-full items-center justify-center gap-3 rounded-2xl bg-brand-red py-5 font-bold text-white text-xl uppercase tracking-wider transition-[background-color,transform,box-shadow] duration-200 shadow-md ${isPending ? "cursor-not-allowed opacity-50" : "hover:bg-brand-red/90 hover:scale-[1.01] active:scale-[0.99]"} focus:ring-4 focus:ring-brand-red/20 outline-none`}
+                className={`group flex w-full items-center justify-center gap-3 rounded-2xl bg-brand-primary py-5 font-bold text-white text-xl uppercase tracking-wider transition-[background-color,transform,box-shadow] duration-200 shadow-md ${isPending ? "cursor-not-allowed opacity-50" : "hover:bg-brand-primary/90 hover:scale-[1.01] active:scale-[0.99]"} focus:ring-4 focus:ring-brand-primary/20 outline-none`}
               >
                 {isPending ? "Sending..." : content.form.button}
                 {!isPending && (
@@ -258,3 +258,4 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
     </section>
   );
 }
+

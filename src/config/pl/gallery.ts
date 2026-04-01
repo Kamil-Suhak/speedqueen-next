@@ -29,3 +29,4 @@ export const galleryPl = {
 };
 
 export default galleryPl;
+

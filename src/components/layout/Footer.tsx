@@ -21,7 +21,7 @@ interface FooterProps {
 }
 
 const getSocialIcon = (platform: string) => {
-  const iconProps = { role: "img", viewBox: "0 0 24 24", fill: "currentColor", width: 16, height: 16, className: "text-brand-red" };
+  const iconProps = { role: "img", viewBox: "0 0 24 24", fill: "currentColor", width: 16, height: 16, className: "text-brand-primary" };
   const platformKey = platform.toLowerCase();
 
   if (platformKey === "facebook") {
@@ -57,7 +57,7 @@ export default function Footer({ brand, socials, links, lang, footerLabels }: Fo
 
           {/* Column 2: Locations & Hours (Allocated 5 slots to guarantee inline horizontal spanning) */}
           <div className="flex flex-col gap-4 sm:col-span-2 lg:col-span-5 lg:pl-4 xl:pl-6">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-brand-red">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-brand-primary">
               {footerLabels?.locations}
             </h3>
             <ul className="flex flex-col gap-5">
@@ -66,7 +66,7 @@ export default function Footer({ brand, socials, links, lang, footerLabels }: Fo
 
                 return (
                   <li key={i} className="flex items-start gap-2.5">
-                    <MapPin size={18} className="text-brand-red shrink-0 mt-[2px]" />
+                    <MapPin size={18} className="text-brand-primary shrink-0 mt-[2px]" />
                     <div className="flex flex-row flex-wrap items-center gap-x-3 gap-y-2">
                       <span className="text-sm text-gray-700 font-medium leading-snug">
                         {loc.address}
@@ -95,16 +95,16 @@ export default function Footer({ brand, socials, links, lang, footerLabels }: Fo
 
           {/* Column 3: Contact Info */}
           <div className="flex flex-col gap-4 col-span-1 lg:col-span-2">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-brand-red">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-brand-primary">
               {footerLabels?.contact}
             </h3>
             <div className="flex flex-col gap-3">
-              <ObfuscatedLink type="phone" value={brand.phone} className="flex items-center gap-2 text-sm text-gray-600 hover:text-brand-red transition-colors font-medium">
-                <Phone size={16} className="text-brand-red" />
+              <ObfuscatedLink type="phone" value={brand.phone} className="flex items-center gap-2 text-sm text-gray-600 hover:text-brand-primary transition-colors font-medium">
+                <Phone size={16} className="text-brand-primary" />
                 <span>{brand.phone} <span className="text-xs text-gray-500 font-normal">({footerLabels?.phoneHours})</span></span>
               </ObfuscatedLink>
-              <ObfuscatedLink type="email" value={brand.email} className="flex items-center gap-2 text-sm text-gray-600 hover:text-brand-red transition-colors font-medium break-all">
-                <Mail size={16} className="text-brand-red" />
+              <ObfuscatedLink type="email" value={brand.email} className="flex items-center gap-2 text-sm text-gray-600 hover:text-brand-primary transition-colors font-medium break-all">
+                <Mail size={16} className="text-brand-primary" />
                 {brand.email}
               </ObfuscatedLink>
             </div>
@@ -112,7 +112,7 @@ export default function Footer({ brand, socials, links, lang, footerLabels }: Fo
 
           {/* Column 4: Social Media */}
           <div className="flex flex-col gap-4 col-span-1 lg:col-span-2">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-brand-red">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-brand-primary">
               {footerLabels?.social}
             </h3>
             <div className="flex flex-col gap-3">
@@ -122,7 +122,7 @@ export default function Footer({ brand, socials, links, lang, footerLabels }: Fo
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-gray-600 hover:text-brand-red transition-colors font-medium"
+                  className="flex items-center gap-2 text-sm text-gray-600 hover:text-brand-primary transition-colors font-medium"
                   aria-label={social.platform}
                 >
                   {getSocialIcon(social.platform)}
@@ -143,3 +143,4 @@ export default function Footer({ brand, socials, links, lang, footerLabels }: Fo
     </footer>
   );
 }
+

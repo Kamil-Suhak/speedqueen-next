@@ -46,7 +46,7 @@ export default function AnnouncementBar({ locations }: AnnouncementBarProps) {
   };
 
   return (
-    <div className="absolute top-0 left-0 w-full h-[20px] z-60 bg-brand-red text-white flex items-center overflow-hidden hover:brightness-110 transition-all duration-300 cursor-default">
+    <div className="absolute top-0 left-0 w-full h-[20px] z-60 bg-brand-primary text-white flex items-center overflow-hidden hover:brightness-110 transition-all duration-300 cursor-default">
       <div 
         ref={containerRef}
         className="flex animate-marquee whitespace-nowrap py-1 items-center hover:[animation-play-state:paused]"
@@ -63,3 +63,4 @@ export default function AnnouncementBar({ locations }: AnnouncementBarProps) {
     </div>
   );
 }
+

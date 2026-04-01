@@ -3,15 +3,15 @@ export const galleryEn = {
   subtitle: "Take a tour of our professional self-service laundries",
   images: [
     { src: "/images/gallery/g.jpg", alt: "Outside view - Szlak/Pawia St" },
-    { src: "/images/gallery/k.jpg", alt: "Washing machines - Szlak/Pawia St" },
-    { src: "/images/gallery/j.jpg", alt: "Biggest washing machine - Szlak/Pawia St" },
+    { src: "/images/gallery/k.jpg", alt: "service1 machines - Szlak/Pawia St" },
+    { src: "/images/gallery/j.jpg", alt: "Biggest service1 machine - Szlak/Pawia St" },
     { src: "/images/gallery/h.jpg", alt: "Waiting room - Szlak/Pawia St" },
     { src: "/images/gallery/i.jpg", alt: "Comfortable sofas - Szlak/Pawia St" },
     { src: "/images/gallery/m2.jpg", alt: "Ironing table - Szlak/Pawia St" },
 
     { src: "/images/gallery/s.jpg", alt: "Outside view - J. Słowackiego Alley" },
     { src: "/images/gallery/w.jpg", alt: "Outside view - J. Słowackiego Alley" },
-    { src: "/images/gallery/n.jpg", alt: "Washing machines - J. Słowackiego Alley" },
+    { src: "/images/gallery/n.jpg", alt: "service1 machines - J. Słowackiego Alley" },
     { src: "/images/gallery/p.jpg", alt: "Waiting room - J. Słowackiego Alley" },
     { src: "/images/gallery/o.jpg", alt: "Payment system - J. Słowackiego Alley" },
     { src: "/images/gallery/r.jpg", alt: "Ozonator - J. Słowackiego Alley" },
@@ -29,3 +29,4 @@ export const galleryEn = {
 };
 
 export default galleryEn;
+

@@ -90,7 +90,7 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
           <h2 className="text-4xl md:text-5xl font-extrabold text-zinc-900 mb-4 uppercase tracking-tight">
             {content.title}
           </h2>
-          <div className="mx-auto mt-2 h-1 w-16 bg-brand-red rounded-full" />
+          <div className="mx-auto mt-2 h-1 w-16 bg-brand-primary rounded-full" />
           <p className="mt-6 text-lg text-zinc-600 font-normal">
             {content.subtitle}
           </p>
@@ -164,7 +164,7 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
                         <motion.div
                           variants={listItemVariants}
                           key={`${category.id}-${item.name}-${idx}`}
-                          className="flex flex-col md:flex-row md:items-center justify-between p-6 rounded-3xl bg-white border border-slate-100 shadow-sm hover:border-brand-red/20 transition-colors gap-4"
+                          className="flex flex-col md:flex-row md:items-center justify-between p-6 rounded-3xl bg-white border border-slate-100 shadow-sm hover:border-brand-primary/20 transition-colors gap-4"
                         >
                           <div className="flex flex-col md:pr-4 flex-1">
                             <span className="text-xl font-bold text-zinc-900 uppercase tracking-tight">
@@ -176,7 +176,7 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
                               </span>
                             )}
                             {item.isPerCycle && item.cycleDuration && (
-                              <span className="text-xs font-bold text-brand-red mt-2 uppercase tracking-wider">
+                              <span className="text-xs font-bold text-brand-primary mt-2 uppercase tracking-wider">
                                 1 {content.cycleLabel} = {item.cycleDuration}
                               </span>
                             )}
@@ -195,7 +195,7 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
                             <div className="flex items-center">
                               <button
                                 onClick={scrollToLoyalty}
-                                className="group/btn flex items-center gap-2 font-bold text-white bg-brand-red rounded-lg uppercase tracking-widest px-3 py-1.5 text-sm md:text-xs whitespace-nowrap shadow-sm btn-hover-effect"
+                                className="group/btn flex items-center gap-2 font-bold text-white bg-brand-primary rounded-lg uppercase tracking-widest px-3 py-1.5 text-sm md:text-xs whitespace-nowrap shadow-sm btn-hover-effect"
                               >
                                 {item.loyaltyPrice} {content.unit}{" "}
                                 {content.toggle.upsellBadge}
@@ -238,11 +238,11 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
                     {content.loyaltyCard.priceValue} {content.unit}
                   </span>
                 </div>
-                <div className="bg-brand-red/5 p-4 rounded-2xl border border-brand-red/10">
-                  <span className="block text-xs font-bold text-brand-red uppercase tracking-wider mb-1">
+                <div className="bg-brand-primary/5 p-4 rounded-2xl border border-brand-primary/10">
+                  <span className="block text-xs font-bold text-brand-primary uppercase tracking-wider mb-1">
                     {content.loyaltyCard.benefitLabel}
                   </span>
-                  <span className="text-2xl font-extrabold text-brand-red">
+                  <span className="text-2xl font-extrabold text-brand-primary">
                     {content.loyaltyCard.benefitValue} {content.unit}
                   </span>
                 </div>
@@ -251,7 +251,7 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
               <ul className="space-y-3 text-left w-full max-w-md">
                 {content.loyaltyCard.features.map((feature, i) => (
                   <li key={i} className="flex items-center gap-3 text-zinc-700 font-medium">
-                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-brand-red flex items-center justify-center">
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-brand-primary flex items-center justify-center">
                       <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                       </svg>
@@ -282,3 +282,4 @@ const PricingTabs = ({ content, bgImage }: PricingProps) => {
 };
 
 export default PricingTabs;
+

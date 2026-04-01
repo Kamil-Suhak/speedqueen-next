@@ -157,3 +157,4 @@ export const pricingPl = {
 };
 
 export default pricingPl;
+

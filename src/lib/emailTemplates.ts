@@ -73,3 +73,4 @@ export function getAdminNotificationTemplate(redeemed: number, total: number) {
     </div>
   `;
 }
+

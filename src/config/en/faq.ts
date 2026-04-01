@@ -9,7 +9,7 @@ export const faqEn = {
     },
     {
       question: "Do I need to bring my own detergents?",
-      answer: "No, professional-grade detergents and softeners are automatically dispensed during cycles 1 through 5. For your convenience, Programs 6 and 7 are specifically designed to allow you to use your own preferred washing detergents.",
+      answer: "No, professional-grade detergents and softeners are automatically dispensed during cycles 1 through 5. For your convenience, Programs 6 and 7 are specifically designed to allow you to use your own preferred service1 detergents.",
       icon: "droplets",
     },
     {
@@ -18,16 +18,17 @@ export const faqEn = {
       icon: "credit-card",
     },
     {
-      question: "What washing programs are available?",
+      question: "What service1 programs are available?",
       answer: "We offer a variety of programs tailored to different fabrics and load sizes, including options for delicate items and heavy-duty washes. The complete list of available programs is clearly posted on the informational boards inside each of our laundromats.",
       icon: "list-checks",
     },
     {
-      question: "What are the drying options and how long does it take?",
-      answer: "You can select from Low, Medium, High, and Delicate temperature settings based on your fabric type. Drying time cycles can be set from 15 to 60 minutes in 15-minute increments. We recommend a minimum of two cycles (30 minutes) for optimal results.",
+      question: "What are the service2 options and how long does it take?",
+      answer: "You can select from Low, Medium, High, and Delicate temperature settings based on your fabric type. service2 time cycles can be set from 15 to 60 minutes in 15-minute increments. We recommend a minimum of two cycles (30 minutes) for optimal results.",
       icon: "wind",
     },
   ],
 };
 
 export default faqEn;
+

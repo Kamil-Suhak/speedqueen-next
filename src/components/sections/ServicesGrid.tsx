@@ -24,7 +24,7 @@ export default function ServicesGrid({ head, items, bgImage }: ServicesProps) {
           <h2 className="text-4xl font-extrabold text-gray-900 uppercase tracking-tight">
             {head.title}
           </h2>
-          <div className="mx-auto mt-4 h-1 w-16 bg-brand-red rounded-full" />
+          <div className="mx-auto mt-4 h-1 w-16 bg-brand-primary rounded-full" />
           <p className="mt-6 text-lg text-gray-600 font-normal">
             <FormattedText text={head.subtitle} />
           </p>
@@ -35,7 +35,7 @@ export default function ServicesGrid({ head, items, bgImage }: ServicesProps) {
               key={i}
               className="rounded-3xl border border-slate-100 bg-white shadow-md md:bg-white/80 md:backdrop-blur-sm md:shadow-sm p-8"
             >
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50 text-brand-red shadow-inner">
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50 text-brand-primary shadow-inner">
                 <item.icon size={28} />
               </div>
               <h3 className="mb-3 text-xl font-bold uppercase tracking-tight text-gray-900">
@@ -51,3 +51,4 @@ export default function ServicesGrid({ head, items, bgImage }: ServicesProps) {
     </section>
   );
 }
+

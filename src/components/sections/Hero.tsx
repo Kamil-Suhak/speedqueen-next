@@ -25,8 +25,8 @@ export default function Hero({ content }: HeroProps) {
       <CollageBackground />
 
       <div className="absolute top-32 md:top-28 left-1/2 -translate-x-1/2 md:left-12 md:translate-x-0 z-20 flex items-center gap-1.5 bg-white/60 px-3 md:px-4 py-2 rounded-full animate-fade-in-up whitespace-nowrap border border-slate-200 md:border-white/20 md:backdrop-blur-sm max-w-[calc(100vw-32px)]">
-        <MapPin size={16} className="text-brand-red-dark shrink-0" />
-        <span className="text-sm font-extrabold text-brand-red-dark uppercase tracking-widest leading-none">
+        <MapPin size={16} className="text-brand-primary-dark shrink-0" />
+        <span className="text-sm font-extrabold text-brand-primary-dark uppercase tracking-widest leading-none">
           Kraków &bull;
         </span>
         <CheckCircle size={16} className="text-green-700 shrink-0" />
@@ -58,7 +58,7 @@ export default function Hero({ content }: HeroProps) {
           <a
             href={Locations[1].url}
             onClick={openDirections}
-            className="flex transform items-center justify-center gap-2 rounded-xl bg-brand-red px-8 py-4 font-bold text-white shadow-lg transition hover:-translate-y-1 hover:brightness-110 uppercase tracking-tight"
+            className="flex transform items-center justify-center gap-2 rounded-xl bg-brand-primary px-8 py-4 font-bold text-white shadow-lg transition hover:-translate-y-1 hover:brightness-110 uppercase tracking-tight"
           >
             <MapPin size={20} />
             {content.primaryCTA}
@@ -75,3 +75,4 @@ export default function Hero({ content }: HeroProps) {
     </section>
   );
 }
+

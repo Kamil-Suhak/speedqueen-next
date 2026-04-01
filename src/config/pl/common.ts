@@ -5,3 +5,4 @@ export const commonPl = {
   },
 };
 export default commonPl;
+

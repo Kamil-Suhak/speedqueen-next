@@ -8,15 +8,15 @@ export const servicesEn = {
   },
   items: [
     {
-      title: "Washing",
+      title: "service1",
       description:
         "Our facilities utilize [[eco-friendly wet cleaning]], the safest method for your garments and the environment. A standard cycle averages [[30 minutes]].",
       icon: Sparkles,
     },
     {
-      title: "Drying",
+      title: "service2",
       description:
-        "We provide [[high-efficiency drying]] using advanced heat pump technology, ensuring a delicate process that prevents creasing and shrinkage. We recommend drying clothes for at least [[30 minutes]], and thicker fabrics or bedding for [[45-60 minutes]].",
+        "We provide [[high-efficiency service2]] using advanced heat pump technology, ensuring a delicate process that prevents creasing and shrinkage. We recommend service2 clothes for at least [[30 minutes]], and thicker fabrics or bedding for [[45-60 minutes]].",
       icon: ThermometerSun,
     },
     {
@@ -35,3 +35,4 @@ export const servicesEn = {
 };
 
 export default servicesEn;
+

@@ -27,3 +27,4 @@ export default function LoyaltyCardImg({ className = "" }: LoyaltyCardImgProps) 
     </div>
   );
 }
+

@@ -1,6 +1,6 @@
 export const instructionsPl = {
   title: "Krok po kroku",
-  washing: {
+  service1: {
     title: "Pranie",
     steps: [
       "Włóż ubrania i dokładnie zamknij drzwiczki, przekręcając klamkę.",
@@ -9,7 +9,7 @@ export const instructionsPl = {
       "Naciśnij zielony przycisk START na maszynie, aby rozpocząć pranie.",
     ],
   },
-  drying: {
+  service2: {
     title: "Suszenie",
     steps: [
       "Włóż odwirowaną odzież do suszarki i szczelnie zamknij drzwiczki.",
@@ -42,10 +42,11 @@ export const instructionsPl = {
     ],
   },
   navigation: {
-    washing: "Pranie",
-    drying: "Suszenie",
+    service1: "Pranie",
+    service2: "Suszenie",
     extras: "Dodatki",
   },
 };
 
 export default instructionsPl;
+

@@ -28,3 +28,4 @@ export const sectionBackgroundStyle = (imagePath: string | undefined) => {
     backgroundAttachment: 'scroll',
   } as React.CSSProperties;
 };
+

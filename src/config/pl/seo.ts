@@ -38,3 +38,4 @@ export const seoPl = {
 };
 
 export default seoPl;
+

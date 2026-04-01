@@ -54,7 +54,7 @@ const Faq = ({ content, bgImage }: FaqProps) => {
             {content.description}
           </h2>
           <div
-            className="mx-auto mt-4 h-1 w-16 bg-brand-red rounded-full"
+            className="mx-auto mt-4 h-1 w-16 bg-brand-primary rounded-full"
             aria-hidden="true"
           />
         </div>
@@ -89,26 +89,26 @@ const FaqCard = ({
     <div
       className={`border rounded-2xl transition-[border-color,background-color,box-shadow,border-left-width] duration-300 relative overflow-hidden ${
         isOpen
-          ? "border-brand-red border-l-4 bg-brand-red/2 shadow-md md:shadow-sm"
-          : "border-slate-100 border-l-4 border-l-transparent bg-white shadow-sm md:bg-white/90 md:backdrop-blur-sm md:shadow-none hover:border-slate-200 hover:border-l-brand-red/30 md:hover:shadow-sm hover:shadow-md"
+          ? "border-brand-primary border-l-4 bg-brand-primary/2 shadow-md md:shadow-sm"
+          : "border-slate-100 border-l-4 border-l-transparent bg-white shadow-sm md:bg-white/90 md:backdrop-blur-sm md:shadow-none hover:border-slate-200 hover:border-l-brand-primary/30 md:hover:shadow-sm hover:shadow-md"
       }`}
     >
       <button
         onClick={onClick}
-        className="w-full flex items-center justify-between py-5 px-6 text-left group outline-none focus:ring-4 focus:ring-brand-red/10"
+        className="w-full flex items-center justify-between py-5 px-6 text-left group outline-none focus:ring-4 focus:ring-brand-primary/10"
         aria-expanded={isOpen}
         aria-label={`Toggle answer: ${item.question}`}
       >
         <div className="flex items-center gap-4">
           {Icon && (
             <div
-              className={`p-2 rounded-xl transition-colors ${isOpen ? "bg-brand-red text-white" : "bg-slate-100 text-zinc-500 group-hover:bg-brand-red/10 group-hover:text-brand-red"}`}
+              className={`p-2 rounded-xl transition-colors ${isOpen ? "bg-brand-primary text-white" : "bg-slate-100 text-zinc-500 group-hover:bg-brand-primary/10 group-hover:text-brand-primary"}`}
             >
               <Icon size={20} strokeWidth={2.5} />
             </div>
           )}
           <span
-            className={`font-bold text-base md:text-lg uppercase tracking-tight transition-colors ${isOpen ? "text-brand-red" : "text-gray-900 group-hover:text-brand-red"}`}
+            className={`font-bold text-base md:text-lg uppercase tracking-tight transition-colors ${isOpen ? "text-brand-primary" : "text-gray-900 group-hover:text-brand-primary"}`}
           >
             {item.question}
           </span>
@@ -118,7 +118,7 @@ const FaqCard = ({
           aria-hidden="true"
         >
           {isOpen ? (
-            <ChevronUp className="text-brand-red" />
+            <ChevronUp className="text-brand-primary" />
           ) : (
             <ChevronDown className="text-zinc-400" />
           )}
@@ -139,3 +139,4 @@ const FaqCard = ({
 };
 
 export default Faq;
+

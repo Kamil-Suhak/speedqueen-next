@@ -14,7 +14,7 @@ export default function SocialSidebar() {
           href={facebookUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex items-center justify-center w-12 h-12 rounded-2xl bg-white shadow-lg border border-slate-100 text-slate-600 hover:bg-brand-red hover:text-white transition-all transform hover:scale-110"
+          className="group flex items-center justify-center w-12 h-12 rounded-2xl bg-white shadow-lg border border-slate-100 text-slate-600 hover:bg-brand-primary hover:text-white transition-all transform hover:scale-110"
           aria-label="Facebook"
         >
           <Facebook size={24} />
@@ -25,7 +25,7 @@ export default function SocialSidebar() {
           href={instagramUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex items-center justify-center w-12 h-12 rounded-2xl bg-white shadow-lg border border-slate-100 text-slate-600 hover:bg-brand-red hover:text-white transition-all transform hover:scale-110"
+          className="group flex items-center justify-center w-12 h-12 rounded-2xl bg-white shadow-lg border border-slate-100 text-slate-600 hover:bg-brand-primary hover:text-white transition-all transform hover:scale-110"
           aria-label="Instagram"
         >
           <Instagram size={24} />
@@ -34,3 +34,4 @@ export default function SocialSidebar() {
     </div>
   );
 }
+

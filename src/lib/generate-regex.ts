@@ -14,3 +14,4 @@ const singlePatterns = Object.keys(markersContent).map((char) =>
 const pattern = [...pairPatterns, ...singlePatterns].join("|");
 
 export const markerRegex = new RegExp(`(${pattern})`, "g");
+

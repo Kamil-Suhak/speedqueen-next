@@ -103,3 +103,4 @@ export async function claimDiscount(state: ClaimDiscountState) {
     return { success: false, error: content.form.errorServer };
   }
 }
+

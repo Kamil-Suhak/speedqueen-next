@@ -6,3 +6,4 @@ export const reviewsEn = {
 };
 
 export default reviewsEn;
+

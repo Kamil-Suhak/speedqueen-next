@@ -93,7 +93,7 @@ export const pricingEn = {
         id: "dryers-and-others",
         title: "DRYERS & OTHERS",
         alertBanner: {
-          title: "Drying efficiency",
+          title: "service2 efficiency",
           description: "A single 15-minute cycle may not be sufficient for a full load. We recommend two to four cycles for optimal results, depending of the type of fabric."
         },
         items: [
@@ -144,3 +144,4 @@ export const pricingEn = {
 };
 
 export default pricingEn;
+

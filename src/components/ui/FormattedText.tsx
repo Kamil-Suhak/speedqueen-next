@@ -50,3 +50,4 @@ export const FormattedText = ({ text }: { text: string }) => {
     </>
   );
 };
+

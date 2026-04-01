@@ -12,8 +12,8 @@ export const navigationEn = {
     {
       title: "Step by step",
       links: [
-        { label: "Washing", href: "#instructions" },
-        { label: "Drying", href: "#instructions" },
+        { label: "service1", href: "#instructions" },
+        { label: "service2", href: "#instructions" },
       ],
     },
   ],
@@ -27,3 +27,4 @@ export const navigationEn = {
 };
 
 export default navigationEn;
+

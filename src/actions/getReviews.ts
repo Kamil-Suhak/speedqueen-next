@@ -85,3 +85,4 @@ export async function getGoogleReviews(lang: string): Promise<GoogleReview[]> {
     return [];
   }
 }
+

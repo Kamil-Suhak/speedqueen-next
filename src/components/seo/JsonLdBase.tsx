@@ -158,3 +158,4 @@ export default function JsonLdBase({ seo, ratings }: JsonLdBaseProps) {
     </>
   );
 }
+

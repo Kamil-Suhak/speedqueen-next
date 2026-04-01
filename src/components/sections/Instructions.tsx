@@ -15,11 +15,11 @@ import SectionBackground from "@/components/ui/SectionBackground";
 
 interface InstructionConfig {
   title: string;
-  washing: {
+  service1: {
     title: string;
     steps: string[];
   };
-  drying: {
+  service2: {
     title: string;
     steps: string[];
   };
@@ -28,8 +28,8 @@ interface InstructionConfig {
     items: { title: string; description: string; icon: string }[];
   };
   navigation: {
-    washing: string;
-    drying: string;
+    service1: string;
+    service2: string;
     extras: string;
   };
 }
@@ -48,14 +48,14 @@ export default function Instructions({
   const tabs = [
     {
       id: 0 as const,
-      title: content.washing.title,
-      key: "washing" as const,
+      title: content.service1.title,
+      key: "service1" as const,
       image: "/images/gallery/j.jpg",
     },
     {
       id: 1 as const,
-      title: content.drying.title,
-      key: "drying" as const,
+      title: content.service2.title,
+      key: "service2" as const,
       image: "/images/gallery/d.jpg",
     },
     {
@@ -117,7 +117,7 @@ export default function Instructions({
 
           <div className="flex-1 flex flex-col justify-center">
             <div
-              className="w-14 h-14 rounded-full bg-brand-red text-white flex items-center justify-center font-extrabold text-2xl shadow-md z-10 animate-seq-zoom-in transition-all duration-300 pointer-events-none"
+              className="w-14 h-14 rounded-full bg-brand-primary text-white flex items-center justify-center font-extrabold text-2xl shadow-md z-10 animate-seq-zoom-in transition-all duration-300 pointer-events-none"
               style={{
                 animationDelay: `${idx * 80}ms`,
                 marginLeft: isStaggered ? "72px" : "0px",
@@ -159,7 +159,7 @@ export default function Instructions({
 
           <div className="flex-1 flex flex-col justify-center">
             <div
-              className="w-14 h-14 rounded-full bg-brand-red text-white flex items-center justify-center font-extrabold shadow-md z-10 animate-seq-zoom-in transition-all duration-300 pointer-events-none"
+              className="w-14 h-14 rounded-full bg-brand-primary text-white flex items-center justify-center font-extrabold shadow-md z-10 animate-seq-zoom-in transition-all duration-300 pointer-events-none"
               style={{
                 animationDelay: `${idx * 80}ms`,
                 marginLeft: isStaggered ? "72px" : "0px",
@@ -175,7 +175,7 @@ export default function Instructions({
             className="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md animate-seq-fade-in-up"
             style={{ animationDelay: `${idx * 80}ms` }}
           >
-            <h4 className="font-extrabold text-brand-red uppercase mb-1">
+            <h4 className="font-extrabold text-brand-primary uppercase mb-1">
               {item.title}
             </h4>
             <p className="text-gray-700 leading-relaxed text-left md:text-base text-sm">
@@ -204,7 +204,7 @@ export default function Instructions({
           <h2 className="text-4xl font-extrabold text-gray-900 uppercase tracking-tight">
             {content.title}
           </h2>
-          <div className="mx-auto mt-4 h-1 w-16 bg-brand-red rounded-full" />
+          <div className="mx-auto mt-4 h-1 w-16 bg-brand-primary rounded-full" />
         </div>
 
         <div className="md:grid grid-cols-2 xl:grid-cols-12 md:gap-12 items-stretch relative z-10 mx-auto w-full">
@@ -214,7 +214,7 @@ export default function Instructions({
             onTouchEnd={handleTouchEnd}
           >
             {/* Tab Selector Header */}
-            <div className="flex items-center justify-between gap-2 md:gap-8 mb-6 md:mb-10 border-b-2 border-brand-red/10 relative">
+            <div className="flex items-center justify-between gap-2 md:gap-8 mb-6 md:mb-10 border-b-2 border-brand-primary/10 relative">
               {tabs.map((tab) => {
                 const isActive = activeTab === tab.id;
                 return (
@@ -222,7 +222,7 @@ export default function Instructions({
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
                     className={`flex-1 pb-3 md:pb-4 text-center transition-all duration-300 relative group outline-none ${
-                        isActive ? "text-brand-red" : "text-zinc-400 hover:text-brand-red/60"
+                        isActive ? "text-brand-primary" : "text-zinc-400 hover:text-brand-primary/60"
                     }`}
                   >
                     <span className="text-[11px] sm:text-sm md:text-xl font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] md:tracking-widest whitespace-nowrap">
@@ -233,8 +233,8 @@ export default function Instructions({
                     <div 
                       className={`absolute -bottom-[2px] left-0 right-0 h-[2px] rounded-full transition-all duration-300 transform origin-center ${
                         isActive 
-                          ? "bg-brand-red scale-x-100 opacity-100" 
-                          : "bg-brand-red scale-x-0 opacity-0 group-hover:scale-x-50 group-hover:opacity-30"
+                          ? "bg-brand-primary scale-x-100 opacity-100" 
+                          : "bg-brand-primary scale-x-0 opacity-0 group-hover:scale-x-50 group-hover:opacity-30"
                       }`} 
                     />
                   </button>
@@ -254,7 +254,7 @@ export default function Instructions({
                 }`}
                 aria-hidden={activeTab !== 0}
               >
-                {content.washing.steps.map((step, idx) =>
+                {content.service1.steps.map((step, idx) =>
                   renderTimelineStep(step, idx),
                 )}
               </div>
@@ -267,7 +267,7 @@ export default function Instructions({
                 }`}
                 aria-hidden={activeTab !== 1}
               >
-                {content.drying.steps.map((step, idx) =>
+                {content.service2.steps.map((step, idx) =>
                   renderTimelineStep(step, idx),
                 )}
               </div>
@@ -289,24 +289,24 @@ export default function Instructions({
             <div className="mt-auto flex justify-between items-center w-full pt-8 border-t border-slate-200/60 transition-opacity duration-300">
               <button
                 onClick={goPrev}
-                className="flex font-bold text-gray-900 border-slate-200/60 items-center justify-center gap-2 text-[11px] md:text-sm uppercase tracking-widest hover:text-brand-red transition-colors bg-white border px-4 py-3 md:py-4 rounded-full shadow-sm group w-[48%]"
+                className="flex font-bold text-gray-900 border-slate-200/60 items-center justify-center gap-2 text-[11px] md:text-sm uppercase tracking-widest hover:text-brand-primary transition-colors bg-white border px-4 py-3 md:py-4 rounded-full shadow-sm group w-[48%]"
                 aria-label={`Go to ${prevTab.title}`}
               >
                 <ChevronLeft
                   size={18}
-                  className="group-hover:-translate-x-1 transition-transform text-brand-red -ml-1"
+                  className="group-hover:-translate-x-1 transition-transform text-brand-primary -ml-1"
                 />
                 <span className="truncate">{prevTab.title}</span>
               </button>
               <button
                 onClick={goNext}
-                className="flex font-bold text-gray-900 border-slate-200/60 items-center justify-center gap-2 text-[11px] md:text-sm uppercase tracking-widest hover:text-brand-red transition-colors bg-white border px-4 py-3 md:py-4 rounded-full shadow-sm group w-[48%]"
+                className="flex font-bold text-gray-900 border-slate-200/60 items-center justify-center gap-2 text-[11px] md:text-sm uppercase tracking-widest hover:text-brand-primary transition-colors bg-white border px-4 py-3 md:py-4 rounded-full shadow-sm group w-[48%]"
                 aria-label={`Go to ${nextTab.title}`}
               >
                 <span className="truncate">{nextTab.title}</span>
                 <ChevronRight
                   size={18}
-                  className="group-hover:translate-x-1 transition-transform text-brand-red -mr-1"
+                  className="group-hover:translate-x-1 transition-transform text-brand-primary -mr-1"
                 />
               </button>
             </div>
@@ -314,7 +314,7 @@ export default function Instructions({
 
           <div className="hidden md:flex flex-col items-center justify-center xl:col-span-5 sticky top-32 mt-8">
             <div className="relative w-full max-w-[440px] aspect-4/5 animate-seq-zoom-in">
-              <div className="absolute inset-0 translate-x-4 translate-y-4 border-2 border-brand-red/30 rounded-2xl -z-10" />
+              <div className="absolute inset-0 translate-x-4 translate-y-4 border-2 border-brand-primary/30 rounded-2xl -z-10" />
 
               <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-lg bg-slate-50">
                 {tabs.map((tab) => (
@@ -338,3 +338,4 @@ export default function Instructions({
     </section>
   );
 }
+

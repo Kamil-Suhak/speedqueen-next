@@ -63,3 +63,4 @@ export default function BaseModal({ isOpen, onClose, children, closeLabel }: Bas
     </AnimatePresence>
   );
 }
+

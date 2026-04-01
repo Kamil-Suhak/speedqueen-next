@@ -7,3 +7,4 @@ export const heroEn = {
 };
 
 export default heroEn;
+

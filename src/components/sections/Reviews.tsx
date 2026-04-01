@@ -110,7 +110,7 @@ export default function Reviews({
           <h2 className="text-4xl font-extrabold text-gray-900 uppercase tracking-tight">
             {reviewWrapper.title}
           </h2>
-          <div className="mx-auto mt-4 h-1 w-16 bg-brand-red rounded-full" />
+          <div className="mx-auto mt-4 h-1 w-16 bg-brand-primary rounded-full" />
         </div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -126,12 +126,12 @@ export default function Reviews({
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
                   key={`${review.author_name}-${review.time}-${i}`}
-                  className="flex flex-col justify-between rounded-3xl border border-slate-100 bg-white shadow-md md:bg-white/90 md:backdrop-blur-sm md:shadow-sm p-8 transition-[box-shadow,border-color] duration-200 hover:border-brand-red/20 hover:shadow-lg md:hover:shadow-md"
+                  className="flex flex-col justify-between rounded-3xl border border-slate-100 bg-white shadow-md md:bg-white/90 md:backdrop-blur-sm md:shadow-sm p-8 transition-[box-shadow,border-color] duration-200 hover:border-brand-primary/20 hover:shadow-lg md:hover:shadow-md"
                 >
                   <div className="flex w-full items-start justify-between">
-                    <Quote className="mb-4 text-brand-red/20" size={48} />
+                    <Quote className="mb-4 text-brand-primary/20" size={48} />
 
-                    <div className="mt-4 flex gap-1 text-brand-red">
+                    <div className="mt-4 flex gap-1 text-brand-primary">
                       {[...Array(Math.max(0, review.rating || 0))].map(
                         (_, j) => (
                           <Star key={j} fill="currentColor" size={20} />
@@ -144,7 +144,7 @@ export default function Reviews({
                     {hasMore && (
                       <button
                         onClick={() => setSelectedReview(review)}
-                        className="not-italic text-right text-sm font-bold text-zinc-900 hover:text-brand-red transition-colors focus:outline-none focus:underline uppercase tracking-tight"
+                        className="not-italic text-right text-sm font-bold text-zinc-900 hover:text-brand-primary transition-colors focus:outline-none focus:underline uppercase tracking-tight"
                       >
                         {reviewWrapper.read_more}
                       </button>
@@ -226,7 +226,7 @@ export default function Reviews({
                 </p>
               </div>
 
-              <div className="hidden md:flex gap-1 text-brand-red ml-6">
+              <div className="hidden md:flex gap-1 text-brand-primary ml-6">
                 {[...Array(Math.max(0, selectedReview.rating || 0))].map(
                   (_, k) => (
                     <Star key={k} fill="currentColor" size={28} />
@@ -246,3 +246,4 @@ export default function Reviews({
     </section>
   );
 }
+

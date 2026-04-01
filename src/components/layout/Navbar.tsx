@@ -82,10 +82,10 @@ export default function Navbar({
           isActive
             ? isInsideRed
               ? "text-white"
-              : "text-brand-red"
+              : "text-brand-primary"
             : isInsideRed
               ? "text-white/80 hover:text-white"
-              : "text-gray-600 hover:text-brand-red"
+              : "text-gray-600 hover:text-brand-primary"
         }`}
         aria-current={isActive ? "page" : undefined}
       >
@@ -93,12 +93,12 @@ export default function Navbar({
         {isActive ? (
           <motion.div
             layoutId="activeNavUnderline"
-            className={`absolute bottom-0 left-0 right-0 h-0.5 rounded-full ${isInsideRed ? "bg-white" : "bg-brand-red"}`}
+            className={`absolute bottom-0 left-0 right-0 h-0.5 rounded-full ${isInsideRed ? "bg-white" : "bg-brand-primary"}`}
             transition={{ type: "spring", stiffness: 380, damping: 40 }}
           />
         ) : (
           <span
-            className={`absolute bottom-0 left-0 h-0.5 w-0 rounded-full transition-[width] duration-300 group-hover:w-full ${isInsideRed ? "bg-white" : "bg-brand-red"}`}
+            className={`absolute bottom-0 left-0 h-0.5 w-0 rounded-full transition-[width] duration-300 group-hover:w-full ${isInsideRed ? "bg-white" : "bg-brand-primary"}`}
           />
         )}
       </Link>
@@ -143,7 +143,7 @@ export default function Navbar({
           </Link>
 
           <div className="hidden items-center gap-4 md:flex">
-            <div className="flex items-center gap-4 bg-brand-red px-5 py-2.5 rounded-full shadow-md">
+            <div className="flex items-center gap-4 bg-brand-primary px-5 py-2.5 rounded-full shadow-md">
               <div className="flex items-center gap-5">
                 {links
                   .filter((link) => !link.href.includes("gallery"))
@@ -167,7 +167,7 @@ export default function Navbar({
             <Link
               href={togglePath}
               scroll={false}
-              className="flex items-center gap-2 bg-brand-red px-4 py-2.5 rounded-full shadow-md text-sm font-bold tracking-wide text-white uppercase transition-colors hover:text-zinc-200"
+              className="flex items-center gap-2 bg-brand-primary px-4 py-2.5 rounded-full shadow-md text-sm font-bold tracking-wide text-white uppercase transition-colors hover:text-zinc-200"
               aria-label="Switch language"
             >
               <Globe size={14} aria-hidden="true" />
@@ -177,7 +177,7 @@ export default function Navbar({
             <ObfuscatedLink
               type="phone"
               useGlobalConfig={true}
-              className="flex transform items-center justify-center gap-2 rounded-xl px-4 py-2.5 bg-brand-red text-white text-sm font-bold shadow-md transition-[background-color,transform] hover:bg-brand-red/90 hover:scale-[1.01] active:scale-[0.99] uppercase tracking-tight outline-none focus:ring-4 focus:ring-brand-red/20 whitespace-nowrap"
+              className="flex transform items-center justify-center gap-2 rounded-xl px-4 py-2.5 bg-brand-primary text-white text-sm font-bold shadow-md transition-[background-color,transform] hover:bg-brand-primary/90 hover:scale-[1.01] active:scale-[0.99] uppercase tracking-tight outline-none focus:ring-4 focus:ring-brand-primary/20 whitespace-nowrap"
             >
               <Phone size={16} aria-hidden="true" />
               {ctaText}
@@ -188,7 +188,7 @@ export default function Navbar({
             {/* Language Switcher Pill */}
             <Link
               href={togglePath}
-              className="flex items-center justify-center bg-brand-red px-4 py-2 rounded-full shadow-md text-xs font-bold text-white uppercase transition-colors hover:text-zinc-200"
+              className="flex items-center justify-center bg-brand-primary px-4 py-2 rounded-full shadow-md text-xs font-bold text-white uppercase transition-colors hover:text-zinc-200"
               scroll={false}
               aria-label="Switch language"
             >
@@ -198,7 +198,7 @@ export default function Navbar({
             {/* Hamburger (Dropdown) Pill */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="flex items-center justify-center bg-brand-red p-2.5 rounded-full shadow-md text-white transition-transform duration-200 active:scale-95"
+              className="flex items-center justify-center bg-brand-primary p-2.5 rounded-full shadow-md text-white transition-transform duration-200 active:scale-95"
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
             >
@@ -249,15 +249,15 @@ export default function Navbar({
                     href={href}
                     onClick={() => setIsOpen(false)}
                     className={`block px-3 py-5 text-lg font-bold uppercase tracking-tight transition-colors ${
-                      showBottomBorder ? "border-b-2 border-brand-red/20" : ""
-                    } ${isActive ? "text-brand-red" : "text-gray-900 active:text-brand-red"}`}
+                      showBottomBorder ? "border-b-2 border-brand-primary/20" : ""
+                    } ${isActive ? "text-brand-primary" : "text-gray-900 active:text-brand-primary"}`}
                   >
                     <div className="relative inline-block">
                       <span>{link.label}</span>
                       {isActive && (
                         <motion.div
                           layoutId="activeNavUnderlineMobile"
-                          className="absolute -bottom-1 left-0 right-0 h-0.5 bg-brand-red rounded-full"
+                          className="absolute -bottom-1 left-0 right-0 h-0.5 bg-brand-primary rounded-full"
                           transition={{
                             type: "spring",
                             stiffness: 380,
@@ -289,15 +289,15 @@ export default function Navbar({
                 return (
                   <div
                     key={link.label}
-                    className="border-t-2 border-brand-red mt-2"
+                    className="border-t-2 border-brand-primary mt-2"
                   >
                     <Link
                       href={href}
                       onClick={() => setIsOpen(false)}
                       className={`block px-3 py-5 text-lg font-bold uppercase tracking-tight transition-colors ${
                         isActive
-                          ? "text-brand-red"
-                          : "text-gray-900 active:text-brand-red"
+                          ? "text-brand-primary"
+                          : "text-gray-900 active:text-brand-primary"
                       }`}
                     >
                       <div className="relative inline-block">
@@ -305,7 +305,7 @@ export default function Navbar({
                         {isActive && (
                           <motion.div
                             layoutId="activeNavUnderlineMobile"
-                            className="absolute -bottom-1 left-0 right-0 h-0.5 bg-brand-red rounded-full"
+                            className="absolute -bottom-1 left-0 right-0 h-0.5 bg-brand-primary rounded-full"
                             transition={{
                               type: "spring",
                               stiffness: 380,
@@ -322,7 +322,7 @@ export default function Navbar({
               <ObfuscatedLink
                 type="phone"
                 useGlobalConfig={true}
-                className="flex w-full items-center justify-center gap-3 rounded-xl bg-brand-red py-4 font-bold text-white text-lg shadow-md hover:bg-brand-red/90 hover:scale-[1.01] active:scale-[0.99] transition-[background-color,transform] uppercase tracking-tight outline-none focus:ring-4 focus:ring-brand-red/20"
+                className="flex w-full items-center justify-center gap-3 rounded-xl bg-brand-primary py-4 font-bold text-white text-lg shadow-md hover:bg-brand-primary/90 hover:scale-[1.01] active:scale-[0.99] transition-[background-color,transform] uppercase tracking-tight outline-none focus:ring-4 focus:ring-brand-primary/20"
               >
                 <Phone size={20} aria-hidden="true" />
                 {ctaText}
@@ -334,3 +334,4 @@ export default function Navbar({
     </nav>
   );
 }
+

@@ -85,7 +85,7 @@ export default function DiscountClaim({ content, onSuccess }: DiscountClaimProps
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="mt-1 block w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-5 py-4 text-zinc-900 focus:border-brand-red focus:ring-brand-red sm:text-sm transition-all outline-none"
+            className="mt-1 block w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-5 py-4 text-zinc-900 focus:border-brand-primary focus:ring-brand-primary sm:text-sm transition-all outline-none"
             placeholder={content.form.emailPlaceholder}
             disabled={loading}
           />
@@ -111,7 +111,7 @@ export default function DiscountClaim({ content, onSuccess }: DiscountClaimProps
               required
               checked={consent}
               onChange={(e) => setConsent(e.target.checked)}
-              className="h-4 w-4 rounded border-zinc-300 text-brand-red focus:ring-brand-red transition-all cursor-pointer"
+              className="h-4 w-4 rounded border-zinc-300 text-brand-primary focus:ring-brand-primary transition-all cursor-pointer"
               disabled={loading}
             />
           </div>
@@ -127,7 +127,7 @@ export default function DiscountClaim({ content, onSuccess }: DiscountClaimProps
         <button
           type="submit"
           disabled={loading}
-          className="flex w-full items-center justify-center rounded-2xl bg-brand-red px-8 py-5 font-bold text-white shadow-lg transition hover:brightness-110 active:scale-[0.98] disabled:opacity-70 uppercase tracking-widest text-sm"
+          className="flex w-full items-center justify-center rounded-2xl bg-brand-primary px-8 py-5 font-bold text-white shadow-lg transition hover:brightness-110 active:scale-[0.98] disabled:opacity-70 uppercase tracking-widest text-sm"
         >
           {loading ? (
             <>
@@ -142,7 +142,7 @@ export default function DiscountClaim({ content, onSuccess }: DiscountClaimProps
 
       {status && (
         <div
-          className={`mt-6 flex items-start gap-3 rounded-lg p-4 ${status.type === 'success' ? 'bg-green-50 text-green-800' : 'bg-brand-red-light text-brand-red'
+          className={`mt-6 flex items-start gap-3 rounded-lg p-4 ${status.type === 'success' ? 'bg-green-50 text-green-800' : 'bg-brand-primary-light text-brand-primary'
             }`}
         >
           {status.type === 'success' ? (
@@ -156,3 +156,4 @@ export default function DiscountClaim({ content, onSuccess }: DiscountClaimProps
     </div>
   );
 }
+

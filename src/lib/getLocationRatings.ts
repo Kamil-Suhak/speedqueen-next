@@ -58,3 +58,4 @@ export async function getLocationRatings(): Promise<LocationRating[]> {
     return [];
   }
 }
+

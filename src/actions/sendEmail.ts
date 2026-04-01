@@ -37,3 +37,4 @@ export async function sendEmail(formData: FormData) {
     return { success: false, error: "Failed to send email." };
   }
 }
+

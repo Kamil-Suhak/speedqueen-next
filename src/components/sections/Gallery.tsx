@@ -69,7 +69,7 @@ const Gallery = ({
             {content.title}
           </h2>
           <div
-            className="mx-auto mt-4 h-1 w-16 bg-brand-red rounded-full"
+            className="mx-auto mt-4 h-1 w-16 bg-brand-primary rounded-full"
             aria-hidden="true"
           />
           <p className="mt-6 text-lg text-gray-600 font-normal">
@@ -93,7 +93,7 @@ const Gallery = ({
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  className="group relative aspect-4/3 overflow-hidden rounded-4xl bg-white border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-brand-red/10 hover:border-brand-red/20 transition-[box-shadow,border-color] duration-500"
+                  className="group relative aspect-4/3 overflow-hidden rounded-4xl bg-white border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-brand-primary/10 hover:border-brand-primary/20 transition-[box-shadow,border-color] duration-500"
                 >
                   <Image
                     src={image.src}
@@ -106,7 +106,7 @@ const Gallery = ({
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 flex flex-col justify-end p-8">
                     <div className="relative z-10 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-[transform,opacity] duration-500 ease-out">
                       {image.category && (
-                        <span className="inline-block text-[10px] font-bold text-white bg-brand-red px-2 py-0.5 rounded mb-2 uppercase tracking-widest">
+                        <span className="inline-block text-[10px] font-bold text-white bg-brand-primary px-2 py-0.5 rounded mb-2 uppercase tracking-widest">
                           {image.category}
                         </span>
                       )}
@@ -130,7 +130,7 @@ const Gallery = ({
           >
             <button
               onClick={handlePrev}
-              className="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-brand-red hover:text-brand-red transition-[border-color,color,transform] duration-200 transform hover:scale-110 text-slate-600 focus:ring-4 focus:ring-brand-red/10 outline-none"
+              className="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-brand-primary hover:text-brand-primary transition-[border-color,color,transform] duration-200 transform hover:scale-110 text-slate-600 focus:ring-4 focus:ring-brand-primary/10 outline-none"
               aria-label="Previous page"
             >
               <ChevronLeft size={24} aria-hidden="true" />
@@ -141,9 +141,9 @@ const Gallery = ({
                 <button
                   key={i}
                   onClick={() => setCurrentPage(i)}
-                  className={`h-2 rounded-full transition-[width,background-color] duration-300 focus:ring-4 focus:ring-brand-red/10 outline-none ${
+                  className={`h-2 rounded-full transition-[width,background-color] duration-300 focus:ring-4 focus:ring-brand-primary/10 outline-none ${
                     currentPage === i
-                      ? "bg-brand-red w-10 shadow-sm shadow-brand-red/30"
+                      ? "bg-brand-primary w-10 shadow-sm shadow-brand-primary/30"
                       : "bg-slate-200 w-2 hover:bg-slate-300"
                   }`}
                   aria-label={`Go to page ${i + 1}`}
@@ -154,7 +154,7 @@ const Gallery = ({
 
             <button
               onClick={handleNext}
-              className="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-brand-red hover:text-brand-red transition-[border-color,color,transform] duration-200 transform hover:scale-110 text-slate-600 focus:ring-4 focus:ring-brand-red/10 outline-none"
+              className="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-brand-primary hover:text-brand-primary transition-[border-color,color,transform] duration-200 transform hover:scale-110 text-slate-600 focus:ring-4 focus:ring-brand-primary/10 outline-none"
               aria-label="Next page"
             >
               <ChevronRight size={24} aria-hidden="true" />
@@ -167,3 +167,4 @@ const Gallery = ({
 };
 
 export default Gallery;
+
