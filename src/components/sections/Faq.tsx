@@ -1,7 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
-import { ChevronUp, ChevronDown, Clock, Droplets, CreditCard, ListChecks, Wind, LucideIcon } from "lucide-react";
+import { useState } from "react";
+import {
+  ChevronUp,
+  ChevronDown,
+  Clock,
+  Droplets,
+  CreditCard,
+  ListChecks,
+  Wind,
+  LucideIcon,
+} from "lucide-react";
 import { FormattedText } from "@/components/ui/FormattedText";
 import SectionBackground from "@/components/ui/SectionBackground";
 
@@ -12,11 +21,11 @@ export interface FaqItem {
 }
 
 const iconMap: Record<string, LucideIcon> = {
-  Clock,
-  Droplets,
-  CreditCard,
-  ListChecks,
-  Wind,
+  clock: Clock,
+  droplets: Droplets,
+  "credit-card": CreditCard,
+  "list-checks": ListChecks,
+  wind: Wind,
 };
 
 export interface FaqProps {

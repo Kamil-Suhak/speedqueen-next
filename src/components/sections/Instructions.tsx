@@ -8,6 +8,8 @@ import {
   CreditCard,
   Ticket,
   Tag,
+  Wind,
+  Zap,
 } from "lucide-react";
 import SectionBackground from "@/components/ui/SectionBackground";
 
@@ -23,7 +25,7 @@ interface InstructionConfig {
   };
   extras: {
     title: string;
-    items: { title: string; description: string }[];
+    items: { title: string; description: string; icon: string }[];
   };
   navigation: {
     washing: string;
@@ -67,7 +69,13 @@ export default function Instructions({
   const prevTab = tabs[(activeTab + 2) % 3];
   const nextTab = tabs[(activeTab + 1) % 3];
 
-  const extrasIcons = [Ticket, CreditCard, Tag];
+  const ICONS_MAP: Record<string, React.ElementType> = {
+    ticket: Ticket,
+    "credit-card": CreditCard,
+    tag: Tag,
+    iron: Wind,
+    zap: Zap,
+  };
 
   const goNext = () => {
     setSlideDir("right");
@@ -137,11 +145,11 @@ export default function Instructions({
   };
 
   const renderExtrasStep = (
-    item: { title: string; description: string },
+    item: { title: string; description: string; icon: string },
     idx: number,
   ) => {
     const isStaggered = idx % 2 === 1;
-    const Icon = extrasIcons[idx % extrasIcons.length];
+    const Icon = ICONS_MAP[item.icon] || Tag;
 
     return (
       <div
