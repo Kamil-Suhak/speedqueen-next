@@ -213,12 +213,34 @@ export default function Instructions({
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
-            <h3
-              key={activeTab}
-              className={`text-xl md:text-2xl font-bold uppercase tracking-widest text-brand-red mb-6 border-b-2 border-brand-red/20 pb-2 text-center md:pb-4 md:mb-10 w-full ${swipeClass}`}
-            >
-              {tabs[activeTab].title}
-            </h3>
+            {/* Tab Selector Header */}
+            <div className="flex items-center justify-between gap-2 md:gap-8 mb-6 md:mb-10 border-b-2 border-brand-red/10 relative">
+              {tabs.map((tab) => {
+                const isActive = activeTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`flex-1 pb-3 md:pb-4 text-center transition-all duration-300 relative group outline-none ${
+                        isActive ? "text-brand-red" : "text-zinc-400 hover:text-brand-red/60"
+                    }`}
+                  >
+                    <span className="text-[11px] sm:text-sm md:text-xl font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] md:tracking-widest whitespace-nowrap">
+                      {tab.title}
+                    </span>
+                    
+                    {/* CSS-only Animated Underline */}
+                    <div 
+                      className={`absolute -bottom-[2px] left-0 right-0 h-[2px] rounded-full transition-all duration-300 transform origin-center ${
+                        isActive 
+                          ? "bg-brand-red scale-x-100 opacity-100" 
+                          : "bg-brand-red scale-x-0 opacity-0 group-hover:scale-x-50 group-hover:opacity-30"
+                      }`} 
+                    />
+                  </button>
+                );
+              })}
+            </div>
 
             <div
               className={`relative grid ${swipeClass}`}
