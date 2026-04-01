@@ -24,13 +24,13 @@ export default function Hero({ content }: HeroProps) {
     >
       <CollageBackground />
 
-      <div className="absolute md:top-28 top-30 left-1/2 -translate-x-1/2 md:left-12 md:translate-x-0 z-20 flex items-center gap-1.5 bg-white/60 px-4 py-2 rounded-full animate-fade-in-up">
-        <MapPin size={18} className="text-brand-red-dark" />
-        <span className="text-sm font-extrabold text-brand-red-dark uppercase tracking-widest">
+      <div className="absolute top-32 md:top-28 left-1/2 -translate-x-1/2 md:left-12 md:translate-x-0 z-20 flex items-center gap-1.5 bg-white/60 px-3 md:px-4 py-2 rounded-full animate-fade-in-up whitespace-nowrap border border-slate-200 md:border-white/20 md:backdrop-blur-sm max-w-[calc(100vw-32px)]">
+        <MapPin size={16} className="text-brand-red-dark shrink-0" />
+        <span className="text-sm font-extrabold text-brand-red-dark uppercase tracking-widest leading-none">
           Kraków &bull;
         </span>
-        <CheckCircle size={18} className="text-green-700" />
-        <span className="text-sm font-extrabold text-green-700 uppercase tracking-widest">
+        <CheckCircle size={16} className="text-green-700 shrink-0" />
+        <span className="text-sm font-extrabold text-green-700 uppercase tracking-widest leading-none">
           24/7
         </span>
       </div>
