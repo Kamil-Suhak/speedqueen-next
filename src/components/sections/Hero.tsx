@@ -47,8 +47,7 @@ export default function Hero({ content }: HeroProps) {
           />
         </div>
 
-        {/* Cutout Text Mask Container */}
-        <div className="bg-zinc-300/50 mix-blend-screen p-4 rounded-4xl mb-20 animate-fade-in-up [animation-delay:500ms]">
+        <div className="bg-zinc-300/70 md:bg-zinc-300/30 p-4 rounded-4xl mb-20 animate-fade-in-up [animation-delay:500ms] md:backdrop-blur-sm border border-slate-200 md:border-white/20">
           <h1 className="mx-auto max-w-4xl text-4xl font-extrabold tracking-tight text-black md:text-7xl">
             <FormattedText text={content.title} />
           </h1>
@@ -75,4 +74,3 @@ export default function Hero({ content }: HeroProps) {
     </section>
   );
 }
-
