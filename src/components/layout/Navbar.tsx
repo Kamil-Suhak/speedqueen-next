@@ -61,9 +61,22 @@ export default function Navbar({
   const renderNavLink = (
     link: { label: string; href: string },
     isInsideRed = false,
+    additionalOnClick?: () => void,
   ) => {
     const isAnchor = link.href.startsWith("#");
-    const isHomePage = pathname === `/${lang}` || pathname === `/${lang}/`;
+    // Normalize pathname for home page check (handles trailing slashes)
+    const isHomePage =
+      pathname === `/${lang}` ||
+      pathname === `/${lang}/` ||
+      pathname === `/${lang}/#`;
+
+    /* 
+      ROUTING LOGIC:
+      - If it's an anchor (#) and we are on the Home Page, we use the hash directly.
+      - If it's an anchor but we are on a SUBPAGE, we prepend the lang base (e.g., /en#about) 
+        so Next.js navigates back home before scrolling.
+      - If it's a standard page link, we always prepend the lang base.
+    */
     const href = isAnchor
       ? isHomePage
         ? link.href
@@ -74,33 +87,72 @@ export default function Navbar({
       ? activeSection === link.href.replace("#", "")
       : pathname === `/${lang}${link.href}`;
 
+    // FORCED SCROLL FIX:
+    // If the user is on the target page and clicks an anchor link, 
+    // we manually scroll to ensure the jump happens even if the URL hash matches.
+    const handleLinkClick = (e: React.MouseEvent) => {
+      if (isAnchor && isHomePage) {
+        const targetId = link.href.replace("#", "");
+        const element = document.getElementById(targetId);
+        if (element) {
+          e.preventDefault();
+          element.scrollIntoView({ behavior: "smooth" });
+          // Update the URL hash manually if needed, but per plan we keep it simple
+          if (additionalOnClick) additionalOnClick();
+        }
+      } else if (additionalOnClick) {
+        // For mobile menu typically to close the drawer
+        additionalOnClick();
+      }
+    };
+
+    const desktopClasses = `relative pb-1 text-sm font-bold uppercase tracking-wider transition-colors duration-300 ease-in-out group whitespace-nowrap ${
+      isActive
+        ? isInsideRed
+          ? "text-white"
+          : "text-brand-primary"
+        : isInsideRed
+          ? "text-white/80 hover:text-white"
+          : "text-gray-600 hover:text-brand-primary"
+    }`;
+
+    const mobileClasses = `block px-3 py-5 text-lg font-bold uppercase tracking-tight transition-colors border-b-2 border-brand-primary/20 ${
+      isActive
+        ? "text-brand-primary"
+        : "text-gray-900 active:text-brand-primary"
+    }`;
+
     return (
       <Link
         key={link.label}
         href={href}
-        className={`relative pb-1 text-sm font-bold uppercase tracking-wider transition-colors duration-300 ease-in-out group whitespace-nowrap ${
-          isActive
-            ? isInsideRed
-              ? "text-white"
-              : "text-brand-primary"
-            : isInsideRed
-              ? "text-white/80 hover:text-white"
-              : "text-gray-600 hover:text-brand-primary"
-        }`}
+        onClick={handleLinkClick}
+        className={isInsideRed ? desktopClasses : mobileClasses}
         aria-current={isActive ? "page" : undefined}
       >
-        <span className="relative z-10">{link.label}</span>
-        {isActive ? (
-          <motion.div
-            layoutId="activeNavUnderline"
-            className={`absolute bottom-0 left-0 right-0 h-0.5 rounded-full ${isInsideRed ? "bg-white" : "bg-brand-primary"}`}
-            transition={{ type: "spring", stiffness: 380, damping: 40 }}
-          />
-        ) : (
-          <span
-            className={`absolute bottom-0 left-0 h-0.5 w-0 rounded-full transition-[width] duration-300 group-hover:w-full ${isInsideRed ? "bg-white" : "bg-brand-primary"}`}
-          />
-        )}
+        <div className="relative inline-block z-10">
+          <span>{link.label}</span>
+          {isActive && (
+            <motion.div
+              layoutId={
+                isInsideRed
+                  ? "activeNavUnderline"
+                  : "activeNavUnderlineMobile"
+              }
+              className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full ${
+                isInsideRed ? "bg-white" : "bg-brand-primary"
+              }`}
+              transition={{ type: "spring", stiffness: 380, damping: 40 }}
+            />
+          )}
+          {!isActive && isInsideRed && (
+            <span
+              className={`absolute bottom-0 left-0 h-0.5 w-0 rounded-full transition-[width] duration-300 group-hover:w-full ${
+                isInsideRed ? "bg-white" : "bg-brand-primary"
+              }`}
+            />
+          )}
+        </div>
       </Link>
     );
   };
@@ -223,101 +275,18 @@ export default function Navbar({
           <div className="space-y-1 px-4 pt-2 pb-8">
             {links
               .filter((link) => !link.href.includes("gallery"))
-              .map((link, index, array) => {
-                const isAnchor = link.href.startsWith("#");
-                const isHomePage =
-                  pathname === `/${lang}` || pathname === `/${lang}/`;
-                const href = isAnchor
-                  ? isHomePage
-                    ? link.href
-                    : `/${lang}${link.href}`
-                  : `/${lang}${link.href}`;
-
-                const isActive = isAnchor
-                  ? activeSection === link.href.replace("#", "")
-                  : pathname === `/${lang}${link.href}`;
-
-                const isLast = index === array.length - 1;
-                const hasGallery = links.some((l) =>
-                  l.href.includes("gallery"),
-                );
-                const showBottomBorder = !isLast || !hasGallery;
-
-                return (
-                  <Link
-                    key={link.label}
-                    href={href}
-                    onClick={() => setIsOpen(false)}
-                    className={`block px-3 py-5 text-lg font-bold uppercase tracking-tight transition-colors ${
-                      showBottomBorder ? "border-b-2 border-brand-primary/20" : ""
-                    } ${isActive ? "text-brand-primary" : "text-gray-900 active:text-brand-primary"}`}
-                  >
-                    <div className="relative inline-block">
-                      <span>{link.label}</span>
-                      {isActive && (
-                        <motion.div
-                          layoutId="activeNavUnderlineMobile"
-                          className="absolute -bottom-1 left-0 right-0 h-0.5 bg-brand-primary rounded-full"
-                          transition={{
-                            type: "spring",
-                            stiffness: 380,
-                            damping: 40,
-                          }}
-                        />
-                      )}
-                    </div>
-                  </Link>
-                );
-              })}
+              .map((link) => renderNavLink(link, false, () => setIsOpen(false)))}
 
             {links
               .filter((link) => link.href.includes("gallery"))
-              .map((link) => {
-                const isAnchor = link.href.startsWith("#");
-                const isHomePage =
-                  pathname === `/${lang}` || pathname === `/${lang}/`;
-                const href = isAnchor
-                  ? isHomePage
-                    ? link.href
-                    : `/${lang}${link.href}`
-                  : `/${lang}${link.href}`;
-
-                const isActive = isAnchor
-                  ? activeSection === link.href.replace("#", "")
-                  : pathname === `/${lang}${link.href}`;
-
-                return (
-                  <div
-                    key={link.label}
-                    className="border-t-2 border-brand-primary mt-2"
-                  >
-                    <Link
-                      href={href}
-                      onClick={() => setIsOpen(false)}
-                      className={`block px-3 py-5 text-lg font-bold uppercase tracking-tight transition-colors ${
-                        isActive
-                          ? "text-brand-primary"
-                          : "text-gray-900 active:text-brand-primary"
-                      }`}
-                    >
-                      <div className="relative inline-block">
-                        <span>{link.label}</span>
-                        {isActive && (
-                          <motion.div
-                            layoutId="activeNavUnderlineMobile"
-                            className="absolute -bottom-1 left-0 right-0 h-0.5 bg-brand-primary rounded-full"
-                            transition={{
-                              type: "spring",
-                              stiffness: 380,
-                              damping: 40,
-                            }}
-                          />
-                        )}
-                      </div>
-                    </Link>
-                  </div>
-                );
-              })}
+              .map((link) => (
+                <div
+                  key={link.label}
+                  className="border-t-2 border-brand-primary mt-2"
+                >
+                  {renderNavLink(link, false, () => setIsOpen(false))}
+                </div>
+              ))}
             <div className="pt-4">
               <ObfuscatedLink
                 type="phone"
