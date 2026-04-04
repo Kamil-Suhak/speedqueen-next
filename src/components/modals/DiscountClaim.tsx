@@ -52,7 +52,7 @@ export default function DiscountClaim({ content, onSuccess }: DiscountClaimProps
       if (onSuccess) {
         setTimeout(() => {
           onSuccess();
-        }, 3000);
+        }, 1500);
       }
     } catch (err) {
       if (err instanceof Error) {
@@ -94,7 +94,7 @@ export default function DiscountClaim({ content, onSuccess }: DiscountClaimProps
         <div className="absolute opacity-0 -z-10 h-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <input
             type="text"
-            name="confirm_email_address"
+            name="do_not_fill"
             tabIndex={-1}
             value={honeypot}
             onChange={(e) => setHoneypot(e.target.value)}

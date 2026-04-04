@@ -8,6 +8,9 @@ export interface ClaimDiscountContent {
     errorNoCodes: string;
     errorEmailFailed: string;
     errorServer: string;
+    errorEmailTypo: string;
+    errorDomainInvalid: string;
+    errorPromoEnded: string;
   };
   email: {
     subject: string;
@@ -16,6 +19,7 @@ export interface ClaimDiscountContent {
     instruction: string;
     brightnessTip: string;
     printTip: string;
+    expirationNotice: string;
     footer: string;
   };
 }
@@ -42,6 +46,7 @@ export function getClaimDiscountEmailTemplate(
           <img src="${blobUrl}" alt="QR Code" width="250" height="250" style="width: 250px; height: 250px; display: block; margin: 0 auto; background-color: #ffffff;" />
         </div>
         <p style="color: #e7272d; font-weight: bold; font-size: 16px; margin-bottom: 8px;">${emailContent.instruction}</p>
+        <p style="color: #e7272d; font-size: 14px; margin-top: 0; margin-bottom: 12px; font-weight: bold;">${emailContent.expirationNotice}</p>
         <p style="color: #666666; font-size: 13px; margin-top: 0; margin-bottom: 4px;">${emailContent.brightnessTip}</p>
         <p style="color: #666666; font-size: 13px; margin-top: 0;">${emailContent.printTip} <a href="tel:${phone.replace(/\s+/g, '')}" style="color: #e7272d; text-decoration: none; font-weight: bold;">${phone}</a></p>
       </div>

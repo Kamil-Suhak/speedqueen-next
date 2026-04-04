@@ -15,6 +15,9 @@ export const discountEn = {
     errorEmailFailed: "Error sending email.",
     errorServer: "A server error occurred.",
     errorPromoNotStarted: "The promotion starts March 30th.",
+    errorEmailTypo: "Are you sure you typed your email correctly? A typo was detected in the domain.",
+    errorDomainInvalid: "The email domain provided does not exist or cannot receive mail.",
+    errorPromoEnded: "This promotion has already ended.",
   },
   email: {
     subject: "Your Speed Queen Krakow Discount Code",
@@ -23,6 +26,7 @@ export const discountEn = {
     instruction: "Scan this code at the payment terminal to receive your discount.",
     brightnessTip: "💡 Pro tip: maximize your screen brightness when scanning.",
     printTip: "If you're still having trouble, you can print this code or call our helpline: ",
+    expirationNotice: "⚠️ Remember: Your QR code expires on June 30th, 2026.",
     footer: "See you at Speed Queen!",
   }
 };

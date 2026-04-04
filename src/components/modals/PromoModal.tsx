@@ -20,7 +20,9 @@ export default function PromoModal({ content }: PromoModalProps) {
   useEffect(() => {
     // 1. First, check if promo matches the date criteria client-side
     const promoStartDate = new Date(2026, 2, 30); // Note: Month 2 is March
-    const isPromoActive = new Date() >= promoStartDate;
+    const promoEndDate = new Date(2026, 5, 30, 23, 59, 59); // Note: Month 5 is June
+    const now = new Date();
+    const isPromoActive = now >= promoStartDate && now <= promoEndDate;
 
     if (!isPromoActive) return;
 

@@ -5,6 +5,7 @@ import { neon } from '@netlify/neon';
 import { Resend } from 'resend';
 import { ClaimDiscountContent, getClaimDiscountEmailTemplate, getAdminNotificationTemplate } from '@/lib/emailTemplates';
 import { GlobalConfig } from '@/config/site-config';
+import { validateEmail } from '@/lib/emailValidation';
 
 const sql = neon();
 
@@ -26,12 +27,30 @@ export async function claimDiscount(state: ClaimDiscountState) {
     if (!email || !email.includes('@')) return { success: false, error: content.form.errorInvalidEmail };
     if (!consent) return { success: false, error: content.form.errorNoConsent };
 
+    // ADVANCED EMAIL VALIDATION: Typo & Domain Check
+    const validation = await validateEmail(email);
+    if (!validation.isValid) {
+      if (validation.type === 'typo') {
+        return { success: false, error: content.form.errorEmailTypo };
+      } else if (validation.type === 'invalid_domain') {
+        return { success: false, error: content.form.errorDomainInvalid };
+      }
+      return { success: false, error: content.form.errorInvalidEmail };
+    }
+
     const adminEmail = process.env.ADMIN_EMAIL;
     const isEarlyAccess = adminEmail && email.toLowerCase().trim() === adminEmail.toLowerCase().trim();
     const promoStartEnv = process.env.PROMO_START_DATE || '2026-03-30T00:00:00+01:00';
+    const promoEndEnv = process.env.PROMO_END_DATE || '2026-06-30T23:59:59+02:00';
     const promoStartDate = new Date(promoStartEnv);
-    if (new Date() < promoStartDate && !isEarlyAccess) {
+    const promoEndDate = new Date(promoEndEnv);
+    const now = new Date();
+
+    if (now < promoStartDate && !isEarlyAccess) {
       return { success: false, error: content.form.errorPromoNotStarted };
+    }
+    if (now > promoEndDate && !isEarlyAccess) {
+      return { success: false, error: content.form.errorPromoEnded };
     }
 
     const salt = process.env.HASH_SALT || 'default-fallback-salt-change-me';

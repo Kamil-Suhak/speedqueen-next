@@ -15,6 +15,9 @@ export const discountPl = {
     errorEmailFailed: "Błąd podczas wysyłania e-maila.",
     errorServer: "Wystąpił błąd serwera.",
     errorPromoNotStarted: "Promocja startuje 30 marca.",
+    errorEmailTypo: "Czy na pewno wpisałeś poprawny e-mail? Wykryto literówkę w domenie.",
+    errorDomainInvalid: "Podana domena e-mail nie istnieje lub nie może odbierać wiadomości.",
+    errorPromoEnded: "Ta promocja dobiegła już końca.",
   },
   email: {
     subject: "Twój kod rabatowy Speed Queen Kraków",
@@ -23,9 +26,9 @@ export const discountPl = {
     instruction: "Zeskanuj ten kod przy panelu płatniczym, aby otrzymać zniżkę.",
     brightnessTip: "💡 Wskazówka: zwiększ jasność ekranu podczas skanowania.",
     printTip: "Jeśli nadal masz problemy, wydrukuj kod lub zadzwoń na naszą infolinię: ",
+    expirationNotice: "⚠️ Pamiętaj: Twój kod QR wygasa 30 czerwca 2026 r.",
     footer: "Do zobaczenia w Speed Queen!",
   }
 };
 
 export default discountPl;
-
