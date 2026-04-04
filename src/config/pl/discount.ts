@@ -26,7 +26,7 @@ export const discountPl = {
     instruction: "Zeskanuj ten kod przy panelu płatniczym, aby otrzymać zniżkę.",
     brightnessTip: "💡 Wskazówka: zwiększ jasność ekranu podczas skanowania.",
     printTip: "Jeśli nadal masz problemy, wydrukuj kod lub zadzwoń na naszą infolinię: ",
-    expirationNotice: "⚠️ Pamiętaj: Twój kod QR wygasa 30 czerwca 2026 r.",
+    expirationNotice: "Ten kod straci ważność 30 czerwca 2026.",
     footer: "Do zobaczenia w Speed Queen!",
   }
 };

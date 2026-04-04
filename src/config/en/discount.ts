@@ -26,7 +26,7 @@ export const discountEn = {
     instruction: "Scan this code at the payment terminal to receive your discount.",
     brightnessTip: "💡 Pro tip: maximize your screen brightness when scanning.",
     printTip: "If you're still having trouble, you can print this code or call our helpline: ",
-    expirationNotice: "⚠️ Remember: Your QR code expires on June 30th, 2026.",
+    expirationNotice: "This discount expires June 30th 2026.",
     footer: "See you at Speed Queen!",
   }
 };
