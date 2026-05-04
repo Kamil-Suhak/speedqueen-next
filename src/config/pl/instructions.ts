@@ -41,11 +41,6 @@ export const instructionsPl = {
       },
     ],
   },
-  navigation: {
-    service1: "Pranie",
-    service2: "Suszenie",
-    extras: "Dodatki",
-  },
 };
 
 export default instructionsPl;

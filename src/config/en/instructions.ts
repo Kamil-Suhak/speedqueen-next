@@ -1,7 +1,7 @@
 export const instructionsEn = {
   title: "Step by step",
   service1: {
-    title: "service1",
+    title: "Washing",
     steps: [
       "Load your clothes in and close the door tightly by twisting the knob.",
       "Select your desired program on the machine.",
@@ -10,7 +10,7 @@ export const instructionsEn = {
     ],
   },
   service2: {
-    title: "service2",
+    title: "Drying",
     steps: [
       "Load your spun clothes (not soaking wet) into the dryer and close the door tightly.",
       "Select your preferred temperature on the machine.",
@@ -39,11 +39,6 @@ export const instructionsEn = {
         icon: "credit-card",
       },
     ],
-  },
-  navigation: {
-    service1: "Washing",
-    service2: "Drying",
-    extras: "Extras",
   },
 };
 

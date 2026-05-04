@@ -27,11 +27,6 @@ interface InstructionConfig {
     title: string;
     items: { title: string; description: string; icon: string }[];
   };
-  navigation: {
-    service1: string;
-    service2: string;
-    extras: string;
-  };
 }
 
 export default function Instructions({
