@@ -14,6 +14,23 @@ export async function sendEmail(formData: FormData) {
   const name = formData.get("senderName") as string;
   const email = formData.get("senderEmail") as string;
   const message = formData.get("message") as string;
+  const honeypot = formData.get("do_not_fill") as string;
+
+  if (honeypot) {
+    // If honeypot is filled, silently ignore and pretend success to deter bots
+    return { success: true };
+  }
+
+  // Server-side spam checks (matching client-side)
+  const messageStr = message || "";
+  if (
+    messageStr.split(/\s+/).some((word) => word.length > 25) ||
+    messageStr.trim().split(/\s+/).length < 3 ||
+    /(http:\/\/|https:\/\/|www\.)/i.test(messageStr)
+  ) {
+    // Silently ignore spam messages so bots think they succeeded
+    return { success: true };
+  }
 
   try {
     if (!process.env.RESEND_TO_EMAIL) {

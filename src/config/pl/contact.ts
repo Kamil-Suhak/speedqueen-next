@@ -13,9 +13,11 @@ export const contactPl = {
     errorTitle: "Błąd wysyłania wiadomości",
     errorMessage:
       "Coś poszło nie tak. Prosimy o zadzwonienie do nas bezpośrednio.",
+    errorGibberish: "Twoja wiadomość zawiera zbyt długie słowa.",
+    errorTooShort: "Twoja wiadomość musi składać się z co najmniej 3 słów.",
+    errorLinks: "Linki w wiadomości nie są dozwolone.",
     buttonClose: "Zamknij",
   },
 };
 
 export default contactPl;
-

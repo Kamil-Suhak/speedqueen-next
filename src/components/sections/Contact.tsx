@@ -22,6 +22,9 @@ interface ContactProps {
       successMessage: string;
       errorTitle: string;
       errorMessage: string;
+      errorGibberish: string;
+      errorTooShort: string;
+      errorLinks: string;
       buttonClose: string;
     };
   };
@@ -38,9 +41,30 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorModal, setErrorModal] = useState({
     isOpen: false,
+    message: "",
   });
 
   async function handleSubmit(formData: FormData) {
+    const messageStr = formData.get("message") as string || "";
+
+    // 1. Max 25 chars per word
+    if (messageStr.split(/\s+/).some((word) => word.length > 25)) {
+      setErrorModal({ isOpen: true, message: content.form.errorGibberish });
+      return;
+    }
+
+    // 2. Minimum 3 words
+    if (messageStr.trim().split(/\s+/).length < 3) {
+      setErrorModal({ isOpen: true, message: content.form.errorTooShort });
+      return;
+    }
+
+    // 3. No links
+    if (/(http:\/\/|https:\/\/|www\.)/i.test(messageStr)) {
+      setErrorModal({ isOpen: true, message: content.form.errorLinks });
+      return;
+    }
+
     setIsPending(true);
     const result = await sendEmail(formData);
     setIsPending(false);
@@ -50,6 +74,7 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
     } else {
       setErrorModal({
         isOpen: true,
+        message: content.form.errorMessage,
       });
     }
   }
@@ -64,9 +89,9 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
 
       <StatusModal
         isOpen={errorModal.isOpen}
-        onClose={() => setErrorModal((prev) => ({ ...prev, isOpen: false }))}
+        onClose={() => setErrorModal((prev) => ({ ...prev, isOpen: false, message: "" }))}
         title={content.form.errorTitle}
-        message={content.form.errorMessage}
+        message={errorModal.message || content.form.errorMessage}
         type="error"
         closeButtonText={content.form.buttonClose}
       />
@@ -200,6 +225,14 @@ export default function Contact({ content, brandInfo, bgImage }: ContactProps) {
               className="space-y-4 rounded-3xl border border-slate-100 bg-white shadow-lg md:bg-white/90 md:backdrop-blur-sm md:shadow-md p-10"
               aria-label={content.title}
             >
+              <div className="absolute opacity-0 -z-10 h-0 overflow-hidden pointer-events-none" aria-hidden="true">
+                <input
+                  type="text"
+                  name="do_not_fill"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
               <div>
                 <label htmlFor="senderName" className="sr-only">
                   {content.form.name}
