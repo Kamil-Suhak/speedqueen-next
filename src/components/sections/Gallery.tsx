@@ -46,12 +46,26 @@ const Gallery = ({
     startIndex + imagesPerPage,
   );
 
+  const scrollToGallery = () => {
+    const gallerySection = document.getElementById("gallery");
+    if (gallerySection) {
+      gallerySection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   const handleNext = () => {
     setCurrentPage((prev) => (prev + 1) % totalPages);
+    scrollToGallery();
   };
 
   const handlePrev = () => {
     setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+    scrollToGallery();
+  };
+
+  const handlePageClick = (index: number) => {
+    setCurrentPage(index);
+    scrollToGallery();
   };
 
   return (
@@ -140,7 +154,7 @@ const Gallery = ({
               {Array.from({ length: totalPages }).map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => setCurrentPage(i)}
+                  onClick={() => handlePageClick(i)}
                   className={`h-2 rounded-full transition-[width,background-color] duration-300 focus:ring-4 focus:ring-brand-primary/10 outline-none ${
                     currentPage === i
                       ? "bg-brand-primary w-10 shadow-sm shadow-brand-primary/30"
