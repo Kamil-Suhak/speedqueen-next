@@ -41,11 +41,10 @@ export const instructionsEn = {
     ],
   },
   navigation: {
-    service1: "service1",
-    service2: "service2",
+    service1: "Washing",
+    service2: "Drying",
     extras: "Extras",
   },
 };
 
 export default instructionsEn;
-
