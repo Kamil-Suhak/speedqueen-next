@@ -139,5 +139,8 @@ gemini.md
 discount_qr_codes
 .aiexclude
 
-# Local Netlify folder
+.open-next
 .netlify
+.wrangler
+
+wrangler.toml

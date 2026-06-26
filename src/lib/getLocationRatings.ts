@@ -12,6 +12,13 @@ const PLACE_IDS: Record<string, string | undefined> = {
   slowackiego: process.env.NEXT_PUBLIC_GOOGLE_PLACEID_SLOWACKIEGO,
 };
 
+interface GooglePlacesRatingResponse {
+  result?: {
+    rating?: number;
+    user_ratings_total?: number;
+  };
+}
+
 async function fetchLocationRating(
   key: string,
   placeId: string | undefined,
@@ -25,7 +32,7 @@ async function fetchLocationRating(
     const response = await fetch(url, { next: { revalidate: 86400 } });
     if (!response.ok) return null;
 
-    const data = await response.json();
+    const data: GooglePlacesRatingResponse = await response.json();
     const result = data?.result;
 
     if (!result?.rating) return null;

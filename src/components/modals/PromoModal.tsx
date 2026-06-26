@@ -31,7 +31,7 @@ export default function PromoModal({ content }: PromoModalProps) {
     const checkPromo = async () => {
       try {
         const res = await fetch('/api/promo-check', { method: 'POST' });
-        const data = await res.json();
+        const data = (await res.json()) as { showModal: boolean };
         if (isMounted && data.showModal) {
           setShouldShow(true);
         }

@@ -1,5 +1,11 @@
 "use server";
 
+interface GooglePlacesResponse {
+  result?: {
+    reviews?: GooglePlaceReviewRAW[];
+  };
+}
+
 export interface GoogleReview {
   author_name: string;
   rating: number;
@@ -37,7 +43,7 @@ async function fetchLocationReviews(
     const response = await fetch(url, { next: { revalidate: 86400 } });
     if (!response.ok) return [];
 
-    const data = await response.json();
+    const data: GooglePlacesResponse = await response.json();
     const reviews: GooglePlaceReviewRAW[] = Array.isArray(data?.result?.reviews)
       ? data.result.reviews
       : [];
@@ -71,8 +77,8 @@ export async function getGoogleReviews(lang: string): Promise<GoogleReview[]> {
 
     const allReviews = results.flat();
     const uniqueReviewsMap = new Map<string, GoogleReview>();
-    
-    allReviews.forEach(r => {
+
+    allReviews.forEach((r) => {
       const key = `${r.author_name}-${r.time}`;
       if (!uniqueReviewsMap.has(key)) {
         uniqueReviewsMap.set(key, r);
@@ -85,4 +91,3 @@ export async function getGoogleReviews(lang: string): Promise<GoogleReview[]> {
     return [];
   }
 }
-

@@ -1,4 +1,4 @@
-import { getRequestContext } from "@opennextjs/cloudflare";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { NextResponse } from "next/server";
 
 export async function GET(
@@ -8,7 +8,7 @@ export async function GET(
   const { key } = await params;
 
   try {
-    const { env } = getRequestContext();
+    const { env } = getCloudflareContext();
     const object = await env.DISCOUNT_QR_CODES.get(key);
 
     if (!object) {

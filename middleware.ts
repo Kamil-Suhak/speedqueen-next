@@ -4,12 +4,15 @@ import type { NextRequest } from "next/server";
 const locales = ["en", "pl"];
 const defaultLocale = "en";
 
-export function proxy(request: NextRequest) {
+export const runtime = "experimental-edge";
+
+export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // 1. Check if the pathname is missing a locale
   const pathnameIsMissingLocale = locales.every(
-    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
+    (locale) =>
+      !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
   );
 
   // 2. Redirect if there is no locale (e.g. "/" or "/about")
@@ -45,5 +48,7 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   // Matcher ignoring internal Next.js paths and common static assets
-  matcher: ["/((?!api|_next/static|_next/image|images|favicon.ico|robots.txt|sitemap.xml).*)"],
+  matcher: [
+    "/((?!api|_next/static|_next/image|images|favicon.ico|robots.txt|sitemap.xml).*)",
+  ],
 };
