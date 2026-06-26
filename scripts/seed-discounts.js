@@ -2,8 +2,8 @@ import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import { neon } from '@netlify/neon';
-import { getStore } from '@netlify/blobs';
+import { neon } from '@neondatabase/serverless';
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -12,6 +12,15 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 dotenv.config({ path: path.resolve(__dirname, '../.env.local'), override: true });
 
 const sql = neon(process.env.DATABASE_URL || process.env.NETLIFY_DATABASE_URL);
+
+const s3 = new S3Client({
+  endpoint: `https://${process.env.CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+  credentials: {
+    accessKeyId: process.env.CLOUDFLARE_R2_ACCESS_KEY_ID,
+    secretAccessKey: process.env.CLOUDFLARE_R2_SECRET_ACCESS_KEY,
+  },
+  region: 'auto',
+});
 
 async function seed() {
   console.log('Seeding discounts table with placeholders...');
@@ -29,19 +38,13 @@ async function seed() {
   console.log('Clearing old discount records...');
   await sql`TRUNCATE TABLE discounts RESTART IDENTITY`;
 
-  // Upload 80 QR codes to Netlify Blobs and insert keys into DB
+  // Upload 80 QR codes to Cloudflare R2 and insert keys into DB
   const qrCodesDir = path.resolve(__dirname, '../discount_qr_codes');
   const allFiles = fs.readdirSync(qrCodesDir);
   const bmpFiles = allFiles.filter(f => f.toLowerCase().endsWith('.bmp'));
   const selectedFiles = bmpFiles.slice(0, 80);
 
-  const discountStore = getStore({
-    name: 'discount-qr-codes',
-    siteID: process.env.NETLIFY_SITE_ID,
-    token: process.env.NETLIFY_API_TOKEN,
-  });
-
-  console.log(`Uploading ${selectedFiles.length} QR codes to Netlify Blobs...`);
+  console.log(`Uploading ${selectedFiles.length} QR codes to Cloudflare R2...`);
 
   for (let i = 0; i < selectedFiles.length; i++) {
     const filename = selectedFiles[i];
@@ -49,10 +52,13 @@ async function seed() {
     const fileBuffer = fs.readFileSync(filePath);
 
     try {
-      // 1. Upload to Blob
-      await discountStore.set(filename, fileBuffer, {
-        metadata: { contentType: 'image/bmp' }
-      });
+      // 1. Upload to R2
+      await s3.send(new PutObjectCommand({
+        Bucket: 'discount-qr-codes',
+        Key: filename,
+        Body: fileBuffer,
+        ContentType: 'image/bmp',
+      }));
 
       // 2. Insert DB record
       await sql`

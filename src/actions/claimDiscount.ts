@@ -1,13 +1,13 @@
 "use server";
 
 import crypto from 'crypto';
-import { neon } from '@netlify/neon';
+import { neon } from '@neondatabase/serverless';
 import { Resend } from 'resend';
 import { ClaimDiscountContent, getClaimDiscountEmailTemplate, getAdminNotificationTemplate } from '@/lib/emailTemplates';
 import { GlobalConfig } from '@/config/site-config';
 import { validateEmail } from '@/lib/emailValidation';
 
-const sql = neon();
+const sql = neon(process.env.DATABASE_URL!);
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
