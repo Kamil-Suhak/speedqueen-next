@@ -1,7 +1,7 @@
 "use server";
 
 import { Resend } from "resend";
-import { render } from "@react-email/render";
+import { render } from "react-email";
 import { ContactFormEmail } from "@/components/emails/ContactFormEmail";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -38,7 +38,7 @@ export async function sendEmail(formData: FormData) {
     }
 
     const htmlContent = await render(
-      ContactFormEmail({ name, email, message })
+      ContactFormEmail({ name, email, message }),
     );
 
     const data = await resend.emails.send({
@@ -54,4 +54,3 @@ export async function sendEmail(formData: FormData) {
     return { success: false, error: "Failed to send email." };
   }
 }
-
