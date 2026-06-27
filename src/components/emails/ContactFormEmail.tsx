@@ -7,8 +7,7 @@ import {
   Preview,
   Section,
   Text,
-} from "@react-email/components";
-import * as React from "react";
+} from "react-email";
 
 interface ContactFormEmailProps {
   name: string;
@@ -31,26 +30,25 @@ export const ContactFormEmail = ({
             <Text style={heading}>
               Zostało wysłane nowe pytanie poprzez formularz kontaktowy
             </Text>
-            
+
             <Text style={paragraph}>
               <strong>Imię i nazwisko:</strong> {name}
             </Text>
-            
+
             <Text style={paragraph}>
               <strong>E-mail:</strong> {email}
             </Text>
-            
+
             <Text style={paragraph}>
               <strong>Wiadomość:</strong>
             </Text>
-            <Text style={messageBox}>
-              {message}
-            </Text>
-            
+            <Text style={messageBox}>{message}</Text>
+
             <Hr style={hr} />
-            
+
             <Text style={footer}>
-              Aby odpowiedzieć na pytanie, napisz maila na adres: {email} lub kliknij 'Odpowiedz'
+              Aby odpowiedzieć na pytanie, napisz maila na adres: {email} lub
+              kliknij 'Odpowiedz'
             </Text>
           </Section>
         </Container>
@@ -111,4 +109,3 @@ const footer = {
 };
 
 export default ContactFormEmail;
-
