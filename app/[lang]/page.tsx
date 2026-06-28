@@ -67,10 +67,13 @@ export default async function LandingPage({
         {...(pricing as PricingProps)}
         bgImage={getSectionBackground(2)}
       />
-      <Reviews reviewWrapper={reviewsContent} reviews={googleReviews} bgImage={getSectionBackground(4)} />
-      <Faq content={faq} bgImage={getSectionBackground(5)} />
-      <Contact content={contact} brandInfo={GlobalConfig.brand} bgImage={getSectionBackground(6)} />
+      {/* <Reviews reviewWrapper={reviewsContent} reviews={googleReviews} bgImage={getSectionBackground(4)} /> */}
+      <Faq content={faq} bgImage={getSectionBackground(3)} />
+      <Contact
+        content={contact}
+        brandInfo={GlobalConfig.brand}
+        bgImage={getSectionBackground(4)}
+      />
     </>
   );
 }
-
