@@ -4,7 +4,7 @@ export const navigationEn = {
     { label: "Step by step", href: "#instructions" },
     { label: "Pricing", href: "#pricing" },
     { label: "Gallery", href: "/gallery" },
-    { label: "Reviews", href: "#reviews" },
+    // { label: "Reviews", href: "#reviews" },
     { label: "Tips", href: "#faq" },
     { label: "Contact", href: "#contact" },
   ],
@@ -27,4 +27,3 @@ export const navigationEn = {
 };
 
 export default navigationEn;
-

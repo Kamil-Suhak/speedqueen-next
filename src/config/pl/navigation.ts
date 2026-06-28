@@ -4,7 +4,7 @@ export const navigationPl = {
     { label: "Krok po kroku", href: "#instructions" },
     { label: "Cennik", href: "#pricing" },
     { label: "Galeria", href: "/gallery" },
-    { label: "Opinie", href: "#reviews" },
+    // { label: "Opinie", href: "#reviews" },
     { label: "Wskazówki", href: "#faq" },
     { label: "Kontakt", href: "#contact" },
   ],
@@ -27,4 +27,3 @@ export const navigationPl = {
 };
 
 export default navigationPl;
-
