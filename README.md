@@ -24,21 +24,4 @@ The **`PricingTabs`** component features a sticky location switcher that maintai
 ## 🚀 Performance
 - **Optimized Assets:** Automatic WebP conversion and responsive sizing using `next/image`.
 - **Minimal Layout Shift:** Careful use of `framer-motion` and CSS variables to ensure high Lighthouse scores (>90) for both performance and accessibility.
-- **Production Build:** Hosted on Vercel for edge-cached content delivery.
-
-## 🏗 Setup & Deployment
-1. **Prerequisites:** Node.js 18+, `pnpm` (recommended).
-2. **Environment Variables:**
-   - `GOOGLE_PLACES_API_KEY`: For reviews.
-   - `RESEND_API_KEY`: For the contact form.
-   - `NEXT_PUBLIC_GOOGLE_PLACEID_*`: Unique IDs for each location.
-3. **Execution:**
-   ```bash
-   npm install
-   npm run dev
-   ```
-
-## 🗺 Roadmap
-- [ ] **Google Calendar API:** Direct integration for machine booking/reservation.
-- [ ] **Interactive Gallery:** Image lightbox and location-specific photo filtering.
-- [ ] **Contact System Expansion:** Automated mailing list subscription via Resend.
+- **Production Build:** Hosted and managed on Cloudflare for edge-cached content delivery.
