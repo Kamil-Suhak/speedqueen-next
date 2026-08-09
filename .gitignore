@@ -142,3 +142,5 @@ discount_qr_codes
 .open-next
 .netlify
 .wrangler
+
+scripts/
