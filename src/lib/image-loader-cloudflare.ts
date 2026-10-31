@@ -21,6 +21,7 @@ export default function cloudflareLoader({
   // On workers.dev preview environments or local development, fall back to direct unoptimized static assets.
   if (
     process.env.NODE_ENV === "development" ||
+    process.env.NEXT_PUBLIC_CF_IMAGE_RESIZING === "false" ||
     process.env.NEXT_PUBLIC_BASE_URL?.includes("workers.dev") ||
     (typeof window !== "undefined" && window.location.hostname.endsWith(".workers.dev"))
   ) {

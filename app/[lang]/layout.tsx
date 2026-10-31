@@ -97,6 +97,13 @@ export default async function RootLayout({
 
   return (
     <html lang={lang} className={`scroll-smooth ${inter.variable} ${montserrat.variable}`} data-scroll-behavior="smooth">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='IMG'&&t.src&&t.src.indexOf('/cdn-cgi/image/')!==-1&&!t.dataset.fallback){t.dataset.fallback='1';var m=t.src.match(/\\/cdn-cgi\\/image\\/[^\\/]+\\/(.*)/);if(m&&m[1]){t.src='/'+m[1];}}},true);`,
+          }}
+        />
+      </head>
       <body className="font-sans antialiased">
         <JsonLdBase seo={seo} ratings={ratings} />
         {GlobalConfig.brand.showAnnouncementBar && (
