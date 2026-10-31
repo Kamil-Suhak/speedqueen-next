@@ -43,7 +43,10 @@ export default function Navbar({
     const main = document.getElementById("main-content");
     if (!main) return;
     const child = main.querySelector("[data-navbar-theme]");
-    setDarkTheme(child?.getAttribute("data-navbar-theme") === "dark");
+    const isDark = child?.getAttribute("data-navbar-theme") === "dark";
+    queueMicrotask(() => {
+      setDarkTheme(isDark);
+    });
   }, [pathname]);
 
   const sectionIds = useMemo(

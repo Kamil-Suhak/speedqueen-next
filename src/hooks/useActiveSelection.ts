@@ -8,8 +8,6 @@ export function useActiveSection(sectionIds: string[]) {
   const pathname = usePathname();
 
   useEffect(() => {
-    setActiveSection(""); // Reset on page change
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -31,9 +29,11 @@ export function useActiveSection(sectionIds: string[]) {
       }
     });
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      setActiveSection("");
+    };
   }, [sectionIds, pathname]);
 
   return activeSection;
 }
-

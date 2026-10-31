@@ -20,7 +20,6 @@ export default function LoyaltyCardImg({
           width={600}
           height={380}
           className="w-full h-auto object-cover block"
-          priority
         />
 
         <div className="absolute inset-0 rounded-[15px] ring-1 ring-inset ring-white/20 pointer-events-none" />

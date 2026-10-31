@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useSyncExternalStore } from "react";
 import { GlobalConfig } from "@/config/site-config";
+
+const emptySubscribe = () => () => {};
 
 interface ObfuscatedLinkProps {
   type: "email" | "phone";
@@ -18,13 +20,13 @@ export default function ObfuscatedLink({
   className = "",
   children,
 }: ObfuscatedLinkProps) {
-  const [mounted, setMounted] = useState(false);
+  const isMounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return <span>...</span>;
+  if (!isMounted) return <span>...</span>;
 
   const resolvedValue = useGlobalConfig
     ? (type === "email" ? GlobalConfig.brand.email : GlobalConfig.brand.phone)
@@ -42,4 +44,3 @@ export default function ObfuscatedLink({
     </a>
   );
 }
-

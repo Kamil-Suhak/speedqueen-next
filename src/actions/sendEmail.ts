@@ -4,7 +4,12 @@ import { Resend } from "resend";
 import { render } from "react-email";
 import { ContactFormEmail } from "@/components/emails/ContactFormEmail";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() {
+  if (!process.env.RESEND_API_KEY) {
+    throw new Error("Missing RESEND_API_KEY environment variable.");
+  }
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 export async function sendEmail(formData: FormData) {
   if (process.env.NODE_ENV === "test") {
@@ -41,7 +46,8 @@ export async function sendEmail(formData: FormData) {
       ContactFormEmail({ name, email, message }),
     );
 
-    const data = await resend.emails.send({
+    const resend = getResend();
+    const { error: sendError } = await resend.emails.send({
       from: "Strona Internetowa SQ <noreply@mail.speedqueenkrk.pl>",
       to: [process.env.RESEND_TO_EMAIL],
       subject: `Nowe pytanie od: ${name}`,
@@ -49,8 +55,14 @@ export async function sendEmail(formData: FormData) {
       html: htmlContent,
     });
 
+    if (sendError) {
+      console.error("Resend error:", sendError);
+      return { success: false, error: "Failed to send email." };
+    }
+
     return { success: true };
   } catch (error) {
+    console.error("sendEmail exception:", error);
     return { success: false, error: "Failed to send email." };
   }
 }
