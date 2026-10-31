@@ -17,17 +17,16 @@ export default function cloudflareLoader({
     params.push(`quality=${quality}`);
   }
 
-  // Cloudflare Image Resizing (/cdn-cgi/image/) is only enabled on custom zone domains (e.g. speedqueenkrk.pl).
-  // On workers.dev preview environments or local development, fall back to direct unoptimized static assets.
-  if (
-    process.env.NODE_ENV === "development" ||
-    process.env.NEXT_PUBLIC_CF_IMAGE_RESIZING === "false" ||
-    process.env.NEXT_PUBLIC_BASE_URL?.includes("workers.dev") ||
-    (typeof window !== "undefined" && window.location.hostname.endsWith(".workers.dev"))
-  ) {
+  // Cloudflare Image Resizing (/cdn-cgi/image/) is only enabled on custom registered zones (speedqueenkrk.pl).
+  // In development, preview (workers.dev), or when explicitly disabled, serve direct unoptimized static assets.
+  const isCustomZone =
+    process.env.NEXT_PUBLIC_BASE_URL?.includes("speedqueenkrk.pl") &&
+    (typeof window === "undefined" || !window.location.hostname.endsWith(".workers.dev"));
+
+  if (!isCustomZone || process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_CF_IMAGE_RESIZING === "false") {
     return src;
   }
 
-  // Route through Cloudflare's native edge transformation path
+  // Route through Cloudflare's native edge transformation path on speedqueenkrk.pl
   return `/cdn-cgi/image/${params.join(",")}/${normalizeSrc(src)}`;
 }
