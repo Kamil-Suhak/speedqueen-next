@@ -34,6 +34,10 @@ export async function generateMetadata({
   };
 }
 
+export async function generateStaticParams() {
+  return [{ lang: "en" }, { lang: "pl" }];
+}
+
 export default async function GalleryPage({
   params,
 }: {

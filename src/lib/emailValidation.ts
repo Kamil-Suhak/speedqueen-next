@@ -1,5 +1,3 @@
-import { promises as dns } from 'dns';
-
 /**
  * A robust list of common email domain typos and their corrections.
  * This covers the most frequent providers in Poland and globally.
@@ -67,41 +65,36 @@ export async function validateEmail(email: string): Promise<{
     };
   }
 
-  // 2. Performance-safe DNS check for MX records
-  // We use a timeout to ensure this doesn't hang the server action.
+  // 2. Edge-compatible DNS check for MX records via Cloudflare DoH (DNS over HTTPS)
+  // Replaces Node.js 'dns' module which is unsupported in Cloudflare Workers
   try {
-    const mxCheck = await withTimeout(dns.resolveMx(domain), 1000);
-    if (!mxCheck || mxCheck.length === 0) {
-      return { isValid: false, type: 'invalid_domain' };
+    const res = await fetch(
+      `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=MX`,
+      {
+        headers: { accept: "application/dns-json" },
+        signal: AbortSignal.timeout(1500),
+      },
+    );
+
+    if (res.ok) {
+      const data = (await res.json()) as {
+        Status?: number;
+        Answer?: { type: number; data: string }[];
+      };
+      // Status 3 is NXDOMAIN (domain does not exist)
+      if (data.Status === 3) {
+        return { isValid: false, type: "invalid_domain" };
+      }
+      // If Status 0 (NOERROR) but no MX Answer, check if it has zero answers
+      if (data.Status === 0 && (!data.Answer || data.Answer.length === 0)) {
+        return { isValid: false, type: "invalid_domain" };
+      }
     }
   } catch (error) {
-    const errorCode = (error as any).code;
-
-    // Domain explicitly doesn't exist or has no mail servers configured
-    if (errorCode === 'ENOTFOUND' || errorCode === 'ENODATA' || errorCode === 'EREFUSED') {
-      return { isValid: false, type: 'invalid_domain' };
-    }
-    
-    // For other errors (like timeouts), we log a warning and proceed 
-    // to avoid preventing valid users from signing up due to transient DNS issues.
+    // For timeouts or network errors, log a warning and proceed gracefully
+    // to avoid blocking valid users during transient DNS issues
     console.warn(`DNS check for ${domain} skipped or failed:`, error);
   }
 
   return { isValid: true };
-}
-
-/**
- * Utility to wrap a promise with a timeout.
- */
-function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
-  let timeoutId: NodeJS.Timeout;
-  const timeout = new Promise<never>((_, reject) => {
-    timeoutId = setTimeout(() => {
-      reject(new Error('DNS Timeout'));
-    }, ms);
-  });
-
-  return Promise.race([promise, timeout]).finally(() => {
-    clearTimeout(timeoutId);
-  }) as Promise<T>;
 }

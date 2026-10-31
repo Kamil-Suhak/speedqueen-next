@@ -58,7 +58,6 @@ export default function CollageBackground() {
                   fill
                   className="object-cover"
                   style={antiAliasingStyles}
-                  priority
                   placeholder="blur"
                   sizes="(min-width: 768px) 33vw, 50vw"
                 />
@@ -85,7 +84,6 @@ export default function CollageBackground() {
                   fill
                   className="object-cover"
                   style={antiAliasingStyles}
-                  priority
                   placeholder="blur"
                   sizes="(min-width: 768px) 33vw, 50vw"
                 />

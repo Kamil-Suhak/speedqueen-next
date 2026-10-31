@@ -1,10 +1,16 @@
 import { neon } from '@neondatabase/serverless';
 import { NextResponse } from 'next/server';
 
-const sql = neon(process.env.DATABASE_URL!);
+function getSql() {
+  if (!process.env.DATABASE_URL) {
+    throw new Error('DATABASE_URL is not configured');
+  }
+  return neon(process.env.DATABASE_URL);
+}
 
 export async function POST() {
   try {
+    const sql = getSql();
     const result = await sql`
       UPDATE visit_counter
       SET count = CASE

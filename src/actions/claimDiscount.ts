@@ -7,9 +7,19 @@ import { ClaimDiscountContent, getClaimDiscountEmailTemplate, getAdminNotificati
 import { GlobalConfig } from '@/config/site-config';
 import { validateEmail } from '@/lib/emailValidation';
 
-const sql = neon(process.env.DATABASE_URL!);
+function getSql() {
+  if (!process.env.DATABASE_URL) {
+    throw new Error("DATABASE_URL is not configured");
+  }
+  return neon(process.env.DATABASE_URL);
+}
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() {
+  if (!process.env.RESEND_API_KEY) {
+    throw new Error("RESEND_API_KEY is not configured");
+  }
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 interface ClaimDiscountState {
   email: string;
@@ -56,6 +66,9 @@ export async function claimDiscount(state: ClaimDiscountState) {
     const salt = process.env.HASH_SALT || 'default-fallback-salt-change-me';
     const hashedEmail = crypto.createHash('sha256').update(email.toLowerCase().trim() + salt).digest('hex');
 
+    const sql = getSql();
+    const resend = getResend();
+
     const existing = await sql`SELECT id FROM discounts WHERE hashed_email = ${hashedEmail} LIMIT 1`;
     if (existing.length > 0) return { success: false, error: content.form.errorAlreadyClaimed };
 
@@ -93,24 +106,28 @@ export async function claimDiscount(state: ClaimDiscountState) {
 
       console.log('Success:', data?.id);
 
-      // Send admin notification
+      // Send admin notification (awaited in try/catch so worker does not terminate before completion)
       if (adminEmail) {
-        Promise.all([
-          sql`SELECT COUNT(*) FROM discounts WHERE hashed_email IS NOT NULL`,
-          sql`SELECT COUNT(*) FROM discounts`
-        ]).then(([countResult, totalResult]) => {
+        try {
+          const [countResult, totalResult] = await Promise.all([
+            sql`SELECT COUNT(*) FROM discounts WHERE hashed_email IS NOT NULL`,
+            sql`SELECT COUNT(*) FROM discounts`,
+          ]);
           const totalRedeemed = countResult[0].count;
           const totalCodes = totalResult[0].count;
-          
-          resend.emails.send({
+
+          await resend.emails.send({
             from: 'Speed Queen System <noreply@mail.speedqueenkrk.pl>',
             to: [adminEmail],
             subject: `🎟️ QR Code Redeemed (${totalRedeemed}/${totalCodes})`,
             html: getAdminNotificationTemplate(Number(totalRedeemed), Number(totalCodes)),
-          }).catch(err => console.error('Admin email failed:', err));
-        }).catch(err => console.error('Failed to get counts for admin email:', err));
+          });
+        } catch (adminErr) {
+          console.error('Admin email failed (non-blocking):', adminErr);
+        }
       }
     } catch (err) {
+      console.error('Customer email failed:', err);
       // FALLBACK: Email failed, so release the QR code back to the pool
       await sql`UPDATE discounts SET hashed_email = NULL, claimed_at = NULL WHERE id = ${discountId}`;
       return { success: false, error: content.form.errorEmailFailed };

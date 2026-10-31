@@ -1,5 +1,3 @@
-"use server";
-
 export interface LocationRating {
   placeId: string;
   rating: number;
@@ -29,7 +27,10 @@ async function fetchLocationRating(
   const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=rating,user_ratings_total&key=${apiKey}`;
 
   try {
-    const response = await fetch(url, { next: { revalidate: 86400 } });
+    const response = await fetch(url, {
+      next: { revalidate: 86400 },
+      signal: AbortSignal.timeout(4000),
+    });
     if (!response.ok) return null;
 
     const data: GooglePlacesRatingResponse = await response.json();

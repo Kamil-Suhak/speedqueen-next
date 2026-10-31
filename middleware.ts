@@ -4,8 +4,6 @@ import type { NextRequest } from "next/server";
 const locales = ["en", "pl"];
 const defaultLocale = "en";
 
-export const runtime = "experimental-edge";
-
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
@@ -34,21 +32,22 @@ export function middleware(request: NextRequest) {
       }
     }
 
-    // e.g. redirect "/" to "/en" or "/pl"
-    // We use a permanent redirect (308) or temporary (307)
-    // For local dev, 307 is safer to avoid browser caching issues
-    return NextResponse.redirect(
-      new URL(
-        `/${locale}${pathname.startsWith("/") ? pathname : "/" + pathname}`,
-        request.url,
-      ),
-    );
+    // Redirect directly without trailing slash to prevent double redirect, preserving query params
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname =
+      pathname === "/"
+        ? `/${locale}`
+        : `/${locale}${pathname.startsWith("/") ? pathname : `/${pathname}`}`;
+
+    return NextResponse.redirect(redirectUrl);
   }
+
+  return NextResponse.next();
 }
 
 export const config = {
-  // Matcher ignoring internal Next.js paths and common static assets
+  // Matcher ignoring internal Next.js paths and common static assets (including Cloudflare cdn-cgi)
   matcher: [
-    "/((?!api|_next/static|_next/image|images|favicon.ico|robots.txt|sitemap.xml).*)",
+    "/((?!api|_next/static|_next/image|cdn-cgi|images|favicon.ico|robots.txt|sitemap.xml).*)",
   ],
 };

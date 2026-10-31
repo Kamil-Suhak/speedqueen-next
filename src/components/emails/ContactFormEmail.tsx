@@ -48,7 +48,7 @@ export const ContactFormEmail = ({
 
             <Text style={footer}>
               Aby odpowiedzieć na pytanie, napisz maila na adres: {email} lub
-              kliknij 'Odpowiedz'
+              kliknij &apos;Odpowiedz&apos;
             </Text>
           </Section>
         </Container>

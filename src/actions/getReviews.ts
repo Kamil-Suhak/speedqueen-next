@@ -40,7 +40,10 @@ async function fetchLocationReviews(
   const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&key=${apiKey}&language=${lang}&review_sort=newest`;
 
   try {
-    const response = await fetch(url, { next: { revalidate: 86400 } });
+    const response = await fetch(url, {
+      next: { revalidate: 86400 },
+      signal: AbortSignal.timeout(4000),
+    });
     if (!response.ok) return [];
 
     const data: GooglePlacesResponse = await response.json();
