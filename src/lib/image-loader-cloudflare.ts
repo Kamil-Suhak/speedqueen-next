@@ -17,9 +17,14 @@ export default function cloudflareLoader({
     params.push(`quality=${quality}`);
   }
 
-  // Keep original unoptimized images during local development
-  if (process.env.NODE_ENV === "development") {
-    return `${src}?${params.join("&")}`;
+  // Cloudflare Image Resizing (/cdn-cgi/image/) is only enabled on custom zone domains (e.g. speedqueenkrk.pl).
+  // On workers.dev preview environments or local development, fall back to direct unoptimized static assets.
+  if (
+    process.env.NODE_ENV === "development" ||
+    process.env.NEXT_PUBLIC_BASE_URL?.includes("workers.dev") ||
+    (typeof window !== "undefined" && window.location.hostname.endsWith(".workers.dev"))
+  ) {
+    return src;
   }
 
   // Route through Cloudflare's native edge transformation path

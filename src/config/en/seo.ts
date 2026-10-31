@@ -8,7 +8,7 @@ export const seoEn = {
     "Speed Queen Kraków",
     "coin laundry Krakow",
     "24/7 laundry Kraków",
-    "self-service service1 Kraków",
+    "self-service washing Kraków",
     "industrial washer Kraków",
     "laundry near me Kraków",
     "pralnia samoobsługowa",
@@ -28,8 +28,8 @@ export const seoEn = {
     galleryDescription:
       "Photo gallery of Speed Queen self-service laundromat locations in Kraków",
     serviceMatchKeywords: {
-      washService: ["service1", "washer"],
-      dryService: ["service2", "dryer"],
+      washService: ["washing", "washer"],
+      dryService: ["drying", "dryer"],
       washPricing: "washer",
       dryPricing: "dryer",
     },

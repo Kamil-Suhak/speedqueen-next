@@ -29,7 +29,7 @@ export const faqEn = {
     {
       question: "What are the drying options and how long does it take?",
       answer:
-        "You can select from Low, Medium, High, and Delicate temperature settings based on your fabric type. service2 time cycles can be set from 15 to 60 minutes in 15-minute increments. We recommend a minimum of two cycles (30 minutes) for optimal results.",
+        "You can select from Low, Medium, High, and Delicate temperature settings based on your fabric type. Drying time cycles can be set from 15 to 60 minutes in 15-minute increments. We recommend a minimum of two cycles (30 minutes) for optimal results.",
       icon: "wind",
     },
   ],

@@ -35,7 +35,7 @@ export const instructionsEn = {
       {
         title: "Speed Queen Loyalty Card",
         description:
-          "Buy a card in the payment system and enjoy lower prices on service1 and service2 in all of our laundromats.",
+          "Buy a card in the payment system and enjoy lower prices on washing and drying in all of our laundromats.",
         icon: "credit-card",
       },
     ],
