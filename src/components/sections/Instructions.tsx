@@ -283,14 +283,9 @@ export default function Instructions({
                             <Sparkles size={20} />
                           </div>
                           <div className="min-w-0">
-                            <div className="flex items-center gap-2 flex-wrap">
-                              <span className="font-bold text-sm md:text-base text-gray-900 group-hover:text-brand-primary transition-colors">
-                                {content.programs.triggerWashing.button}
-                              </span>
-                              <span className="text-[10px] md:text-[11px] font-bold bg-brand-primary/10 text-brand-primary px-2.5 py-0.5 rounded-full shrink-0">
-                                {content.programs.triggerWashing.badge}
-                              </span>
-                            </div>
+                            <span className="block font-bold text-sm md:text-base text-gray-900 group-hover:text-brand-primary transition-colors">
+                              {content.programs.triggerWashing.button}
+                            </span>
                             <p className="text-xs text-gray-500 font-normal mt-1 leading-snug">
                               {content.programs.triggerWashing.subtitle}
                             </p>
@@ -331,14 +326,9 @@ export default function Instructions({
                             <ThermometerSun size={20} />
                           </div>
                           <div className="min-w-0">
-                            <div className="flex items-center gap-2 flex-wrap">
-                              <span className="font-bold text-sm md:text-base text-gray-900 group-hover:text-orange-600 transition-colors">
-                                {content.programs.triggerDrying.button}
-                              </span>
-                              <span className="text-[10px] md:text-[11px] font-bold bg-orange-500/10 text-orange-600 px-2.5 py-0.5 rounded-full shrink-0">
-                                {content.programs.triggerDrying.badge}
-                              </span>
-                            </div>
+                            <span className="block font-bold text-sm md:text-base text-gray-900 group-hover:text-orange-600 transition-colors">
+                              {content.programs.triggerDrying.button}
+                            </span>
                             <p className="text-xs text-gray-500 font-normal mt-1 leading-snug">
                               {content.programs.triggerDrying.subtitle}
                             </p>

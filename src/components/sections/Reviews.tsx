@@ -199,19 +199,24 @@ export default function Reviews({
           onClick={handleClose}
         >
           <div
-            className={`bg-white rounded-3xl p-10 max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl relative border border-slate-100 ${isClosing ? "animate-scale-out-modal" : "animate-scale-in-modal"}`}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="review-modal-title"
+            className={`bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl relative border border-slate-100 ${isClosing ? "animate-scale-out-modal" : "animate-scale-in-modal"}`}
             onClick={(e) => e.stopPropagation()}
           >
             <button
               ref={closeButtonRef}
               onClick={handleClose}
-              className="absolute top-8 right-8 p-2 flex items-center justify-center rounded-2xl hover:bg-slate-50 transition-all text-zinc-900"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 md:top-6 md:right-6 w-11 h-11 flex items-center justify-center rounded-full hover:bg-slate-100 active:bg-slate-200 transition-colors text-slate-500 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary/30 z-10 cursor-pointer"
               aria-label="Close modal"
             >
-              <X size={32} />
+              <X size={20} className="sm:hidden" />
+              <X size={24} className="hidden sm:block" />
             </button>
-            <div className="flex items-center gap-4 mb-8">
-              <div className="relative h-16 w-16">
+
+            <div className="flex items-start gap-3 sm:gap-4 pr-12 sm:pr-16 mb-5 sm:mb-6">
+              <div className="relative h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 shrink-0 rounded-full overflow-hidden border border-slate-100 bg-slate-50 shadow-xs">
                 <Image
                   src={
                     selectedReview.profile_photo_url ||
@@ -219,30 +224,56 @@ export default function Reviews({
                   }
                   alt=""
                   fill
-                  className="rounded-full bg-slate-50 object-cover border border-slate-100"
-                  sizes="64px"
+                  className="object-cover"
+                  sizes="(max-width: 640px) 48px, 64px"
                 />
               </div>
-              <div className="flex flex-col">
-                <h3 className="font-extrabold text-2xl text-gray-900 uppercase tracking-tight">
+
+              <div className="flex flex-col min-w-0">
+                <h3
+                  id="review-modal-title"
+                  className="font-extrabold text-base sm:text-xl md:text-2xl text-gray-900 uppercase tracking-tight break-words"
+                >
                   {selectedReview.author_name}
                 </h3>
-                <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">
-                  {selectedReview.relative_time_description}
-                </p>
-              </div>
+                <div className="flex items-center gap-1.5 text-xs text-gray-500 font-semibold uppercase tracking-wider mt-0.5 flex-wrap">
+                  <span>{selectedReview.relative_time_description}</span>
+                  {selectedReview.branchName && (
+                    <>
+                      <span className="text-gray-300">•</span>
+                      <span className="text-gray-600 truncate max-w-[200px] sm:max-w-none">
+                        {selectedReview.branchName}
+                      </span>
+                    </>
+                  )}
+                </div>
 
-              <div className="hidden md:flex gap-1 text-brand-primary ml-6">
-                {[...Array(Math.max(0, selectedReview.rating || 0))].map(
-                  (_, k) => (
-                    <Star key={k} fill="currentColor" size={28} />
-                  ),
-                )}
+                {/* Rating display - permanently visible on mobile & desktop */}
+                <div className="flex items-center gap-2 mt-2">
+                  <div
+                    className="flex gap-0.5 text-brand-primary"
+                    aria-label={`Ocena: ${selectedReview.rating || 5} z 5 gwiazdek`}
+                  >
+                    {[...Array(5)].map((_, k) => {
+                      const isFilled = k < (selectedReview.rating || 5);
+                      return (
+                        <Star
+                          key={k}
+                          fill={isFilled ? "currentColor" : "none"}
+                          className={`w-4 h-4 sm:w-5 sm:h-5 ${isFilled ? "text-brand-primary" : "text-slate-200"}`}
+                        />
+                      );
+                    })}
+                  </div>
+                  <span className="text-xs sm:text-sm font-bold text-gray-700">
+                    {selectedReview.rating ? `${selectedReview.rating}.0` : "5.0"}
+                  </span>
+                </div>
               </div>
             </div>
 
-            <div className="border-t border-slate-50 pt-8">
-              <p className="text-gray-700 leading-relaxed whitespace-pre-line text-xl font-normal">
+            <div className="border-t border-slate-100 pt-5 sm:pt-6 md:pt-8">
+              <p className="text-gray-700 leading-relaxed whitespace-pre-line text-sm sm:text-base md:text-lg font-normal">
                 {selectedReview.text}
               </p>
             </div>
