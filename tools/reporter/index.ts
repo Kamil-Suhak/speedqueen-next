@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import dotenv from "dotenv";
 dotenv.config({ path: ".env.local" });
 dotenv.config(); // fallback to process.env
@@ -79,8 +81,12 @@ async function main() {
 
     console.log(`Report successfully dispatched! Resend message ID: ${data?.id}`);
   } else {
-    console.log("Dry-run mode completed successfully. No email was sent.");
-    console.log("To send the report, rerun with the --send flag.");
+    const previewPath = path.resolve(process.cwd(), "report-preview.html");
+    fs.writeFileSync(previewPath, html, "utf-8");
+    console.log(`Dry-run mode completed successfully.`);
+    console.log(`Preview saved to: ${previewPath}`);
+    console.log("You can open this HTML file directly in any browser to inspect the email.");
+    console.log("To send the live report, rerun with the --send flag.");
   }
 }
 
