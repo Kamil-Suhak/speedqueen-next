@@ -30,7 +30,7 @@ export const MonthlyReportEmail = ({
     <Html>
       <Head />
       <Preview>
-        Raport Witryny Speed Queen ({period}) — {traffic.visits.toLocaleString("pl-PL")} wizyt, śr. {traffic.dailyAverage.toLocaleString("pl-PL")}/dzień
+        Raport Witryny Speed Queen ({period}) — {traffic.visits.toLocaleString("pl-PL")} wizyt, {traffic.pageViews.toLocaleString("pl-PL")} odsłon
       </Preview>
       <Body
         style={{
@@ -127,21 +127,25 @@ export const MonthlyReportEmail = ({
                   <KpiCard
                     label="Wizyty"
                     value={traffic.visits.toLocaleString("pl-PL")}
+                    sublabel="Odwiedziny osób"
                   />
                   <td width="8" />
                   <KpiCard
                     label="Średnio / Dzień"
                     value={traffic.dailyAverage.toLocaleString("pl-PL")}
+                    sublabel="Wizyt dziennie"
                   />
                   <td width="8" />
                   <KpiCard
                     label="Odsłony"
                     value={traffic.pageViews.toLocaleString("pl-PL")}
+                    sublabel="Wyświetlenia stron"
                   />
                   <td width="8" />
                   <KpiCard
                     label="Strony / Wizyta"
                     value={traffic.pagesPerVisit.toFixed(2)}
+                    sublabel="Zaangażowanie"
                   />
                 </tr>
               </tbody>
@@ -158,7 +162,7 @@ export const MonthlyReportEmail = ({
                   backgroundColor: "#f8fafc",
                   border: "1px solid #e2e8f0",
                   borderRadius: "8px",
-                  margin: "0 0 24px 0",
+                  margin: "0 0 16px 0",
                 }}
               >
                 <tbody>
@@ -183,17 +187,97 @@ export const MonthlyReportEmail = ({
                             verticalAlign: "middle",
                           }}
                         />
-                        <strong>Dzień szczytowy:</strong> {traffic.peakDay.formattedDate} —{" "}
+                        <strong>Dzień z największym ruchem:</strong> {traffic.peakDay.formattedDate} —{" "}
                         <strong style={{ color: "#0f172a" }}>
                           {traffic.peakDay.visitors.toLocaleString("pl-PL")}
                         </strong>{" "}
-                        wizyt
+                        odsłon
                       </Text>
                     </td>
                   </tr>
                 </tbody>
               </table>
             )}
+
+            {/* Short non-patronizing, non-technical context */}
+            <table
+              width="100%"
+              cellPadding="0"
+              cellSpacing="0"
+              border={0}
+              style={{
+                backgroundColor: "#f8fafc",
+                border: "1px solid #e2e8f0",
+                borderRadius: "8px",
+                margin: "0 0 24px 0",
+              }}
+            >
+              <tbody>
+                <tr>
+                  <td style={{ padding: "14px 16px" }}>
+                    <Text
+                      style={{
+                        margin: "0 0 8px 0",
+                        fontSize: "11px",
+                        lineHeight: "14px",
+                        fontWeight: "700",
+                        color: "#475569",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.06em",
+                      }}
+                    >
+                      Co oznaczają te liczby w praktyce?
+                    </Text>
+                    <table width="100%" cellPadding="0" cellSpacing="0" border={0}>
+                      <tbody>
+                        <tr>
+                          <td style={{ verticalAlign: "top", paddingBottom: "6px" }}>
+                            <Text
+                              style={{
+                                margin: "0",
+                                fontSize: "12px",
+                                lineHeight: "18px",
+                                color: "#334155",
+                              }}
+                            >
+                              • <strong>Wizyty:</strong> Liczba rzeczywistych osób, które odwiedziły stronę w minionym miesiącu (np. sprawdzając cennik czy lokalizację). Mierzone są wyłącznie sesje w przeglądarkach ludzi — roboty i skanery internetowe są całkowicie wykluczone.
+                            </Text>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style={{ verticalAlign: "top", paddingBottom: "6px" }}>
+                            <Text
+                              style={{
+                                margin: "0",
+                                fontSize: "12px",
+                                lineHeight: "18px",
+                                color: "#334155",
+                              }}
+                            >
+                              • <strong>Odsłony i Zaangażowanie:</strong> Pokazują, jak wnikliwie klienci zapoznają się z ofertą. Wynik powyżej 3 stron na wizytę oznacza, że odwiedzający aktywnie sprawdzają kolejne zakładki (np. instrukcję prania, cennik i dojazd) przed przyjściem do pralni.
+                            </Text>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style={{ verticalAlign: "top" }}>
+                            <Text
+                              style={{
+                                margin: "0",
+                                fontSize: "12px",
+                                lineHeight: "18px",
+                                color: "#334155",
+                              }}
+                            >
+                              • <strong>Smartfony vs. Komputery i Język:</strong> Wskazują, jak wielu klientów szuka pralni na telefonie będąc w drodze, oraz jak dużą część stanowią turyści i osoby obcojęzyczne korzystające z wersji angielskiej.
+                            </Text>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
             {/* Section 2: Visitor Demographics & Devices */}
             <Text
