@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          ref: dev
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -36,13 +38,13 @@ jobs:
 
       - name: Commit & Push Snapshot if Changed
         run: |
-          if ! git diff --quiet src/data/reviews.json; then
+          if [ -n "$(git status --porcelain src/data/reviews.json)" ]; then
             echo "Changes detected in reviews snapshot. Committing..."
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add src/data/reviews.json
             git commit -m "chore: update google reviews snapshot"
-            git push
+            git push origin dev
           else
             echo "No changes detected in reviews snapshot."
           fi

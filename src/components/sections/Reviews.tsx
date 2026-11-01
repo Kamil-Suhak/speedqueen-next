@@ -3,7 +3,7 @@
 import { useEffect, useState, useMemo, useRef, useCallback } from "react";
 import { Star, Quote, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import type { GoogleReview } from "@/actions/getReviews";
+import type { GoogleReviewItem } from "@/actions/getReviews";
 import Image from "next/image";
 import SectionBackground from "@/components/ui/SectionBackground";
 
@@ -16,7 +16,7 @@ interface ReviewsWrapper {
 
 const MAX_CHARS = 130;
 
-const calculateScore = (review: GoogleReview) => {
+const calculateScore = (review: GoogleReviewItem) => {
   const bonus =
     (Math.min(MAX_CHARS, (review.text || "").length) / MAX_CHARS) * 0.99;
   return (review.rating || 0) + bonus;
@@ -36,10 +36,10 @@ export default function Reviews({
   bgImage,
 }: {
   reviewWrapper: ReviewsWrapper;
-  reviews?: GoogleReview[];
+  reviews?: GoogleReviewItem[];
   bgImage?: string;
 }) {
-  const [selectedReview, setSelectedReview] = useState<GoogleReview | null>(
+  const [selectedReview, setSelectedReview] = useState<GoogleReviewItem | null>(
     null,
   );
   const [isClosing, setIsClosing] = useState(false);

@@ -2,20 +2,22 @@
 
 import reviewsData from "@/data/reviews.json";
 
-export interface GoogleReview {
+export interface GoogleReviewItem {
   author_name: string;
   rating: number;
   text: string;
   relative_time_description: string;
   profile_photo_url: string;
   time: number;
-  branchName?: string;
+  branchName: string;
 }
 
-export async function getGoogleReviews(lang: string): Promise<GoogleReview[]> {
+export async function getGoogleReviews(
+  lang: string,
+): Promise<GoogleReviewItem[]> {
   try {
     const reviewsByLang = reviewsData?.reviews as
-      | Record<string, GoogleReview[]>
+      | Record<string, GoogleReviewItem[]>
       | undefined;
 
     if (!reviewsByLang) return [];
