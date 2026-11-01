@@ -11,7 +11,9 @@
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "deploy:preview": "opennextjs-cloudflare build && opennextjs-cloudflare deploy --env preview",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv"
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv",
+    "report:preview": "npx tsx tools/reporter/index.ts",
+    "report:send": "npx tsx tools/reporter/index.ts --send"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.609.0",
@@ -37,6 +39,7 @@
     "prettier": "^3.7.4",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4",
+    "tsx": "^4.19.2",
     "typescript": "^5",
     "wrangler": "^4.105.0"
   },

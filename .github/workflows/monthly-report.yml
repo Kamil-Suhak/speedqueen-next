@@ -1,0 +1,36 @@
+name: Monthly Visibility Report
+
+on:
+  schedule:
+    # Runs at 09:00 UTC on the 1st day of every month
+    - cron: '0 9 1 * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab anytime
+
+jobs:
+  generate-and-send:
+    name: Generate & Dispatch Monthly Report
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Execute Monthly Reporter
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_TO_EMAIL: ${{ secrets.RESEND_TO_EMAIL || 'kontakt@speedqueenkrk.pl' }}
+          NEXT_PUBLIC_GOOGLE_PLACEID_ORLINSKIEGO: "ChIJXw81dFBbFkcR37QA2sxXPU0"
+          NEXT_PUBLIC_GOOGLE_PLACEID_PAWIA: "ChIJ5zIcehhbFkcRg5JAJS7ICZo"
+          NEXT_PUBLIC_GOOGLE_PLACEID_SLOWACKIEGO: "ChIJLzFV3tFbFkcRri72hyj1PCI"
+        run: npx tsx tools/reporter/index.ts --send
