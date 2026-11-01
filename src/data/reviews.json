@@ -1,0 +1,171 @@
+{
+  "updatedAt": "2026-11-01T16:00:40.796Z",
+  "ratings": {
+    "orlinskiego": {
+      "rating": 3.9,
+      "reviewCount": 56
+    },
+    "pawia": {
+      "rating": 3.8,
+      "reviewCount": 122
+    },
+    "slowackiego": {
+      "rating": 3.6,
+      "reviewCount": 43
+    },
+    "overall": {
+      "rating": 3.8,
+      "totalReviews": 221
+    }
+  },
+  "reviews": {
+    "pl": [
+      {
+        "author_name": "Heidi Lepori",
+        "rating": 5,
+        "text": "Veloce ma soprattutto molto pulita",
+        "relative_time_description": "w ostatnim tygodniu",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVlD8UfDAZWQwGGoUuAvjfU-8HOIAKvxfUhSxnHgf7uLeNCi1G6=s128-c0x00000000-cc-rp-mo-ba3",
+        "time": 1792968595,
+        "branchName": "Kraków — ul. Pawia 34"
+      },
+      {
+        "author_name": "Victoria Gosser",
+        "rating": 5,
+        "text": "Cena jest wyższa niż w innych, ale jest bardzo wygodna. Pralki dozują detergent do prania, więc nie musisz się o to martwić. Różne rozmiary. Są suszarki i deska do prasowania. Wnętrze jest bardzo ładne i czyste. Otwarte 24 godziny na dobę, co jest bardzo wygodne. Bardzo podobało mi się to, że jestem w podróży.",
+        "relative_time_description": "3 tygodnie temu",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIrZqLbwvo0vvPbXpGyr47gNnmXxfAECA2IbazDqE_Ru4bTug=s128-c0x00000000-cc-rp-mo-ba3",
+        "time": 1791298926,
+        "branchName": "Kraków — ul. Pawia 34"
+      },
+      {
+        "author_name": "HIDEKI OURA",
+        "rating": 5,
+        "text": "Dzięki postowi Ando-sana mogłam zrobić pranie bez stresu. Przyjechałam około 8 rano w niedzielę, po przyjeździe z Pragi pociągiem sypialnym, więc było praktycznie pusto. Prałam w pralce 7 kg za 32 pz, a w suszarce przez 30 minut za 32 pz. Taki poziom czystości jest w zupełności wystarczający. Wyobrażam sobie, że w nocy pewnie robi się tam tłoczno.",
+        "relative_time_description": "miesiąc temu",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWS4AgBuB-5yGJuv-oY-zaav66jeGp07yQvlOv41YoBlXvedUvy=s128-c0x00000000-cc-rp-mo-ba3",
+        "time": 1789560571,
+        "branchName": "Kraków — ul. Pawia 34"
+      },
+      {
+        "author_name": "Mark Muirhead",
+        "rating": 5,
+        "text": "Niektórzy narzekają na cenę, ale dla mnie płaci się za wygodę i lokalizację – hotel znajduje się naprzeciwko głównego centrum handlowego i dworca kolejowego. Lokalizacja jest absolutnie idealna. Cykle prania trwają zazwyczaj około 30 minut, a suszenie odbywa się w 15-minutowych odstępach, przy czym 30 minut to realnie potrzebne minimum. To miejsce znajduje się około 10 minut od kilku hoteli, więc jeśli mieszkasz w pobliżu, jest idealne. Jedynym minusem jest brak toalety na miejscu, ale to drobiazg.",
+        "relative_time_description": "miesiąc temu",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUbaSoNZEA1l9P1D2IwlsKNZaxZ55NOAb7NbHQigPVC18VE2DHryg=s128-c0x00000000-cc-rp-mo-ba5",
+        "time": 1789507930,
+        "branchName": "Kraków — ul. Pawia 34"
+      },
+      {
+        "author_name": "Kreks Props",
+        "rating": 4,
+        "text": "Drogo, mało pralek dużych. Poza tym zgodne z opisem",
+        "relative_time_description": "miesiąc temu",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjU4fEHvNuFubJYuBNDETAYQ7boYvgijttne5Joghln7cHFiMQg=s128-c0x00000000-cc-rp-mo-ba5",
+        "time": 1789573426,
+        "branchName": "Kraków — al. J. Słowackiego 56"
+      },
+      {
+        "author_name": "Rachel See",
+        "rating": 5,
+        "text": "Pierwszorzędne doświadczenie! Przyjechaliśmy tu, żeby zrobić pranie pod koniec wakacji i było super!!\nKlimatyzacja działała, czysto i schludnie, wygodne miejsca do siedzenia i dużo miejsca do sortowania prania.\nNie korzystam z pralni na tyle często, żeby móc porównywać ceny, ale dla mnie było to opłacalne. Jedna z suszarek zepsuła się, więc musieliśmy zapłacić za kolejną, ale skontaktowałam się z obsługą klienta i już dostałam zwrot pieniędzy! Prawie zniechęciły mnie negatywne recenzje, ale cieszę się, że tak się nie stało!",
+        "relative_time_description": "4 miesiące temu",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVZtP2UKK3A23L-ZKRir6ctk_XbOQjHNBKPHsJlUi4WM5MbIeY=s128-c0x00000000-cc-rp-mo-ba2",
+        "time": 1782113398,
+        "branchName": "Kraków — al. J. Słowackiego 56"
+      },
+      {
+        "author_name": "Sunny Digital",
+        "rating": 5,
+        "text": "Wszystko działa świetnie!! Wyprałam 1 pranie i 2 suszarki (45 + 15 min). Wydałam 100 zł!! W cenę wliczony jest detergent, ponieważ pralka automatycznie go dodaje, więc uwielbiam tę część. Nie wiem, czy każda pralnia samoobsługowa jest tak droga, czy to po prostu normalne. Jeśli to normalne, turyści potrzebują pomocy polskiego rządu, żeby zrobić pranie!!! 🧺 Proszę o pomoc 😂 Podoba Ci się ta recenzja? Kliknij ❤️ dla mnie!",
+        "relative_time_description": "4 miesiące temu",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJY4ilr041O0l9qUapwfaTD65xyXLu-MR7EbNY0D-ds3E9Coh8=s128-c0x00000000-cc-rp-mo-ba3",
+        "time": 1781626344,
+        "branchName": "Kraków — al. J. Słowackiego 56"
+      },
+      {
+        "author_name": "Piotr Pietrzyk",
+        "rating": 4,
+        "text": "Sam proces prania i suszenia ok. Szczególnie do ponad gabarytowych rzeczy.\nAle płatność kartą nie działała (brak połączenia), gorąco jak w piekle (klima jest, ale nie działa).\nZapewne wrócę, bo nie mam daleko.",
+        "relative_time_description": "3 miesiące temu",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWvN3-EnHfX0_TqyvfZK3-lUrRcelQnEkUWdaZ-q_dFO8GfVCLE=s128-c0x00000000-cc-rp-mo-ba5",
+        "time": 1784553968,
+        "branchName": "Kraków — ul. Orlińskiego 1"
+      }
+    ],
+    "en": [
+      {
+        "author_name": "Heidi Lepori",
+        "rating": 5,
+        "text": "Veloce ma soprattutto molto pulita",
+        "relative_time_description": "in the last week",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVlD8UfDAZWQwGGoUuAvjfU-8HOIAKvxfUhSxnHgf7uLeNCi1G6=s128-c0x00000000-cc-rp-mo-ba3",
+        "time": 1792968595,
+        "branchName": "Kraków — ul. Pawia 34"
+      },
+      {
+        "author_name": "Victoria Gosser",
+        "rating": 5,
+        "text": "Price is higher than others but it is very convenient. The washers dispense laundry detergent so you don't have to worry about that. Multiple sizes. Have dryers and an ironing board. Very nice and clean inside. Open 24 hours which is very convenient. Loved having this as a traveler.",
+        "relative_time_description": "3 weeks ago",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIrZqLbwvo0vvPbXpGyr47gNnmXxfAECA2IbazDqE_Ru4bTug=s128-c0x00000000-cc-rp-mo-ba3",
+        "time": 1791298926,
+        "branchName": "Kraków — ul. Pawia 34"
+      },
+      {
+        "author_name": "HIDEKI OURA",
+        "rating": 5,
+        "text": "Thanks to Ando-san's post, I was able to do my laundry without any stress. I arrived around 8am on a Sunday morning after arriving from Prague by sleeper train, so it was practically empty. I used the 7kg washing machine for 32pz and the dryer for 30 minutes for 32pz. This level of cleanliness is perfectly fine. I imagine it probably gets crowded at night.",
+        "relative_time_description": "a month ago",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWS4AgBuB-5yGJuv-oY-zaav66jeGp07yQvlOv41YoBlXvedUvy=s128-c0x00000000-cc-rp-mo-ba3",
+        "time": 1789560571,
+        "branchName": "Kraków — ul. Pawia 34"
+      },
+      {
+        "author_name": "Mark Muirhead",
+        "rating": 5,
+        "text": "Some people complain about the price, but for me, you're paying for the convenience and location -- it's opposite the main shopping centre and train station. It's absolutely perfectly located. The wash cycles mostly take about 30 minutes, and drying is done in increments of 15 minutes, with 30 being the minimum you'll realistically need. This place is about 10 minutes away from several hotels, so if you are based near here, it is ideal. My only criticism is that there's no toilet on site, but it's a minor grumble.",
+        "relative_time_description": "a month ago",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUbaSoNZEA1l9P1D2IwlsKNZaxZ55NOAb7NbHQigPVC18VE2DHryg=s128-c0x00000000-cc-rp-mo-ba5",
+        "time": 1789507930,
+        "branchName": "Kraków — ul. Pawia 34"
+      },
+      {
+        "author_name": "Kreks Props",
+        "rating": 4,
+        "text": "Expensive, few large washing machines. Other than that, consistent with the description",
+        "relative_time_description": "a month ago",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjU4fEHvNuFubJYuBNDETAYQ7boYvgijttne5Joghln7cHFiMQg=s128-c0x00000000-cc-rp-mo-ba5",
+        "time": 1789573426,
+        "branchName": "Kraków — al. J. Słowackiego 56"
+      },
+      {
+        "author_name": "Rachel See",
+        "rating": 5,
+        "text": "First class experience! We came here to do our laundry at the end of our holiday and it was great!!\nAircon worked, clean and tidy, comfortable seating areas and plenty of room to sort through laundry.\nI don’t use laundrettes often enough to be able to compare price but it felt like value for money to me.  One of the dryers malfunctioned meaning we had to pay for another one, but I got in contact with customer service and have had a refund already! I was nearly put off by the bad reviews, but I’m glad that I wasn’t!",
+        "relative_time_description": "4 months ago",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVZtP2UKK3A23L-ZKRir6ctk_XbOQjHNBKPHsJlUi4WM5MbIeY=s128-c0x00000000-cc-rp-mo-ba2",
+        "time": 1782113398,
+        "branchName": "Kraków — al. J. Słowackiego 56"
+      },
+      {
+        "author_name": "Sunny Digital",
+        "rating": 5,
+        "text": "Everything works great!! I did 1 washer load and 2 dryer loads (45 + 15 mins). Spent 100 PLN!! This includes detergent cost since the washer adds it automatically, so love that part. I don’t know if every laundromat is this expensive or this is just normal. If this is\nnormal, Tourists need assistance from Polish Govt. to do their Laundry!!! 🧺 Pls help 😂 Like this review? Click on the ❤️ for me!",
+        "relative_time_description": "4 months ago",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJY4ilr041O0l9qUapwfaTD65xyXLu-MR7EbNY0D-ds3E9Coh8=s128-c0x00000000-cc-rp-mo-ba3",
+        "time": 1781626344,
+        "branchName": "Kraków — al. J. Słowackiego 56"
+      },
+      {
+        "author_name": "Piotr Pietrzyk",
+        "rating": 4,
+        "text": "The washing and drying process itself was okay, especially for oversized items.\n\nHowever, card payments didn't work (no connection), and it was hot as hell (there's air conditioning, but it doesn't work).\n\nI'll probably go back, as it's not far from my place.",
+        "relative_time_description": "3 months ago",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjWvN3-EnHfX0_TqyvfZK3-lUrRcelQnEkUWdaZ-q_dFO8GfVCLE=s128-c0x00000000-cc-rp-mo-ba5",
+        "time": 1784553968,
+        "branchName": "Kraków — ul. Orlińskiego 1"
+      }
+    ]
+  }
+}

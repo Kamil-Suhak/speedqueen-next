@@ -4,11 +4,13 @@ import Instructions from "@/components/sections/Instructions";
 // import ServicesGrid from "@/components/sections/ServicesGrid";
 import Contact from "@/components/sections/Contact";
 import PricingTabs, { PricingProps } from "@/components/sections/PricingTabs";
+import Reviews from "@/components/sections/Reviews";
 import Faq from "@/components/sections/Faq";
 import PromoModal from "@/components/modals/PromoModal";
 import JsonLdHomePage from "@/components/seo/JsonLdHomePage";
 
 import { getDictionary } from "@/lib/generate-dictionaries";
+import { getGoogleReviews } from "@/actions/getReviews";
 import { getSectionBackground } from "@/lib/background-manager";
 
 export async function generateStaticParams() {
@@ -27,21 +29,25 @@ export default async function LandingPage({
     instructions,
     services,
     pricing,
+    reviewsContent,
     faq,
     contact,
     discount,
     common,
     seo,
+    googleReviews,
   ] = await Promise.all([
     getDictionary(lang, "hero"),
     getDictionary(lang, "instructions"),
     getDictionary(lang, "services"),
     getDictionary(lang, "pricing"),
+    getDictionary(lang, "reviews"),
     getDictionary(lang, "faq"),
     getDictionary(lang, "contact"),
     getDictionary(lang, "discount"),
     getDictionary(lang, "common"),
     getDictionary(lang, "seo"),
+    getGoogleReviews(lang),
   ]);
 
   const promoContent = {
@@ -65,7 +71,11 @@ export default async function LandingPage({
         {...(pricing as PricingProps)}
         bgImage={getSectionBackground(2)}
       />
-      {/* <Reviews reviewWrapper={reviewsContent} reviews={googleReviews} bgImage={getSectionBackground(4)} /> */}
+      <Reviews
+        reviewWrapper={reviewsContent}
+        reviews={googleReviews}
+        bgImage={getSectionBackground(4)}
+      />
       <Faq content={faq} bgImage={getSectionBackground(3)} />
       <Contact
         content={contact}

@@ -1,10 +1,6 @@
 "use server";
 
-interface GooglePlacesResponse {
-  result?: {
-    reviews?: GooglePlaceReviewRAW[];
-  };
-}
+import reviewsData from "@/data/reviews.json";
 
 export interface GoogleReview {
   author_name: string;
@@ -13,84 +9,21 @@ export interface GoogleReview {
   relative_time_description: string;
   profile_photo_url: string;
   time: number;
-}
-
-interface GooglePlaceReviewRAW {
-  author_name?: string;
-  rating?: number;
-  text?: string;
-  relative_time_description?: string;
-  profile_photo_url?: string;
-  time?: number;
-}
-
-const PLACE_IDS = [
-  process.env.NEXT_PUBLIC_GOOGLE_PLACEID_ORLINSKIEGO,
-  process.env.NEXT_PUBLIC_GOOGLE_PLACEID_PAWIA,
-  process.env.NEXT_PUBLIC_GOOGLE_PLACEID_SLOWACKIEGO,
-];
-
-async function fetchLocationReviews(
-  placeId: string | undefined,
-  apiKey: string,
-  lang: string,
-): Promise<GoogleReview[]> {
-  if (!placeId) return [];
-
-  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&key=${apiKey}&language=${lang}&review_sort=newest`;
-
-  try {
-    const response = await fetch(url, {
-      next: { revalidate: 86400 },
-      signal: AbortSignal.timeout(4000),
-    });
-    if (!response.ok) return [];
-
-    const data: GooglePlacesResponse = await response.json();
-    const reviews: GooglePlaceReviewRAW[] = Array.isArray(data?.result?.reviews)
-      ? data.result.reviews
-      : [];
-
-    return reviews.map((r) => ({
-      author_name: String(r?.author_name || "Anonymous"),
-      rating: Number(r?.rating || 0),
-      text: String(r?.text || ""),
-      relative_time_description: String(r?.relative_time_description || ""),
-      profile_photo_url: String(r?.profile_photo_url || ""),
-      time: Number(r?.time || Date.now() / 1000),
-    }));
-  } catch (error) {
-    console.error(`Error fetching reviews for ${placeId}:`, error);
-    return [];
-  }
+  branchName?: string;
 }
 
 export async function getGoogleReviews(lang: string): Promise<GoogleReview[]> {
-  const apiKey = process.env.GOOGLE_PLACES_API_KEY;
-
-  if (!apiKey) {
-    console.error("Missing GOOGLE_PLACES_API_KEY");
-    return [];
-  }
-
   try {
-    const results = await Promise.all(
-      PLACE_IDS.map((id) => fetchLocationReviews(id, apiKey, lang)),
-    );
+    const reviewsByLang = reviewsData?.reviews as
+      | Record<string, GoogleReview[]>
+      | undefined;
 
-    const allReviews = results.flat();
-    const uniqueReviewsMap = new Map<string, GoogleReview>();
+    if (!reviewsByLang) return [];
 
-    allReviews.forEach((r) => {
-      const key = `${r.author_name}-${r.time}`;
-      if (!uniqueReviewsMap.has(key)) {
-        uniqueReviewsMap.set(key, r);
-      }
-    });
-
-    return Array.from(uniqueReviewsMap.values());
+    const selectedReviews = reviewsByLang[lang] || reviewsByLang.pl || [];
+    return selectedReviews;
   } catch (error) {
-    console.error("Error in getGoogleReviews:", error);
+    console.error("Error reading reviews snapshot:", error);
     return [];
   }
 }

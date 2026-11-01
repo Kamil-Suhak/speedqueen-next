@@ -154,7 +154,10 @@ export default function Reviews({
                   <div className="flex items-center gap-4 border-t border-slate-50 pt-6">
                     <div className="relative h-14 w-14">
                       <Image
-                        src={review.profile_photo_url || "/images/logo.png"}
+                        src={
+                          review.profile_photo_url ||
+                          "/images/avatar-default.svg"
+                        }
                         alt=""
                         fill
                         className="rounded-full bg-slate-50 object-cover border border-slate-100 shadow-sm"
@@ -210,7 +213,10 @@ export default function Reviews({
             <div className="flex items-center gap-4 mb-8">
               <div className="relative h-16 w-16">
                 <Image
-                  src={selectedReview.profile_photo_url || "/images/logo.png"}
+                  src={
+                    selectedReview.profile_photo_url ||
+                    "/images/avatar-default.svg"
+                  }
                   alt=""
                   fill
                   className="rounded-full bg-slate-50 object-cover border border-slate-100"

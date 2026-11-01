@@ -13,7 +13,8 @@
     "deploy:preview": "opennextjs-cloudflare build && opennextjs-cloudflare deploy --env preview",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv",
     "report:preview": "npx tsx tools/reporter/index.ts",
-    "report:send": "npx tsx tools/reporter/index.ts --send"
+    "report:send": "npx tsx tools/reporter/index.ts --send",
+    "reviews:sync": "npx tsx tools/sync-reviews.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.609.0",
