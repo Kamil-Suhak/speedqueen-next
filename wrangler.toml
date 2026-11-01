@@ -21,7 +21,9 @@ bucket_name = "discount-qr-codes"
 # ==========================================
 [env.preview]
 name = "speedqueen-next-dev"
-workers_dev = true
+routes = [
+  { pattern = "dev.speedqueenkrk.pl", custom_domain = true }
+]
 
 [env.preview.vars]
 PROMO_START_DATE="2026-03-30T00:00:00+01:00"
@@ -29,7 +31,7 @@ NEXT_PUBLIC_GOOGLE_PLACEID_ORLINSKIEGO="ChIJXw81dFBbFkcR37QA2sxXPU0"
 NEXT_PUBLIC_GOOGLE_PLACEID_PAWIA="ChIJ5zIcehhbFkcRg5JAJS7ICZo"
 NEXT_PUBLIC_GOOGLE_PLACEID_SLOWACKIEGO="ChIJLzFV3tFbFkcRri72hyj1PCI"
 RESEND_TO_EMAIL="kontakt@speedqueenkrk.pl"
-NEXT_PUBLIC_BASE_URL="https://speedqueen-next-dev.kamilsuhak.workers.dev"
+NEXT_PUBLIC_BASE_URL="https://dev.speedqueenkrk.pl"
 IS_PREVIEW="true"
 
 [[env.preview.r2_buckets]]
