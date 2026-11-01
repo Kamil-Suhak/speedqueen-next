@@ -67,7 +67,7 @@ export default function Reviews({
       document.body.style.overflow = "auto";
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [selectedReview]);
+  }, [selectedReview, handleClose]);
 
   useEffect(() => {
     if (selectedReview) {
@@ -246,4 +246,3 @@ export default function Reviews({
     </section>
   );
 }
-

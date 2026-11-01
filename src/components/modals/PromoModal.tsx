@@ -35,7 +35,7 @@ export default function PromoModal({ content }: PromoModalProps) {
         if (isMounted && data.showModal) {
           setShouldShow(true);
         }
-      } catch (error) {
+      } catch {
         // Silently fail - don't show the modal if check fails to prevent breaking UX
         console.error('Failed to check promo eligibility');
       }
@@ -64,4 +64,3 @@ export default function PromoModal({ content }: PromoModalProps) {
     </AutoOpenModal>
   );
 }
-

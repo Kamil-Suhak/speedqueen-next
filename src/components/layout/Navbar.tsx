@@ -5,7 +5,6 @@ import { Menu, X, Globe, Phone } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { GlobalConfig } from "@/config/site-config";
 import { useActiveSection } from "@/hooks/useActiveSelection";
 import Image from "next/image";
 import ObfuscatedLink from "@/components/ui/ObfuscatedLink";
@@ -306,4 +305,3 @@ export default function Navbar({
     </nav>
   );
 }
-

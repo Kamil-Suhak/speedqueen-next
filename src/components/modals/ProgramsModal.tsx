@@ -105,14 +105,19 @@ export default function ProgramsModal({
   initialTab = "washing",
   content,
 }: ProgramsModalProps) {
-  const [activeTab, setActiveTab] = useState<"washing" | "drying">(initialTab);
+  const [userTab, setUserTab] = useState<"washing" | "drying" | null>(null);
+  const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (isOpen) {
-      setActiveTab(initialTab);
+  if (prevIsOpen !== isOpen) {
+    setPrevIsOpen(isOpen);
+    if (!isOpen) {
+      setUserTab(null);
     }
-  }, [isOpen, initialTab]);
+  }
+
+  const activeTab = userTab ?? initialTab;
+  const setActiveTab = (tab: "washing" | "drying") => setUserTab(tab);
 
   useEffect(() => {
     scrollContainerRef.current?.scrollTo({ top: 0, behavior: "instant" });

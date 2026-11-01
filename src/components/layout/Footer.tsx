@@ -1,4 +1,4 @@
-import { GlobalConfig, Locations } from "@/config/site-config";
+import { GlobalConfig } from "@/config/site-config";
 import Image from "next/image";
 import { Phone, Mail, MapPin, Clock, CheckCircle } from "lucide-react";
 import ObfuscatedLink from "@/components/ui/ObfuscatedLink";
@@ -6,7 +6,7 @@ import ObfuscatedLink from "@/components/ui/ObfuscatedLink";
 interface FooterProps {
   brand: typeof GlobalConfig.brand;
   socials: typeof GlobalConfig.socials;
-  links: {
+  links?: {
     title: string;
     links: { label: string; href: string }[];
   }[];
@@ -39,7 +39,7 @@ const getSocialIcon = (platform: string) => {
   return null;
 };
 
-export default function Footer({ brand, socials, links, lang, footerLabels }: FooterProps) {
+export default function Footer({ brand, socials, lang, footerLabels }: FooterProps) {
   return (
     <footer className="border-t border-zinc-200 bg-zinc-50 pt-16 pb-8 text-gray-600">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -143,4 +143,3 @@ export default function Footer({ brand, socials, links, lang, footerLabels }: Fo
     </footer>
   );
 }
-
