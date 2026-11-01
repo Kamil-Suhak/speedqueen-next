@@ -27,6 +27,9 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+          CLOUDFLARE_R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+          R2_REPORTS_BUCKET: "speedqueen-reports"
           GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           RESEND_TO_EMAIL: ${{ secrets.RESEND_TO_EMAIL || 'kontakt@speedqueenkrk.pl' }}
@@ -34,3 +37,11 @@ jobs:
           NEXT_PUBLIC_GOOGLE_PLACEID_PAWIA: "ChIJ5zIcehhbFkcRg5JAJS7ICZo"
           NEXT_PUBLIC_GOOGLE_PLACEID_SLOWACKIEGO: "ChIJLzFV3tFbFkcRri72hyj1PCI"
         run: npx tsx tools/reporter/index.ts --send
+
+      - name: Archive Reports in GitHub Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monthly-reports
+          path: reports/
+          retention-days: 90

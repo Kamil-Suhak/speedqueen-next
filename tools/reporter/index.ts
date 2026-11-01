@@ -10,8 +10,9 @@ import { Resend } from "resend";
 import { MonthlyReportEmail } from "./template";
 import { fetchGooglePlacesReputation } from "./adapters/googlePlaces";
 import { fetchCloudflareVisitorMetrics } from "./adapters/cloudflare";
+import { saveReport } from "./adapters/storage";
 
-function getPolishMonthName(): string {
+function getReportPeriod(): { period: string; slug: string } {
   const date = new Date();
   // If run early in the month (1st-5th), report is for the previous month
   if (date.getDate() <= 5) {
@@ -20,12 +21,14 @@ function getPolishMonthName(): string {
   const monthName = date.toLocaleDateString("pl-PL", { month: "long" });
   const year = date.getFullYear();
   const capitalizedMonth = monthName.charAt(0).toUpperCase() + monthName.slice(1);
-  return `${capitalizedMonth} ${year}`;
+  const period = `${capitalizedMonth} ${year}`;
+  const slug = `${year}-${String(date.getMonth() + 1).padStart(2, "0")}`;
+  return { period, slug };
 }
 
 async function main() {
   const isSend = process.argv.includes("--send");
-  const period = getPolishMonthName();
+  const { period, slug } = getReportPeriod();
   const recipientEmail =
     process.env.RESEND_TO_EMAIL || "kontakt@speedqueenkrk.pl";
 
@@ -55,7 +58,16 @@ async function main() {
 
   const html = await render(emailElement);
 
-  // 3. Dispatch or Dry Run
+  // 3. Save report locally and to R2 storage
+  console.log("Saving report snapshot...");
+  const storageResult = await saveReport({ html, slug, period });
+  console.log(`[Storage] Saved locally: ${storageResult.localPath}`);
+  console.log(`[Storage] Updated preview: ${storageResult.previewPath}`);
+  if (storageResult.r2Uploaded) {
+    console.log(`[Storage] Archived to Cloudflare R2: ${storageResult.r2Location}`);
+  }
+
+  // 4. Dispatch or Dry Run
   if (isSend) {
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
@@ -81,11 +93,8 @@ async function main() {
 
     console.log(`Report successfully dispatched! Resend message ID: ${data?.id}`);
   } else {
-    const previewPath = path.resolve(process.cwd(), "report-preview.html");
-    fs.writeFileSync(previewPath, html, "utf-8");
     console.log(`Dry-run mode completed successfully.`);
-    console.log(`Preview saved to: ${previewPath}`);
-    console.log("You can open this HTML file directly in any browser to inspect the email.");
+    console.log(`Open preview directly: ${storageResult.previewPath}`);
     console.log("To send the live report, rerun with the --send flag.");
   }
 }
