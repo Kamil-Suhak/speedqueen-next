@@ -52,14 +52,6 @@ export default function BaseModal({
             className="absolute inset-0 bg-zinc-900/60 backdrop-blur-sm cursor-pointer"
           />
 
-          <button
-            onClick={onClose}
-            className="fixed right-6 top-6 z-[60] rounded-full p-2.5 text-white/70 transition hover:bg-white/10 hover:text-white hidden md:block"
-            aria-label={closeLabel}
-          >
-            <X size={32} />
-          </button>
-
           <motion.div
             role="dialog"
             aria-modal="true"
@@ -70,10 +62,10 @@ export default function BaseModal({
           >
             <button
               onClick={onClose}
-              className="absolute right-4 top-4 z-10 rounded-full p-2 text-zinc-400 transition hover:bg-zinc-100 md:hidden"
+              className="absolute right-4 top-4 md:right-5 md:top-5 z-20 rounded-full p-2 text-zinc-400 hover:text-zinc-700 transition hover:bg-zinc-100 cursor-pointer"
               aria-label={closeLabel}
             >
-              <X size={24} />
+              <X size={22} />
             </button>
 
             {children}

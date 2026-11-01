@@ -5,10 +5,6 @@ import BaseModal from "./BaseModal";
 import {
   Sparkles,
   ThermometerSun,
-  Clock,
-  RotateCw,
-  Droplets,
-  AlertCircle,
   Info,
   Check,
   Package,
@@ -186,34 +182,15 @@ export default function ProgramsModal({
           {activeTab === "washing" ? (
             <>
               {/* Washing Disclaimers */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div className="p-3.5 rounded-xl bg-blue-50/70 border border-blue-100 flex items-start gap-3">
-                  <div className="shrink-0 p-1.5 rounded-lg bg-blue-100 text-blue-700 mt-0.5">
-                    <Droplets size={16} />
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-blue-900 mb-0.5">
-                      {content.washing.disclaimerDetergent.title}
-                    </h4>
-                    <p className="text-xs text-blue-800/90 leading-relaxed">
-                      {content.washing.disclaimerDetergent.text}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-100 flex items-start gap-3">
-                  <div className="shrink-0 p-1.5 rounded-lg bg-amber-100 text-amber-700 mt-0.5">
-                    <AlertCircle size={16} />
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-amber-900 mb-0.5">
-                      {content.washing.disclaimerRules.title}
-                    </h4>
-                    <p className="text-xs text-amber-800/90 leading-relaxed">
-                      {content.washing.disclaimerRules.text}
-                    </p>
-                  </div>
-                </div>
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/60 text-xs text-zinc-600 flex items-start gap-2.5">
+                <Info size={16} className="text-zinc-400 shrink-0 mt-0.5" />
+                <p className="leading-relaxed">
+                  <strong className="text-zinc-800">{content.washing.disclaimerDetergent.title}:</strong>{" "}
+                  {content.washing.disclaimerDetergent.text}
+                  <span className="mx-1.5 text-zinc-300">•</span>
+                  <strong className="text-zinc-800">{content.washing.disclaimerRules.title}:</strong>{" "}
+                  {content.washing.disclaimerRules.text}
+                </p>
               </div>
 
               {/* Washing Programs List */}
@@ -233,20 +210,16 @@ export default function ProgramsModal({
                         </h4>
                       </div>
 
-                      {/* Badges row */}
-                      <div className="flex flex-wrap items-center gap-1.5 pl-10 sm:pl-0">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-bold bg-white text-gray-800 border border-slate-200/70 shadow-xs">
+                      {/* Spec row */}
+                      <div className="flex items-center gap-2 text-xs text-zinc-600 pl-10 sm:pl-0 font-medium">
+                        <span className="font-bold text-zinc-900 flex items-center gap-1">
                           <ThermometerSun size={13} className="text-brand-primary" />
                           {item.temp}
                         </span>
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-white text-gray-700 border border-slate-200/70 shadow-xs">
-                          <RotateCw size={13} className="text-blue-600" />
-                          {item.spin}
-                        </span>
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-white text-gray-700 border border-slate-200/70 shadow-xs">
-                          <Clock size={13} className="text-slate-500" />
-                          {item.duration}
-                        </span>
+                        <span className="text-zinc-300">•</span>
+                        <span>{item.spin}</span>
+                        <span className="text-zinc-300">•</span>
+                        <span>{item.duration}</span>
                       </div>
                     </div>
 
@@ -277,34 +250,15 @@ export default function ProgramsModal({
           ) : (
             <>
               {/* Drying Disclaimers */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div className="p-3.5 rounded-xl bg-blue-50/70 border border-blue-100 flex items-start gap-3">
-                  <div className="shrink-0 p-1.5 rounded-lg bg-blue-100 text-blue-700 mt-0.5">
-                    <Info size={16} />
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-blue-900 mb-0.5">
-                      {content.drying.disclaimerSpin.title}
-                    </h4>
-                    <p className="text-xs text-blue-800/90 leading-relaxed">
-                      {content.drying.disclaimerSpin.text}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-100 flex items-start gap-3">
-                  <div className="shrink-0 p-1.5 rounded-lg bg-emerald-100 text-emerald-700 mt-0.5">
-                    <Sparkles size={16} />
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-900 mb-0.5">
-                      {content.drying.disclaimerCapacity.title}
-                    </h4>
-                    <p className="text-xs text-emerald-800/90 leading-relaxed">
-                      {content.drying.disclaimerCapacity.text}
-                    </p>
-                  </div>
-                </div>
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/60 text-xs text-zinc-600 flex items-start gap-2.5">
+                <Info size={16} className="text-zinc-400 shrink-0 mt-0.5" />
+                <p className="leading-relaxed">
+                  <strong className="text-zinc-800">{content.drying.disclaimerSpin.title}:</strong>{" "}
+                  {content.drying.disclaimerSpin.text}
+                  <span className="mx-1.5 text-zinc-300">•</span>
+                  <strong className="text-zinc-800">{content.drying.disclaimerCapacity.title}:</strong>{" "}
+                  {content.drying.disclaimerCapacity.text}
+                </p>
               </div>
 
               {/* Drying Semantic Programs List */}
@@ -331,19 +285,16 @@ export default function ProgramsModal({
                         </div>
                       </div>
 
-                      {/* Badges row */}
-                      <div className="flex flex-wrap items-center gap-1.5 pl-10 sm:pl-0">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-bold bg-white text-gray-800 border border-slate-200/70 shadow-xs">
+                      {/* Spec row */}
+                      <div className="flex items-center gap-2 text-xs text-zinc-600 pl-10 sm:pl-0 font-medium">
+                        <span className="font-bold text-zinc-900 flex items-center gap-1">
                           <ThermometerSun size={13} className="text-orange-500" />
                           {item.temp}
                         </span>
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-white text-gray-700 border border-slate-200/70 shadow-xs">
-                          <Clock size={13} className="text-slate-500" />
-                          {item.duration}
-                        </span>
-                        <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-brand-primary/10 text-brand-primary">
-                          {item.badge}
-                        </span>
+                        <span className="text-zinc-300">•</span>
+                        <span>{item.duration}</span>
+                        <span className="text-zinc-300">•</span>
+                        <span className="font-semibold text-brand-primary">{item.badge}</span>
                       </div>
                     </div>
 

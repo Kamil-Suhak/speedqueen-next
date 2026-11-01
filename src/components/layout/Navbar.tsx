@@ -118,10 +118,10 @@ export default function Navbar({
           : "text-gray-600 hover:text-brand-primary"
     }`;
 
-    const mobileClasses = `block px-3 py-5 text-lg font-bold uppercase tracking-tight transition-colors border-b-2 border-brand-primary/20 ${
+    const mobileClasses = `flex items-center justify-between px-4 py-3.5 rounded-xl text-base font-bold uppercase tracking-wider transition-colors duration-150 ${
       isActive
-        ? "text-brand-primary"
-        : "text-gray-900 active:text-brand-primary"
+        ? "text-brand-primary bg-brand-primary/5"
+        : "text-zinc-800 hover:text-brand-primary hover:bg-slate-50 active:bg-slate-100"
     }`;
 
     return (
@@ -134,24 +134,16 @@ export default function Navbar({
       >
         <div className="relative inline-block z-10">
           <span>{link.label}</span>
-          {isActive && (
+          {isActive && isInsideRed && (
             <motion.div
-              layoutId={
-                isInsideRed
-                  ? "activeNavUnderline"
-                  : "activeNavUnderlineMobile"
-              }
-              className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full ${
-                isInsideRed ? "bg-white" : "bg-brand-primary"
-              }`}
+              layoutId="activeNavUnderline"
+              className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-white"
               transition={{ type: "spring", stiffness: 380, damping: 40 }}
             />
           )}
           {!isActive && isInsideRed && (
             <span
-              className={`absolute bottom-0 left-0 h-0.5 w-0 rounded-full transition-[width] duration-300 group-hover:w-full ${
-                isInsideRed ? "bg-white" : "bg-brand-primary"
-              }`}
+              className="absolute bottom-0 left-0 h-0.5 w-0 rounded-full transition-[width] duration-300 group-hover:w-full bg-white"
             />
           )}
         </div>
@@ -163,10 +155,10 @@ export default function Navbar({
     <nav
       style={{ top: hasAnnouncementBar && !scrolled ? "20px" : "0px" }}
       className={`fixed z-50 w-full transition-[background-color,padding,box-shadow,border-color,backdrop-filter,top] duration-300 ${
-        scrolled
-          ? "bg-white/95 py-3 shadow-md backdrop-blur-md border-b border-gray-100"
-          : isOpen
-            ? "bg-white py-5 shadow-sm"
+        isOpen
+          ? "bg-white shadow-lg"
+          : scrolled
+            ? "bg-white/95 py-3 shadow-sm backdrop-blur-md border-b border-slate-200/60"
             : "bg-transparent py-5"
       }`}
       aria-label="Menu"
@@ -273,8 +265,8 @@ export default function Navbar({
         aria-hidden={!isOpen}
         inert={!isOpen ? true : undefined}
       >
-        <div className="overflow-hidden border-b border-gray-100 bg-white">
-          <div className="space-y-1 px-4 pt-2 pb-8">
+        <div className="overflow-hidden border-t border-slate-100 border-b border-slate-200/80 bg-white">
+          <div className="flex flex-col gap-1 px-4 pt-3 pb-6">
             {links
               .filter((link) => !link.href.includes("gallery"))
               .map((link) => renderNavLink(link, false, () => setIsOpen(false)))}
@@ -284,7 +276,7 @@ export default function Navbar({
               .map((link) => (
                 <div
                   key={link.label}
-                  className="border-t-2 border-brand-primary mt-2"
+                  className="pt-2 mt-1 border-t border-slate-100"
                 >
                   {renderNavLink(link, false, () => setIsOpen(false))}
                 </div>
