@@ -11,13 +11,12 @@ import { fetchCloudflareVisitorMetrics } from "./adapters/cloudflare";
 
 function getPolishMonthName(): string {
   const date = new Date();
-  // If run early in the month (e.g. 1st-5th), report is for the previous month
+  // If run early in the month (1st-5th), report is for the previous month
   if (date.getDate() <= 5) {
     date.setMonth(date.getMonth() - 1);
   }
   const monthName = date.toLocaleDateString("pl-PL", { month: "long" });
   const year = date.getFullYear();
-  // Capitalize first letter of Polish month
   const capitalizedMonth = monthName.charAt(0).toUpperCase() + monthName.slice(1);
   return `${capitalizedMonth} ${year}`;
 }
@@ -29,23 +28,22 @@ async function main() {
     process.env.RESEND_TO_EMAIL || "kontakt@speedqueenkrk.pl";
 
   console.log("==========================================");
-  console.log(`📊 Speed Queen Monthly Reporter — ${period}`);
+  console.log(`Speed Queen Monthly Visibility Reporter (${period})`);
   console.log("==========================================");
 
-  // 1. Fetch metrics from adapters
-  console.log("📡 Pobieranie danych z Google Places i Cloudflare...");
+  // 1. Fetch metrics from adapters (strictly real data, throws fatal error on missing keys or failures)
+  console.log("Fetching live data from Google Places API and Cloudflare Analytics...");
   const [reputation, traffic] = await Promise.all([
     fetchGooglePlacesReputation(),
     fetchCloudflareVisitorMetrics(),
   ]);
 
-  console.log(`✅ Odwiedzający: ${traffic.visits.toLocaleString("pl-PL")}`);
-  console.log(`✅ Odsłony: ${traffic.pageViews.toLocaleString("pl-PL")}`);
-  console.log(`✅ Średnia ocena Google: ${reputation.averageRating.toFixed(1)} ★ (${reputation.totalReviews} opinii)`);
-  console.log(`✅ Odbiorca: ${recipientEmail}`);
+  console.log(`[Google Places] Retrieved ${reputation.totalReviews} verified reviews across ${reputation.branches.length} branches. Average rating: ${reputation.averageRating.toFixed(1)}`);
+  console.log(`[Cloudflare] Retrieved ${traffic.visits} unique visitors and ${traffic.pageViews} page views.`);
+  console.log(`[Config] Target recipient: ${recipientEmail}`);
 
   // 2. Render React Email template to HTML
-  console.log("🎨 Generowanie szablonu HTML wiadomości...");
+  console.log("Rendering HTML email template in Polish...");
   const emailElement = React.createElement(MonthlyReportEmail, {
     period,
     traffic,
@@ -59,11 +57,12 @@ async function main() {
   if (isSend) {
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
-      console.error("❌ Błąd: Brak zmiennej RESEND_API_KEY w środowisku!");
-      process.exit(1);
+      throw new Error(
+        "Fatal: Missing RESEND_API_KEY environment variable. Cannot dispatch report email.",
+      );
     }
 
-    console.log(`🚀 Wysyłanie raportu na adres: ${recipientEmail}...`);
+    console.log(`Dispatching monthly report to ${recipientEmail} via Resend...`);
     const resend = new Resend(apiKey);
     const { data, error } = await resend.emails.send({
       from: "Raporty Speed Queen <noreply@mail.speedqueenkrk.pl>",
@@ -73,18 +72,19 @@ async function main() {
     });
 
     if (error) {
-      console.error("❌ Błąd podczas wysyłania przez Resend:", error);
-      process.exit(1);
+      throw new Error(
+        `Fatal: Resend delivery failed: ${JSON.stringify(error)}`,
+      );
     }
 
-    console.log("🎉 Raport został pomyślnie wysłany! ID wiadomości:", data?.id);
+    console.log(`Report successfully dispatched! Resend message ID: ${data?.id}`);
   } else {
-    console.log("ℹ️ Tryb podglądu (--dry-run). Wiadomość NIE została wysłana.");
-    console.log("💡 Aby wysłać raport, uruchom polecenie z flagą --send.");
+    console.log("Dry-run mode completed successfully. No email was sent.");
+    console.log("To send the report, rerun with the --send flag.");
   }
 }
 
 main().catch((err) => {
-  console.error("❌ Nieoczekiwany błąd w generatorze raportu:", err);
-  process.exit(1);
+  console.error("FATAL ERROR:", err instanceof Error ? err.message : err);
+  process.exitCode = 1;
 });

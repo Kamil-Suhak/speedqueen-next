@@ -45,8 +45,9 @@ export async function fetchGooglePlacesReputation(
   const key = apiKey || process.env.GOOGLE_PLACES_API_KEY;
 
   if (!key) {
-    console.warn("⚠️ [Reporter] Brak GOOGLE_PLACES_API_KEY — używam danych poglądowych.");
-    return getFallbackReputation();
+    throw new Error(
+      "Fatal: Missing GOOGLE_PLACES_API_KEY environment variable. Live Google Places data is strictly required.",
+    );
   }
 
   const branches: BranchReputation[] = [];
@@ -54,63 +55,76 @@ export async function fetchGooglePlacesReputation(
 
   for (const branch of BRANCH_CONFIGS) {
     const placeId = process.env[branch.envKey] || branch.defaultPlaceId;
-    if (!placeId) continue;
+    if (!placeId) {
+      throw new Error(
+        `Fatal: Missing Google Place ID for branch ${branch.name} (${branch.envKey}).`,
+      );
+    }
 
-    try {
-      const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,user_ratings_total,reviews&key=${key}&language=pl`;
-      const response = await fetch(url, { signal: AbortSignal.timeout(6000) });
+    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,user_ratings_total,reviews&key=${key}&language=pl`;
+    const response = await fetch(url, { signal: AbortSignal.timeout(8000) });
 
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
+    if (!response.ok) {
+      throw new Error(
+        `Fatal: Google Places API request failed for ${branch.name} with HTTP ${response.status}: ${response.statusText}`,
+      );
+    }
 
-      const data = (await response.json()) as {
-        result?: {
+    const data = (await response.json()) as {
+      status?: string;
+      error_message?: string;
+      result?: {
+        rating?: number;
+        user_ratings_total?: number;
+        reviews?: Array<{
+          author_name?: string;
+          text?: string;
           rating?: number;
-          user_ratings_total?: number;
-          reviews?: Array<{
-            author_name?: string;
-            text?: string;
-            rating?: number;
-            relative_time_description?: string;
-          }>;
-        };
+          relative_time_description?: string;
+        }>;
       };
-      const result = data.result || {};
+    };
 
-      const rating = Number(result.rating || 4.8);
-      const totalReviews = Number(result.user_ratings_total || 150);
+    if (data.status !== "OK" && data.status !== "ZERO_RESULTS") {
+      throw new Error(
+        `Fatal: Google Places API returned status "${data.status}" for ${branch.name}: ${data.error_message || "Unknown error"}`,
+      );
+    }
 
-      branches.push({
-        name: branch.name,
-        address: branch.address,
-        rating,
-        totalReviews,
-      });
+    const result = data.result || {};
+    const rating = Number(result.rating || 0);
+    const totalReviews = Number(result.user_ratings_total || 0);
 
-      // Find a clean, substantive 5-star review for the spotlight quote
-      if (!featuredReview && Array.isArray(result.reviews)) {
-        const top5Star = result.reviews.find(
-          (r: { rating?: number; text?: string }) =>
-            r.rating === 5 && r.text && r.text.length > 30 && r.text.length < 240,
-        );
-        if (top5Star) {
-          featuredReview = {
-            author: top5Star.author_name || "Zadowolony Klient",
-            text: top5Star.text!,
-            rating: 5,
-            branchName: branch.name,
-            relativeTime: top5Star.relative_time_description || "niedawno",
-          };
-        }
+    branches.push({
+      name: branch.name,
+      address: branch.address,
+      rating,
+      totalReviews,
+    });
+
+    // Check for an actual, authentic 5-star customer review with substantive text
+    if (!featuredReview && Array.isArray(result.reviews)) {
+      const top5Star = result.reviews.find(
+        (r) =>
+          r.rating === 5 &&
+          r.text &&
+          r.text.trim().length > 25 &&
+          r.text.trim().length < 280,
+      );
+      if (top5Star && top5Star.text) {
+        featuredReview = {
+          author: top5Star.author_name || "Klient Google",
+          text: top5Star.text.trim(),
+          rating: 5,
+          branchName: branch.name,
+          relativeTime: top5Star.relative_time_description || "niedawno",
+        };
       }
-    } catch (err) {
-      console.warn(`⚠️ [Reporter] Błąd pobierania opinii dla ${branch.name}:`, err);
     }
   }
 
   if (branches.length === 0) {
-    return getFallbackReputation();
+    throw new Error("Fatal: No branch data could be retrieved from Google Places API.");
   }
 
   const totalReviews = branches.reduce((sum, b) => sum + b.totalReviews, 0);
@@ -121,52 +135,12 @@ export async function fetchGooglePlacesReputation(
   const averageRating =
     totalReviews > 0
       ? Number((weightedRatingSum / totalReviews).toFixed(1))
-      : 4.8;
+      : 0;
 
   return {
     averageRating,
     totalReviews,
     branches,
-    featuredReview: featuredReview || {
-      author: "Piotr K.",
-      text: "Czysto, pralki nowoczesne, płatność kartą i telefonem. Pranie i suszenie zajęło mniej niż godzinę. Bardzo polecam!",
-      rating: 5,
-      branchName: "Kraków — ul. Pawia 34",
-      relativeTime: "w tym miesiącu",
-    },
-  };
-}
-
-function getFallbackReputation(): GooglePlacesReportData {
-  return {
-    averageRating: 4.8,
-    totalReviews: 486,
-    branches: [
-      {
-        name: "Kraków — ul. Pawia 34",
-        address: "ul. Pawia 34 (Centrum / Dworzec Główny)",
-        rating: 4.8,
-        totalReviews: 218,
-      },
-      {
-        name: "Kraków — al. J. Słowackiego 56",
-        address: "al. J. Słowackiego 56 (Krowodrza)",
-        rating: 4.7,
-        totalReviews: 176,
-      },
-      {
-        name: "Kraków — ul. Orlińskiego 1",
-        address: "ul. Orlińskiego 1/U17 (Czyżyny)",
-        rating: 4.9,
-        totalReviews: 92,
-      },
-    ],
-    featuredReview: {
-      author: "Anna M.",
-      text: "Świetna pralnia! Szybkie pranie i suszenie, wszystko pachnące i czyste. Bardzo wygodna lokalizacja.",
-      rating: 5,
-      branchName: "Kraków — ul. Pawia 34",
-      relativeTime: "w tym miesiącu",
-    },
+    featuredReview,
   };
 }

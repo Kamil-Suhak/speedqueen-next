@@ -101,7 +101,6 @@ export const MonthlyReportEmail = ({
 
           {/* Body Container */}
           <Section style={{ padding: "24px 24px 8px 24px" }}>
-            {/* Intro paragraph */}
             <Text
               style={{
                 margin: "0 0 20px 0",
@@ -110,7 +109,7 @@ export const MonthlyReportEmail = ({
                 lineHeight: "1.6",
               }}
             >
-              Dzień dobry! Poniżej znajduje się comiesięczne podsumowanie widoczności strony internetowej oraz opinii klientów dla Twoich 3 samoobsługowych pralni w Krakowie.
+              Dzień dobry! Poniżej znajduje się zestawienie rzeczywistych wyników oglądalności strony internetowej oraz opinii klientów dla Twoich 3 samoobsługowych pralni w Krakowie.
             </Text>
 
             {/* Section 1: KPI Cards */}
@@ -144,39 +143,30 @@ export const MonthlyReportEmail = ({
               </tbody>
             </table>
 
-            {/* Section 2: Visual Device & Language Bars */}
-            <Text
-              style={{
-                margin: "0 0 12px 0",
-                fontSize: "16px",
-                fontWeight: "800",
-                color: "#0f172a",
-                borderBottom: "2px solid #f1f5f9",
-                paddingBottom: "8px",
-              }}
-            >
-              Skąd i jak klienci sprawdzają pralnie?
-            </Text>
+            {/* Section 2: Visual Distribution Bars (only if real data is provided) */}
+            {traffic.deviceBreakdown && (
+              <VisualSplitBar
+                leftLabel="Telefony komórkowe"
+                leftPct={traffic.deviceBreakdown.mobilePct}
+                leftColor="#e7272d"
+                rightLabel="Komputery"
+                rightPct={traffic.deviceBreakdown.desktopPct}
+                rightColor="#0f172a"
+                description="Większość klientów przegląda ofertę na smartfonie — sprawdzając godziny, wolne pralki lub cennik w drodze do lokalu."
+              />
+            )}
 
-            <VisualSplitBar
-              leftLabel="Telefony komórkowe"
-              leftPct={traffic.mobilePct}
-              leftColor="#e7272d"
-              rightLabel="Komputery"
-              rightPct={traffic.desktopPct}
-              rightColor="#0f172a"
-              description="Aż 3 na 4 klientów przegląda ofertę na smartfonie — najczęściej w drodze do pralni lub sprawdzając cennik i wolne programy będąc już na miejscu."
-            />
-
-            <VisualSplitBar
-              leftLabel="Język polski"
-              leftPct={traffic.polishPct}
-              leftColor="#e7272d"
-              rightLabel="Język angielski"
-              rightPct={traffic.englishPct}
-              rightColor="#0284c7"
-              description="Prawie co trzeci użytkownik korzysta z wersji angielskiej. Potwierdza to stały napływ studentów zagranicznych (Erasmus) oraz turystów w Krakowie."
-            />
+            {traffic.languageBreakdown && (
+              <VisualSplitBar
+                leftLabel="Język polski"
+                leftPct={traffic.languageBreakdown.polishPct}
+                leftColor="#e7272d"
+                rightLabel="Język angielski"
+                rightPct={traffic.languageBreakdown.englishPct}
+                rightColor="#0284c7"
+                description="Udział wersji angielskiej odzwierciedla liczbę zagranicznych turystów oraz studentów korzystających z pralni w Krakowie."
+              />
+            )}
 
             {/* Section 3: Google Places Reputation */}
             <Text
@@ -202,7 +192,7 @@ export const MonthlyReportEmail = ({
               />
             ))}
 
-            {/* Section 4: Customer Review Spotlight */}
+            {/* Section 4: Customer Review Spotlight (only if authentic real review found) */}
             {reputation.featuredReview && (
               <Section
                 style={{
@@ -260,7 +250,7 @@ export const MonthlyReportEmail = ({
                 lineHeight: "1.5",
               }}
             >
-              Raport generowany automatycznie na 1. dzień każdego miesiąca. Liczba odwiedzających przedstawia realne, unikalne sesje użytkowników z odfiltrowaniem robotów sieciowych.
+              Raport generowany automatycznie 1. dnia każdego miesiąca na podstawie rzeczywistych danych z Google Maps oraz Cloudflare Web Analytics. Liczba odwiedzających przedstawia realne sesje z odfiltrowaniem robotów sieciowych.
             </Text>
             <Text
               style={{

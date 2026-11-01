@@ -144,3 +144,5 @@ discount_qr_codes
 .wrangler
 
 scripts/
+
+ai_docs/*
