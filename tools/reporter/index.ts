@@ -40,8 +40,8 @@ async function main() {
     fetchCloudflareVisitorMetrics(),
   ]);
 
-  console.log(`[Google Places] Retrieved ${reputation.totalReviews} verified reviews across ${reputation.branches.length} branches. Average rating: ${reputation.averageRating.toFixed(1)}`);
-  console.log(`[Cloudflare] Retrieved ${traffic.visits} unique visitors and ${traffic.pageViews} page views.`);
+  console.log(`[Google Places] Scoped to last month: ${reputation.recentReviewsCount} new reviews. Featured review: ${reputation.featuredReview ? reputation.featuredReview.author : "None"}`);
+  console.log(`[Cloudflare] ${traffic.visits} visits, ${traffic.pageViews} page views, daily avg: ${traffic.dailyAverage}, peak: ${traffic.peakDay.formattedDate} (${traffic.peakDay.visitors})`);
   console.log(`[Config] Target recipient: ${recipientEmail}`);
 
   // 2. Render React Email template to HTML

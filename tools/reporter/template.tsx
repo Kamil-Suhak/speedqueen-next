@@ -9,11 +9,7 @@ import {
   Section,
   Text,
 } from "react-email";
-import {
-  KpiCard,
-  VisualSplitBar,
-  BranchRow,
-} from "./components/EmailComponents";
+import { KpiCard, VisualSplitBar } from "./components/EmailComponents";
 import { GooglePlacesReportData } from "./adapters/googlePlaces";
 import { CloudflareVisitorMetrics } from "./adapters/cloudflare";
 
@@ -34,7 +30,7 @@ export const MonthlyReportEmail = ({
     <Html>
       <Head />
       <Preview>
-        Raport Widoczności Speed Queen Kraków ({period}) — {traffic.visits.toLocaleString("pl-PL")} odwiedzających, ocena {reputation.averageRating.toFixed(1)} ★
+        Raport Witryny Speed Queen ({period}) — {traffic.visits.toLocaleString("pl-PL")} wizyt, śr. {traffic.dailyAverage.toLocaleString("pl-PL")}/dzień
       </Preview>
       <Body
         style={{
@@ -42,7 +38,7 @@ export const MonthlyReportEmail = ({
           fontFamily:
             '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
           margin: "0",
-          padding: "24px 0",
+          padding: "32px 0",
         }}
       >
         <Container
@@ -50,26 +46,28 @@ export const MonthlyReportEmail = ({
             maxWidth: "600px",
             margin: "0 auto",
             backgroundColor: "#ffffff",
-            borderRadius: "18px",
+            borderRadius: "12px",
             border: "1px solid #e2e8f0",
+            borderTop: "4px solid #e7272d",
             overflow: "hidden",
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.05)",
+            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)",
           }}
         >
-          {/* Header Banner */}
+          {/* Executive Header */}
           <Section
             style={{
-              backgroundColor: "#e7272d",
-              padding: "28px 24px 24px 24px",
+              padding: "24px 24px 20px 24px",
+              borderBottom: "1px solid #f1f5f9",
               textAlign: "left",
             }}
           >
             <Text
               style={{
-                margin: "0 0 6px 0",
-                fontSize: "12px",
+                margin: "0 0 4px 0",
+                fontSize: "11px",
+                lineHeight: "14px",
                 fontWeight: "800",
-                color: "#ffffff",
+                color: "#e7272d",
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
               }}
@@ -78,188 +76,311 @@ export const MonthlyReportEmail = ({
             </Text>
             <Text
               style={{
-                margin: "0 0 4px 0",
-                fontSize: "24px",
+                margin: "0 0 6px 0",
+                fontSize: "22px",
+                lineHeight: "26px",
                 fontWeight: "800",
-                color: "#ffffff",
-                lineHeight: "1.2",
+                color: "#0f172a",
               }}
             >
-              Miesięczny Raport Widoczności
+              Miesięczny Raport Ruchu Witryny
             </Text>
             <Text
               style={{
                 margin: "0",
                 fontSize: "13px",
-                color: "rgba(255, 255, 255, 0.9)",
+                lineHeight: "16px",
+                color: "#64748b",
                 fontWeight: "500",
               }}
             >
-              Podsumowanie aktywności za okres: <strong>{period}</strong>
+              Okres: <strong style={{ color: "#0f172a" }}>{period}</strong> • speedqueenkrk.pl
             </Text>
           </Section>
 
-          {/* Body Container */}
-          <Section style={{ padding: "24px 24px 8px 24px" }}>
+          {/* Main Body */}
+          <Section style={{ padding: "24px" }}>
+            {/* Section 1: Core Website Performance */}
             <Text
               style={{
-                margin: "0 0 20px 0",
-                fontSize: "14px",
-                color: "#334155",
-                lineHeight: "1.6",
+                margin: "0 0 12px 0",
+                fontSize: "12px",
+                lineHeight: "16px",
+                fontWeight: "700",
+                color: "#0f172a",
+                textTransform: "uppercase",
+                letterSpacing: "0.06em",
               }}
             >
-              Dzień dobry! Poniżej znajduje się zestawienie rzeczywistych wyników oglądalności strony internetowej oraz opinii klientów dla Twoich 3 samoobsługowych pralni w Krakowie.
+              Ruch i Zaangażowanie
             </Text>
 
-            {/* Section 1: KPI Cards */}
             <table
               width="100%"
               cellPadding="0"
               cellSpacing="0"
               border={0}
-              style={{ margin: "0 0 24px 0" }}
+              style={{ margin: "0 0 12px 0" }}
             >
               <tbody>
                 <tr>
                   <KpiCard
-                    label="Odwiedzający"
+                    label="Wizyty"
                     value={traffic.visits.toLocaleString("pl-PL")}
-                    subtitle="Prawdziwe osoby na stronie"
                   />
-                  <td width="10" />
+                  <td width="8" />
                   <KpiCard
-                    label="Odsłony podstron"
+                    label="Średnio / Dzień"
+                    value={traffic.dailyAverage.toLocaleString("pl-PL")}
+                  />
+                  <td width="8" />
+                  <KpiCard
+                    label="Odsłony"
                     value={traffic.pageViews.toLocaleString("pl-PL")}
-                    subtitle={`Śr. ${traffic.pagesPerVisit} str./osobę`}
                   />
-                  <td width="10" />
+                  <td width="8" />
                   <KpiCard
-                    label="Ocena w Google"
-                    value={`${reputation.averageRating.toFixed(1)} ★`}
-                    subtitle={`${reputation.totalReviews} opinii łącznie`}
+                    label="Strony / Wizyta"
+                    value={traffic.pagesPerVisit.toFixed(2)}
                   />
                 </tr>
               </tbody>
             </table>
 
-            {/* Section 2: Visual Distribution Bars (only if real data is provided) */}
+            {/* Peak Day Highlight Row */}
+            {traffic.peakDay && traffic.peakDay.visitors > 0 && (
+              <table
+                width="100%"
+                cellPadding="0"
+                cellSpacing="0"
+                border={0}
+                style={{
+                  backgroundColor: "#f8fafc",
+                  border: "1px solid #e2e8f0",
+                  borderRadius: "8px",
+                  margin: "0 0 24px 0",
+                }}
+              >
+                <tbody>
+                  <tr>
+                    <td style={{ padding: "12px 16px" }}>
+                      <Text
+                        style={{
+                          margin: "0",
+                          fontSize: "13px",
+                          lineHeight: "16px",
+                          color: "#334155",
+                        }}
+                      >
+                        <span
+                          style={{
+                            display: "inline-block",
+                            width: "8px",
+                            height: "8px",
+                            borderRadius: "50%",
+                            backgroundColor: "#e7272d",
+                            marginRight: "8px",
+                            verticalAlign: "middle",
+                          }}
+                        />
+                        <strong>Dzień szczytowy:</strong> {traffic.peakDay.formattedDate} —{" "}
+                        <strong style={{ color: "#0f172a" }}>
+                          {traffic.peakDay.visitors.toLocaleString("pl-PL")}
+                        </strong>{" "}
+                        wizyt
+                      </Text>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            )}
+
+            {/* Section 2: Visitor Demographics & Devices */}
+            <Text
+              style={{
+                margin: "0 0 6px 0",
+                fontSize: "12px",
+                lineHeight: "16px",
+                fontWeight: "700",
+                color: "#0f172a",
+                textTransform: "uppercase",
+                letterSpacing: "0.06em",
+              }}
+            >
+              Struktura Ruchu
+            </Text>
+
             {traffic.deviceBreakdown && (
               <VisualSplitBar
-                leftLabel="Telefony komórkowe"
+                leftLabel="Smartfony"
                 leftPct={traffic.deviceBreakdown.mobilePct}
                 leftColor="#e7272d"
                 rightLabel="Komputery"
                 rightPct={traffic.deviceBreakdown.desktopPct}
                 rightColor="#0f172a"
-                description="Większość klientów przegląda ofertę na smartfonie — sprawdzając godziny, wolne pralki lub cennik w drodze do lokalu."
               />
             )}
 
             {traffic.languageBreakdown && (
               <VisualSplitBar
-                leftLabel="Język polski"
+                leftLabel="Wersja polska"
                 leftPct={traffic.languageBreakdown.polishPct}
                 leftColor="#e7272d"
-                rightLabel="Język angielski"
+                rightLabel="Wersja angielska"
                 rightPct={traffic.languageBreakdown.englishPct}
-                rightColor="#0284c7"
-                description="Udział wersji angielskiej odzwierciedla liczbę zagranicznych turystów oraz studentów korzystających z pralni w Krakowie."
+                rightColor="#475569"
               />
             )}
 
-            {/* Section 3: Google Places Reputation */}
-            <Text
+            {/* Section 3: Google Maps scoped to last month */}
+            <Hr
               style={{
-                margin: "24px 0 12px 0",
-                fontSize: "16px",
-                fontWeight: "800",
-                color: "#0f172a",
-                borderBottom: "2px solid #f1f5f9",
-                paddingBottom: "8px",
+                border: "none",
+                borderTop: "1px solid #e2e8f0",
+                margin: "24px 0 20px 0",
               }}
+            />
+
+            <table
+              width="100%"
+              cellPadding="0"
+              cellSpacing="0"
+              border={0}
+              style={{ margin: "0 0 8px 0" }}
             >
-              Reputacja w Google Maps — Wszystkie 3 Pralnie
-            </Text>
+              <tbody>
+                <tr>
+                  <td>
+                    <Text
+                      style={{
+                        margin: "0",
+                        fontSize: "12px",
+                        lineHeight: "16px",
+                        fontWeight: "700",
+                        color: "#0f172a",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.06em",
+                      }}
+                    >
+                      Google Maps • Ostatni Miesiąc
+                    </Text>
+                  </td>
+                  <td style={{ textAlign: "right" }}>
+                    <Text
+                      style={{
+                        margin: "0",
+                        fontSize: "12px",
+                        lineHeight: "16px",
+                        fontWeight: "600",
+                        color: "#64748b",
+                      }}
+                    >
+                      {reputation.recentReviewsCount > 0
+                        ? `Nowe opinie: ${reputation.recentReviewsCount}`
+                        : "Nowe opinie w ubiegłym miesiącu: 0"}
+                    </Text>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
-            {reputation.branches.map((branch) => (
-              <BranchRow
-                key={branch.name}
-                name={branch.name}
-                address={branch.address}
-                rating={branch.rating}
-                reviews={branch.totalReviews}
-              />
-            ))}
-
-            {/* Section 4: Customer Review Spotlight (only if authentic real review found) */}
+            {/* Authentic 5-Star Customer Spotlight from the last 30 days */}
             {reputation.featuredReview && (
-              <Section
+              <table
+                width="100%"
+                cellPadding="0"
+                cellSpacing="0"
+                border={0}
                 style={{
-                  margin: "20px 0 16px 0",
-                  padding: "18px 20px",
-                  backgroundColor: "#fff1f2",
-                  borderRadius: "14px",
-                  borderLeft: "4px solid #e7272d",
+                  backgroundColor: "#ffffff",
+                  borderRadius: "8px",
+                  border: "1px solid #e2e8f0",
+                  borderLeft: "3px solid #e7272d",
+                  margin: "8px 0 8px 0",
                 }}
               >
-                <Text
-                  style={{
-                    margin: "0 0 6px 0",
-                    fontSize: "11px",
-                    fontWeight: "800",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.08em",
-                    color: "#e7272d",
-                  }}
-                >
-                  WYRÓŻNIONA OPINIA Z GOOGLE MAPS
-                </Text>
-                <Text
-                  style={{
-                    margin: "0 0 10px 0",
-                    fontSize: "14px",
-                    fontStyle: "italic",
-                    color: "#1e293b",
-                    lineHeight: "1.5",
-                  }}
-                >
-                  „{reputation.featuredReview.text}”
-                </Text>
-                <Text
-                  style={{
-                    margin: "0",
-                    fontSize: "12px",
-                    fontWeight: "700",
-                    color: "#475569",
-                  }}
-                >
-                  — {reputation.featuredReview.author} • ★★★★★ ({reputation.featuredReview.branchName})
-                </Text>
-              </Section>
+                <tbody>
+                  <tr>
+                    <td style={{ padding: "16px 18px" }}>
+                      <Text
+                        style={{
+                          margin: "0 0 4px 0",
+                          fontSize: "12px",
+                          lineHeight: "16px",
+                          fontWeight: "700",
+                          color: "#e7272d",
+                        }}
+                      >
+                        ★★★★★{" "}
+                        <span
+                          style={{
+                            fontSize: "11px",
+                            fontWeight: "600",
+                            color: "#64748b",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.05em",
+                            marginLeft: "6px",
+                          }}
+                        >
+                          Opinia Klienta
+                        </span>
+                      </Text>
+                      <Text
+                        style={{
+                          margin: "0 0 8px 0",
+                          fontSize: "13px",
+                          lineHeight: "1.5",
+                          fontStyle: "italic",
+                          color: "#1e293b",
+                        }}
+                      >
+                        „{reputation.featuredReview.text}”
+                      </Text>
+                      <Text
+                        style={{
+                          margin: "0",
+                          fontSize: "12px",
+                          lineHeight: "14px",
+                          fontWeight: "600",
+                          color: "#64748b",
+                        }}
+                      >
+                        — {reputation.featuredReview.author} • {reputation.featuredReview.branchName}
+                      </Text>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             )}
 
-            <Hr style={{ borderColor: "#e2e8f0", margin: "24px 0 16px 0" }} />
-
-            {/* Footer */}
+            {/* Footer Transparency */}
+            <Hr
+              style={{
+                border: "none",
+                borderTop: "1px solid #e2e8f0",
+                margin: "24px 0 16px 0",
+              }}
+            />
             <Text
               style={{
-                margin: "0 0 8px 0",
+                margin: "0 0 4px 0",
                 fontSize: "11px",
-                color: "#94a3b8",
-                lineHeight: "1.5",
+                lineHeight: "15px",
+                color: "#64748b",
               }}
             >
-              Raport generowany automatycznie 1. dnia każdego miesiąca na podstawie rzeczywistych danych z Google Maps oraz Cloudflare Web Analytics. Liczba odwiedzających przedstawia realne sesje z odfiltrowaniem robotów sieciowych.
+              Raport wygenerowany automatycznie na podstawie telemetrii Cloudflare Web Analytics
+              oraz Google Places API dla domeny speedqueenkrk.pl.
             </Text>
             <Text
               style={{
                 margin: "0",
                 fontSize: "11px",
-                color: "#94a3b8",
+                lineHeight: "15px",
+                color: "#64748b",
               }}
             >
-              Wysłano na adres: <strong>{recipientEmail}</strong> • Speed Queen Kraków
+              Odbiorca: <strong style={{ color: "#334155" }}>{recipientEmail}</strong>
             </Text>
           </Section>
         </Container>
@@ -267,5 +388,3 @@ export const MonthlyReportEmail = ({
     </Html>
   );
 };
-
-export default MonthlyReportEmail;

@@ -1,14 +1,5 @@
-export interface BranchReputation {
-  name: string;
-  address: string;
-  rating: number;
-  totalReviews: number;
-}
-
 export interface GooglePlacesReportData {
-  averageRating: number;
-  totalReviews: number;
-  branches: BranchReputation[];
+  recentReviewsCount: number;
   featuredReview?: {
     author: string;
     text: string;
@@ -50,8 +41,10 @@ export async function fetchGooglePlacesReputation(
     );
   }
 
-  const branches: BranchReputation[] = [];
+  let recentReviewsCount = 0;
   let featuredReview: GooglePlacesReportData["featuredReview"] | undefined;
+
+  const thirtyDaysAgoSec = Math.floor(Date.now() / 1000) - 30 * 24 * 60 * 60;
 
   for (const branch of BRANCH_CONFIGS) {
     const placeId = process.env[branch.envKey] || branch.defaultPlaceId;
@@ -61,7 +54,7 @@ export async function fetchGooglePlacesReputation(
       );
     }
 
-    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,user_ratings_total,reviews&key=${key}&language=pl`;
+    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,reviews&key=${key}&language=pl&review_sort=newest`;
     const response = await fetch(url, { signal: AbortSignal.timeout(8000) });
 
     if (!response.ok) {
@@ -74,13 +67,12 @@ export async function fetchGooglePlacesReputation(
       status?: string;
       error_message?: string;
       result?: {
-        rating?: number;
-        user_ratings_total?: number;
         reviews?: Array<{
           author_name?: string;
           text?: string;
           rating?: number;
           relative_time_description?: string;
+          time?: number;
         }>;
       };
     };
@@ -91,56 +83,35 @@ export async function fetchGooglePlacesReputation(
       );
     }
 
-    const result = data.result || {};
-    const rating = Number(result.rating || 0);
-    const totalReviews = Number(result.user_ratings_total || 0);
+    const reviews = data.result?.reviews || [];
 
-    branches.push({
-      name: branch.name,
-      address: branch.address,
-      rating,
-      totalReviews,
-    });
+    // Filter reviews strictly within the last 30 days
+    for (const r of reviews) {
+      if (r.time && r.time >= thirtyDaysAgoSec) {
+        recentReviewsCount++;
 
-    // Check for an actual, authentic 5-star customer review with substantive text
-    if (!featuredReview && Array.isArray(result.reviews)) {
-      const top5Star = result.reviews.find(
-        (r) =>
+        // Spotlight 5-star review strictly from the last 30 days
+        if (
+          !featuredReview &&
           r.rating === 5 &&
           r.text &&
-          r.text.trim().length > 25 &&
-          r.text.trim().length < 280,
-      );
-      if (top5Star && top5Star.text) {
-        featuredReview = {
-          author: top5Star.author_name || "Klient Google",
-          text: top5Star.text.trim(),
-          rating: 5,
-          branchName: branch.name,
-          relativeTime: top5Star.relative_time_description || "niedawno",
-        };
+          r.text.trim().length > 20 &&
+          r.text.trim().length < 280
+        ) {
+          featuredReview = {
+            author: r.author_name || "Klient Google",
+            text: r.text.trim(),
+            rating: 5,
+            branchName: branch.name,
+            relativeTime: r.relative_time_description || "w ubiegłym miesiącu",
+          };
+        }
       }
     }
   }
 
-  if (branches.length === 0) {
-    throw new Error("Fatal: No branch data could be retrieved from Google Places API.");
-  }
-
-  const totalReviews = branches.reduce((sum, b) => sum + b.totalReviews, 0);
-  const weightedRatingSum = branches.reduce(
-    (sum, b) => sum + b.rating * b.totalReviews,
-    0,
-  );
-  const averageRating =
-    totalReviews > 0
-      ? Number((weightedRatingSum / totalReviews).toFixed(1))
-      : 0;
-
   return {
-    averageRating,
-    totalReviews,
-    branches,
+    recentReviewsCount,
     featuredReview,
   };
 }

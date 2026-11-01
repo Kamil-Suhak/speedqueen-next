@@ -1,33 +1,34 @@
 import React from "react";
 import { Text, Section } from "react-email";
 
-// KPI Card
+// Clean KPI metric card without glued helper text
 export const KpiCard = ({
   label,
   value,
-  subtitle,
+  sublabel,
 }: {
   label: string;
   value: string;
-  subtitle: string;
+  sublabel?: string;
 }) => (
   <td
     style={{
-      padding: "16px 14px",
+      padding: "16px 12px",
       backgroundColor: "#ffffff",
-      borderRadius: "14px",
+      borderRadius: "8px",
       border: "1px solid #e2e8f0",
       textAlign: "center",
-      width: "33.33%",
+      width: "25%",
     }}
   >
     <Text
       style={{
         margin: "0 0 6px 0",
         fontSize: "11px",
+        lineHeight: "14px",
         fontWeight: "700",
         textTransform: "uppercase",
-        letterSpacing: "0.06em",
+        letterSpacing: "0.08em",
         color: "#64748b",
       }}
     >
@@ -35,29 +36,31 @@ export const KpiCard = ({
     </Text>
     <Text
       style={{
-        margin: "0 0 4px 0",
-        fontSize: "26px",
+        margin: "0",
+        fontSize: "22px",
+        lineHeight: "26px",
         fontWeight: "800",
         color: "#0f172a",
-        lineHeight: "1.1",
       }}
     >
       {value}
     </Text>
-    <Text
-      style={{
-        margin: "0",
-        fontSize: "11px",
-        color: "#64748b",
-        lineHeight: "1.3",
-      }}
-    >
-      {subtitle}
-    </Text>
+    {sublabel && (
+      <Text
+        style={{
+          margin: "4px 0 0 0",
+          fontSize: "11px",
+          lineHeight: "14px",
+          color: "#94a3b8",
+        }}
+      >
+        {sublabel}
+      </Text>
+    )}
   </td>
 );
 
-// Visual Horizontal Split Bar (Email-safe pure HTML/table)
+// Visual Horizontal Split Bar with disciplined slate/red tokens
 export const VisualSplitBar = ({
   leftLabel,
   leftPct,
@@ -65,7 +68,6 @@ export const VisualSplitBar = ({
   rightLabel,
   rightPct,
   rightColor = "#0f172a",
-  description,
 }: {
   leftLabel: string;
   leftPct: number;
@@ -73,9 +75,8 @@ export const VisualSplitBar = ({
   rightLabel: string;
   rightPct: number;
   rightColor?: string;
-  description: string;
 }) => (
-  <Section style={{ margin: "16px 0" }}>
+  <Section style={{ margin: "16px 0 20px 0" }}>
     <table
       width="100%"
       cellPadding="0"
@@ -85,52 +86,55 @@ export const VisualSplitBar = ({
     >
       <tbody>
         <tr>
-          <td style={{ fontSize: "13px", fontWeight: "700", color: "#0f172a" }}>
+          <td style={{ fontSize: "12px", lineHeight: "16px", fontWeight: "600", color: "#334155" }}>
             <span
               style={{
                 display: "inline-block",
-                width: "10px",
-                height: "10px",
-                borderRadius: "3px",
+                width: "8px",
+                height: "8px",
+                borderRadius: "2px",
                 backgroundColor: leftColor,
                 marginRight: "6px",
+                verticalAlign: "middle",
               }}
             />
-            {leftLabel}: <strong>{leftPct}%</strong>
+            {leftLabel}: <strong style={{ color: "#0f172a" }}>{leftPct}%</strong>
           </td>
           <td
             style={{
               textAlign: "right",
-              fontSize: "13px",
-              fontWeight: "700",
-              color: "#0f172a",
+              fontSize: "12px",
+              lineHeight: "16px",
+              fontWeight: "600",
+              color: "#334155",
             }}
           >
             <span
               style={{
                 display: "inline-block",
-                width: "10px",
-                height: "10px",
-                borderRadius: "3px",
+                width: "8px",
+                height: "8px",
+                borderRadius: "2px",
                 backgroundColor: rightColor,
                 marginRight: "6px",
+                verticalAlign: "middle",
               }}
             />
-            {rightLabel}: <strong>{rightPct}%</strong>
+            {rightLabel}: <strong style={{ color: "#0f172a" }}>{rightPct}%</strong>
           </td>
         </tr>
       </tbody>
     </table>
 
-    {/* Meter Bar */}
+    {/* Crisp Segmented Progress Bar */}
     <table
       width="100%"
       cellPadding="0"
       cellSpacing="0"
       border={0}
       style={{
-        height: "14px",
-        borderRadius: "999px",
+        height: "8px",
+        borderRadius: "4px",
         overflow: "hidden",
         backgroundColor: "#e2e8f0",
       }}
@@ -139,103 +143,14 @@ export const VisualSplitBar = ({
         <tr>
           <td
             width={`${leftPct}%`}
-            style={{ backgroundColor: leftColor, height: "14px" }}
+            style={{ backgroundColor: leftColor, height: "8px" }}
           />
           <td
             width={`${rightPct}%`}
-            style={{ backgroundColor: rightColor, height: "14px" }}
+            style={{ backgroundColor: rightColor, height: "8px" }}
           />
         </tr>
       </tbody>
     </table>
-
-    <Text
-      style={{
-        margin: "6px 0 0 0",
-        fontSize: "12px",
-        color: "#64748b",
-        lineHeight: "1.4",
-      }}
-    >
-      {description}
-    </Text>
   </Section>
-);
-
-// Branch Reputation Card Row
-export const BranchRow = ({
-  name,
-  address,
-  rating,
-  reviews,
-}: {
-  name: string;
-  address: string;
-  rating: number;
-  reviews: number;
-}) => (
-  <table
-    width="100%"
-    cellPadding="0"
-    cellSpacing="0"
-    border={0}
-    style={{
-      backgroundColor: "#ffffff",
-      borderRadius: "12px",
-      border: "1px solid #e2e8f0",
-      margin: "0 0 10px 0",
-    }}
-  >
-    <tbody>
-      <tr>
-        <td style={{ padding: "14px 16px" }}>
-          <Text
-            style={{
-              margin: "0 0 2px 0",
-              fontSize: "14px",
-              fontWeight: "700",
-              color: "#0f172a",
-            }}
-          >
-            {name}
-          </Text>
-          <Text
-            style={{
-              margin: "0",
-              fontSize: "12px",
-              color: "#64748b",
-            }}
-          >
-            {address}
-          </Text>
-        </td>
-        <td style={{ padding: "14px 16px", textAlign: "right" }}>
-          <span
-            style={{
-              display: "inline-block",
-              backgroundColor: "#fef2f2",
-              border: "1px solid #fecaca",
-              color: "#dc2626",
-              fontWeight: "800",
-              fontSize: "13px",
-              padding: "4px 10px",
-              borderRadius: "8px",
-            }}
-          >
-            ★ {rating.toFixed(1)}
-          </span>
-          <Text
-            style={{
-              margin: "4px 0 0 0",
-              fontSize: "11px",
-              color: "#64748b",
-              fontWeight: "600",
-            }}
-          >
-            {reviews} opinii
-          </Text>
-        </td>
-      </tr>
-    </tbody>
-  </table>
 );
