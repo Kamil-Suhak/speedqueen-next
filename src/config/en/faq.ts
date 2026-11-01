@@ -11,7 +11,7 @@ export const faqEn = {
     {
       question: "Do I need to bring my own detergents?",
       answer:
-        "No, professional-grade detergents and softeners are automatically dispensed during cycles 1 through 5. For your convenience, Programs 6 and 7 are specifically designed to allow you to use your own preferred washing detergents.",
+        "No, professional-grade detergents, sanitizers, and softeners are automatically dispensed during cycles 1 through 5. For your convenience, Programs 6 and 7 are specifically designed to allow you to use your own preferred washing detergents.",
       icon: "droplets",
     },
     {
@@ -23,13 +23,13 @@ export const faqEn = {
     {
       question: "What washing programs are available?",
       answer:
-        "We offer a variety of programs tailored to different fabrics and load sizes, including options for delicate items and heavy-duty washes. The complete list of available programs is clearly posted on the informational boards inside each of our laundromats.",
+        "We offer 7 professional wash cycles ranging from 15°C to 90°C. Programs 1–5 include automatic dosing in the price. Programs 6 and 7 (30°C and 60°C) allow you to use your own detergents. You can view the full breakdown with exact spin speeds and durations in our Step by Step section.",
       icon: "list-checks",
     },
     {
       question: "What are the drying options and how long does it take?",
       answer:
-        "You can select from Low, Medium, High, and Delicate temperature settings based on your fabric type. Drying time cycles can be set from 15 to 60 minutes in 15-minute increments. We recommend a minimum of two cycles (30 minutes) for optimal results.",
+        "Our dryers feature 5 temperature modes: High (~65-70°C), Medium (~55-60°C), Low (~45-50°C), Delicate (~40-45°C), and No Heat (air fluff). Cycle time is set in 15-minute increments. We recommend 30–45 minutes (2–3 cycles) for optimal results. Please note: dryers do not extract water, so laundry must be thoroughly spun first.",
       icon: "wind",
     },
   ],

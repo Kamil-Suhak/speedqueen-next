@@ -19,16 +19,15 @@ export const faqPl = {
     },
     {
       question: "Jakie programy prania są dostępne?",
-      answer: "Oferujemy różnorodne programy dostosowane do różnych tkanin i rozmiarów wsadów, w tym opcje do prania bardzo delikatnego oraz intensywnego. Pełna lista dostępnych programów znajduje się na tablicach informacyjnych w każdym z naszych lokali.",
+      answer: "Oferujemy 7 profesjonalnych programów prania od 15°C do 90°C. Programy 1–5 zawierają w cenie automatyczne dozowanie detergentów, odkażacza i płynu zmiękczającego. Programy 6 i 7 (30°C i 60°C) pozwalają na użycie własnych detergentów. Pełną tabelę z temperaturami, obrotami wirowania i czasem znajdziesz w sekcji Krok po kroku.",
       icon: "list-checks",
     },
     {
       question: "Jakie są opcje suszenia i jak długo to trwa?",
-      answer: "W zależności od rodzaju tkanin, mogą Państwo wybrać ustawienia temperatury: Niska, Średnia, Wysoka lub Delikatna. Czas suszenia można zaplanować od 15 do 60 minut (jeden cykl wynosi 15 minut). W celu uzyskania optymalnych rezultatów zalecamy skorzystanie z co najmniej dwóch cykli (30 minut).",
+      answer: "Suszarki wyposażone są w 5 trybów: Wysoka (~65-70°C), Średnia (~55-60°C), Niska (~45-50°C), Delikatne (~40-45°C) oraz Bez grzania (chłodny nawiew). Czas suszenia wybiera się w krokach co 15 minut. Dla optymalnych rezultatów zalecamy 30–45 minut (2–3 cykle). Pamiętaj: suszarki nie odwirowują wody – pranie musi być uprzednio dobrze odwirowane.",
       icon: "wind",
     },
   ],
 };
 
 export default faqPl;
-

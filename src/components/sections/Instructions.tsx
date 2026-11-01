@@ -10,8 +10,13 @@ import {
   Tag,
   Wind,
   Zap,
+  Sparkles,
+  ThermometerSun,
 } from "lucide-react";
 import SectionBackground from "@/components/ui/SectionBackground";
+import ProgramsModal, {
+  ProgramsContent,
+} from "@/components/modals/ProgramsModal";
 
 interface InstructionConfig {
   title: string;
@@ -27,6 +32,7 @@ interface InstructionConfig {
     title: string;
     items: { title: string; description: string; icon: string }[];
   };
+  programs?: ProgramsContent;
 }
 
 export default function Instructions({
@@ -38,6 +44,8 @@ export default function Instructions({
 }) {
   const [activeTab, setActiveTab] = useState<0 | 1 | 2>(0);
   const [slideDir, setSlideDir] = useState<"left" | "right">("right");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalTab, setModalTab] = useState<"washing" | "drying">("washing");
   const touchStartX = useRef<number | null>(null);
 
   const tabs = [
@@ -70,6 +78,11 @@ export default function Instructions({
     tag: Tag,
     iron: Wind,
     zap: Zap,
+  };
+
+  const handleOpenModal = (tab: "washing" | "drying") => {
+    setModalTab(tab);
+    setIsModalOpen(true);
   };
 
   const goNext = () => {
@@ -254,6 +267,39 @@ export default function Instructions({
                 {content.service1.steps.map((step, idx) =>
                   renderTimelineStep(step, idx),
                 )}
+
+                {/* Washing Programs Trigger Button */}
+                {content.programs?.triggerWashing && (
+                  <div className="w-full my-2 px-1 sm:px-2 pb-4 animate-seq-fade-in-up">
+                    <button
+                      onClick={() => handleOpenModal("washing")}
+                      className="w-full flex items-center justify-between p-4 rounded-2xl bg-white border border-slate-200/80 hover:border-brand-primary/50 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group text-left cursor-pointer"
+                    >
+                      <div className="flex items-center gap-3.5 min-w-0">
+                        <div className="w-11 h-11 rounded-xl bg-brand-primary/10 text-brand-primary flex items-center justify-center shrink-0 group-hover:scale-105 group-hover:bg-brand-primary group-hover:text-white transition-all duration-200">
+                          <Sparkles size={20} />
+                        </div>
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="font-bold text-sm md:text-base text-gray-900 group-hover:text-brand-primary transition-colors">
+                              {content.programs.triggerWashing.button}
+                            </span>
+                            <span className="text-[10px] md:text-[11px] font-bold bg-brand-primary/10 text-brand-primary px-2.5 py-0.5 rounded-full shrink-0">
+                              {content.programs.triggerWashing.badge}
+                            </span>
+                          </div>
+                          <p className="text-xs text-gray-500 font-normal truncate mt-0.5">
+                            {content.programs.triggerWashing.subtitle}
+                          </p>
+                        </div>
+                      </div>
+                      <ChevronRight
+                        size={20}
+                        className="text-gray-400 group-hover:text-brand-primary group-hover:translate-x-1 transition-all shrink-0 ml-2"
+                      />
+                    </button>
+                  </div>
+                )}
               </div>
 
               <div
@@ -266,6 +312,39 @@ export default function Instructions({
               >
                 {content.service2.steps.map((step, idx) =>
                   renderTimelineStep(step, idx),
+                )}
+
+                {/* Drying Programs Trigger Button */}
+                {content.programs?.triggerDrying && (
+                  <div className="w-full my-2 px-1 sm:px-2 pb-4 animate-seq-fade-in-up">
+                    <button
+                      onClick={() => handleOpenModal("drying")}
+                      className="w-full flex items-center justify-between p-4 rounded-2xl bg-white border border-slate-200/80 hover:border-orange-500/50 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group text-left cursor-pointer"
+                    >
+                      <div className="flex items-center gap-3.5 min-w-0">
+                        <div className="w-11 h-11 rounded-xl bg-orange-500/10 text-orange-600 flex items-center justify-center shrink-0 group-hover:scale-105 group-hover:bg-orange-500 group-hover:text-white transition-all duration-200">
+                          <ThermometerSun size={20} />
+                        </div>
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="font-bold text-sm md:text-base text-gray-900 group-hover:text-orange-600 transition-colors">
+                              {content.programs.triggerDrying.button}
+                            </span>
+                            <span className="text-[10px] md:text-[11px] font-bold bg-orange-500/10 text-orange-600 px-2.5 py-0.5 rounded-full shrink-0">
+                              {content.programs.triggerDrying.badge}
+                            </span>
+                          </div>
+                          <p className="text-xs text-gray-500 font-normal truncate mt-0.5">
+                            {content.programs.triggerDrying.subtitle}
+                          </p>
+                        </div>
+                      </div>
+                      <ChevronRight
+                        size={20}
+                        className="text-gray-400 group-hover:text-orange-600 group-hover:translate-x-1 transition-all shrink-0 ml-2"
+                      />
+                    </button>
+                  </div>
                 )}
               </div>
 
@@ -309,6 +388,7 @@ export default function Instructions({
             </div>
           </div>
 
+          {/* Right Sticky Image Container */}
           <div className="hidden md:flex flex-col items-center justify-center xl:col-span-5 sticky top-32 mt-8">
             <div className="relative w-full max-w-[440px] aspect-4/5 animate-seq-zoom-in">
               <div className="absolute inset-0 translate-x-4 translate-y-4 border-2 border-brand-primary/30 rounded-2xl -z-10" />
@@ -327,11 +407,42 @@ export default function Instructions({
                     priority={activeTab === tab.id}
                   />
                 ))}
+
+                {/* Floating pill badge on sticky desktop image */}
+                {activeTab !== 2 && content.programs && (
+                  <button
+                    onClick={() =>
+                      handleOpenModal(activeTab === 0 ? "washing" : "drying")
+                    }
+                    className="absolute bottom-4 left-4 right-4 z-20 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white/95 backdrop-blur-md text-gray-900 font-bold text-xs uppercase tracking-wider shadow-lg hover:bg-white hover:text-brand-primary hover:scale-[1.02] transition-all duration-200 border border-white/60 cursor-pointer"
+                  >
+                    {activeTab === 0 ? (
+                      <Sparkles size={16} className="text-brand-primary" />
+                    ) : (
+                      <ThermometerSun size={16} className="text-orange-500" />
+                    )}
+                    <span className="truncate">
+                      {activeTab === 0
+                        ? content.programs.triggerWashing.button
+                        : content.programs.triggerDrying.button}
+                    </span>
+                  </button>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Programs Modal */}
+      {content.programs && (
+        <ProgramsModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          initialTab={modalTab}
+          content={content.programs}
+        />
+      )}
     </section>
   );
 }

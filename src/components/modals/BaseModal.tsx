@@ -9,18 +9,36 @@ interface BaseModalProps {
   onClose: () => void;
   children: React.ReactNode;
   closeLabel?: string;
+  maxWidth?: string;
+  contentClassName?: string;
 }
 
-export default function BaseModal({ isOpen, onClose, children, closeLabel }: BaseModalProps) {
-  // Prevent scrolling when modal is open
+export default function BaseModal({
+  isOpen,
+  onClose,
+  children,
+  closeLabel,
+  maxWidth,
+  contentClassName,
+}: BaseModalProps) {
+  // Prevent scrolling when modal is open and handle Escape key
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          onClose();
+        }
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = 'unset';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
     } else {
       document.body.style.overflow = 'unset';
     }
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   return (
     <AnimatePresence>
@@ -43,10 +61,12 @@ export default function BaseModal({ isOpen, onClose, children, closeLabel }: Bas
           </button>
 
           <motion.div
+            role="dialog"
+            aria-modal="true"
             initial={{ opacity: 0, scale: 0.95, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 10 }}
-            className="relative w-full max-w-[480px] overflow-hidden rounded-[2rem] bg-white shadow-2xl"
+            className={`relative w-full ${maxWidth || 'max-w-[480px]'} overflow-hidden rounded-[2rem] bg-white shadow-2xl ${contentClassName || ''}`}
           >
             <button
               onClick={onClose}
@@ -63,4 +83,3 @@ export default function BaseModal({ isOpen, onClose, children, closeLabel }: Bas
     </AnimatePresence>
   );
 }
-
