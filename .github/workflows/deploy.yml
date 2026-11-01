@@ -61,7 +61,6 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           DATABASE_URL: ${{ secrets.DATABASE_URL_PREVIEW || secrets.DATABASE_URL }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          PREVIEW_PASSWORD: ${{ secrets.PREVIEW_PASSWORD }}
         run: |
           npx opennextjs-cloudflare build
           npx opennextjs-cloudflare deploy --env preview
