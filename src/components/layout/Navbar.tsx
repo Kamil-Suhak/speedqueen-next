@@ -118,10 +118,10 @@ export default function Navbar({
           : "text-gray-600 hover:text-brand-primary"
     }`;
 
-    const mobileClasses = `flex items-center justify-between px-4 py-3.5 rounded-xl text-base font-bold uppercase tracking-wider transition-colors duration-150 ${
+    const mobileClasses = `relative block py-3 px-2 text-base font-bold uppercase tracking-wider transition-colors duration-200 group ${
       isActive
-        ? "text-brand-primary bg-brand-primary/5"
-        : "text-zinc-800 hover:text-brand-primary hover:bg-slate-50 active:bg-slate-100"
+        ? "text-brand-primary"
+        : "text-zinc-800 hover:text-brand-primary active:text-brand-primary"
     }`;
 
     return (
@@ -132,18 +132,26 @@ export default function Navbar({
         className={isInsideRed ? desktopClasses : mobileClasses}
         aria-current={isActive ? "page" : undefined}
       >
-        <div className="relative inline-block z-10">
+        <div className="relative inline-block z-10 pb-1">
           <span>{link.label}</span>
-          {isActive && isInsideRed && (
+          {isActive && (
             <motion.div
-              layoutId="activeNavUnderline"
-              className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-white"
+              layoutId={
+                isInsideRed
+                  ? "activeNavUnderline"
+                  : "activeNavUnderlineMobile"
+              }
+              className={`absolute -bottom-0.5 left-0 right-0 h-0.5 rounded-full ${
+                isInsideRed ? "bg-white" : "bg-brand-primary"
+              }`}
               transition={{ type: "spring", stiffness: 380, damping: 40 }}
             />
           )}
-          {!isActive && isInsideRed && (
+          {!isActive && (
             <span
-              className="absolute bottom-0 left-0 h-0.5 w-0 rounded-full transition-[width] duration-300 group-hover:w-full bg-white"
+              className={`absolute -bottom-0.5 left-0 h-0.5 w-0 rounded-full transition-[width] duration-300 group-hover:w-full ${
+                isInsideRed ? "bg-white" : "bg-brand-primary"
+              }`}
             />
           )}
         </div>
