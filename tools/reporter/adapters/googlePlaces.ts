@@ -1,5 +1,7 @@
 export interface GooglePlacesReportData {
   recentReviewsCount: number;
+  totalReviews: number;
+  averageRating: number;
   featuredReview?: {
     author: string;
     text: string;
@@ -41,10 +43,29 @@ export async function fetchGooglePlacesReputation(
     );
   }
 
-  let recentReviewsCount = 0;
-  let featuredReview: GooglePlacesReportData["featuredReview"] | undefined;
+  // Calculate target month window matching report period
+  const now = new Date();
+  let targetYear = now.getFullYear();
+  let targetMonth = now.getMonth(); // 0-indexed
+  if (now.getDate() <= 5) {
+    targetMonth -= 1;
+    if (targetMonth < 0) {
+      targetMonth = 11;
+      targetYear -= 1;
+    }
+  }
 
-  const thirtyDaysAgoSec = Math.floor(Date.now() / 1000) - 30 * 24 * 60 * 60;
+  const startOfMonthSec = Math.floor(
+    new Date(Date.UTC(targetYear, targetMonth, 1, 0, 0, 0)).getTime() / 1000,
+  );
+  const endOfMonthSec = Math.floor(
+    new Date(Date.UTC(targetYear, targetMonth + 1, 1, 0, 0, 0)).getTime() / 1000,
+  );
+
+  let recentReviewsCount = 0;
+  let totalReviews = 0;
+  let totalRatingWeighted = 0;
+  let featuredReview: GooglePlacesReportData["featuredReview"] | undefined;
 
   for (const branch of BRANCH_CONFIGS) {
     const placeId = process.env[branch.envKey] || branch.defaultPlaceId;
@@ -54,7 +75,8 @@ export async function fetchGooglePlacesReputation(
       );
     }
 
-    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,reviews&key=${key}&language=pl&review_sort=newest`;
+    // Note: Parameter MUST be 'reviews_sort=newest' (plural 'reviews')
+    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,user_ratings_total,reviews&key=${key}&language=pl&reviews_sort=newest`;
     const response = await fetch(url, { signal: AbortSignal.timeout(8000) });
 
     if (!response.ok) {
@@ -67,6 +89,8 @@ export async function fetchGooglePlacesReputation(
       status?: string;
       error_message?: string;
       result?: {
+        rating?: number;
+        user_ratings_total?: number;
         reviews?: Array<{
           author_name?: string;
           text?: string;
@@ -83,19 +107,24 @@ export async function fetchGooglePlacesReputation(
       );
     }
 
+    const branchReviewsCount = data.result?.user_ratings_total || 0;
+    const branchRating = data.result?.rating || 0;
+    totalReviews += branchReviewsCount;
+    totalRatingWeighted += branchRating * branchReviewsCount;
+
     const reviews = data.result?.reviews || [];
 
-    // Filter reviews strictly within the last 30 days
+    // Filter reviews strictly within the target month window
     for (const r of reviews) {
-      if (r.time && r.time >= thirtyDaysAgoSec) {
+      if (r.time && r.time >= startOfMonthSec && r.time < endOfMonthSec) {
         recentReviewsCount++;
 
-        // Spotlight 5-star review strictly from the last 30 days
+        // Spotlight 5-star review from the target month
         if (
           !featuredReview &&
           r.rating === 5 &&
           r.text &&
-          r.text.trim().length > 20 &&
+          r.text.trim().length > 15 &&
           r.text.trim().length < 280
         ) {
           featuredReview = {
@@ -110,8 +139,13 @@ export async function fetchGooglePlacesReputation(
     }
   }
 
+  const averageRating =
+    totalReviews > 0 ? Number((totalRatingWeighted / totalReviews).toFixed(1)) : 0;
+
   return {
     recentReviewsCount,
+    totalReviews,
+    averageRating,
     featuredReview,
   };
 }
