@@ -19,7 +19,7 @@ export default function LoyaltyCardImg({
           alt="Karta Stałego Klienta Speed Queen Kraków"
           width={600}
           height={380}
-          className="w-full h-auto object-cover block"
+          className="w-full h-auto aspect-[600/380] object-cover block"
         />
 
         <div className="absolute inset-0 rounded-[15px] ring-1 ring-inset ring-white/20 pointer-events-none" />

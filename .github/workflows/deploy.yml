@@ -55,6 +55,23 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Generate Runtime Env File from Secrets
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL_PREVIEW || secrets.DATABASE_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+          HASH_SALT: ${{ secrets.HASH_SALT }}
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+        run: |
+          cat << EOF > .env.production
+          DATABASE_URL=${DATABASE_URL}
+          RESEND_API_KEY=${RESEND_API_KEY}
+          GOOGLE_PLACES_API_KEY=${GOOGLE_PLACES_API_KEY}
+          HASH_SALT=${HASH_SALT}
+          ADMIN_EMAIL=${ADMIN_EMAIL}
+          IS_PREVIEW=true
+          EOF
+
       - name: Build & Deploy Preview Worker
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -85,6 +102,22 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
+
+      - name: Generate Runtime Env File from Secrets
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+          HASH_SALT: ${{ secrets.HASH_SALT }}
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+        run: |
+          cat << EOF > .env.production
+          DATABASE_URL=${DATABASE_URL}
+          RESEND_API_KEY=${RESEND_API_KEY}
+          GOOGLE_PLACES_API_KEY=${GOOGLE_PLACES_API_KEY}
+          HASH_SALT=${HASH_SALT}
+          ADMIN_EMAIL=${ADMIN_EMAIL}
+          EOF
 
       - name: Build & Deploy Production Worker
         env:
