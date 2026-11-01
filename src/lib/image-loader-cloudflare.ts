@@ -12,10 +12,6 @@ export default function cloudflareLoader({
   if (src.startsWith("http://") || src.startsWith("https://")) {
     return src;
   }
-  const params = [`width=${width}`];
-  if (quality) {
-    params.push(`quality=${quality}`);
-  }
 
   // Cloudflare Image Resizing (/cdn-cgi/image/) is only enabled on custom registered zones (speedqueenkrk.pl).
   // In development, preview (workers.dev, or dev.speedqueenkrk.pl behind Cloudflare Access),
@@ -32,10 +28,9 @@ export default function cloudflareLoader({
     return src;
   }
 
-  const isCustomZone = process.env.NEXT_PUBLIC_BASE_URL?.includes("speedqueenkrk.pl");
-
-  if (!isCustomZone) {
-    return src;
+  const params = [`width=${width}`, "format=auto"];
+  if (quality) {
+    params.push(`quality=${quality}`);
   }
 
   // Route through Cloudflare's native edge transformation path on speedqueenkrk.pl
