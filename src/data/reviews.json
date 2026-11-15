@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-01T16:00:40.796Z",
+  "updatedAt": "2026-11-15T10:13:36.810Z",
   "ratings": {
     "orlinskiego": {
       "rating": 3.9,
-      "reviewCount": 56
+      "reviewCount": 57
     },
     "pawia": {
       "rating": 3.8,
@@ -15,7 +15,7 @@
     },
     "overall": {
       "rating": 3.8,
-      "totalReviews": 221
+      "totalReviews": 222
     }
   },
   "reviews": {
@@ -24,7 +24,7 @@
         "author_name": "Heidi Lepori",
         "rating": 5,
         "text": "Veloce ma soprattutto molto pulita",
-        "relative_time_description": "w ostatnim tygodniu",
+        "relative_time_description": "2 tygodnie temu",
         "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVlD8UfDAZWQwGGoUuAvjfU-8HOIAKvxfUhSxnHgf7uLeNCi1G6=s128-c0x00000000-cc-rp-mo-ba3",
         "time": 1792968595,
         "branchName": "Kraków — ul. Pawia 34"
@@ -33,7 +33,7 @@
         "author_name": "Victoria Gosser",
         "rating": 5,
         "text": "Cena jest wyższa niż w innych, ale jest bardzo wygodna. Pralki dozują detergent do prania, więc nie musisz się o to martwić. Różne rozmiary. Są suszarki i deska do prasowania. Wnętrze jest bardzo ładne i czyste. Otwarte 24 godziny na dobę, co jest bardzo wygodne. Bardzo podobało mi się to, że jestem w podróży.",
-        "relative_time_description": "3 tygodnie temu",
+        "relative_time_description": "miesiąc temu",
         "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIrZqLbwvo0vvPbXpGyr47gNnmXxfAECA2IbazDqE_Ru4bTug=s128-c0x00000000-cc-rp-mo-ba3",
         "time": 1791298926,
         "branchName": "Kraków — ul. Pawia 34"
@@ -51,7 +51,7 @@
         "author_name": "Mark Muirhead",
         "rating": 5,
         "text": "Niektórzy narzekają na cenę, ale dla mnie płaci się za wygodę i lokalizację – hotel znajduje się naprzeciwko głównego centrum handlowego i dworca kolejowego. Lokalizacja jest absolutnie idealna. Cykle prania trwają zazwyczaj około 30 minut, a suszenie odbywa się w 15-minutowych odstępach, przy czym 30 minut to realnie potrzebne minimum. To miejsce znajduje się około 10 minut od kilku hoteli, więc jeśli mieszkasz w pobliżu, jest idealne. Jedynym minusem jest brak toalety na miejscu, ale to drobiazg.",
-        "relative_time_description": "miesiąc temu",
+        "relative_time_description": "2 miesiące temu",
         "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUbaSoNZEA1l9P1D2IwlsKNZaxZ55NOAb7NbHQigPVC18VE2DHryg=s128-c0x00000000-cc-rp-mo-ba5",
         "time": 1789507930,
         "branchName": "Kraków — ul. Pawia 34"
@@ -78,7 +78,7 @@
         "author_name": "Sunny Digital",
         "rating": 5,
         "text": "Wszystko działa świetnie!! Wyprałam 1 pranie i 2 suszarki (45 + 15 min). Wydałam 100 zł!! W cenę wliczony jest detergent, ponieważ pralka automatycznie go dodaje, więc uwielbiam tę część. Nie wiem, czy każda pralnia samoobsługowa jest tak droga, czy to po prostu normalne. Jeśli to normalne, turyści potrzebują pomocy polskiego rządu, żeby zrobić pranie!!! 🧺 Proszę o pomoc 😂 Podoba Ci się ta recenzja? Kliknij ❤️ dla mnie!",
-        "relative_time_description": "4 miesiące temu",
+        "relative_time_description": "5 miesięcy temu",
         "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJY4ilr041O0l9qUapwfaTD65xyXLu-MR7EbNY0D-ds3E9Coh8=s128-c0x00000000-cc-rp-mo-ba3",
         "time": 1781626344,
         "branchName": "Kraków — al. J. Słowackiego 56"
@@ -98,7 +98,7 @@
         "author_name": "Heidi Lepori",
         "rating": 5,
         "text": "Veloce ma soprattutto molto pulita",
-        "relative_time_description": "in the last week",
+        "relative_time_description": "2 weeks ago",
         "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVlD8UfDAZWQwGGoUuAvjfU-8HOIAKvxfUhSxnHgf7uLeNCi1G6=s128-c0x00000000-cc-rp-mo-ba3",
         "time": 1792968595,
         "branchName": "Kraków — ul. Pawia 34"
@@ -107,7 +107,7 @@
         "author_name": "Victoria Gosser",
         "rating": 5,
         "text": "Price is higher than others but it is very convenient. The washers dispense laundry detergent so you don't have to worry about that. Multiple sizes. Have dryers and an ironing board. Very nice and clean inside. Open 24 hours which is very convenient. Loved having this as a traveler.",
-        "relative_time_description": "3 weeks ago",
+        "relative_time_description": "a month ago",
         "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocIrZqLbwvo0vvPbXpGyr47gNnmXxfAECA2IbazDqE_Ru4bTug=s128-c0x00000000-cc-rp-mo-ba3",
         "time": 1791298926,
         "branchName": "Kraków — ul. Pawia 34"
@@ -125,7 +125,7 @@
         "author_name": "Mark Muirhead",
         "rating": 5,
         "text": "Some people complain about the price, but for me, you're paying for the convenience and location -- it's opposite the main shopping centre and train station. It's absolutely perfectly located. The wash cycles mostly take about 30 minutes, and drying is done in increments of 15 minutes, with 30 being the minimum you'll realistically need. This place is about 10 minutes away from several hotels, so if you are based near here, it is ideal. My only criticism is that there's no toilet on site, but it's a minor grumble.",
-        "relative_time_description": "a month ago",
+        "relative_time_description": "2 months ago",
         "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjUbaSoNZEA1l9P1D2IwlsKNZaxZ55NOAb7NbHQigPVC18VE2DHryg=s128-c0x00000000-cc-rp-mo-ba5",
         "time": 1789507930,
         "branchName": "Kraków — ul. Pawia 34"
@@ -152,7 +152,7 @@
         "author_name": "Sunny Digital",
         "rating": 5,
         "text": "Everything works great!! I did 1 washer load and 2 dryer loads (45 + 15 mins). Spent 100 PLN!! This includes detergent cost since the washer adds it automatically, so love that part. I don’t know if every laundromat is this expensive or this is just normal. If this is\nnormal, Tourists need assistance from Polish Govt. to do their Laundry!!! 🧺 Pls help 😂 Like this review? Click on the ❤️ for me!",
-        "relative_time_description": "4 months ago",
+        "relative_time_description": "5 months ago",
         "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocJY4ilr041O0l9qUapwfaTD65xyXLu-MR7EbNY0D-ds3E9Coh8=s128-c0x00000000-cc-rp-mo-ba3",
         "time": 1781626344,
         "branchName": "Kraków — al. J. Słowackiego 56"
